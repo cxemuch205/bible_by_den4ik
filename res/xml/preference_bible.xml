@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/category_base">
+        <ListPreference 
+            android:key="@string/pref_default_translaters"
+            android:title="@string/title_def_trans"
+            android:summary="@string/summary_def_trans"
+            android:entries="@array/trnaslaters_names"
+            android:entryValues="@array/trnaslaters_names_id"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialogtitle_def_trans"/>
+        <ListPreference 
+            android:key="@string/pref_mode_read"
+            android:title="@string/title_mode_read"
+            android:summary="@string/summary_mode_read"
+            android:entries="@array/mode_read_array"
+            android:entryValues="@array/mode_read_array_id"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialogtitle_mode_read"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/category_design">
+        <ua.maker.gbible.widget.setting.ChangeSizeTextPreference
+            android:key="@string/pref_size_text_poem"
+            android:title="@string/title_size_text_poem"
+            android:summary="@string/summary_size_text_poem"/>
+        <ListPreference
+            android:key="@string/pref_pos_down_panel"
+            android:title="@string/title_pos_down_panel"
+            android:summary="@string/summary_pos_down_panel"
+            android:entries="@array/select_pos_panel"
+            android:entryValues="@array/select_pos_panel_id"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_title_pos_down_panel"/>
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

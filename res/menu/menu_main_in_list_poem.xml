@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/action_previous_chapter"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/previous_chapter_symbol"
+        android:icon="@drawable/pointer_previous"/>
+    <item 
+        android:id="@+id/action_next_chapter"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/next_chapter_symbol"
+        android:icon="@drawable/pointer_next"/>
+    <item 
+        android:id="@+id/action_exit"
+        android:orderInCategory="100"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:icon="@drawable/exit"
+        android:title="@string/exit_str"/>
+
+</menu>

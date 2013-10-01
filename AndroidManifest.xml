@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ua.maker.gbible"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_app_bible_n"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="ua.maker.gbible.activity.StartActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ua.maker.gbible.activity.ListChaptersActivity"
+            android:label="@string/title_activity_list_chapters">
+        </activity>
+        <activity
+            android:name="ua.maker.gbible.activity.ListPoemsActivity"
+            android:label="">
+        </activity>
+        <activity
+            android:name="ua.maker.gbible.activity.ComparePoemActivity"
+            android:label="@string/title_activity_list_compare_poems"
+            android:parentActivityName="ua.maker.gbible.activity.ListPoemsActivity">
+        </activity>
+        <activity
+            android:name="ua.maker.gbible.activity.SettingActivity"
+            android:label="@string/action_setting"
+            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" 
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        </activity>
+        
+        <uses-library required="false" name="com.sec.android.app.multiwindow"> </uses-library>
+        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
+        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" />
+        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" />
+        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" /> 
+    </application>
+
+</manifest>

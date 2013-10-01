@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">gBible</string>
+    <string name="action_select">Перейти</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_search">Поиск</string>
+    <string name="action_bookmarks">Закладки</string>
+    <string name="action_history">История</string>
+    <string name="action_setting">Настройки</string>
+    
+    <string name="exit_question">Выйти?</string>
+    <string name="closes_app">Закрытие приложения..</string>
+    <string name="dialog_yes">Да</string>
+    <string name="dialog_cancel">Отмена</string>
+    
+    <string name="progress_dialog_title">Загрузка&#8230;</string>
+    <string name="progress_dialog_message">Загрузка данных&#8230;</string>
+    
+    <!-- ERROR -->
+    <string name="empty_et">Поле для поиска не заполенно!</string>
+    <!-- ############ -->
+       
+    <!-- Books -->
+    <string name="bitie_str">Бытие</string>
+    <string name="ishod_str">Исход</string>
+    <string name="levit_str">Левит</string>
+    <string name="number_str">Числа</string>
+    <string name="vtorozakonie_str">Второзаконие</string>
+    <string name="iisus_navin_str">Иисус Навин</string>
+    <string name="sudii_str">Судьи</string>
+    <string name="ruf_str">Руфь</string>
+    <string name="one_carstw_str">1-я Царств</string>
+    <string name="two_carstw_str">2-я Царств</string>
+    <string name="three_carstw_str">3-я Царств</string>
+    <string name="four_carstw_str">4-я Царств</string>
+    <string name="one_paralipamenon_str">1-я Паралипаменон</string>
+    <string name="two_paralipamenon_str">2-я Паралипаменон</string>
+    <string name="ezdra_str">Ездра</string>
+    <string name="neemia_str">Неемия</string>
+    <string name="esfir_str">Есфирь</string>
+    <string name="iov_str">Иов</string>
+    <string name="psaltir_str">Псалтырь</string>
+    <string name="pritchi_str">Притчи</string>
+    <string name="ecclesiast_str">Екклесиаст</string>
+    <string name="pesni_pesney_str">Песня песней</string>
+    <string name="isaia_str">Исаия</string>
+    <string name="ieremia_str">Иеремия</string>
+    <string name="plach_ieremii_str">Плач Иеремии</string>
+    <string name="iezekiil_str">Иезекииль</string>
+    <string name="daniil_str">Даниил</string>
+    <string name="osia_str">Осия</string>
+    <string name="ioil_str">Иоиль</string>
+    <string name="amos_str">Амос</string>
+    <string name="avdiy_str">Авдий</string>
+    <string name="iona_str">Иона</string>
+    <string name="michey_str">Михей</string>
+    <string name="naum_str">Наум</string>
+    <string name="avvakum_str">Аввакум</string>
+    <string name="sofonia_str">Софония</string>
+    <string name="aggey_str">Аггей</string>
+    <string name="zaharia_str">Захария</string>
+    <string name="malahia_str">Малахия</string>
+    <string name="matfey_str">От Матфея</string>
+    <string name="mark_str">От Марка</string>
+    <string name="luka_str">От Луки</string>
+    <string name="ioanna_str">От Иоанна</string>
+    <string name="deyania_str">Деяния</string>
+    <string name="iakova_str">Иакова</string>
+    <string name="one_petra_str">1-е Петра</string>
+    <string name="two_petra_str">2-е Петра</string>
+    <string name="one_ioanna_str">1-е Иоанна</string>
+    <string name="two_ioanna_str">2-е Иоанна</string>
+    <string name="three_ioanna_str">3-е Иоанна</string>
+    <string name="iudy_str">Иуды</string>
+    <string name="rimlan_str">К Римлянам</string>
+    <string name="one_korinfyanam_str">1-е Коринфянам</string>
+    <string name="two_korinfyanam_str">2-е Коринфянам</string>
+    <string name="galatam_str">К Галатам</string>
+    <string name="efesyanam_str">К Ефесянам</string>
+    <string name="filipiycam_str">К Филиппийцам</string>
+    <string name="kolosyanam_str">К Колоссянам</string>
+    <string name="one_fessalonikiycam_str">1-е Фессалоникийцам</string>
+    <string name="two_fessalonikiycam_str">2-е Фессалоникийцам</string>
+    <string name="one_timofeu_str">1-е Тимофею</string>
+    <string name="two_timofeu_str">2-е Тимофею</string>
+    <string name="titu_str">К Титу</string>
+    <string name="filimonu_str">К Филимону</string>
+    <string name="evreyam_str">К Евреям</string>
+    <string name="otkrovenie_str">Откровение</string>
+    <!-- ############################################ -->
+    
+    <!-- Books array -->
+    <string-array name="array_books">
+        <item >Бытие</item>
+        <item >Исход</item>
+        <item >Левит</item>
+        <item >Числа</item>
+        <item >Второзаконие</item>
+        <item >Иисус Навин</item>
+        <item >Судьи</item>
+        <item >Руфь</item>
+        <item >1-я Царств</item>
+        <item >2-я Царств</item>
+        <item >3-я Царств</item>
+        <item >4-я Царств</item>
+        <item >1-я Паралипоминон</item>
+        <item >2-я Паралипоминон</item>
+        <item >Ездра</item>
+        <item >Неемия</item>
+        <item >Есфирь</item>
+        <item >Иов</item>
+        <item >Пластырь</item>
+        <item >Притчи</item>
+        <item >Екклесиаст</item>
+        <item >Песня Песней</item>
+        <item >Исаия</item>
+        <item >Иеремия</item>
+        <item >Плач Иеремии</item>
+        <item >Иезекииль</item>
+        <item >Даниил</item>
+        <item >Осия</item>
+        <item >Иоиль</item>
+        <item >Амос</item>
+        <item >Авдий</item>
+        <item >Иона</item>
+        <item >Михей</item>
+        <item >Наум</item>
+        <item >Аввакум</item>
+        <item >Софония</item>
+        <item >Аггей</item>
+        <item >Захария</item>
+        <item >Малахия</item>
+        <item >От Матфея</item>
+        <item >От Марка</item>
+        <item >От Луки</item>
+        <item >От Иоанна</item>
+        <item >Деяния</item>
+        <item >Иакова</item>
+        <item >1-е Петра</item>
+        <item >2-е Петра</item>
+        <item >1-е Иоанна</item>
+        <item >2-е Иоанна</item>
+        <item >3-е Иоанна</item>
+        <item >Иуды</item>
+        <item >К Римлянам</item>
+        <item >1-е Коринфянам</item>
+        <item >2-е Коринфянам</item>
+        <item >К Галатам</item>
+        <item >К Ефесянам</item>
+        <item >К Филиппийцам</item>
+        <item >К Колоссянам</item>
+        <item >1-е Фессалоникийцам</item>
+        <item >2-е Фессалоникийцам</item>
+        <item >1-е Тимофею</item>
+        <item >2-е Тимофею</item>
+        <item >К Титу</item>
+        <item >К Филимону</item>
+        <item >К Евреям</item>
+        <item >Откровение</item>
+    </string-array>
+    
+    <string-array name="array_books_id">
+        <item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+		<item>7</item>
+		<item>8</item>
+		<item>9</item>
+		<item>10</item>
+		<item>11</item>
+		<item>12</item>
+		<item>13</item>
+		<item>14</item>
+		<item>15</item>
+		<item>16</item>
+		<item>17</item>
+		<item>18</item>
+		<item>19</item>
+		<item>20</item>
+		<item>21</item>
+		<item>22</item>
+		<item>23</item>
+		<item>24</item>
+		<item>25</item>
+		<item>26</item>
+		<item>27</item>
+		<item>28</item>
+		<item>29</item>
+		<item>30</item>
+		<item>31</item>
+		<item>32</item>
+		<item>33</item>
+		<item>34</item>
+		<item>35</item>
+		<item>36</item>
+		<item>37</item>
+		<item>38</item>
+		<item>39</item>
+		<item>40</item>
+		<item>41</item>
+		<item>42</item>
+		<item>43</item>
+		<item>44</item>
+		<item>45</item>
+		<item>46</item>
+		<item>47</item>
+		<item>48</item>
+		<item>49</item>
+		<item>50</item>
+		<item>51</item>
+		<item>52</item>
+		<item>53</item>
+		<item>54</item>
+		<item>55</item>
+		<item>56</item>
+		<item>57</item>
+		<item>58</item>
+		<item>59</item>
+		<item>60</item>
+		<item>61</item>
+		<item>62</item>
+		<item>63</item>
+		<item>64</item>
+		<item>65</item>
+		<item>66</item>
+    </string-array>
+    
+    <!-- ########################################### -->
+    
+    <string name="title_activity_list_chapters">Глава</string>
+    <string name="title_list_poem">Стих</string>
+    <string name="title_activity_list_compare_poems">Сравнение стихов</string>
+    
+    <string name="compare_str">Сравнить</string>
+    <string name="exit_str">Выход</string>
+    <string name="next_chapter_symbol">След.</string>
+    <string name="previous_chapter_symbol">Пред.</string>
+    <string name="btn_empty_str">---</string>
+    <string name="btn_empty_str_small">-</string>
+    
+    <!-- Preference string -->
+    <string name="dialog_select_size_text">Размер шрифта:</string>
+    <string name="str_sample_size_text">Пример.</string>
+    
+    <string name="category_base">Общие</string>
+    	<string name="pref_default_translaters">def_translates</string>
+    		<string name="title_def_trans">Перевод по-умлч.</string>
+    		<string name="summary_def_trans">Устонавливает отображение текста определенного перевода.</string>
+    		<string name="dialogtitle_def_trans">Выбирете перевод по-умлч:</string>
+    		<string-array name="trnaslaters_names">
+    		    <item >Русский Синодальный перевод</item>
+    		    <item >Современный Русский перевод</item>
+    		</string-array>
+    		<string-array name="trnaslaters_names_id">
+    		    <item >0</item>
+    		    <item >1</item>
+    		</string-array>
+    	<string name="pref_mode_read">mode_read</string>
+    		<string name="title_mode_read">Режим День/Ночь</string>
+    		<string name="summary_mode_read">Устонавливает фон и цвет шрифта более приятный для глаз в зависимости от части дня.</string>
+    		<string name="dialogtitle_mode_read">Выбирите режим:</string>
+    		<string-array name="mode_read_array">
+    		    <item>День</item>
+    		    <item>Ночь</item>
+    		</string-array>
+    		<string-array name="mode_read_array_id">
+    		    <item>0</item>
+    		    <item>1</item>
+    		</string-array>
+    		
+    <string name="category_design">Оформление</string>
+    	<string name="pref_size_text_poem">size_text_poem</string>
+    		<string name="title_size_text_poem">Размер шрифта стихов</string>
+    		<string name="summary_size_text_poem">Устанавливает размер текста на странице со стихами.</string>
+    		<string name="dialogtitle_size_text_pem">Введите размер шрифта (от 10 до 32):</string>
+    	<string name="pref_background_poem_list">background_poem_list</string>
+    		<string name="title_set_color_poem_list">Цвет фона стихов</string>
+    		<string name="summary_set_color_poem_list">Устанавливает цвет фона на страници отображения стихов.</string>
+    		<string name="dialogtitle_set_color_poem_list">Выбирите цвет:</string>
+    		<string name="press_color_to_apply">Нажмите для выбора</string>
+    	<string name="pref_pos_down_panel">position_control_panel</string>
+    		<string name="title_pos_down_panel">Положение ПУ</string>
+    		<string name="summary_pos_down_panel">Установка положения панели управления в горизонтальной ориентации устройства.</string>
+    		<string name="dialog_title_pos_down_panel">Выбирите положение:</string>
+    		<string-array name="select_pos_panel">
+    		    <item>Слева</item>
+    		    <item>Справа</item>
+    		</string-array>
+    		<string-array name="select_pos_panel_id">
+    		    <item>0</item>
+    		    <item>1</item>
+    		</string-array>
+    		
+    <!-- Tools -->
+    <string name="no_select_book">Выбирите книгу.</string>
+    <string name="no_select_chapter">Выбирите главу.</string>
+    
+    <!-- Search fragment -->
+    <string name="search_str">Поиск</string>
+    <string name="dialog_start_search">Поиск&#8230;</string>
+    <string name="dialog_title_search">Поиск по запросу: </string>
+    <!-- ##################### -->
+    
+    <!-- History Fragment -->
+    <string name="action_title_clear_history">Очистка</string>
+    <string name="list_history_empty">История пуста</string>
+    <string name="is_rst_translate">РСП</string>
+    <string name="is_mt_translate">СП</string>
+    
+    <string name="dialog_title_clear_history">Очистить историю?</string>
+    <string name="dialog_message_clear_history">Данные о истории посещаемых глав будет очищена.</string>
+    <!-- ##################### -->
+    
+    <!-- Bookmarks -->
+    <string name="no_founded_bookmarks">Закладок нет</string>
+    <!-- ##################### -->
+    
+    <!-- List poems -->
+    <string name="dialog_add_to_bookmarks">Добавить в закладки</string>
+    <string name="dialog_copy_to_clicpboard">Копировать содержимое</string>
+    <string name="dialog_share">Поделиться</string>
+    
+    <string name="dialog_added_to_bookmarks">Добавлено в закладки!</string>
+    <string name="copyed_poem">Скопировано!</string>
+    
+    <string name="dialog_title_select_text">Выдилите текст:</string>
+    <string name="dialog_dtn_copy_all">Копировать все</string>
+    <string name="dialog_btn_copy_select_text">Копировать выделеное</string>
+    
+    <!-- ##################### -->
+    		
+</resources>
