@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/menu_button_background"
+            android:background="@drawable/btn_background_v4"
             android:clickable="true"
             android:gravity="center"
             android:orientation="vertical" >
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/menu_button_background"
+            android:background="@drawable/btn_background_v4"
             android:clickable="true"
             android:gravity="center"
             android:orientation="vertical" >
@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            android:background="@drawable/menu_button_background"
+            android:background="@drawable/btn_background_v4"
             android:clickable="true"
             android:gravity="center"
             android:orientation="vertical" >
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/menu_button_background"
+                android:background="@drawable/btn_background_v4"
                 android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -101,7 +101,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:background="@drawable/menu_button_background"
+                android:background="@drawable/btn_background_v4"
                 android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical" >

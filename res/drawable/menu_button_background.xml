@@ -10,8 +10,8 @@
     
     <item >
         <shape >
-            <!-- <solid android:color="#BABABA"/>  -->
-            <solid android:color="#B56414"/>
+            <!-- <solid android:color="#BABABA"/> -->
+            <solid android:color="#3e94fe"/>
             <corners android:radius="4dp"/>
             <padding 
                 android:left="4dp"
@@ -20,5 +20,4 @@
                 android:bottom="4dp"/>
         </shape>
     </item>
-
 </selector>
