@@ -17,6 +17,7 @@ public class SettingActivity extends SherlockPreferenceActivity {
 		Log.d(TAG, "Start onCreate");
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
 		addPreferencesFromResource(R.xml.preference_bible);
 	}
 	

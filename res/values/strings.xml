@@ -231,6 +231,7 @@
     
     <!-- ########################################### -->
     
+    <color name="background_def">#a62f00</color>
     <string name="title_activity_list_chapters">Глава</string>
     <string name="title_list_poem">Стих</string>
     <string name="title_activity_list_compare_poems">Сравнение стихов</string>
@@ -323,6 +324,7 @@
     <string name="dialog_add_to_bookmarks">Добавить в закладки</string>
     <string name="dialog_copy_to_clicpboard">Копировать содержимое</string>
     <string name="dialog_share">Поделиться</string>
+    <string name="dialog_compare">Сравнить</string>
     
     <string name="dialog_added_to_bookmarks">Добавлено в закладки!</string>
     <string name="copyed_poem">Скопировано!</string>

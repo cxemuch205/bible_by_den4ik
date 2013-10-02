@@ -21,10 +21,15 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -43,7 +48,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class ListPoemsFragment extends SherlockFragment {
+public class ListPoemsFragment extends SherlockFragment implements OnGestureListener{
 	
 	private static final String TAG = "ListPoemsFragment";
 	
@@ -53,6 +58,8 @@ public class ListPoemsFragment extends SherlockFragment {
 	private LinearLayout llMenuLink = null;
 	private DataBase dataBase = null;
 	private AlertDialog dialog = null;
+	private GestureDetector gestureDetector = null;
+	private Thread thread = null;
 	private List<String> listPoems = null;
 	
 	private int bookId = 1;
@@ -60,6 +67,9 @@ public class ListPoemsFragment extends SherlockFragment {
 	private int poemPos = 1;
 	private int selectPoem = 1;
 	private int maxChapter = 0;
+	private int click = 0;
+	
+	private int posPoemForCompare = 0;
 	
 	private String nameTranslate = "";
 	
@@ -76,6 +86,7 @@ public class ListPoemsFragment extends SherlockFragment {
 	private int chapterBM = 1;
 	private String contentBM = "";
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -105,9 +116,37 @@ public class ListPoemsFragment extends SherlockFragment {
 				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
 				+ chapterNumber);
 		Log.d(TAG, "END onCreateView");
+		gestureDetector = new GestureDetector(this);
+		gestureDetector.setOnDoubleTapListener(doubleTapListener);
 		
 		return view;
 	}
+	
+	private OnDoubleTapListener doubleTapListener = new OnDoubleTapListener() {
+		
+		@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			Log.d(TAG, "onSingleTapConfirmed");
+			
+			return false;
+		}
+		
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			Log.d(TAG, "onDoubleTapEvent");
+			return false;
+		}
+		
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			Log.d(TAG, "onDoubleTap");
+			if(getSherlockActivity().getActionBar().isShowing()) 
+				getSherlockActivity().getActionBar().hide();
+			else
+				getSherlockActivity().getActionBar().show();
+			return false;
+		}
+	};
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -126,8 +165,6 @@ public class ListPoemsFragment extends SherlockFragment {
 			lvShowPoem.setBackgroundColor(Color.WHITE);
 			llMenuLink.setBackgroundColor(Color.WHITE);
 		}
-		
-		//llMenuLink.setOn
 		
 		btnPoem.setBackgroundResource(R.drawable.btn_active_select);
 		btnBook.setText(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
@@ -197,22 +234,59 @@ public class ListPoemsFragment extends SherlockFragment {
 		String[] listActions = {
 				""+getString(R.string.dialog_add_to_bookmarks),
 				""+getString(R.string.dialog_copy_to_clicpboard),
-				""+getString(R.string.dialog_share)};
+				""+getString(R.string.dialog_share),
+				""+getString(R.string.dialog_compare)};
 		List<Integer> idPicture = new ArrayList<Integer>();
 		idPicture.add(R.drawable.add_bookmark_small);
 		idPicture.add(R.drawable.copy_ico_small);
 		idPicture.add(R.drawable.ico_share_smal_v2);
+		idPicture.add(R.drawable.ico_compare_poem);
 		
 		ItemDialogAdapter adapterDialog = new ItemDialogAdapter(getSherlockActivity(), listActions, idPicture);
 		
 		builder.setAdapter(adapterDialog, dialogItemClickListener);
 		dialog = builder.create();
+		
+		thread = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				click++;
+				if(click%2 == 0){
+					if(getSherlockActivity().getActionBar().isShowing()) 
+						getSherlockActivity().getActionBar().hide();
+					else
+						getSherlockActivity().getActionBar().show();
+					if(llMenuLink.getVisibility() == LinearLayout.VISIBLE) 
+						llMenuLink.setVisibility(LinearLayout.GONE);
+					else
+						llMenuLink.setVisibility(LinearLayout.VISIBLE);
+					click = 0;
+				}
+				if(click%2 == 0)
+					new Handler()
+						.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						click = 0;
+					}
+				}, 500);
+			}
+		});
 	}
 	
 	private void selectPrefPoem(){
 		Log.d(TAG, "START - select poem: " + poemPos);
 		lvShowPoem.setSelection(selectPoem);
 		lvShowPoem.smoothScrollToPosition(selectPoem);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		thread.destroy();
 	}
 	
 	private OnScrollListener scrollChangeListener = new OnScrollListener() {
@@ -233,12 +307,8 @@ public class ListPoemsFragment extends SherlockFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			Intent intent = new Intent(getSherlockActivity(), ComparePoemActivity.class);
-			intent.putExtra(App.BOOK_ID, bookId);
-			intent.putExtra(App.CHAPTER, chapterNumber);
-			intent.putExtra(App.POEM, (position+1));
-			startActivity(intent);
-			Log.d(TAG, "Click on list: pos = " + position);
+			posPoemForCompare = position;
+			thread.run();
 		}
 	};
 	
@@ -280,7 +350,13 @@ public class ListPoemsFragment extends SherlockFragment {
 				getSherlockActivity().startActivity(intent);
 				
 				break;
-			case 3://Links
+			case 3://Compare
+				Intent intentCompare = new Intent(getSherlockActivity(), ComparePoemActivity.class);
+				intentCompare.putExtra(App.BOOK_ID, bookId);
+				intentCompare.putExtra(App.CHAPTER, chapterNumber);
+				intentCompare.putExtra(App.POEM, (posPoemForCompare+1));
+				startActivity(intentCompare);
+				Log.d(TAG, "Click on list: pos = " + posPoemForCompare);
 				
 				break;
 			default:
@@ -448,5 +524,37 @@ public class ListPoemsFragment extends SherlockFragment {
 			}
 		}
 		return translateName;
+	}
+
+	@Override
+	public boolean onDown(MotionEvent e) {
+		return false;
+	}
+
+	@Override
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
+		return false;
+	}
+
+	@Override
+	public void onLongPress(MotionEvent e) {
+		
+	}
+
+	@Override
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+			float distanceY) {
+		return false;
+	}
+
+	@Override
+	public void onShowPress(MotionEvent e) {
+		
+	}
+
+	@Override
+	public boolean onSingleTapUp(MotionEvent e) {
+		return false;
 	}
 }

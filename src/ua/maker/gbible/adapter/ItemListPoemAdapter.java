@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,11 @@ import android.widget.TextView;
 
 public class ItemListPoemAdapter extends ArrayAdapter<String> {
 	
-	private static final String TAG = "ItemListPoemAdapter";
-	
 	private int layoutResourseId = 0;
 	private List<String> listPoems = null;
 	private Context context = null;
 	private SharedPreferences defPref = null;
-	private boolean dayNight = false; //false - day / true - night
+	private boolean dayNight = false;
 
 	public ItemListPoemAdapter(Context context, int textViewResourceId,
 			List<String> objects) {
@@ -58,14 +55,9 @@ public class ItemListPoemAdapter extends ArrayAdapter<String> {
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		int size = 14;
-		Log.d(TAG, "Start geting prefs - size poem text");
 		if(prefs.contains(context.getString(R.string.pref_size_text_poem))){
-			Log.d(TAG, "contains - true");
 			size = prefs.getInt(context.getString(R.string.pref_size_text_poem), 15);
-			Log.d(TAG, "size = " + size);
 		}
-		else
-			Log.d(TAG, "no contains");
 		
 		String content = listPoems.get(position);
 		if(dayNight){

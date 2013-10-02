@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp"
+    android:paddingTop="4dp"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -14,7 +14,7 @@
         <EditText
             android:id="@+id/et_search_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
             android:singleLine="true" >
@@ -25,9 +25,11 @@
         <Button
             android:id="@+id/btn_start_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="2"
-            android:text="@string/search_str" />
+            android:background="@drawable/menu_button_background"
+            android:text="@string/search_str"
+            android:textColor="#fff" />
 
     </LinearLayout>
 

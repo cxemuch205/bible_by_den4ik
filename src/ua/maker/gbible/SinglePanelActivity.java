@@ -18,6 +18,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnDoubleTapListener;
+import android.view.MotionEvent;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -28,6 +33,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 	private static final String TAG = "SinglaPaneActivity";
 	
 	private Fragment fragment = null;
+	private GestureDetector gestureDetector = null;
 	
 	private LinearLayout btnSelect = null;
 	private LinearLayout btnSearch = null;
@@ -51,7 +57,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_empty);
-    	
+    	getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
     	sp = getSharedPreferences(App.PREF_SEND_DATA, 0);
     	spDef = PreferenceManager.getDefaultSharedPreferences(SinglePanelActivity.this);
 
@@ -67,7 +73,8 @@ public abstract class SinglePanelActivity extends BaseActivity {
 	    	    add(R.id.flRoot, fragment, App.TAG_FRAGMENT_BOOKS).
 	    	    commit();
 	    }
-    	
+    	gestureDetector = new GestureDetector(SinglePanelActivity.this, gestureListener);
+    	gestureDetector.setOnDoubleTapListener(doubleTapListener);
     }
 	
     public void startFragment(Fragment fragment, String tag) {
@@ -78,6 +85,70 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		ft.addToBackStack(null);
 		ft.commit();
 	}
+    
+    private OnDoubleTapListener doubleTapListener = new OnDoubleTapListener() {
+		
+    	@Override
+		public boolean onSingleTapConfirmed(MotionEvent e) {
+			Log.d(TAG, "onSingleTapConfirmed");
+			
+			return false;
+		}
+		
+		@Override
+		public boolean onDoubleTapEvent(MotionEvent e) {
+			Log.d(TAG, "onDoubleTapEvent");
+			return false;
+		}
+		
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			Log.d(TAG, "onDoubleTap");
+			if(getActionBar().isShowing()) 
+				getActionBar().hide();
+			else
+				getActionBar().show();
+			
+			return false;
+		}
+	};
+    
+    private OnGestureListener gestureListener = new OnGestureListener() {
+		
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			return false;
+		}
+		
+		@Override
+		public void onShowPress(MotionEvent e) {
+			
+		}
+		
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+				float distanceY) {
+			return false;
+		}
+		
+		@Override
+		public void onLongPress(MotionEvent e) {
+			
+		}
+		
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			
+			return false;
+		}
+		
+		@Override
+		public boolean onDown(MotionEvent e) {
+			
+			return false;
+		}
+	};
     
     @Override
     protected void onResume() {

@@ -30,6 +30,7 @@ public class ComparePoemActivity extends SherlockActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compare_poems);
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
 		tvShowLink = (TextView)findViewById(R.id.tv_show_link);
 		db = new DataBase(ComparePoemActivity.this);
 		try {
