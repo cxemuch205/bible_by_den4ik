@@ -3,6 +3,8 @@ package ua.maker.gbible.fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ComparePoemActivity;
@@ -52,6 +54,8 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	
 	private static final String TAG = "ListPoemsFragment";
 	
+	private static final int CLEAR_CLICK_DELAYED = 300;
+	
 	private View view = null;
 	private ListView lvShowPoem = null;
 	private EditText etContent = null;
@@ -61,6 +65,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	private GestureDetector gestureDetector = null;
 	private Thread thread = null;
 	private List<String> listPoems = null;
+	private Timer timer = null;
 	
 	private int bookId = 1;
 	private int chapterNumber = 1;
@@ -169,6 +174,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		btnPoem.setBackgroundResource(R.drawable.btn_active_select);
 		btnBook.setText(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
 		btnChapter.setText(""+chapterNumber);
+		timer = new Timer();
 		
 		btnBook.setOnClickListener(new OnClickListener() {
 			
@@ -263,15 +269,14 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 						llMenuLink.setVisibility(LinearLayout.VISIBLE);
 					click = 0;
 				}
-				if(click%2 == 0)
-					new Handler()
-						.postDelayed(new Runnable() {
+				timer.schedule(new TimerTask() {
 					
 					@Override
 					public void run() {
+						Log.d(TAG, "Clear count click: " + click);
 						click = 0;
 					}
-				}, 500);
+				}, CLEAR_CLICK_DELAYED);
 			}
 		});
 	}
@@ -282,11 +287,9 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		lvShowPoem.smoothScrollToPosition(selectPoem);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		thread.destroy();
 	}
 	
 	private OnScrollListener scrollChangeListener = new OnScrollListener() {
