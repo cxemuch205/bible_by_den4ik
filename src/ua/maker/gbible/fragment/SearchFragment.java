@@ -74,6 +74,8 @@ public class SearchFragment extends SherlockFragment {
 		lvResultSearch = (ListView)view.findViewById(R.id.lv_search_result);
 		
 		pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+		if(!getSherlockActivity().getActionBar().isShowing())
+			getSherlockActivity().getActionBar().show();
 		
 		return view;
 	}

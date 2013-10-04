@@ -8,12 +8,14 @@ import ua.maker.gbible.fragment.SearchFragment;
 import ua.maker.gbible.fragment.StartFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -34,6 +36,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 	
 	private Fragment fragment = null;
 	private GestureDetector gestureDetector = null;
+	private ProgressDialog pd = null;
 	
 	private LinearLayout btnSelect = null;
 	private LinearLayout btnSearch = null;
@@ -219,6 +222,24 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
+			StartSelectBook selectLinck = new StartSelectBook();
+			selectLinck.execute();
+		}
+	};
+	
+	class StartSelectBook extends AsyncTask<Void, Void, Void>{
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = ProgressDialog.show(SinglePanelActivity.this, 
+					getString(R.string.progress_dialog_title), 
+					getString(R.string.progress_dialog_message));
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			
 			Editor editor = sp.edit();
 			editor.putBoolean(App.is_OPEN_SETTING, true);
 			editor.commit();
@@ -246,6 +267,14 @@ public abstract class SinglePanelActivity extends BaseActivity {
 						.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)? 
 								getSupportFragmentManager()
 								.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new StartFragment(), App.TAG_FRAGMENT_BOOKS).commit();
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			if(pd.isShowing()) pd.cancel();
 		}
 	};
 	

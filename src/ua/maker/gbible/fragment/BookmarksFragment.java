@@ -49,6 +49,8 @@ public class BookmarksFragment extends SherlockFragment {
 		lvBookmarks = (ListView)view.findViewById(R.id.lv_list_bookmarks);
 		tvInfo = (TextView)view.findViewById(R.id.tv_info_bookmarks);
 		listBookmarks = new ArrayList<BookMarksStruct>();
+		if(!getSherlockActivity().getActionBar().isShowing())
+			getSherlockActivity().getActionBar().show();
 		return view;
 	}
 	

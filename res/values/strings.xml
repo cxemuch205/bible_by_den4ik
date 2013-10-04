@@ -16,6 +16,7 @@
     
     <string name="progress_dialog_title">Загрузка&#8230;</string>
     <string name="progress_dialog_message">Загрузка данных&#8230;</string>
+    <string name="progress_dialog_download_chapter">Загрузка главы&#8230;</string>
     
     <!-- ERROR -->
     <string name="empty_et">Поле для поиска не заполенно!</string>

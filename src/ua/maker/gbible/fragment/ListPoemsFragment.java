@@ -15,6 +15,7 @@ import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,13 +23,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -62,7 +61,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	private LinearLayout llMenuLink = null;
 	private DataBase dataBase = null;
 	private AlertDialog dialog = null;
-	private GestureDetector gestureDetector = null;
 	private Thread thread = null;
 	private List<String> listPoems = null;
 	private Timer timer = null;
@@ -91,11 +89,10 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	private int chapterBM = 1;
 	private String contentBM = "";
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.d(TAG, "Start onCreateView");
+		Log.d(TAG, "Start onCreateView");		
 		view = inflater.inflate(R.layout.activity_list_poems, null);
 		lvShowPoem = (ListView)view.findViewById(R.id.lv_show_poems);
 		llMenuLink = (LinearLayout)view.findViewById(R.id.menu_select_link);
@@ -115,47 +112,28 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		bookId = sp.getInt(App.BOOK_ID, 1);
 		chapterNumber = sp.getInt(App.CHAPTER, 1);
 		selectPoem = sp.getInt(App.POEM_SET_FOCUS, 1);
-		maxChapter = dataBase.getNumberOfChapterInBook(bookId, nameTranslate);
+		Thread getMaxChapter = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Log.d(TAG, "Thread getMaxCountPoemInChapter");
+				maxChapter = dataBase.getNumberOfChapterInBook(bookId, nameTranslate);
+			}
+		});
+		getMaxChapter.run();
 		
 		getSherlockActivity().setTitle(""
 				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
 				+ chapterNumber);
 		Log.d(TAG, "END onCreateView");
-		gestureDetector = new GestureDetector(this);
-		gestureDetector.setOnDoubleTapListener(doubleTapListener);
 		
 		return view;
 	}
 	
-	private OnDoubleTapListener doubleTapListener = new OnDoubleTapListener() {
-		
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			Log.d(TAG, "onSingleTapConfirmed");
-			
-			return false;
-		}
-		
-		@Override
-		public boolean onDoubleTapEvent(MotionEvent e) {
-			Log.d(TAG, "onDoubleTapEvent");
-			return false;
-		}
-		
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			Log.d(TAG, "onDoubleTap");
-			if(getSherlockActivity().getActionBar().isShowing()) 
-				getSherlockActivity().getActionBar().hide();
-			else
-				getSherlockActivity().getActionBar().show();
-			return false;
-		}
-	};
-	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		Log.d(TAG, "onActivityCreated()");
 		setHasOptionsMenu(true);
 		
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
@@ -252,6 +230,8 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		
 		builder.setAdapter(adapterDialog, dialogItemClickListener);
 		dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(true);
+		dialog.setCancelable(true);
 		
 		thread = new Thread(new Runnable() {
 			
@@ -285,11 +265,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		Log.d(TAG, "START - select poem: " + poemPos);
 		lvShowPoem.setSelection(selectPoem);
 		lvShowPoem.smoothScrollToPosition(selectPoem);
-	}
-	
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
 	}
 	
 	private OnScrollListener scrollChangeListener = new OnScrollListener() {
@@ -379,7 +354,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		}
 	};
 	
-	private DialogInterface.OnClickListener clickCopySelectedListener = new onDialogClickListener() {
+	/*private DialogInterface.OnClickListener clickCopySelectedListener = new onDialogClickListener() {
 		
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
@@ -390,7 +365,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			
 			dialog.cancel();			
 		}
-	};
+	};*/
 	
 	private DialogInterface.OnClickListener clickCancelCopyListener = new onDialogClickListener() {
 		
@@ -466,18 +441,46 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	}
 	
 	public void chengeChapter(int count){
-		listPoems = dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate);
-		ItemListPoemAdapter adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), R.layout.item_list_poems, listPoems);
-		lvShowPoem.setAdapter(adapterListPoem);
-		getSherlockActivity().setTitle(""+
-				Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " + chapterNumber);
-		btnChapter.setText(""+chapterNumber);
-		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		Editor editor = sp.edit();
-		editor.putInt(App.BOOK_ID, bookId);
-		editor.putInt(App.CHAPTER, chapterNumber);
-		editor.commit();
+		ChangeChapterAsyncTask changechapterTask = new ChangeChapterAsyncTask();
+		changechapterTask.execute();
 	}
+	
+	class ChangeChapterAsyncTask extends AsyncTask<Void, Void, Void>{
+
+		private ProgressDialog pd = null;
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pd = ProgressDialog.show(getSherlockActivity(), 
+					getString(R.string.progress_dialog_title), 
+					getString(R.string.progress_dialog_download_chapter));
+		}
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+			Log.d(TAG, "ChangeChapterAsyncTask()");
+			listPoems = dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate);
+			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			Editor editor = sp.edit();
+			editor.putInt(App.BOOK_ID, bookId);
+			editor.putInt(App.CHAPTER, chapterNumber);
+			editor.commit();
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			Log.d(TAG, "ChangeChapterAsyncTask() - END");
+			if(pd.isShowing()) pd.cancel();
+			getSherlockActivity().setTitle(""+
+					Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " + chapterNumber);
+			btnChapter.setText(""+chapterNumber);
+			ItemListPoemAdapter adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), R.layout.item_list_poems, listPoems);
+			lvShowPoem.setAdapter(adapterListPoem);
+		}		
+	};
 	
 	@Override
 	public void onResume() {

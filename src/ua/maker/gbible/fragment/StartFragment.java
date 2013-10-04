@@ -52,6 +52,8 @@ public class StartFragment extends SherlockFragment {
 		btnBook = (Button)view.findViewById(R.id.btn_book);
 		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
 		btnPoem = (Button)view.findViewById(R.id.btn_poem);
+		if(!getSherlockActivity().getActionBar().isShowing())
+			getSherlockActivity().getActionBar().show();
 		
 		Log.d(TAG, "Start activity create");
 		return view;

@@ -60,6 +60,8 @@ public class HistoryFragment extends SherlockFragment {
 		} catch (IOException e) {}
 		dataBase.openDataBase();
 		listHistory = new ArrayList<HistoryStruct>();
+		if(!getSherlockActivity().getActionBar().isShowing())
+			getSherlockActivity().getActionBar().show();
 		
 		return view;
 	}
