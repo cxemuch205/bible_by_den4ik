@@ -61,7 +61,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	private LinearLayout llMenuLink = null;
 	private DataBase dataBase = null;
 	private AlertDialog dialog = null;
-	private Thread thread = null;
 	private List<String> listPoems = null;
 	private Timer timer = null;
 	
@@ -232,33 +231,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.setCancelable(true);
-		
-		thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				click++;
-				if(click%2 == 0){
-					if(getSherlockActivity().getActionBar().isShowing()) 
-						getSherlockActivity().getActionBar().hide();
-					else
-						getSherlockActivity().getActionBar().show();
-					if(llMenuLink.getVisibility() == LinearLayout.VISIBLE) 
-						llMenuLink.setVisibility(LinearLayout.GONE);
-					else
-						llMenuLink.setVisibility(LinearLayout.VISIBLE);
-					click = 0;
-				}
-				timer.schedule(new TimerTask() {
-					
-					@Override
-					public void run() {
-						Log.d(TAG, "Clear count click: " + click);
-						click = 0;
-					}
-				}, CLEAR_CLICK_DELAYED);
-			}
-		});
 	}
 	
 	private void selectPrefPoem(){
@@ -285,10 +257,34 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			posPoemForCompare = position;
-			thread.run();
+			posPoemForCompare = (int)id;
+			Log.d("TEst click list", "id: " + id);
+			hideActionNav();
 		}
 	};
+	
+	private void hideActionNav(){
+		click++;
+		if(click%2 == 0){
+			if(getSherlockActivity().getActionBar().isShowing()) 
+				getSherlockActivity().getActionBar().hide();
+			else
+				getSherlockActivity().getActionBar().show();
+			if(llMenuLink.getVisibility() == LinearLayout.VISIBLE) 
+				llMenuLink.setVisibility(LinearLayout.GONE);
+			else
+				llMenuLink.setVisibility(LinearLayout.VISIBLE);
+			click = 0;
+		}
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				Log.d(TAG, "Clear count click: " + click);
+				click = 0;
+			}
+		}, CLEAR_CLICK_DELAYED);
+	}
 	
 	private DialogInterface.OnClickListener dialogItemClickListener = new onDialogClickListener() {
 		
@@ -400,6 +396,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			poemBM = (int)id+1;
 			chapterBM = chapterNumber;
 			contentBM = listPoems.get((int)id);
+			posPoemForCompare = (int)id;
 			dialog.show();
 			return false;
 		}
