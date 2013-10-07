@@ -334,7 +334,6 @@ int id btn_start_search 0x7f050059
 int id color_picker_view 0x7f05005f
 int id disableHome 0x7f050009
 int id edit_query 0x7f050026
-int id et_content_for_select 0x7f050067
 int id et_search_text 0x7f050058
 int id flRoot 0x7f050037
 int id gv_show_chapters 0x7f050055
@@ -399,6 +398,7 @@ int id tv_translate_label 0x7f05006b
 int id useLogo 0x7f050004
 int id view1 0x7f050035
 int id wrap_content 0x7f050000
+int id wv_show_content_poem 0x7f050067
 int integer abs__max_action_buttons 0x7f090000
 int layout abs__action_bar_home 0x7f030000
 int layout abs__action_bar_tab 0x7f030001

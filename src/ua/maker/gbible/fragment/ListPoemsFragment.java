@@ -34,13 +34,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -57,7 +57,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	
 	private View view = null;
 	private ListView lvShowPoem = null;
-	private EditText etContent = null;
+	private WebView wvContent = null;
 	private LinearLayout llMenuLink = null;
 	private DataBase dataBase = null;
 	private AlertDialog dialog = null;
@@ -302,10 +302,15 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 				
 				LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
 				View view = inflater.inflate(R.layout.dialog_select_poem, null);
-				etContent = (EditText)view.findViewById(R.id.et_content_for_select);
-				etContent.setText(Tools.getBookNameByBookId(bookId, getSherlockActivity())
-	        		+" "+chapterNumber+":"+poemBM+"\n"
-	        		+listPoems.get(poemBM-1));
+				wvContent = (WebView)view.findViewById(R.id.wv_show_content_poem);
+				wvContent.getSettings().setDefaultTextEncodingName("utf-8");
+				wvContent.setBackgroundColor(0x00000000);
+				
+				StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(bookId, getSherlockActivity())
+		        		+" "+chapterNumber+":"+poemBM+"</b></p>"
+		        		+"<p>"+listPoems.get(poemBM-1)+"</p>");
+				
+				wvContent.loadDataWithBaseURL(null, builderString.toString(), "text/html", "utf-8", null);//loadData(builderString.toString(), "text/html", "utf-8");
 				
 				builderSelect.setNegativeButton(getString(R.string.dialog_cancel), clickCancelCopyListener);
 				builderSelect.setPositiveButton(getString(R.string.dialog_dtn_copy_all), clickCopyAllListener);

@@ -54,7 +54,10 @@
     <ListView
         android:id="@+id/lv_show_poems"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:divider="#11000000"
+        android:dividerHeight="0dp" >
+
     </ListView>
 
 </LinearLayout>

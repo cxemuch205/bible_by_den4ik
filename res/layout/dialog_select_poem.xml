@@ -5,11 +5,9 @@
     android:orientation="vertical"
     android:padding="4dp" >
 
-    <EditText
-        android:id="@+id/et_content_for_select"
+    <WebView
+        android:id="@+id/wv_show_content_poem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" >
-    </EditText>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
