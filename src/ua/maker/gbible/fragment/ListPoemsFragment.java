@@ -522,7 +522,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		String translateName = DataBase.TABLE_NAME_RST;
 		if(prefs.contains(getString(R.string.pref_default_translaters))){
 			
-			switch(Integer.parseInt(prefs.getString(getString(R.string.pref_default_translaters), ""))){
+			switch(Integer.parseInt(prefs.getString(getString(R.string.pref_default_translaters), "0"))){
 				case 0:
 					translateName = DataBase.TABLE_NAME_RST;
 					break;

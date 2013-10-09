@@ -8,17 +8,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.TextView.BufferType;
 
 public class ItemListSearchAdapter extends ArrayAdapter<SearchStruct> {
-	
-	private static final String TAG = "ItemListPoemAdapter";
 	
 	private List<SearchStruct> listPoems = null;
 	private Context context = null;
@@ -31,7 +27,6 @@ public class ItemListSearchAdapter extends ArrayAdapter<SearchStruct> {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View view = convertView;
 		AdapterHolder holder = null;
 		
@@ -52,14 +47,9 @@ public class ItemListSearchAdapter extends ArrayAdapter<SearchStruct> {
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		int size = 14;
-		Log.d(TAG, "Start geting prefs - size poem text");
 		if(prefs.contains(context.getString(R.string.pref_size_text_poem))){
-			Log.d(TAG, "contains - true");
 			size = prefs.getInt(context.getString(R.string.pref_size_text_poem), 15);
-			Log.d(TAG, "size = " + size);
 		}
-		else
-			Log.d(TAG, "no contains");
 		
 		SearchStruct item = listPoems.get(position);
 		holder.tvContentPoem.setText(""+item.getContent());

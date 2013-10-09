@@ -79,6 +79,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");
 		
 		btnChapter.setBackgroundResource(R.drawable.btn_active_select);		
 
@@ -159,7 +160,7 @@ public class ListChaptersFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		translate = spDef.getString(getString(R.string.pref_default_translaters), DataBase.TABLE_NAME_RST);
+		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");
 	};
 	
 	@Override

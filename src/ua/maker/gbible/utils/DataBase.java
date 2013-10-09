@@ -426,7 +426,7 @@ public class DataBase extends SQLiteOpenHelper {
 			if(c.moveToFirst()){
 				do {
 					int id = c.getInt(c.getColumnIndex(DataBase.FIELD_BOOK_ID));
-					if(id >= idBookStart && id <= idBookEnd){
+					if((id-1) >= idBookStart && (id-1) <= idBookEnd){
 						String bookName = c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME))==null?"null"
 								:c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME));
 						int chapter = c.getInt(c.getColumnIndex(DataBase.FIELD_CHAPTER));

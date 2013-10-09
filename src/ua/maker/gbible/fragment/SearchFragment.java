@@ -92,8 +92,7 @@ public class SearchFragment extends SherlockFragment {
 		
 		db.openDataBase();
 		searchResult = new ArrayList<SearchStruct>();
-		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
-		lvResultSearch.setAdapter(adapter);
+		updateListResult();
 		
 		if(pref.contains(App.SEARCH_REQUEST)){
 			requestDB = pref.getString(App.SEARCH_REQUEST, "");
@@ -112,7 +111,8 @@ public class SearchFragment extends SherlockFragment {
 	}
 	
 	private void updateListResult() {
-		adapter.notifyDataSetChanged();
+		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
+		lvResultSearch.setAdapter(adapter);
 	}
 	
 	private OnItemClickListener itemResultSearchListener = new OnItemClickListener() {
@@ -212,7 +212,7 @@ public class SearchFragment extends SherlockFragment {
 		
 	}
 	
-	private class SearchTast extends AsyncTask<String, Void, List<SearchStruct>>{
+	private class SearchTast extends AsyncTask<Void, Void, Void>{
 		
 		private ProgressDialog pd = null;
 		
@@ -226,18 +226,19 @@ public class SearchFragment extends SherlockFragment {
 		};
 
 		@Override
-		protected List<SearchStruct> doInBackground(String... params) {
-			return db.searchInDataBase(requestDB, idBookStart, idBookEnd);
+		protected Void doInBackground(Void... params) {
+			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);
+			searchResult = db.searchInDataBase(requestDB, idBookStart, idBookEnd);
+			return null;
 		}
 		
 		@Override
-		protected void onPostExecute(java.util.List<SearchStruct> result) {
+		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			if(pd.isShowing()) pd.dismiss();
 			Log.d(TAG, "Search AsyncTask - CANCEL");
-			searchResult.addAll(result);
 			
-			db.insertSearchResult(result);
+			db.insertSearchResult(searchResult);
 			
 			updateListResult();
 		};

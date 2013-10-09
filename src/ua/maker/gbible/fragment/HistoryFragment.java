@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
@@ -112,6 +113,9 @@ public class HistoryFragment extends SherlockFragment {
 			editor.putInt(App.CHAPTER, listHistory.get((int)id).getChapter());
 			editor.putInt(App.POEM_SET_FOCUS, 0);
 			editor.commit();
+			
+			//SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+			//prefs.edit().putString(getString(R.string.pref_default_translaters), listHistory.get((int)id).getTranslate());
 			
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
