@@ -20,6 +20,7 @@ public class App {
 	public static final String TAG_FRAGMENT_SETTINGS = "settings_tag";
 	public static final String TAG_FRAGMENT_CHAPTERS = "chapters_tag";
 	public static final String TAG_FRAGMENT_POEMS = "poems_tag";
+	public static final String TAG_FRAGMENT_PLAN = "plan_fragment_tag";
 	
 	//app constants
 	public static final int DEFAULT_SIZE_TEXT = 16;

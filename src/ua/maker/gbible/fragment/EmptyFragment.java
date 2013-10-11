@@ -1,6 +1,8 @@
 package ua.maker.gbible.fragment;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,10 @@ public class EmptyFragment extends SherlockFragment {
 		case R.id.action_exit:
 			getSherlockActivity().finish();
 			return true;
+		case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
+	   		return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

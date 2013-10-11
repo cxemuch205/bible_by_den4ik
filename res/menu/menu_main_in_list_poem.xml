@@ -13,6 +13,12 @@
         android:showAsAction="ifRoom|withText"
         android:title="@string/next_chapter_symbol"
         android:icon="@drawable/pointer_next"/>
+    <item
+        android:id="@+id/action_setting_app"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/action_setting"/>
     <item 
         android:id="@+id/action_exit"
         android:orderInCategory="100"

@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.SinglePanelActivity;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListBookmarksAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.BookMarksStruct;
 import ua.maker.gbible.utils.DataBase;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -134,6 +137,10 @@ public class BookmarksFragment extends SherlockFragment {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
 	   		getSherlockActivity().finish();
+	   		return true;
+	   	case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);

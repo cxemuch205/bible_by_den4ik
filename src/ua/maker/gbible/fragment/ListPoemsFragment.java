@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ComparePoemActivity;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemDialogAdapter;
 import ua.maker.gbible.adapter.ItemListPoemAdapter;
 import ua.maker.gbible.constant.App;
@@ -168,7 +169,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 				
 				FragmentTransaction ft = getFragmentManager().
 						 beginTransaction();
-				ft.replace(R.id.flRoot, new StartFragment(), App.TAG_FRAGMENT_BOOKS);
+				ft.replace(R.id.flRoot, new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS);
 				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 				ft.addToBackStack(null);
 				ft.commit();
@@ -438,6 +439,10 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			else
 				chapterNumber++;
 			return true;
+		case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
+	   		return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

@@ -98,7 +98,7 @@
                 android:id="@+id/ImageView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_manage" />
+                android:src="@drawable/icon_plan" />
         </LinearLayout>
     </LinearLayout>
     
@@ -206,7 +206,7 @@
                 android:id="@+id/iv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_manage" />
+                android:src="@drawable/icon_plan" />
         </LinearLayout>
     </LinearLayout>
 

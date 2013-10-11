@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListSearchAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.SearchStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
@@ -258,7 +260,10 @@ public class SearchFragment extends SherlockFragment {
 		case R.id.action_exit:
 			getSherlockActivity().finish();
 			break;
-
+		case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
+	   		return true;
 		default:
 			break;
 		}

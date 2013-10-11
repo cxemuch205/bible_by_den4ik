@@ -4,8 +4,9 @@ import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.fragment.BookmarksFragment;
 import ua.maker.gbible.fragment.HistoryFragment;
+import ua.maker.gbible.fragment.PlanFragment;
 import ua.maker.gbible.fragment.SearchFragment;
-import ua.maker.gbible.fragment.StartFragment;
+import ua.maker.gbible.fragment.SelectBookFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -266,7 +267,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 				.replace(R.id.flRoot, (getSupportFragmentManager()
 						.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)? 
 								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new StartFragment(), App.TAG_FRAGMENT_BOOKS).commit();
+								.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS).commit();
 			
 			return null;
 		}
@@ -319,8 +320,11 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
-			Intent startSetting = new Intent(SinglePanelActivity.this, SettingActivity.class);
-			startActivity(startSetting);
+			getSupportFragmentManager().beginTransaction()
+			.replace(R.id.flRoot, (getSupportFragmentManager()
+					.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
+							getSupportFragmentManager()
+							.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlanFragment(), App.TAG_FRAGMENT_PLAN).commit();
 		}
 	};
     

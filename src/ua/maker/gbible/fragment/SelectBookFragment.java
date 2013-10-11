@@ -3,9 +3,11 @@ package ua.maker.gbible.fragment;
 import java.io.IOException;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class StartFragment extends SherlockFragment {
+public class SelectBookFragment extends SherlockFragment {
 	
 	private static final String TAG = "StartFragment";
 	
@@ -161,6 +163,10 @@ public class StartFragment extends SherlockFragment {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
 	   		getSherlockActivity().finish();
+	   		return true;
+	   	case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);

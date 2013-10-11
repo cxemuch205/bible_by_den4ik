@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListHistoryAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.listeners.onDialogClickListener;
@@ -12,6 +13,7 @@ import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.DataBase;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -167,6 +169,10 @@ public class HistoryFragment extends SherlockFragment {
 	   		AlertDialog dialog = builder.create();
 	   		dialog.show();
 	   		
+	   		return true;
+	   	case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);

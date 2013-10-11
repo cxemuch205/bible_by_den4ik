@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -102,7 +104,7 @@ public class ListChaptersFragment extends SherlockFragment {
 				
 				FragmentTransaction ft = getFragmentManager().
 						 beginTransaction();
-				ft.replace(R.id.flRoot, new StartFragment(), App.TAG_FRAGMENT_BOOKS);
+				ft.replace(R.id.flRoot, new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS);
 				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 				ft.addToBackStack(null);
 				ft.commit();
@@ -174,6 +176,10 @@ public class ListChaptersFragment extends SherlockFragment {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
 	   		getSherlockActivity().finish();
+	   		return true;
+	   	case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);

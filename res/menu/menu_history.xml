@@ -14,5 +14,12 @@
         android:showAsAction="ifRoom|withText"
         android:icon="@drawable/exit"
         android:title="@string/exit_str"/>
+    
+    <item
+        android:id="@+id/action_setting_app"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom|withText"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/action_setting"/>
 
 </menu>
