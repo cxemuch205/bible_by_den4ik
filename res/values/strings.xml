@@ -335,5 +335,9 @@
     <string name="dialog_btn_copy_select_text">Копировать выделеное</string>
     
     <!-- ##################### -->
+    
+    <!-- Plan fragment -->
+    <string name="title_activit_plan">План</string>
+    <!-- ##################### -->
     		
 </resources>

@@ -33,6 +33,7 @@ public class PlanFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activit_plan));
 		
 	}
 	
