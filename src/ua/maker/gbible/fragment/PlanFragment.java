@@ -30,6 +30,13 @@ public class PlanFragment extends SherlockFragment {
 	}
 	
 	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		setHasOptionsMenu(true);
+		
+	}
+	
+	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.menu_main, menu);
 		super.onCreateOptionsMenu(menu, inflater);
