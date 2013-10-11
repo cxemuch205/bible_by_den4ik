@@ -1,6 +1,8 @@
 package ua.maker.gbible.fragment;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.SettingActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 public class PlanFragment extends SherlockFragment {
 	
@@ -23,5 +28,25 @@ public class PlanFragment extends SherlockFragment {
 		
 		return view;
 	}
-
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.menu_main, menu);
+		super.onCreateOptionsMenu(menu, inflater);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch (item.getItemId()) {
+		case R.id.action_exit:
+	   		getSherlockActivity().finish();
+	   		return true;
+	   	case R.id.action_setting_app:
+	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+			startActivity(startSetting);
+	   		return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }
