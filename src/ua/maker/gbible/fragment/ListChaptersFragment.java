@@ -55,7 +55,6 @@ public class ListChaptersFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.activity_list_chapters, null);
 		gvShowChapters = (GridView)view.findViewById(R.id.gv_show_chapters);
-		getSherlockActivity().setTitle(getString(R.string.title_activity_list_chapters));
 
 		btnBook = (Button)view.findViewById(R.id.btn_book);
 		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
@@ -79,6 +78,8 @@ public class ListChaptersFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_list_chapters));
+		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");

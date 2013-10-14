@@ -12,6 +12,7 @@
     <string name="exit_question">Выйти?</string>
     <string name="closes_app">Закрытие приложения..</string>
     <string name="dialog_yes">Да</string>
+    <string name="dialog_save">Сохранить</string>
     <string name="dialog_cancel">Отмена</string>
     
     <string name="progress_dialog_title">Загрузка&#8230;</string>
@@ -247,6 +248,7 @@
     <!-- Preference string -->
     <string name="dialog_select_size_text">Размер шрифта:</string>
     <string name="str_sample_size_text">Пример.</string>
+    <string name="pref_message_select_use_btn_lov">Вы не выбрали пункт \"Кнопки громкоски\"!</string>
     
     <string name="category_base">Общие</string>
     	<string name="pref_default_translaters">def_translates</string>
@@ -273,6 +275,14 @@
     		    <item>0</item>
     		    <item>1</item>
     		</string-array>
+    	<string name="pref_use_vol_up_down_btn">use_vol_btn</string>
+    		<string name="title_use_vol_btn">Кнопки громкости</string>
+    		<string name="summary_use_vol_btn">Использование кнопок громкости для чтения, переключение между главами по конечному стиху.</string>
+    	<string name="pref_smooth_duration">smooth_duration_scrollint_list</string>
+    		<string name="dialog_pref_title_speed_smooth_scroll">Установите скорость скроллинга:</string>
+    		<string name="dialog_pref_message_speed_smooth_scroll">Текущая скорость:</string>
+    		<string name="title_smooth_scroll">Скорость скрола глав</string>
+    		<string name="summary_smooth_scroll">Скорость чтения стихов в главе под упавлением клавишь громкости.</string>
     		
     <string name="category_design">Оформление</string>
     	<string name="pref_size_text_poem">size_text_poem</string>
@@ -308,6 +318,7 @@
     <!-- ##################### -->
     
     <!-- History Fragment -->
+    <string name="title_activity_history">История</string>
     <string name="action_title_clear_history">Очистка</string>
     <string name="list_history_empty">История пуста</string>
     <string name="is_rst_translate">РСП</string>
@@ -318,10 +329,12 @@
     <!-- ##################### -->
     
     <!-- Bookmarks -->
+    <string name="title_activity_bookmarks">Закладки</string>
     <string name="no_founded_bookmarks">Закладок нет</string>
     <!-- ##################### -->
     
     <!-- List poems -->
+    <string name="it_is_chapter_last">Это последняя глава</string>
     <string name="dialog_add_to_bookmarks">Добавить в закладки</string>
     <string name="dialog_copy_to_clicpboard">Копировать содержимое</string>
     <string name="dialog_share">Поделиться</string>

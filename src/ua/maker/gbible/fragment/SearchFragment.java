@@ -86,7 +86,7 @@ public class SearchFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
-		getSherlockActivity().setTitle(getString(R.string.search_str));
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.search_str));
 		db = new DataBase(getSherlockActivity());
 		try {
 			db.createDataBase();

@@ -24,15 +24,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -50,11 +55,12 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-public class ListPoemsFragment extends SherlockFragment implements OnGestureListener{
+public class ListPoemsFragment extends SherlockFragment{
 	
 	private static final String TAG = "ListPoemsFragment";
 	
 	private static final int CLEAR_CLICK_DELAYED = 300;
+	private static final int SMOOTH_DURATION = 100;
 	
 	private View view = null;
 	private ListView lvShowPoem = null;
@@ -82,6 +88,8 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 	
 	private SharedPreferences sp = null, defPref = null;
 	private boolean dayNight = false; //false - day / true - night
+	private boolean useVolBtn = false;
+	private int speedScroolList = App.DEFAULT_SCROOL_SPEED;
 	
 	//link for bookmark
 	private int bookIdBM = 1;
@@ -122,9 +130,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		});
 		getMaxChapter.run();
 		
-		getSherlockActivity().setTitle(""
-				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
-				+ chapterNumber);
 		Log.d(TAG, "END onCreateView");
 		
 		return view;
@@ -135,6 +140,9 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		super.onActivityCreated(savedInstanceState);
 		Log.d(TAG, "onActivityCreated()");
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setTitle(""
+				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
+				+ chapterNumber);
 		
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
@@ -149,6 +157,8 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			llMenuLink.setBackgroundColor(Color.WHITE);
 		}
 		
+		speedScroolList = defPref.getInt(getString(R.string.pref_smooth_duration), 2);
+		useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
 		btnPoem.setBackgroundResource(R.drawable.btn_active_select);
 		btnBook.setText(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
 		btnChapter.setText(""+chapterNumber);
@@ -210,9 +220,11 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		
 		Log.d(TAG, "END onActivityCreated");
 		
+		lvShowPoem.setSmoothScrollbarEnabled(true);
 		lvShowPoem.setOnScrollListener(scrollChangeListener);		
 		lvShowPoem.setOnItemClickListener(itemClickListener);		
 		lvShowPoem.setOnItemLongClickListener(itemLongClickListener);
+		lvShowPoem.setOnTouchListener(touchListener);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
 		String[] listActions = {
@@ -232,7 +244,68 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.setCancelable(true);
+		
+		lvShowPoem.setOnKeyListener(keyListener);
+		getSherlockActivity().setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+		
 	}
+	
+	SimpleOnGestureListener gestureListener = new SimpleOnGestureListener(){
+		
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2,
+				float velocityX, float velocityY) {
+			
+			float sensitvity = 120;
+			   
+			if((e1.getX() - e2.getX()) > sensitvity){
+			    toNextChapter(); //Swipe to left
+			}else if((e2.getX() - e1.getX()) > sensitvity){
+			    toPreviousChapter(); //Swipe to right
+			}
+			   
+			/*if((e1.getY() - e2.getY()) > sensitvity){
+				//swipe += "Swipe Up\n";
+			}else if((e2.getY() - e1.getY()) > sensitvity){
+				//swipe += "Swipe Down\n";
+			}else{
+				//swipe += "\n";
+			}*/
+			
+			return super.onFling(e1, e2, velocityX, velocityY);
+		}
+	};
+	
+	GestureDetector gestureDetector
+    = new GestureDetector(gestureListener);
+	
+	private OnTouchListener touchListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			if (gestureDetector.onTouchEvent(event))
+				return true;
+			else
+				return false;
+		}
+	};
+	
+	private OnKeyListener keyListener = new OnKeyListener() {
+		
+		@Override
+		public boolean onKey(View v, int keyCode, KeyEvent event) {
+			if(useVolBtn){
+				if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+					lvShowPoem.smoothScrollBy((speedScroolList*(-1)), SMOOTH_DURATION);
+				}
+				else
+				if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+					lvShowPoem.smoothScrollBy(speedScroolList, SMOOTH_DURATION);
+				}
+			}			
+			return false;
+		}
+	};
 	
 	private void selectPrefPoem(){
 		Log.d(TAG, "START - select poem: " + poemPos);
@@ -249,7 +322,9 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemCount, int totalItemCount) {
 			btnPoem.setText(""+(firstVisibleItem+1));
-			poemPos = firstVisibleItem;				
+			poemPos = firstVisibleItem;
+			
+			//lvShowPoem.is
 		}
 	};
 	
@@ -259,7 +334,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			posPoemForCompare = (int)id;
-			Log.d("TEst click list", "id: " + id);
 			hideActionNav();
 		}
 	};
@@ -281,7 +355,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			
 			@Override
 			public void run() {
-				Log.d(TAG, "Clear count click: " + click);
 				click = 0;
 			}
 		}, CLEAR_CLICK_DELAYED);
@@ -304,14 +377,14 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 				LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
 				View view = inflater.inflate(R.layout.dialog_select_poem, null);
 				wvContent = (WebView)view.findViewById(R.id.wv_show_content_poem);
-				wvContent.getSettings().setDefaultTextEncodingName("utf-8");
+				wvContent.getSettings().setJavaScriptEnabled(true);
 				wvContent.setBackgroundColor(0x00000000);
 				
 				StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(bookId, getSherlockActivity())
 		        		+" "+chapterNumber+":"+poemBM+"</b></p>"
 		        		+"<p>"+listPoems.get(poemBM-1)+"</p>");
 				
-				wvContent.loadDataWithBaseURL(null, builderString.toString(), "text/html", "utf-8", null);//loadData(builderString.toString(), "text/html", "utf-8");
+				wvContent.loadDataWithBaseURL(null, builderString.toString(), "text/html", "utf-8", null);
 				
 				builderSelect.setNegativeButton(getString(R.string.dialog_cancel), clickCancelCopyListener);
 				builderSelect.setPositiveButton(getString(R.string.dialog_dtn_copy_all), clickCopyAllListener);
@@ -355,19 +428,6 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			dialog.cancel();			
 		}
 	};
-	
-	/*private DialogInterface.OnClickListener clickCopySelectedListener = new onDialogClickListener() {
-		
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			int start = 0, end = 0;
-			start = etContent.getSelectionStart();
-			end = etContent.getSelectionEnd();
-			copyToClipBoard(""+etContent.getText().toString().substring(start, end).toString());
-			
-			dialog.cancel();			
-		}
-	};*/
 	
 	private DialogInterface.OnClickListener clickCancelCopyListener = new onDialogClickListener() {
 		
@@ -421,24 +481,12 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		case R.id.action_exit:
 			getSherlockActivity().finish();
 			return true;
-		case R.id.action_next_chapter:
-			chapterNumber++;
-			if(dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate) != null 
-					&& chapterNumber > 0 && chapterNumber <= maxChapter){
-				chengeChapter(chapterNumber);
-			}
-			else
-				chapterNumber--;
-			return true;
-		case R.id.action_previous_chapter:
-			chapterNumber--;
-			if(dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate) != null 
-					&& chapterNumber > 0 && chapterNumber <= maxChapter){
-				chengeChapter(chapterNumber);
-			}
-			else
-				chapterNumber++;
-			return true;
+//		case R.id.action_next_chapter:
+//			toNextChapter();
+//			return true;
+//		case R.id.action_previous_chapter:
+//			toPreviousChapter();
+//			return true;
 		case R.id.action_setting_app:
 	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
 			startActivity(startSetting);
@@ -447,6 +495,32 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		return super.onOptionsItemSelected(item);
 	}
 	
+	private void toPreviousChapter() {
+		chapterNumber--;
+		if(/*dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate) != null 
+				&& */chapterNumber > 0 && chapterNumber <= maxChapter){
+			chengeChapter(chapterNumber);
+		}
+		else
+		{
+			chapterNumber++;
+		}
+	}
+
+	private void toNextChapter() {
+		chapterNumber++;
+		if(/*dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate) != null 
+				&& */chapterNumber > 0 && chapterNumber <= maxChapter){
+			chengeChapter(chapterNumber);
+		}
+		else
+		{
+			chapterNumber--;
+			Tools.showToast(getSherlockActivity(), getString(R.string.it_is_chapter_last));
+			//In future? may make switch on next book
+		}
+	}
+
 	public void chengeChapter(int count){
 		ChangeChapterAsyncTask changechapterTask = new ChangeChapterAsyncTask();
 		changechapterTask.execute();
@@ -481,7 +555,7 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			super.onPostExecute(result);
 			Log.d(TAG, "ChangeChapterAsyncTask() - END");
 			if(pd.isShowing()) pd.cancel();
-			getSherlockActivity().setTitle(""+
+			getSherlockActivity().getActionBar().setTitle(""+
 					Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " + chapterNumber);
 			btnChapter.setText(""+chapterNumber);
 			ItemListPoemAdapter adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), R.layout.item_list_poems, listPoems);
@@ -509,6 +583,8 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 		}
 		
 		selectPrefPoem();
+		useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
+		speedScroolList = defPref.getInt(getString(R.string.pref_smooth_duration), 2);
 		
 		Log.d(TAG, "OnResume TESTING");
 	}
@@ -537,37 +613,5 @@ public class ListPoemsFragment extends SherlockFragment implements OnGestureList
 			}
 		}
 		return translateName;
-	}
-
-	@Override
-	public boolean onDown(MotionEvent e) {
-		return false;
-	}
-
-	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-			float velocityY) {
-		return false;
-	}
-
-	@Override
-	public void onLongPress(MotionEvent e) {
-		
-	}
-
-	@Override
-	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-			float distanceY) {
-		return false;
-	}
-
-	@Override
-	public void onShowPress(MotionEvent e) {
-		
-	}
-
-	@Override
-	public boolean onSingleTapUp(MotionEvent e) {
-		return false;
 	}
 }

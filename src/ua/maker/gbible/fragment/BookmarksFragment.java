@@ -61,6 +61,8 @@ public class BookmarksFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_bookmarks));
+		
 		db = new DataBase(getSherlockActivity());
 		
 		try {

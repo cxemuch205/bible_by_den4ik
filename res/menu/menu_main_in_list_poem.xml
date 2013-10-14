@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <item 
+    <!-- <item 
         android:id="@+id/action_previous_chapter"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
@@ -12,7 +12,7 @@
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText"
         android:title="@string/next_chapter_symbol"
-        android:icon="@drawable/pointer_next"/>
+        android:icon="@drawable/pointer_next"/>  -->
     <item
         android:id="@+id/action_setting_app"
         android:orderInCategory="100"

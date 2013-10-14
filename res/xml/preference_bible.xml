@@ -17,6 +17,15 @@
             android:entryValues="@array/mode_read_array_id"
             android:defaultValue="0"
             android:dialogTitle="@string/dialogtitle_mode_read"/>
+        <CheckBoxPreference
+            android:key="@string/pref_use_vol_up_down_btn"
+            android:title="@string/title_use_vol_btn"
+            android:summary="@string/summary_use_vol_btn"
+            android:defaultValue="false"/>
+         <ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference
+            android:key="@string/pref_smooth_duration"
+            android:title="@string/title_smooth_scroll"
+            android:summary="@string/summary_smooth_scroll"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/category_design">
         <ua.maker.gbible.widget.setting.ChangeSizeTextPreference

@@ -73,6 +73,7 @@ public class HistoryFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_history));
 		Log.d(TAG, "onActivityCreated()");
 		updateListHistory();
 		getLIstHistory();
