@@ -6,20 +6,25 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.SinglePanelActivity;
+import ua.maker.gbible.activity.ComparePoemActivity;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListBookmarksAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.BookMarksStruct;
 import ua.maker.gbible.utils.DataBase;
+import ua.maker.gbible.utils.Tools;
+import ua.maker.gbible.utils.UserDB;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -35,6 +40,10 @@ public class BookmarksFragment extends SherlockFragment {
 	
 	private static final String TAG = "BookmarksFragment";
 	
+	private static final int BTN_COMPARE_POEM = 100;
+	private static final int BTN_ADD_TO_PLAN = 101;
+	private static final int BTN_DELETE = 102;
+	
 	private View view = null;
 	private ListView lvBookmarks = null;
 	private TextView tvInfo = null;
@@ -42,7 +51,8 @@ public class BookmarksFragment extends SherlockFragment {
 	
 	private List<BookMarksStruct> listBookmarks = null;
 	
-	private DataBase db = null;
+	private UserDB db = null;
+	private int selectItem = 0;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,14 +72,10 @@ public class BookmarksFragment extends SherlockFragment {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_bookmarks));
+		registerForContextMenu(lvBookmarks);
+		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		
-		db = new DataBase(getSherlockActivity());
-		
-		try {
-			db.createDataBase();
-		} catch (IOException e) {}
-		db.openDataBase();
-		Log.d(TAG, "DB opened");
+		db = new UserDB(getSherlockActivity());
 		
 		listBookmarks = db.getBookMarks();
 		if(listBookmarks == null || listBookmarks.size()<1){
@@ -118,6 +124,7 @@ public class BookmarksFragment extends SherlockFragment {
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View v,
 				int position, long id) {
+			selectItem = position;
 			return false;
 		}
 	};
@@ -133,6 +140,15 @@ public class BookmarksFragment extends SherlockFragment {
 		inflater.inflate(R.menu.menu_main, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(Menu.NONE, BTN_COMPARE_POEM, Menu.NONE, getString(R.string.compare_str));
+		menu.add(Menu.NONE, BTN_ADD_TO_PLAN, Menu.NONE, getString(R.string.add_to_plan_this_link));
+		menu.add(Menu.NONE, BTN_DELETE, Menu.NONE, getString(R.string.context_delete));
+	}
 	    
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,6 +162,32 @@ public class BookmarksFragment extends SherlockFragment {
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(android.view.MenuItem item) {
+		
+		switch (item.getItemId()) {
+		case BTN_ADD_TO_PLAN:
+			
+			return true;
+		case BTN_DELETE:
+			db.deleteBookmark(listBookmarks.get(selectItem).getId());
+			listBookmarks.remove(selectItem);
+			updateListView();
+			Tools.showToast(getSherlockActivity(), getString(R.string.deleted_bookmark));
+			return true;
+		case BTN_COMPARE_POEM:
+			Intent intentCompare = new Intent(getSherlockActivity(), ComparePoemActivity.class);
+			intentCompare.putExtra(App.BOOK_ID, listBookmarks.get(selectItem).getBookId());
+			intentCompare.putExtra(App.CHAPTER, listBookmarks.get(selectItem).getChapter());
+			intentCompare.putExtra(App.POEM, listBookmarks.get(selectItem).getPoem());
+			startActivity(intentCompare);
+			Log.d(TAG, "Click on list: pos = " + selectItem);
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
 	}
 
 }

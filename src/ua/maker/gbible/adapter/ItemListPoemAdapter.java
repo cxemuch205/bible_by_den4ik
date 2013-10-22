@@ -3,6 +3,7 @@ package ua.maker.gbible.adapter;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.structs.PoemStruct;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,19 +15,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ItemListPoemAdapter extends ArrayAdapter<String> {
+public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 	
-	private int layoutResourseId = 0;
-	private List<String> listPoems = null;
+	private List<PoemStruct> listPoems = null;
 	private Context context = null;
 	private SharedPreferences defPref = null;
 	private boolean dayNight = false;
 
-	public ItemListPoemAdapter(Context context, int textViewResourceId,
-			List<String> objects) {
-		super(context, textViewResourceId, objects);
-		layoutResourseId = textViewResourceId;
-		listPoems = objects;
+	public ItemListPoemAdapter(Context context, List<PoemStruct> data) {
+		super(context, R.layout.item_list_poems, data);
+		this.listPoems = data;
 		this.context = context;
 	}
 	
@@ -40,7 +38,7 @@ public class ItemListPoemAdapter extends ArrayAdapter<String> {
 		
 		if(view == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-			view = inflater.inflate(layoutResourseId, parent, false);
+			view = inflater.inflate(R.layout.item_list_poems, null);
 			
 			holder = new AdapterHolder();
 			holder.tvNumberPoem = (TextView)view.findViewById(R.id.tv_number_of_poem);
@@ -59,11 +57,16 @@ public class ItemListPoemAdapter extends ArrayAdapter<String> {
 			size = prefs.getInt(context.getString(R.string.pref_size_text_poem), 15);
 		}
 		
-		String content = listPoems.get(position);
+		PoemStruct content = listPoems.get(position);
+		
+		if(content.isChecked()){
+			view.setBackgroundResource(R.color.color_selected_list_item);
+		}
+		
 		if(dayNight){
 			holder.tvContentPoem.setTextColor(Color.WHITE);
 			holder.tvNumberPoem.setTextColor(Color.WHITE);
-			holder.tvContentPoem.setText(content);
+			holder.tvContentPoem.setText(content.getText());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));
 			holder.tvNumberPoem.setTextSize(size-1);
@@ -72,7 +75,7 @@ public class ItemListPoemAdapter extends ArrayAdapter<String> {
 		{
 			holder.tvContentPoem.setTextColor(Color.BLACK);
 			holder.tvNumberPoem.setTextColor(Color.BLACK);
-			holder.tvContentPoem.setText(content);
+			holder.tvContentPoem.setText(content.getText());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));
 			holder.tvNumberPoem.setTextSize(size-1);

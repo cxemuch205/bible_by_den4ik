@@ -65,6 +65,7 @@ public class SelectBookFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
 		dataBase = new DataBase(getSherlockActivity());
 		

@@ -331,10 +331,15 @@
     <!-- Bookmarks -->
     <string name="title_activity_bookmarks">Закладки</string>
     <string name="no_founded_bookmarks">Закладок нет</string>
+    
+    <string name="add_to_plan_this_link">Добавить в план</string>
+    <string name="deleted_bookmark">Заметка удалена!</string>
     <!-- ##################### -->
     
     <!-- List poems -->
     <string name="it_is_chapter_last">Это последняя глава</string>
+    <string name="replay_click_btn">Нажмите еще раз для перехода</string>
+    
     <string name="dialog_add_to_bookmarks">Добавить в закладки</string>
     <string name="dialog_copy_to_clicpboard">Копировать содержимое</string>
     <string name="dialog_share">Поделиться</string>
@@ -347,10 +352,35 @@
     <string name="dialog_dtn_copy_all">Копировать все</string>
     <string name="dialog_btn_copy_select_text">Копировать выделеное</string>
     
+    <color name="color_selected_list_item">#22007241</color>
+    <color name="color_no_bagr">#ffffff</color>
     <!-- ##################### -->
     
-    <!-- Plan fragment -->
+    <!-- PlanList fragment -->
     <string name="title_activit_plan">План</string>
+    
+    <string name="create_plane">Создать план</string>
+    <string name="dialog_title_create_plan">Параметры плана:</string>
+    <string name="dialog_enter_name_plan">* Введите заголовок</string>
+    <string name="dialog_enter_sub_description">Под заголовок</string>
+    <string name="data_time">Дата создания:</string>
+    <string name="create_plan_btn">Создать</string>
+    <string name="context_edit">Редактировать</string>
+    <string name="context_delete">Удалить</string>
+    <string name="toast_delete_plan_msg">План %s удален!</string>
+    <!-- ##################### -->
+    
+    <!-- Plan Detail fragment -->
+    <string name="menu_title_add_point">Добавить</string>
+    <string name="dialog_title_add_item_plan">Добавить пункт:</string>
+    <string name="text_str">Текст</string>
+    <string name="link_str">Ссылка</string>
+    <string name="bold_text">Жирный шрифт</string>
+    <string name="quote_poem">Цитировать</string>
+    <string name="error_text_msg">Поле постое!</string>
+    
+    <string name="context_drag_and_drop">Переместить</string>
+    <string name="click_on_point_paste">Тап для вставки</string>
     <!-- ##################### -->
     		
 </resources>

@@ -63,12 +63,12 @@ public class ListChaptersFragment extends SherlockFragment {
 			getSherlockActivity().getActionBar().show();
 		
 		dataBase = new DataBase(getSherlockActivity());
-		try {
+		/*try {
 			dataBase.createDataBase();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		dataBase.openDataBase();
 		return view;
 	}
@@ -78,6 +78,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
+		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_list_chapters));
 		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);

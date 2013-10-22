@@ -12,6 +12,7 @@ import ua.maker.gbible.R;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.BookMarksStruct;
 import ua.maker.gbible.structs.HistoryStruct;
+import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.structs.SearchStruct;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -40,7 +41,6 @@ public class DataBase extends SQLiteOpenHelper {
 	private static final int TRANSLATE_MT_ID = 1;
 	
 	private static final String TABLE_HISTORY = "history_link";
-	private static final String TABLE_BOOKMARKS = "bookmarks";
 	private static final String TABLE_SEARCH_RESULT = "search_history";
 	
 	public static final String FIELD_BOOK_ID = "bookId";
@@ -139,7 +139,7 @@ public class DataBase extends SQLiteOpenHelper {
 		List<String> books = new ArrayList<String>();
 		int j = 0;
 		if(db.isOpen()){
-			Cursor cursor = db.rawQuery("SELECT * FROM '"+tableName+"'", null);
+			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
 				do{
 					if(j != cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID))){
@@ -156,7 +156,7 @@ public class DataBase extends SQLiteOpenHelper {
 	public List<Integer> getChapters(String tableName, int bookId){
 		List<Integer> chapters = new ArrayList<Integer>();
 		if(db.isOpen()){
-			Cursor c = db.rawQuery("SELECT * FROM '"+tableName+"'", null);
+			Cursor c = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+", "+FIELD_POEM+" FROM '"+tableName+"'", null);
 			if(c.moveToFirst()){
 				do{
 					if(c.getInt(c.getColumnIndex(FIELD_BOOK_ID)) == bookId)
@@ -170,17 +170,17 @@ public class DataBase extends SQLiteOpenHelper {
 		return chapters;
 	}
 	
-	public List<String> getPoemsInChapter(int bookId, int chapter, String tableName){
-		List<String> poems = new ArrayList<String>();
+	public List<PoemStruct> getPoemsInChapter(int bookId, int chapter, String tableName){
+		List<PoemStruct> poems = new ArrayList<PoemStruct>();
 		Log.d(TAG, "Satart getting poem in " + Tools.getBookNameByBookId(bookId, mContext)+"chapter " + chapter);
 		if(db.isOpen()){
 			Log.d(TAG, "BaseOpen");
-			Cursor cursor = db.rawQuery("SELECT * FROM '"+tableName+"'", null);
+			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+", "+FIELD_CONTENT+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
 				do{
 					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId)
 						if(cursor.getInt(cursor.getColumnIndex(FIELD_CHAPTER)) == chapter){
-							poems.add(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT)));						
+							poems.add(new PoemStruct(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT))));						
 						}
 					
 				}while(cursor.moveToNext());
@@ -220,7 +220,7 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		if(db.isOpen()){
 			Log.d(TAG, "BaseOpen");
-			Cursor cursor = db.rawQuery("SELECT * FROM '"+tableName+"'", null);
+			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
 				do{
 					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId)
@@ -240,7 +240,7 @@ public class DataBase extends SQLiteOpenHelper {
 		
 		if(db.isOpen()){
 			Log.d(TAG, "BaseOpen");
-			Cursor cursor = db.rawQuery("SELECT * FROM '"+tableName+"'", null);
+			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
 				do{
 					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId)
@@ -322,85 +322,7 @@ public class DataBase extends SQLiteOpenHelper {
     		db.delete(TABLE_HISTORY, null, null);
     	}
     }
-    
-    public void insertBookMark(String tableName, int bookId, int chapter, int poem, String content){
-    	Log.d(TAG, "insert to db BookMarks: bookId " + bookId 
-    			+ " chapter " + chapter 
-    			+ " poem " + poem
-    			+ " tableName " + tableName);
-    	
-    	if(db.isOpen()){
-    		Log.d(TAG, "WRITE - WORK");
-    		ContentValues values = new ContentValues();
-    		
-    		values.put(FIELD_TABLE_NAME, tableName);
-    		values.put(FIELD_BOOK_ID, bookId);
-    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookId, mContext));
-    		values.put(FIELD_CHAPTER, chapter);
-    		values.put(FIELD_POEM, poem);
-    		values.put(FIELD_CONTENT, content);
-    		
-    		db.insert(TABLE_BOOKMARKS, null, values);
-    	}
-    }
-    
-    public void insertBookMarks(List<BookMarksStruct> listBookMarks){
-    	Log.d(TAG, "insert to db BookMarks: size " + listBookMarks.size());
-    	
-    	if(db.isOpen()){
-    		
-    		for(BookMarksStruct item : listBookMarks){
-    			ContentValues values = new ContentValues();
-        		
-        		values.put(FIELD_TABLE_NAME, item.getTableName());
-        		values.put(FIELD_BOOK_ID, item.getBookId());
-        		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(item.getBookId(), mContext));
-        		values.put(FIELD_CHAPTER, item.getChapter());
-        		values.put(FIELD_POEM, item.getPoem());
-        		values.put(FIELD_CONTENT, item.getContent());
-        		
-        		db.insert(TABLE_BOOKMARKS, null, values);
-    		}    		
-    	}
-    }
-    
-    public List<BookMarksStruct> getBookMarks(){
-    	List<BookMarksStruct> result = new ArrayList<BookMarksStruct>();
-    	
-    	if(db.isOpen()){
-    		Log.d(TAG, "start get BookMarks()");
-    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_BOOKMARKS+"'", null);
-    		if(c.moveToFirst()){
-    			do{
-    				String tableName = c.getString(c.getColumnIndex(FIELD_TABLE_NAME));
-    				String bookName = c.getString(c.getColumnIndex(FIELD_BOOK_NAME));
-    				int bookId = c.getInt(c.getColumnIndex(FIELD_BOOK_ID));
-    				int chapter = c.getInt(c.getColumnIndex(FIELD_CHAPTER));
-    				int poem = c.getInt(c.getColumnIndex(FIELD_POEM));
-    				String content = c.getString(c.getColumnIndex(FIELD_CONTENT));
-    				
-    				result.add(new BookMarksStruct(tableName, bookName, content, bookId, chapter, poem));
-    			}while(c.moveToNext());
-    		}
-    	}
-    	
-    	return result;
-    }
-    
-    public void clearBookMarks(){
-    	
-    	if(db.isOpen()){
-    		db.delete(TABLE_BOOKMARKS, null, null);
-    	}
-    }
-    
-    public void clearBookMark(int idBookMarks){
-    	
-    	if(db.isOpen()){
-    		db.delete(TABLE_BOOKMARKS, KEY_ROWID + " = " + idBookMarks, null);
-    	}
-    }
-    
+
     public void clearSearchResultHistory(){
     	if(db.isOpen()){
     		db.delete(TABLE_SEARCH_RESULT, null, null);
@@ -444,7 +366,7 @@ public class DataBase extends SQLiteOpenHelper {
 					
 				} while (c.moveToNext());
 			}
-		}		
+		}
     	
     	return result;
     }

@@ -20,7 +20,8 @@
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:text="@string/btn_empty_str"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:typeface="sans" />
 
         <Button
             android:id="@+id/btn_chapter"

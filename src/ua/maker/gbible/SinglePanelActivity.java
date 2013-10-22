@@ -4,7 +4,8 @@ import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.fragment.BookmarksFragment;
 import ua.maker.gbible.fragment.HistoryFragment;
-import ua.maker.gbible.fragment.PlanFragment;
+import ua.maker.gbible.fragment.PlanDetailFragment;
+import ua.maker.gbible.fragment.PlansListFragment;
 import ua.maker.gbible.fragment.SearchFragment;
 import ua.maker.gbible.fragment.SelectBookFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
@@ -23,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.WindowManager;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.MotionEvent;
 import android.view.GestureDetector.OnGestureListener;
@@ -79,6 +81,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 	    }
     	gestureDetector = new GestureDetector(SinglePanelActivity.this, gestureListener);
     	gestureDetector.setOnDoubleTapListener(doubleTapListener);
+    	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 	
     public void startFragment(Fragment fragment, String tag) {
@@ -320,11 +323,35 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
-			getSupportFragmentManager().beginTransaction()
-			.replace(R.id.flRoot, (getSupportFragmentManager()
-					.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
-							getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlanFragment(), App.TAG_FRAGMENT_PLAN).commit();
+			//int windowWidth = getWindowManager().getDefaultDisplay().getWidth();
+			
+			/*if((windowWidth>1100 || windowWidth>800) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+			{
+				getSupportFragmentManager().beginTransaction()
+				.replace(R.id.flRoot_plan, (getSupportFragmentManager()
+						.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
+								getSupportFragmentManager()
+								.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlanFragment(), App.TAG_FRAGMENT_PLAN).commit();
+			}
+			else
+			{*/
+			if(sp.getInt(App.PLAN_ID, -1) != -1){
+				getSupportFragmentManager().beginTransaction()
+				.replace(R.id.flRoot, (getSupportFragmentManager()
+						.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL) != null)?
+								getSupportFragmentManager()
+								.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL):new PlanDetailFragment(), App.TAG_FRAGMENT_PLAN_DETAIL).commit();
+			}
+			else
+			{
+				getSupportFragmentManager().beginTransaction()
+				.replace(R.id.flRoot, (getSupportFragmentManager()
+						.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
+								getSupportFragmentManager()
+								.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlansListFragment(), App.TAG_FRAGMENT_PLAN).commit();
+			}
+				
+			//}
 		}
 	};
     

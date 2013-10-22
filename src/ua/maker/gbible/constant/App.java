@@ -8,6 +8,7 @@ public class App {
 	public static final String CHAPTER = "chapter";
 	public static final String POEM_SET_FOCUS = "poem_in_focus";
 	public static final String POEM = "poem";
+	public static final String PLAN_ID = "id_plan_selected";
 	public static final String TRANSLATE_LABEL = "translate_label";
 	public static final String is_OPEN_SETTING = "is_open_setting";
 	public static final String SEARCH_REQUEST = "seqrch_request";
@@ -21,6 +22,7 @@ public class App {
 	public static final String TAG_FRAGMENT_CHAPTERS = "chapters_tag";
 	public static final String TAG_FRAGMENT_POEMS = "poems_tag";
 	public static final String TAG_FRAGMENT_PLAN = "plan_fragment_tag";
+	public static final String TAG_FRAGMENT_PLAN_DETAIL = "plan_detail_fragment_tag";
 	
 	//app constants
 	public static final int DEFAULT_SIZE_TEXT = 16;

@@ -8,17 +8,19 @@ public class BookMarksStruct {
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
+	private int id = 0;
 	
 	
 	public BookMarksStruct(){}
 	
-	public BookMarksStruct(String tableName, String bookName, String content, int bookId, int chapter, int poem){
+	public BookMarksStruct(String tableName, String bookName, String content, int bookId, int chapter, int poem, int id){
 		this.tableName = tableName;
 		this.bookName = bookName;
 		this.content = content;
 		this.bookId = bookId;
 		this.chapter = chapter;
 		this.poem = poem;
+		this.id = id;
 	}
 	
 	public void setBookId(int bookId) {
@@ -43,6 +45,14 @@ public class BookMarksStruct {
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	public int getBookId() {
