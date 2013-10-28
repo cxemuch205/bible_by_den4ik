@@ -57,9 +57,9 @@
         android:id="@+id/gv_show_chapters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:padding="2dp"
         android:numColumns="5"
+        android:stretchMode="columnWidth"
         android:layout_gravity="center" >
     </GridView>
 

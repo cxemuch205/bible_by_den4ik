@@ -5,6 +5,7 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
+import ua.maker.gbible.adapter.ItemChapterAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
@@ -131,8 +132,9 @@ public class ListChaptersFragment extends SherlockFragment {
 				getString(R.string.progress_dialog_message));
 		
 		List<Integer> listChapters = dataBase.getChapters(DataBase.TABLE_NAME_RST, bookId);
-		ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getSherlockActivity(), 
-				android.R.layout.simple_list_item_1, listChapters);
+		/*ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getSherlockActivity(), 
+				android.R.layout.simple_list_item_1, listChapters);*/
+		ItemChapterAdapter adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
 		gvShowChapters.setAdapter(adapter);
 		if(pd.isShowing()) pd.cancel();
 		gvShowChapters.setOnItemClickListener(listenerItemGriatView);

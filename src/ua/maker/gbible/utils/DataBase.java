@@ -159,13 +159,16 @@ public class DataBase extends SQLiteOpenHelper {
 	
 	public List<Integer> getChapters(String tableName, int bookId){
 		List<Integer> chapters = new ArrayList<Integer>();
+		int count = 1;
 		if(db.isOpen()){
-			Cursor c = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+", "+FIELD_POEM+" FROM '"+tableName+"'", null);
+			Cursor c = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_POEM+" FROM '"+tableName+"'", null);
 			if(c.moveToFirst()){
 				do{
 					if(c.getInt(c.getColumnIndex(FIELD_BOOK_ID)) == bookId)
-						if(c.getInt(c.getColumnIndex(FIELD_POEM)) == 1)
-								chapters.add(c.getInt(c.getColumnIndex(FIELD_CHAPTER)));
+						if(c.getInt(c.getColumnIndex(FIELD_POEM)) == 1){
+							chapters.add(count);
+							count++;
+						}
 					
 				}while(c.moveToNext());
 			}
