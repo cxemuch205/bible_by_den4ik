@@ -12,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -52,7 +53,6 @@ public class ListChaptersFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.activity_list_chapters, null);
 		gvShowChapters = (GridView)view.findViewById(R.id.gv_show_chapters);
 
@@ -63,19 +63,15 @@ public class ListChaptersFragment extends SherlockFragment {
 			getSherlockActivity().getActionBar().show();
 		
 		dataBase = new DataBase(getSherlockActivity());
-		/*try {
+		try {
 			dataBase.createDataBase();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+		} catch (IOException e) {}
 		dataBase.openDataBase();
 		return view;
 	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
@@ -89,12 +85,19 @@ public class ListChaptersFragment extends SherlockFragment {
 
 		bookId = sp.getInt(App.BOOK_ID, 1);
 		Log.d("Getting Book_id", "id = " + bookId);
-		btnBook.setText(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
+		String bookName = ""+Tools.getBookNameByBookId(bookId, getSherlockActivity());
+		if(bookName.length()>16 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+			btnBook.setTextSize(13);
+		}
+		else
+		{
+			btnBook.setTextSize(16);
+		}
+		btnBook.setText(bookName);
 		btnBook.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null){
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
@@ -117,7 +120,6 @@ public class ListChaptersFragment extends SherlockFragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(!sp.contains(App.CHAPTER) && sp.contains(App.BOOK_ID))
 					Tools.showToast(getSherlockActivity(), getString(R.string.no_select_chapter));
 			}

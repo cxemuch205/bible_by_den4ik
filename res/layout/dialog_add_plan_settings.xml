@@ -12,7 +12,9 @@
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="@string/dialog_enter_name_plan"
-        android:inputType="textPersonName" >
+        android:inputType="textPersonName"
+        android:maxLength="64"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>
@@ -21,10 +23,12 @@
         android:id="@+id/et_description_add_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/dialog_enter_sub_description" />
+        android:ems="10"
+        android:hint="@string/dialog_enter_sub_description"
+        android:maxLength="128"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/textView1"

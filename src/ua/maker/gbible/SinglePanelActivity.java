@@ -1,6 +1,5 @@
 package ua.maker.gbible;
 
-import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.fragment.BookmarksFragment;
 import ua.maker.gbible.fragment.HistoryFragment;
@@ -10,9 +9,7 @@ import ua.maker.gbible.fragment.SearchFragment;
 import ua.maker.gbible.fragment.SelectBookFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
@@ -34,12 +31,10 @@ import android.widget.LinearLayout;
 
 public abstract class SinglePanelActivity extends BaseActivity {
 	
-	@SuppressWarnings("unused")
 	private static final String TAG = "SinglaPaneActivity";
 	
 	private Fragment fragment = null;
 	private GestureDetector gestureDetector = null;
-	private ProgressDialog pd = null;
 	
 	private LinearLayout btnSelect = null;
 	private LinearLayout btnSearch = null;
@@ -227,19 +222,13 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			StartSelectBook selectLinck = new StartSelectBook();
-			selectLinck.execute();
+			if(getSupportFragmentManager()
+					.findFragmentByTag(App.TAG_FRAGMENT_POEMS).isVisible() == false)
+				selectLinck.execute();
 		}
 	};
 	
 	class StartSelectBook extends AsyncTask<Void, Void, Void>{
-		
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			pd = ProgressDialog.show(SinglePanelActivity.this, 
-					getString(R.string.progress_dialog_title), 
-					getString(R.string.progress_dialog_message));
-		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -248,37 +237,12 @@ public abstract class SinglePanelActivity extends BaseActivity {
 			editor.putBoolean(App.is_OPEN_SETTING, true);
 			editor.commit();
 			
-			if(getFragmentManager()
-						.findFragmentByTag(App.TAG_FRAGMENT_SETTINGS) != null)
-			getFragmentManager().beginTransaction()
-				.remove(getFragmentManager()
-						.findFragmentByTag(App.TAG_FRAGMENT_SETTINGS)).commit();
-			
-			if(getSupportFragmentManager()
-					.findFragmentByTag(App.TAG_FRAGMENT_CHAPTERS) != null)
-				getSupportFragmentManager().beginTransaction()
-							.remove(getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_CHAPTERS)).commit();
-			
-			if(getSupportFragmentManager()
-					.findFragmentByTag(App.TAG_FRAGMENT_SEARCH) != null)
-				getSupportFragmentManager().beginTransaction()
-							.remove(getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_SEARCH)).commit();
-			
 			getSupportFragmentManager().beginTransaction()
-				.replace(R.id.flRoot, (getSupportFragmentManager()
-						.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)? 
-								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS).commit();
-			
+			.replace(R.id.flRoot, (getSupportFragmentManager()
+					.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)?
+							getSupportFragmentManager()
+							.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS).commit();
 			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			if(pd.isShowing()) pd.cancel();
 		}
 	};
 	

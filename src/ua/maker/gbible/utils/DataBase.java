@@ -37,11 +37,11 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final String TABLE_NAME_RST = "rus_st";
 	public static final String TABLE_NAME_MT = "rus_mt";
 	
-	private static final int TRANSLATE_RST_ID = 0;
-	private static final int TRANSLATE_MT_ID = 1;
+	public static final int TRANSLATE_RST_ID = 0;
+	public static final int TRANSLATE_MT_ID = 1;
 	
-	private static final String TABLE_HISTORY = "history_link";
-	private static final String TABLE_SEARCH_RESULT = "search_history";
+	public static final String TABLE_HISTORY = "history_link";
+	public static final String TABLE_SEARCH_RESULT = "search_history";
 	
 	public static final String FIELD_BOOK_ID = "bookId";
 	public static final String FIELD_TRANSLATE = "translate";
@@ -50,7 +50,7 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final String FIELD_CHAPTER = "chapter";
 	public static final String FIELD_POEM = "poem";
 	public static final String FIELD_CONTENT = "content";
-	private static final String KEY_ROWID = "_id";
+	public static final String KEY_ROWID = "_id";
 	
 	public static final String[] TABLE_NAMES = {"rus_st",
 												 "rus_mt"};
@@ -124,6 +124,10 @@ public class DataBase extends SQLiteOpenHelper {
     	    if(db != null)
     		    db.close();
     	    super.close();
+	}
+    
+    public SQLiteDatabase getDb() {
+		return db;
 	}
 
 	@Override

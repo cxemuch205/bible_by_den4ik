@@ -24,20 +24,20 @@
     <!-- ############ -->
        
     <!-- Books -->
-    <string name="bitie_str">Бытие</string>
-    <string name="ishod_str">Исход</string>
-    <string name="levit_str">Левит</string>
-    <string name="number_str">Числа</string>
-    <string name="vtorozakonie_str">Второзаконие</string>
-    <string name="iisus_navin_str">Иисус Навин</string>
-    <string name="sudii_str">Судьи</string>
+    <string name="bitie_str">Бытие</string> <string name="bitie_str_small">Быт.</string>
+    <string name="ishod_str">Исход</string> <string name="ishod_str_small">Исх.</string>
+    <string name="levit_str">Левит</string> <string name="levit_str_small">Лев.</string>
+    <string name="number_str">Числа</string> <string name="number_str_small">Чсл.</string>
+    <string name="vtorozakonie_str">Второзаконие</string> <string name="vtorozakonie_str_small">Вторз.</string>
+    <string name="iisus_navin_str">Иисус Навин</string> <string name="iisus_navin_str_small">ИисНав</string>
+    <string name="sudii_str">Судьи</string> <string name="sudii_str_small">Суд</string>
     <string name="ruf_str">Руфь</string>
-    <string name="one_carstw_str">1-я Царств</string>
-    <string name="two_carstw_str">2-я Царств</string>
-    <string name="three_carstw_str">3-я Царств</string>
-    <string name="four_carstw_str">4-я Царств</string>
-    <string name="one_paralipamenon_str">1-я Паралипаменон</string>
-    <string name="two_paralipamenon_str">2-я Паралипаменон</string>
+    <string name="one_carstw_str">1-я Царств</string> <string name="one_carstw_str_small">1 Цар</string>
+    <string name="two_carstw_str">2-я Царств</string> <string name="two_carstw_str_small">2 Цар</string>
+    <string name="three_carstw_str">3-я Царств</string> <string name="three_carstw_str_small">3 Цар</string>
+    <string name="four_carstw_str">4-я Царств</string> <string name="four_carstw_str_small">4 Цар</string>
+    <string name="one_paralipamenon_str">1-я Паралипаменон</string> <string name="one_paralipamenon_str_small">1 Парлп</string>
+    <string name="two_paralipamenon_str">2-я Паралипаменон</string> <string name="two_paralipamenon_str_small">2 Парлп</string>
     <string name="ezdra_str">Ездра</string>
     <string name="neemia_str">Неемия</string>
     <string name="esfir_str">Есфирь</string>
@@ -344,6 +344,8 @@
     <string name="dialog_copy_to_clicpboard">Копировать содержимое</string>
     <string name="dialog_share">Поделиться</string>
     <string name="dialog_compare">Сравнить</string>
+    <string name="dialog_add_item_to_plan">Добавить в план</string>
+    <string name="toast_added_to_plan">Добавлено в план %s!</string>
     
     <string name="dialog_added_to_bookmarks">Добавлено в закладки!</string>
     <string name="copyed_poem">Скопировано!</string>
@@ -358,6 +360,8 @@
     
     <!-- PlanList fragment -->
     <string name="title_activit_plan">План</string>
+    <string name="title_dialog_plans">Выберите план:</string>
+    <string name="toast_msg_no_plans">Список планов пуст!</string>
     
     <string name="create_plane">Создать план</string>
     <string name="dialog_title_create_plan">Параметры плана:</string>

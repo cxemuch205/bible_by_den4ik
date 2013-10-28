@@ -15,8 +15,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -55,6 +58,7 @@ public class SearchFragment extends SherlockFragment {
 	private List<SearchStruct> searchResult = null;
 	
 	private DataBase db = null;
+	private SQLiteDatabase dbSearch = null;
 	
 	private int idBookStart = 1;
 	private int idBookEnd = 66;
@@ -94,7 +98,9 @@ public class SearchFragment extends SherlockFragment {
 		} catch (IOException e) {e.printStackTrace();}
 		
 		db.openDataBase();
+		dbSearch = db.getDb();
 		searchResult = new ArrayList<SearchStruct>();
+		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
 		updateListResult();
 		
 		if(pref.contains(App.SEARCH_REQUEST)){
@@ -114,7 +120,7 @@ public class SearchFragment extends SherlockFragment {
 	}
 	
 	private void updateListResult() {
-		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
+		adapter.notifyDataSetChanged();
 		lvResultSearch.setAdapter(adapter);
 	}
 	
@@ -231,8 +237,55 @@ public class SearchFragment extends SherlockFragment {
 		@Override
 		protected Void doInBackground(Void... params) {
 			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);
-			searchResult = db.searchInDataBase(requestDB, idBookStart, idBookEnd);
+			//searchResult = db.searchInDataBase(requestDB, idBookStart, idBookEnd);
+			searchResult.clear();
+			//TEsting################
+			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+	    	
+	    	String translateId = pref.contains(getString(R.string.pref_default_translaters))?
+	    			pref.getString(getString(R.string.pref_default_translaters), DataBase.TABLE_NAME_RST)
+	    			: "0";
+	    			
+	    	String translate = translateId.equals(""+DataBase.TRANSLATE_RST_ID)?DataBase.TABLE_NAME_RST:DataBase.TABLE_NAME_MT;
+	    	Log.d(TAG, "TRanslate: " + translate);
+	    			
+			if(dbSearch.isOpen()){
+				Log.d(TAG, "DB_is_open: " + dbSearch.isOpen() + " request: " + requestDB);
+				Cursor c = dbSearch.rawQuery("SELECT * FROM '"+translate+"' WHERE content LIKE '%"+requestDB+"%' "+"ORDER BY `"+DataBase.FIELD_BOOK_ID+"` ASC", null);
+				pd.setMax(c.getCount());
+				if(c.moveToFirst()){
+					do {
+						int id = c.getInt(c.getColumnIndex(DataBase.FIELD_BOOK_ID));
+						if((id-1) >= idBookStart && (id-1) <= idBookEnd){
+							String bookName = c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME))==null?"null"
+									:c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME));
+							int chapter = c.getInt(c.getColumnIndex(DataBase.FIELD_CHAPTER));
+							int poem = c.getInt(c.getColumnIndex(DataBase.FIELD_POEM));
+							String content = c.getString(c.getColumnIndex(DataBase.FIELD_CONTENT))==null?"null"
+									:c.getString(c.getColumnIndex(DataBase.FIELD_CONTENT));
+							SearchStruct response = new SearchStruct();
+							response.setBookName(bookName);
+							response.setChapter(chapter);
+							response.setContent(content);
+							response.setIdBook(id);
+							response.setPoem(poem);
+							searchResult.add(response);
+							pd.setProgress(c.getPosition());
+						}
+						
+					} while (c.moveToNext());
+				}
+			}
+			//#######################
+			
+			
 			return null;
+		}
+		
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			super.onProgressUpdate(values);
+			updateListResult();
 		}
 		
 		@Override

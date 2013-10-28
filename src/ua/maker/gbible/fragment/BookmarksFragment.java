@@ -169,6 +169,7 @@ public class BookmarksFragment extends SherlockFragment {
 		
 		switch (item.getItemId()) {
 		case BTN_ADD_TO_PLAN:
+			Log.d(TAG, "click item - add to plan");
 			
 			return true;
 		case BTN_DELETE:

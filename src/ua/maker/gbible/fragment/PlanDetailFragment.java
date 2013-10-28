@@ -17,8 +17,10 @@ import ua.maker.gbible.utils.UserDB;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -374,6 +376,27 @@ public class PlanDetailFragment extends SherlockFragment {
 				pasteItem = false;
 				itemCancel.setVisible(false);
 				updateList();
+			}
+			
+			switch (listItemsPlan.get(position).getDataType()) {
+			case PlanData.DATA_LINK:
+			case PlanData.DATA_LINK_WITH_TEXT:
+				Editor editor = pref.edit();
+				editor.putInt(App.BOOK_ID, listItemsPlan.get((int)id).getBookId());
+				editor.putInt(App.CHAPTER, listItemsPlan.get((int)id).getChapter());
+				editor.putInt(App.POEM_SET_FOCUS, listItemsPlan.get((int)id).getPoem()-1);
+				editor.commit();
+				
+				FragmentTransaction ft = getFragmentManager().
+						 beginTransaction();
+				ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+				ft.addToBackStack(null);
+				ft.commit();
+				break;
+
+			default:
+				break;
 			}
 		}
 	};
