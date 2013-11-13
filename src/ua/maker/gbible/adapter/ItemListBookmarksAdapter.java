@@ -38,6 +38,7 @@ public class ItemListBookmarksAdapter extends ArrayAdapter<BookMarksStruct> {
 			holder = new ViewHolder();
 			holder.tvLink = (TextView)view.findViewById(R.id.tv_link);
 			holder.tvSmallContent = (TextView)view.findViewById(R.id.tv_smal_content);
+			holder.tvComment = (TextView)view.findViewById(R.id.tv_comment_bookmark_fragment);
 			
 			view.setTag(holder);
 		}
@@ -46,9 +47,9 @@ public class ItemListBookmarksAdapter extends ArrayAdapter<BookMarksStruct> {
 		
 		Log.d(TAG, "Add new item["+position+"]");
 		BookMarksStruct item = listBookmarks.get(position);
-		holder.tvLink.setText(""+item.getBookName()+" "+item.getChapter()+":"+item.getPoem());
-		
+		holder.tvLink.setText(""+item.getBookName()+" "+item.getChapter()+":"+item.getPoem()+item.getLinkNext());		
 		holder.tvSmallContent.setText(""+item.getContent());
+		holder.tvComment.setText(""+item.getComment());
 		
 		return view;
 	}
@@ -57,6 +58,7 @@ public class ItemListBookmarksAdapter extends ArrayAdapter<BookMarksStruct> {
 	{
 		TextView tvLink;
 		TextView tvSmallContent;
+		TextView tvComment;
 	}
 
 }

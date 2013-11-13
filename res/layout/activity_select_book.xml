@@ -18,7 +18,7 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
-            android:text="@string/btn_empty_str"
+            android:text="@string/old_testament"
             android:textColor="#fff"
             android:typeface="sans" />
 
@@ -34,7 +34,8 @@
             android:background="@drawable/menu_button_background"
             android:text="@string/btn_empty_str_small"
             android:textColor="#fff"
-            android:typeface="normal" />
+            android:typeface="normal"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_poem"
@@ -48,7 +49,8 @@
             android:background="@drawable/menu_button_background"
             android:text="@string/btn_empty_str_small"
             android:textColor="#fff"
-            android:typeface="normal" />
+            android:typeface="normal"
+            android:visibility="gone" />
 
     </LinearLayout>
 

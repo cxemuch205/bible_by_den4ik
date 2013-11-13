@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.structs.BookMarksStruct;
+import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.structs.ItemPlanStruct;
 import ua.maker.gbible.structs.PlanStruct;
 import android.content.ContentValues;
@@ -23,6 +24,7 @@ public class UserDB extends SQLiteOpenHelper{
 	private static final String TABLE_PLAN_LIST = "user_plan_list";
 	private static final String TABLE_PLAN_DATA = "item_plan_data";
 	private static final String TABLE_BOOKMARKS = "bookmarks_data";
+	private static final String TABLE_HISTORY = "history_link";
 	
 	public static final String FIELD_ID = "_id";
 	public static final String FIELD_PLAN_ID = "id_plan";
@@ -37,6 +39,9 @@ public class UserDB extends SQLiteOpenHelper{
 	public static final String FIELD_POEM = "poem";
 	public static final String FIELD_TO_POEM = "topoem";
 	public static final String FIELD_CONTENT = "content";
+	public static final String FIELD_TRANSLATE = "translate";
+	public static final String FIELD_COMMENT_BOOKMARK = "comment_bookmark";
+	public static final String FIELD_NEXT_LINK = "next_link_bookmark";
 	
 	public static final String FIELD_TYPE_DATA = "type_data";
 	public static final String FIELD_PATH_IMG = "path_img";
@@ -65,9 +70,20 @@ public class UserDB extends SQLiteOpenHelper{
 			+ FIELD_TABLE_NAME + " TEXT,"
 			+ FIELD_BOOK_ID + " INTEGER,"
 			+ FIELD_BOOK_NAME + " TEXT,"
+			+ FIELD_COMMENT_BOOKMARK + " TEXT,"
+			+ FIELD_NEXT_LINK + " TEXT,"
 			+ FIELD_CHAPTER + " INTEGER,"
 			+ FIELD_POEM + " INTEGER,"
 			+ FIELD_CONTENT + " TEXT);";
+	
+	private static final String SQL_CREATE_TABLE_HISTORY = "CREATE TABLE " + TABLE_HISTORY + " ("
+			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+			+ FIELD_TRANSLATE + " TEXT,"
+			+ FIELD_BOOK_ID + " INTEGER,"
+			+ FIELD_BOOK_NAME + " TEXT,"
+			+ FIELD_CHAPTER + " INTEGER,"
+			+ FIELD_POEM + " INTEGER,"
+			+ FIELD_DATE + " TEXT);";
 	
 	private Context context = null;
 	private SQLiteDatabase db = null;
@@ -83,6 +99,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_TABLE_PLANS_LIST);
 		db.execSQL(SQL_CREATE_TABLE_BOOKMARKS_DATA);
 		db.execSQL(SQL_CREATE_TABLE_PLAN_DATA);
+		db.execSQL(SQL_CREATE_TABLE_HISTORY);
 	}
 
 	@Override
@@ -90,6 +107,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.delete(TABLE_PLAN_LIST, null, null);
 		db.delete(TABLE_BOOKMARKS, null, null);
 		db.delete(TABLE_PLAN_DATA, null, null);
+		db.delete(TABLE_HISTORY, null, null);
 		onCreate(db);
 	}
 	
@@ -181,22 +199,24 @@ public class UserDB extends SQLiteOpenHelper{
 		}
 	}
 	
-	public void insertBookMark(String tableName, int bookId, int chapter, int poem, String content){
-    	Log.d(TAG, "insert to db BookMarks: bookId " + bookId 
-    			+ " chapter " + chapter 
-    			+ " poem " + poem
-    			+ " tableName " + tableName);
+	public void insertBookMark(BookMarksStruct bookmarks){
+    	Log.d(TAG, "insert to db BookMarks: bookId " + bookmarks.getBookId() 
+    			+ " chapter " + bookmarks.getChapter() 
+    			+ " poem " + bookmarks.getPoem()
+    			+ " tableName " + bookmarks.getTableName());
     	
     	if(db.isOpen()){
     		Log.d(TAG, "WRITE - WORK");
     		ContentValues values = new ContentValues();
     		
-    		values.put(FIELD_TABLE_NAME, tableName);
-    		values.put(FIELD_BOOK_ID, bookId);
-    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookId, this.context));
-    		values.put(FIELD_CHAPTER, chapter);
-    		values.put(FIELD_POEM, poem);
-    		values.put(FIELD_CONTENT, content);
+    		values.put(FIELD_TABLE_NAME, bookmarks.getTableName());
+    		values.put(FIELD_BOOK_ID, bookmarks.getBookId());
+    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookmarks.getBookId(), this.context));
+    		values.put(FIELD_CHAPTER, bookmarks.getChapter());
+    		values.put(FIELD_POEM, bookmarks.getPoem());
+    		values.put(FIELD_CONTENT, bookmarks.getContent());
+    		values.put(FIELD_COMMENT_BOOKMARK, ""+bookmarks.getComment());
+    		values.put(FIELD_NEXT_LINK, ""+bookmarks.getLinkNext());
     		
     		db.insert(TABLE_BOOKMARKS, null, values);
     	}
@@ -216,6 +236,8 @@ public class UserDB extends SQLiteOpenHelper{
         		values.put(FIELD_CHAPTER, item.getChapter());
         		values.put(FIELD_POEM, item.getPoem());
         		values.put(FIELD_CONTENT, item.getContent());
+        		values.put(FIELD_COMMENT_BOOKMARK, ""+item.getComment());
+        		values.put(FIELD_NEXT_LINK, ""+item.getLinkNext());
         		
         		db.insert(TABLE_BOOKMARKS, null, values);
     		}    		
@@ -229,16 +251,37 @@ public class UserDB extends SQLiteOpenHelper{
     		Log.d(TAG, "start get BookMarks()");
     		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_BOOKMARKS+"'", null);
     		if(c.moveToFirst()){
+    			int idTableName = c.getColumnIndex(FIELD_TABLE_NAME);
+    			int idBookName = c.getColumnIndex(FIELD_BOOK_NAME);
+    			int idBookId = c.getColumnIndex(FIELD_BOOK_ID);
+    			int idChapter = c.getColumnIndex(FIELD_CHAPTER);
+    			int idPoem = c.getColumnIndex(FIELD_POEM);
+    			int idContent = c.getColumnIndex(FIELD_CONTENT);
+    			int idId = c.getColumnIndex(FIELD_ID);
+    			int idComment = c.getColumnIndex(FIELD_COMMENT_BOOKMARK);
+    			int idLinkNext = c.getColumnIndex(FIELD_NEXT_LINK);
+    			
     			do{
-    				String tableName = c.getString(c.getColumnIndex(FIELD_TABLE_NAME));
-    				String bookName = c.getString(c.getColumnIndex(FIELD_BOOK_NAME));
-    				int bookId = c.getInt(c.getColumnIndex(FIELD_BOOK_ID));
-    				int chapter = c.getInt(c.getColumnIndex(FIELD_CHAPTER));
-    				int poem = c.getInt(c.getColumnIndex(FIELD_POEM));
-    				String content = c.getString(c.getColumnIndex(FIELD_CONTENT));
-    				int id = c.getInt(c.getColumnIndex(FIELD_ID));
+    				String tableName = c.getString(idTableName);
+    				String bookName = c.getString(idBookName);
+    				int bookId = c.getInt(idBookId);
+    				int chapter = c.getInt(idChapter);
+    				int poem = c.getInt(idPoem);
+    				String content = c.getString(idContent);
+    				int id = c.getInt(idId);
+    				String comment = c.getString(idComment);
+    				String linkNext = c.getString(idLinkNext);
     				
-    				result.add(new BookMarksStruct(tableName, bookName, content, bookId, chapter, poem, id));
+    				result.add(new BookMarksStruct(
+    									tableName, 
+    									bookName, 
+    									content, 
+    									bookId, 
+    									chapter, 
+    									poem, 
+    									id, 
+    									comment, 
+    									linkNext));
     			}while(c.moveToNext());
     		}
     	}
@@ -353,4 +396,60 @@ public class UserDB extends SQLiteOpenHelper{
 		}
 		return result;
 	}
+	
+	public void insertHistory(HistoryStruct historyItem){
+    	Log.d(TAG, "insert to db History: bookId " + historyItem.getBookId()
+    			+ " chapter " + historyItem.getChapter()
+    			+ " poem " + historyItem.getPoem());
+    	
+    	if(db.isOpen()){
+    		ContentValues values = new ContentValues();
+    		
+    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(historyItem.getBookId(), context));
+    		values.put(FIELD_BOOK_ID, historyItem.getBookId());
+    		values.put(FIELD_CHAPTER, historyItem.getChapter());
+    		values.put(FIELD_POEM, historyItem.getPoem());
+    		values.put(FIELD_TRANSLATE, historyItem.getTranslate());
+    		values.put(FIELD_DATE, historyItem.getDateCreated());
+    		
+    		db.insert(TABLE_HISTORY, null, values);
+    	}
+    }
+    
+    public List<HistoryStruct> getHistory(){
+    	List<HistoryStruct> result = new ArrayList<HistoryStruct>();
+    	
+    	if(db.isOpen()){
+    		Log.d(TAG, "getHistory() - start");
+    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_HISTORY+"'", null);
+    		if(c.moveToFirst()){
+    			int idBookId = c.getColumnIndex(FIELD_BOOK_ID);
+    			int idChapter = c.getColumnIndex(FIELD_CHAPTER);
+    			int idPoem = c.getColumnIndex(FIELD_POEM);
+    			int idBookName = c.getColumnIndex(FIELD_BOOK_NAME);
+    			int idTranslate = c.getColumnIndex(FIELD_TRANSLATE);
+    			int idDateCreate = c.getColumnIndex(FIELD_DATE);
+    			do{
+    				int bookId = c.getInt(idBookId);
+    				int chapter = c.getInt(idChapter);
+    				int poem = c.getInt(idPoem);
+    				String bookName = c.getString(idBookName);
+    				String translate = c.getString(idTranslate);
+    				String dateCreate = c.getString(idDateCreate);
+    				
+    				result.add(0, new HistoryStruct(dateCreate, bookName, translate, bookId, chapter, poem));
+    				
+    			}while(c.moveToNext());
+    		}
+    	}
+    	
+    	return result;
+    }
+    
+    public void clearHistory(){
+    	
+    	if(db.isOpen()){
+    		db.delete(TABLE_HISTORY, null, null);
+    	}
+    }
 }

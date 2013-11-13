@@ -24,9 +24,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -117,12 +119,25 @@ public class SearchFragment extends SherlockFragment {
 		spinnerBookTo.setSelection(65);
 		btnStartSearch.setOnClickListener(clickSearchListener);
 		etSearchText.addTextChangedListener(changeTextListener);
+		etSearchText.setOnKeyListener(keyEnterClickLIstener);
 	}
 	
 	private void updateListResult() {
 		adapter.notifyDataSetChanged();
 		lvResultSearch.setAdapter(adapter);
 	}
+	
+	private OnKeyListener keyEnterClickLIstener = new OnKeyListener() {
+		
+		@Override
+		public boolean onKey(View v, int keyCode, KeyEvent event) {
+			if(keyCode == KeyEvent.KEYCODE_ENTER
+					&& event.getAction()==KeyEvent.ACTION_UP){
+				clickSearchListener.onClick(v);
+			}
+			return false;
+		}
+	};
 	
 	private OnItemClickListener itemResultSearchListener = new OnItemClickListener() {
 
@@ -148,12 +163,7 @@ public class SearchFragment extends SherlockFragment {
 		
 		@Override
 		public void onClick(View v) {
-			if(!etSearchText.getText().toString().equals("") || requestDB != ""){
-				if(etSearchText.getText().toString().equals(""))
-					startSearch(requestDB);
-				else
-					startSearch(etSearchText.getText().toString());
-				
+			if(!etSearchText.getText().toString().equals("") || requestDB != ""){				
 				//hide keyboard
 				getSherlockActivity();
 				InputMethodManager imm = (InputMethodManager)getSherlockActivity()
@@ -162,9 +172,14 @@ public class SearchFragment extends SherlockFragment {
 				
 				pref.edit().putString(App.SEARCH_REQUEST, requestDB).commit();
 				db.clearSearchResultHistory();
-				
 				if(searchResult.size()>0)
 					searchResult.clear();
+				
+				if(etSearchText.getText().toString().equals(""))
+					startSearch(requestDB);
+				else
+					startSearch(etSearchText.getText().toString());
+				
 				updateListResult();
 			}
 			else
@@ -177,12 +192,10 @@ public class SearchFragment extends SherlockFragment {
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			etSearchText.setError(null);
-		}
-		
+		}		
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after) {}
-		
+				int after) {}		
 		@Override
 		public void afterTextChanged(Editable s) {}
 	};
@@ -192,7 +205,7 @@ public class SearchFragment extends SherlockFragment {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View v, int position,
 				long id) {
-			idBookStart = (int)id;
+			idBookStart = (int)id+1;
 		}
 
 		@Override
@@ -204,7 +217,7 @@ public class SearchFragment extends SherlockFragment {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View v, int position,
 				long id) {
-			idBookEnd = (int)id;
+			idBookEnd = (int)id+1;
 		}
 
 		@Override
@@ -215,6 +228,7 @@ public class SearchFragment extends SherlockFragment {
 		requestDB = "";
 		requestDB = request;
 		Log.d(TAG, "START - SEARCH");
+		searchResult.clear();
 		
 		searchTask = new SearchTast();
 		searchTask.execute();
@@ -229,69 +243,22 @@ public class SearchFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			Log.d(TAG, "Search AsyncTask starting");
-			pd= ProgressDialog.show(getSherlockActivity(), 
+			pd = ProgressDialog.show(getSherlockActivity(), 
 					getString(R.string.dialog_title_search)+" "+requestDB, 
 					getString(R.string.dialog_start_search));
 		};
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);
-			//searchResult = db.searchInDataBase(requestDB, idBookStart, idBookEnd);
-			searchResult.clear();
-			//TEsting################
-			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-	    	
-	    	String translateId = pref.contains(getString(R.string.pref_default_translaters))?
-	    			pref.getString(getString(R.string.pref_default_translaters), DataBase.TABLE_NAME_RST)
-	    			: "0";
-	    			
-	    	String translate = translateId.equals(""+DataBase.TRANSLATE_RST_ID)?DataBase.TABLE_NAME_RST:DataBase.TABLE_NAME_MT;
-	    	Log.d(TAG, "TRanslate: " + translate);
-	    			
-			if(dbSearch.isOpen()){
-				Log.d(TAG, "DB_is_open: " + dbSearch.isOpen() + " request: " + requestDB);
-				Cursor c = dbSearch.rawQuery("SELECT * FROM '"+translate+"' WHERE content LIKE '%"+requestDB+"%' "+"ORDER BY `"+DataBase.FIELD_BOOK_ID+"` ASC", null);
-				pd.setMax(c.getCount());
-				if(c.moveToFirst()){
-					do {
-						int id = c.getInt(c.getColumnIndex(DataBase.FIELD_BOOK_ID));
-						if((id-1) >= idBookStart && (id-1) <= idBookEnd){
-							String bookName = c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME))==null?"null"
-									:c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME));
-							int chapter = c.getInt(c.getColumnIndex(DataBase.FIELD_CHAPTER));
-							int poem = c.getInt(c.getColumnIndex(DataBase.FIELD_POEM));
-							String content = c.getString(c.getColumnIndex(DataBase.FIELD_CONTENT))==null?"null"
-									:c.getString(c.getColumnIndex(DataBase.FIELD_CONTENT));
-							SearchStruct response = new SearchStruct();
-							response.setBookName(bookName);
-							response.setChapter(chapter);
-							response.setContent(content);
-							response.setIdBook(id);
-							response.setPoem(poem);
-							searchResult.add(response);
-							pd.setProgress(c.getPosition());
-						}
-						
-					} while (c.moveToNext());
-				}
-			}
-			//#######################
-			
-			
+			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);			
+			searchResult.addAll(db.searchInDataBase(requestDB, idBookStart, idBookEnd));
 			return null;
-		}
-		
-		@Override
-		protected void onProgressUpdate(Void... values) {
-			super.onProgressUpdate(values);
-			updateListResult();
 		}
 		
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			if(pd.isShowing()) pd.dismiss();
+			if(pd != null && pd.isShowing()) pd.dismiss();
 			Log.d(TAG, "Search AsyncTask - CANCEL");
 			
 			db.insertSearchResult(searchResult);

@@ -1,7 +1,9 @@
 package ua.maker.gbible.fragment;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,12 +17,15 @@ import ua.maker.gbible.adapter.ItemPlanListAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.constant.PlanData;
 import ua.maker.gbible.listeners.onDialogClickListener;
+import ua.maker.gbible.structs.BookMarksStruct;
+import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.structs.ItemPlanStruct;
 import ua.maker.gbible.structs.PlanStruct;
 import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
@@ -55,8 +60,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -66,6 +73,8 @@ import com.actionbarsherlock.view.MenuItem;
 public class ListPoemsFragment extends SherlockFragment{
 	
 	private static final String TAG = "ListPoemsFragment";
+	@SuppressLint("SimpleDateFormat")
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
 	
 	private static final int CLEAR_CLICK_DELAYED = 300;
 	private static final int SMOOTH_DURATION = 100;
@@ -88,9 +97,11 @@ public class ListPoemsFragment extends SherlockFragment{
 	private int selectPoem = 1;
 	private int maxChapter = 0;
 	private int click = 0;
+	private String translateId = "0";
 	
 	private int posPoemForCompare = 0;
 	private int widthScreen = 0;
+	@SuppressWarnings("unused")
 	private int visibleItemCount = 0;
 	
 	private String nameTranslate = "";
@@ -98,6 +109,9 @@ public class ListPoemsFragment extends SherlockFragment{
 	private Button btnBook = null;
 	private Button btnChapter = null;
 	private Button btnPoem = null;
+	
+	private EditText etNextLink = null;
+	private EditText etComments = null;
 	
 	private SharedPreferences sp = null, defPref = null;
 	private boolean dayNight = false; //false - day / true - night
@@ -165,6 +179,9 @@ public class ListPoemsFragment extends SherlockFragment{
 		
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
+		if(defPref.contains(getString(R.string.pref_default_translaters))){
+			translateId = defPref.getString(getString(R.string.pref_default_translaters), "0");
+		}
 		if(dayNight)
 		{
 			lvShowPoem.setBackgroundColor(Color.BLACK);
@@ -177,7 +194,8 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 		
 		speedScroolList = defPref.getInt(getString(R.string.pref_smooth_duration), 2);
-		useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
+		if(defPref.contains(getString(R.string.pref_use_vol_up_down_btn)))
+			useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
 		btnPoem.setBackgroundResource(R.drawable.btn_active_select);
 		String bookName = ""+Tools.getBookNameByBookId(bookId, getSherlockActivity());
 		if(bookName.length()>16 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
@@ -282,6 +300,13 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 	}
 	
+	@Override
+	public void onStart() {
+		super.onStart();
+		if(defPref.contains(getString(R.string.pref_use_vol_up_down_btn)))
+			useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
+	}
+	
 	private void updateList(){
 		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
 		lvShowPoem.setAdapter(adapterListPoem);
@@ -337,12 +362,20 @@ public class ListPoemsFragment extends SherlockFragment{
 		@Override
 		public boolean onKey(View v, int keyCode, KeyEvent event) {
 			if(useVolBtn){
-				if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){					
-					lvShowPoem.smoothScrollBy((speedScroolList*(-1)), SMOOTH_DURATION);
+				if(keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+					if(speedScroolList<=50)
+						lvShowPoem.smoothScrollBy((speedScroolList*(-1)), (SMOOTH_DURATION*(speedScroolList/2)));
+					else
+						lvShowPoem.smoothScrollBy((speedScroolList*(-1)), (SMOOTH_DURATION*(speedScroolList/3)));
+					return true;
 				}
 				else
 				if(keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){					
-					lvShowPoem.smoothScrollBy(speedScroolList, SMOOTH_DURATION);
+					if(speedScroolList<=50)
+						lvShowPoem.smoothScrollBy(speedScroolList, (SMOOTH_DURATION*(speedScroolList/2)));
+					else
+						lvShowPoem.smoothScrollBy(speedScroolList, (SMOOTH_DURATION*(speedScroolList/3)));
+					return true;
 				}
 			}			
 			return false;
@@ -406,9 +439,22 @@ public class ListPoemsFragment extends SherlockFragment{
 		public void onClick(DialogInterface dialog, int which) {
 			switch (which) {
 			case 0: //add to bookmarks
-				dbUser.insertBookMark(getTranslateWitchPreferences(), bookId, chapterBM, poemBM, contentBM);
-				Tools.showToast(getSherlockActivity(), getString(R.string.dialog_added_to_bookmarks));
-				dialog.cancel();
+				AlertDialog.Builder bDialogBookMark = new AlertDialog.Builder(getSherlockActivity());
+				bDialogBookMark.setTitle(R.string.dialog_title_add_to_bookmark);
+				
+				LayoutInflater inflaterB = getSherlockActivity().getLayoutInflater();
+				View vAddBookMark = inflaterB.inflate(R.layout.dialog_add_to_bookmark, null);
+				TextView tvLink = (TextView)vAddBookMark.findViewById(R.id.tv_link_dialog_bookmark);
+				etNextLink = (EditText)vAddBookMark.findViewById(R.id.et_link_poem_next);
+				etComments = (EditText)vAddBookMark.findViewById(R.id.et_comment_on_bookmark);
+				
+				tvLink.setText(""+Tools.getBookNameByBookId(bookId, getSherlockActivity())
+						+" "+chapterBM+":"+ poemBM);
+				
+				bDialogBookMark.setView(vAddBookMark);
+				bDialogBookMark.setPositiveButton(getString(R.string.menu_title_add_point), clickAddToBookMarkListener);
+				bDialogBookMark.setNegativeButton(getString(R.string.dialog_cancel), clickCalcelAddToBookMarkListener);
+				bDialogBookMark.create().show();
 				break;
 			case 2://Copy to clipboard
 				AlertDialog.Builder builderSelect = new AlertDialog.Builder(getSherlockActivity());
@@ -476,6 +522,38 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 	};
 	
+	private DialogInterface.OnClickListener clickAddToBookMarkListener = new onDialogClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			BookMarksStruct bookMark = new BookMarksStruct();
+			bookMark.setTableName(getTranslateWitchPreferences());
+			bookMark.setBookId(bookId);
+			bookMark.setChapter(chapterBM);
+			bookMark.setPoem(poemBM);
+			bookMark.setContent(contentBM);
+			String comment = ""+etComments.getText().toString();
+			String linkNext = ""+etNextLink.getText().toString();
+			if(comment.length() != 0)
+				bookMark.setComment(comment);
+			if(linkNext.length() != 0)
+				bookMark.setLinkNext(linkNext);
+			dbUser.insertBookMark(bookMark);
+			Tools.showToast(getSherlockActivity(), getString(R.string.dialog_added_to_bookmarks));
+			etComments.setText("");
+			etNextLink.setText("");
+			dialog.cancel();
+		}
+	};
+	
+	private DialogInterface.OnClickListener clickCalcelAddToBookMarkListener = new onDialogClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			dialog.cancel();
+		}
+	};
+	
 	private DialogInterface.OnClickListener itemDialogListPlanListener = new onDialogClickListener() {
 		
 		@Override
@@ -523,7 +601,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB){
 		     getSherlockActivity();
 			android.content.ClipboardManager clipboard =  (android.content.ClipboardManager) getSherlockActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
-		        ClipData clip = ClipData.newPlainText("label", textSetClip);
+		        ClipData clip = ClipData.newPlainText(getString(R.string.app_name), textSetClip);
 		        clipboard.setPrimaryClip(clip); 
 		} else{
 		    getSherlockActivity();
@@ -572,6 +650,15 @@ public class ListPoemsFragment extends SherlockFragment{
 		chapterNumber--;
 		if(chapterNumber > 0 && chapterNumber <= maxChapter){
 			changeChapter(chapterNumber);
+			String dateCreate = dateFormat.format(new Date());
+			HistoryStruct itemHistory = new HistoryStruct();
+			itemHistory.setBookId(bookId);
+			itemHistory.setChapter(chapterNumber);
+			itemHistory.setPoem(1);
+			itemHistory.setTranslate(translateId);
+			itemHistory.setDateCreated(dateCreate);
+			
+			dbUser.insertHistory(itemHistory);
 		}
 		else
 		{
@@ -583,6 +670,15 @@ public class ListPoemsFragment extends SherlockFragment{
 		chapterNumber++;
 		if(chapterNumber > 0 && chapterNumber <= maxChapter){
 			changeChapter(chapterNumber);
+			String dateCreate = dateFormat.format(new Date());
+			HistoryStruct itemHistory = new HistoryStruct();
+			itemHistory.setBookId(bookId);
+			itemHistory.setChapter(chapterNumber);
+			itemHistory.setPoem(1);
+			itemHistory.setTranslate(translateId);
+			itemHistory.setDateCreated(dateCreate);
+			
+			dbUser.insertHistory(itemHistory);
 		}
 		else
 		{
@@ -659,6 +755,9 @@ public class ListPoemsFragment extends SherlockFragment{
 		{
 			getSherlockActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 			getSherlockActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+		}
+		if(defPref.contains(getString(R.string.pref_default_translaters))){
+			translateId = defPref.getString(getString(R.string.pref_default_translaters), "0");
 		}
 		
 		Log.d(TAG, "OnResume TESTING");

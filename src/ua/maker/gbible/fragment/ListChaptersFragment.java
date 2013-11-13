@@ -1,14 +1,18 @@
 package ua.maker.gbible.fragment;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemChapterAdapter;
 import ua.maker.gbible.constant.App;
+import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
+import ua.maker.gbible.utils.UserDB;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +28,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -38,6 +41,7 @@ public class ListChaptersFragment extends SherlockFragment {
 	private View view = null;
 	private GridView gvShowChapters = null;
 	private DataBase dataBase = null;
+	private UserDB db = null;
 	
 	private int bookId = 0;
 	private String translate = "";
@@ -51,6 +55,9 @@ public class ListChaptersFragment extends SherlockFragment {
 	
 	private ProgressDialog pd = null;
 	
+	@SuppressWarnings("unused")
+	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -63,6 +70,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		if(!getSherlockActivity().getActionBar().isShowing())
 			getSherlockActivity().getActionBar().show();
 		
+		db = new UserDB(getSherlockActivity());
 		dataBase = new DataBase(getSherlockActivity());
 		try {
 			dataBase.createDataBase();
@@ -132,8 +140,6 @@ public class ListChaptersFragment extends SherlockFragment {
 				getString(R.string.progress_dialog_message));
 		
 		List<Integer> listChapters = dataBase.getChapters(DataBase.TABLE_NAME_RST, bookId);
-		/*ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getSherlockActivity(), 
-				android.R.layout.simple_list_item_1, listChapters);*/
 		ItemChapterAdapter adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
 		gvShowChapters.setAdapter(adapter);
 		if(pd.isShowing()) pd.cancel();
@@ -153,7 +159,15 @@ public class ListChaptersFragment extends SherlockFragment {
 			editor.commit();
 			
 			//Write to history
-			dataBase.insertHistory(bookId, (int)(id+1), 1, translate);
+			String dateCreate = dateFormat.format(new Date());
+			HistoryStruct itemHistory = new HistoryStruct();
+			itemHistory.setBookId(bookId);
+			itemHistory.setChapter((int)(id+1));
+			itemHistory.setPoem(1);
+			itemHistory.setTranslate(translate);
+			itemHistory.setDateCreated(dateCreate);
+			
+			db.insertHistory(itemHistory);
 			//#######################
 			
 			FragmentTransaction ft = getFragmentManager().

@@ -27,6 +27,7 @@ public class App {
 	//app constants
 	public static final int DEFAULT_SIZE_TEXT = 16;
 	public static final int DEFAULT_SCROOL_SPEED = 2;
+	public static final int MAX_SCROOL_SPEED = 100;
 	public static final int MIN_SCROOL_SPEED = 1;
 	public static final int MAX_SIZE_TEXT = 50;
 	public static final int MIN_SIZE_TEXT = 8;
