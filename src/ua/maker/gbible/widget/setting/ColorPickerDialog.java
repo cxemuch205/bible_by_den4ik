@@ -65,11 +65,9 @@ public class ColorPickerDialog
 	}
 
 	private void init(int color) {
-		// To fight color banding.
 		getWindow().setFormat(PixelFormat.RGBA_8888);
 
 		setUp(color);
-
 	}
 
 	private void setUp(int color) {
@@ -80,7 +78,7 @@ public class ColorPickerDialog
 
 		setContentView(layout);
 
-		setTitle(R.string.title_set_color_poem_list);
+		setTitle(R.string.dialog_color_picker);
 		
 		mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);
 		mOldColor = (ColorPickerPanelView) layout.findViewById(R.id.old_color_panel);

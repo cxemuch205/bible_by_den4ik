@@ -292,10 +292,7 @@
     		<string name="title_size_text_poem">Размер шрифта стихов</string>
     		<string name="summary_size_text_poem">Устанавливает размер текста на странице со стихами.</string>
     		<string name="dialogtitle_size_text_pem">Введите размер шрифта (от 10 до 32):</string>
-    	<string name="pref_background_poem_list">background_poem_list</string>
-    		<string name="title_set_color_poem_list">Цвет фона стихов</string>
-    		<string name="summary_set_color_poem_list">Устанавливает цвет фона на страници отображения стихов.</string>
-    		<string name="dialogtitle_set_color_poem_list">Выбирите цвет:</string>
+    		
     		<string name="press_color_to_apply">Нажмите для выбора</string>
     	<string name="pref_pos_down_panel">position_control_panel</string>
     		<string name="title_pos_down_panel">Положение ПУ</string>
@@ -309,6 +306,11 @@
     		    <item>0</item>
     		    <item>1</item>
     		</string-array>
+    		
+    	<string name="pref_background_poem">pref_background_on_poem_fragment</string>
+    		<string name="title_background_on_poem_fragment">Цвет фона стихов</string>
+    		<string name="dialogtitle_set_color_poem_list">Выбирите цвет:</string>
+    		<string name="summary_background_on_poem_fragment">Выбирите цвет который в дневном режиме, будет на фоне страници чтения стихов.</string>
     		
     <!-- Tools -->
     <string name="no_select_book">Выбирите книгу.</string>
@@ -393,5 +395,9 @@
     <string name="context_drag_and_drop">Переместить</string>
     <string name="click_on_point_paste">Тап для вставки</string>
     <!-- ##################### -->
+    
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Выбор цвета</string>
+    <string name="press_color_to_apply">Нажмите на цвет для применения</string>    
     		
 </resources>

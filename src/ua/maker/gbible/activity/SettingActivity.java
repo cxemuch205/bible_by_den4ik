@@ -13,7 +13,6 @@ public class SettingActivity extends SherlockPreferenceActivity {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		Log.d(TAG, "Start onCreate");
 		super.onCreate(savedInstanceState);
 		getSupportActionBar().setHomeButtonEnabled(true);

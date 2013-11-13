@@ -40,7 +40,10 @@
             android:entryValues="@array/select_pos_panel_id"
             android:defaultValue="0"
             android:dialogTitle="@string/dialog_title_pos_down_panel"/>
-        
+        <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:key="@string/pref_background_poem"
+			android:title="@string/title_background_on_poem_fragment" 
+			android:summary="@string/summary_background_on_poem_fragment"
+			android:defaultValue="@integer/COLOR_WHITE"/>
     </PreferenceCategory>
-
 </PreferenceScreen>
