@@ -1,6 +1,5 @@
 package ua.maker.gbible.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,14 +9,13 @@ import ua.maker.gbible.adapter.ItemListHistoryAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.structs.HistoryStruct;
-import ua.maker.gbible.utils.DataBase;
+import ua.maker.gbible.utils.UserDB;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Gravity;
@@ -44,7 +42,7 @@ public class HistoryFragment extends SherlockFragment {
 	private ListView lvListShowHistoryItem = null;
 	private TextView tvShowInfoEmpty = null;
 	private LinearLayout llPaige = null;
-	private DataBase dataBase = null;
+	private UserDB db = null;
 	
 	private ItemListHistoryAdapter adapter = null;
 	private List<HistoryStruct> listHistory = null;
@@ -57,11 +55,7 @@ public class HistoryFragment extends SherlockFragment {
 		tvShowInfoEmpty = (TextView)view.findViewById(R.id.tv_info_empty_history);
 		llPaige = (LinearLayout)view.findViewById(R.id.ll_history_paige);
 		
-		dataBase = new DataBase(getSherlockActivity());
-		try {
-			dataBase.createDataBase();
-		} catch (IOException e) {}
-		dataBase.openDataBase();
+		db = new UserDB(getSherlockActivity());		
 		listHistory = new ArrayList<HistoryStruct>();
 		if(!getSherlockActivity().getActionBar().isShowing())
 			getSherlockActivity().getActionBar().show();
@@ -84,7 +78,7 @@ public class HistoryFragment extends SherlockFragment {
 	}
 	
 	private void getLIstHistory(){
-		listHistory = dataBase.getHistory();
+		listHistory.addAll(db.getHistory());
 		updateListHistory();
 	}
 
@@ -117,10 +111,7 @@ public class HistoryFragment extends SherlockFragment {
 			editor.putInt(App.CHAPTER, listHistory.get((int)id).getChapter());
 			editor.putInt(App.POEM_SET_FOCUS, 0);
 			editor.commit();
-			
-			//SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-			//prefs.edit().putString(getString(R.string.pref_default_translaters), listHistory.get((int)id).getTranslate());
-			
+
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
 			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
@@ -134,7 +125,7 @@ public class HistoryFragment extends SherlockFragment {
 		
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			dataBase.clearHistory();
+			db.clearHistory();
 			getLIstHistory();
 			updateListHistory();
 			dialog.cancel();

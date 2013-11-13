@@ -1,19 +1,21 @@
 package ua.maker.gbible.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
-import ua.maker.gbible.SinglePanelActivity;
 import ua.maker.gbible.activity.ComparePoemActivity;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListBookmarksAdapter;
 import ua.maker.gbible.constant.App;
+import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.structs.BookMarksStruct;
-import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -25,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -43,6 +46,7 @@ public class BookmarksFragment extends SherlockFragment {
 	private static final int BTN_COMPARE_POEM = 100;
 	private static final int BTN_ADD_TO_PLAN = 101;
 	private static final int BTN_DELETE = 102;
+	private static final int BTN_COPY = 103;
 	
 	private View view = null;
 	private ListView lvBookmarks = null;
@@ -146,6 +150,7 @@ public class BookmarksFragment extends SherlockFragment {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		menu.add(Menu.NONE, BTN_COMPARE_POEM, Menu.NONE, getString(R.string.compare_str));
+		menu.add(Menu.NONE, BTN_COPY, Menu.NONE, getString(R.string.dialog_copy_to_clicpboard));
 		menu.add(Menu.NONE, BTN_ADD_TO_PLAN, Menu.NONE, getString(R.string.add_to_plan_this_link));
 		menu.add(Menu.NONE, BTN_DELETE, Menu.NONE, getString(R.string.context_delete));
 	}
@@ -186,9 +191,68 @@ public class BookmarksFragment extends SherlockFragment {
 			startActivity(intentCompare);
 			Log.d(TAG, "Click on list: pos = " + selectItem);
 			return true;
+		case BTN_COPY:
+			BookMarksStruct itemS = listBookmarks.get(selectItem);
+			AlertDialog.Builder builderSelect = new AlertDialog.Builder(getSherlockActivity());
+			builderSelect.setTitle(getString(R.string.dialog_title_select_text));
+			
+			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			View view = inflater.inflate(R.layout.dialog_select_poem, null);
+			WebView wvContent = (WebView)view.findViewById(R.id.wv_show_content_poem);
+			wvContent.getSettings().setJavaScriptEnabled(true);
+			wvContent.setBackgroundColor(0x00000000);
+			
+			StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(itemS.getBookId(), getSherlockActivity())
+	        		+" "+itemS.getChapter()+":"+itemS.getPoem()+"</b></p>"
+	        		+"<p>"+itemS.getContent()+"</p>");
+			
+			wvContent.loadDataWithBaseURL(null, builderString.toString(), "text/html", "utf-8", null);
+			
+			builderSelect.setNegativeButton(getString(R.string.dialog_cancel), clickCancelCopyListener);
+			builderSelect.setPositiveButton(getString(R.string.dialog_dtn_copy_all), clickCopyAllListener);
+			builderSelect.setView(view);
+			
+			AlertDialog dialogSelect = builderSelect.create();
+			dialogSelect.show();
+			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
 	}
-
+	
+	private DialogInterface.OnClickListener clickCopyAllListener = new onDialogClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			BookMarksStruct item = listBookmarks.get(selectItem);
+			copyToClipBoard(Tools.getBookNameByBookId(item.getBookId(), getSherlockActivity())
+	        		+" "+item.getChapter()+":"+item.getPoem()+"\n"
+	        		+item.getContent());
+			dialog.cancel();			
+		}
+	};
+	
+	private DialogInterface.OnClickListener clickCancelCopyListener = new onDialogClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			dialog.cancel();			
+		}
+	};
+	
+	@SuppressWarnings("deprecation")
+	private void copyToClipBoard(String textSetClip) {
+		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB){
+		     getSherlockActivity();
+			android.content.ClipboardManager clipboard =  (android.content.ClipboardManager) getSherlockActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
+		        ClipData clip = ClipData.newPlainText(getString(R.string.app_name), textSetClip);
+		        clipboard.setPrimaryClip(clip); 
+		} else{
+		    getSherlockActivity();
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager)getSherlockActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
+		    clipboard.setText(textSetClip);
+		}
+		 Tools.showToast(getSherlockActivity(), getString(R.string.copyed_poem));
+	}
 }

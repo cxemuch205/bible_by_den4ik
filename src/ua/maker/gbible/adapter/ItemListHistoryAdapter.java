@@ -7,8 +7,6 @@ import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.DataBase;
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +36,7 @@ public class ItemListHistoryAdapter extends ArrayAdapter<HistoryStruct> {
 			holder = new ViewHolder();
 			holder.tvTranslate = (TextView)view.findViewById(R.id.tv_translate);
 			holder.tvLink = (TextView)view.findViewById(R.id.tv_link_h);
+			holder.tvDateCreated = (TextView)view.findViewById(R.id.tv_date_created);
 			
 			view.setTag(holder);
 		}
@@ -48,6 +47,7 @@ public class ItemListHistoryAdapter extends ArrayAdapter<HistoryStruct> {
 		String translate = getTranslateWitchPreferences(item.getTranslate());
 		holder.tvTranslate.setText(""+translate);
 		holder.tvLink.setText(""+item.getBookName()+" "+item.getChapter());
+		holder.tvDateCreated.setText(""+item.getDateCreated());
 		
 		return view;
 	}
@@ -69,6 +69,7 @@ public class ItemListHistoryAdapter extends ArrayAdapter<HistoryStruct> {
 	static class ViewHolder{
 		TextView tvTranslate;
 		TextView tvLink;
+		TextView tvDateCreated;
 	}
 
 }

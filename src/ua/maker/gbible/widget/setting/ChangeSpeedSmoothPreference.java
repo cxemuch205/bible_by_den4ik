@@ -56,6 +56,7 @@ public class ChangeSpeedSmoothPreference extends Preference implements Preferenc
 		View viewDialog = inflater.inflate(R.layout.dialog_pref_speed_scroll, null);
 		tvCurrentValueSpeed = (TextView)viewDialog.findViewById(R.id.tv_current_value_speed_scroll);
 		sbSetValueSpeed = (SeekBar)viewDialog.findViewById(R.id.seekBar_set_speed_scroll_list_poem);
+		sbSetValueSpeed.setMax(App.MAX_SCROOL_SPEED);
 		sbSetValueSpeed.setOnSeekBarChangeListener(seekBarChangeListener);
 		if(pref.contains(getContext().getString(R.string.pref_smooth_duration))){
 			valueSpeed = pref.getInt(getContext().getString(R.string.pref_smooth_duration), 2);

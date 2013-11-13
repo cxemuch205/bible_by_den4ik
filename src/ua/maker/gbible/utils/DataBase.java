@@ -40,7 +40,6 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final int TRANSLATE_RST_ID = 0;
 	public static final int TRANSLATE_MT_ID = 1;
 	
-	public static final String TABLE_HISTORY = "history_link";
 	public static final String TABLE_SEARCH_RESULT = "search_history";
 	
 	public static final String FIELD_BOOK_ID = "bookId";
@@ -281,54 +280,6 @@ public class DataBase extends SQLiteOpenHelper {
     	}    	
     	return result;
     }
-    
-    public void insertHistory(int bookId, int chapter, int poem, String translate){
-    	Log.d(TAG, "insert to db History: bookId " + bookId 
-    			+ " chapter " + chapter 
-    			+ " poem " + poem);
-    	
-    	if(db.isOpen()){
-    		ContentValues values = new ContentValues();
-    		
-    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookId, mContext));
-    		values.put(FIELD_BOOK_ID, bookId);
-    		values.put(FIELD_CHAPTER, chapter);
-    		values.put(FIELD_POEM, poem);
-    		values.put(FIELD_TRANSLATE, translate);
-    		
-    		db.insert(TABLE_HISTORY, null, values);
-    	}
-    }
-    
-    public List<HistoryStruct> getHistory(){
-    	List<HistoryStruct> result = new ArrayList<HistoryStruct>();
-    	
-    	if(db.isOpen()){
-    		Log.d(TAG, "getHistory() - start");
-    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_HISTORY+"'", null);
-    		if(c.moveToFirst()){
-    			do{
-    				int bookId = c.getInt(c.getColumnIndex(FIELD_BOOK_ID));
-    				int chapter = c.getInt(c.getColumnIndex(FIELD_CHAPTER));
-    				int poem = c.getInt(c.getColumnIndex(FIELD_POEM));
-    				String bookName = c.getString(c.getColumnIndex(FIELD_BOOK_NAME));
-    				String translate = c.getString(c.getColumnIndex(FIELD_TRANSLATE));
-    				
-    				result.add(0, new HistoryStruct(bookName, translate, bookId, chapter, poem));
-    				
-    			}while(c.moveToNext());
-    		}
-    	}
-    	
-    	return result;
-    }
-    
-    public void clearHistory(){
-    	
-    	if(db.isOpen()){
-    		db.delete(TABLE_HISTORY, null, null);
-    	}
-    }
 
     public void clearSearchResultHistory(){
     	if(db.isOpen()){
@@ -346,16 +297,15 @@ public class DataBase extends SQLiteOpenHelper {
     			: "0";
     			
     	String translate = translateId.equals(""+TRANSLATE_RST_ID)?TABLE_NAME_RST:TABLE_NAME_MT;
-    	Log.d(TAG, "TRanslate: " + translate);
     			
 		if(db.isOpen()){
 			Log.d(TAG, "DB_is_open: " + db.isOpen() + " request: " + request);
 			Cursor c = db.rawQuery("SELECT * FROM '"+translate+"' WHERE content LIKE '%"+request+"%' "+"ORDER BY `"+FIELD_BOOK_ID+"` ASC", null);
-			
+
 			if(c.moveToFirst()){
 				do {
 					int id = c.getInt(c.getColumnIndex(DataBase.FIELD_BOOK_ID));
-					if((id-1) >= idBookStart && (id-1) <= idBookEnd){
+					if((id) >= idBookStart && (id) <= idBookEnd){
 						String bookName = c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME))==null?"null"
 								:c.getString(c.getColumnIndex(DataBase.FIELD_BOOK_NAME));
 						int chapter = c.getInt(c.getColumnIndex(DataBase.FIELD_CHAPTER));

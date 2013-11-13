@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,10 +46,11 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	private SharedPreferences sp = null;
 	
+	private int positionTop = 0;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		view = inflater.inflate(R.layout.activity_select_book, null);
 		lvShowBooks = (ListView)view.findViewById(R.id.lv_show_books);
 		
@@ -63,7 +66,7 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
@@ -71,13 +74,11 @@ public class SelectBookFragment extends SherlockFragment {
 		
 		try {
 			dataBase.createDataBase();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e) {}
 		dataBase.openDataBase();
 		
-		btnBook.setBackgroundResource(R.drawable.btn_active_select);
+		//btnBook.setBackgroundResource(R.drawable.btn_active_select);
+		btnBook.setOnClickListener(clickTestamentListener);
 		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
@@ -93,8 +94,7 @@ public class SelectBookFragment extends SherlockFragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if(sp.contains(App.BOOK_ID) /*&& sp.contains(App.CHAPTER)*/){
+				if(sp.contains(App.BOOK_ID)){
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
 					ft.replace(R.id.flRoot, new ListChaptersFragment(), App.TAG_FRAGMENT_CHAPTERS);
@@ -111,7 +111,6 @@ public class SelectBookFragment extends SherlockFragment {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
@@ -134,7 +133,6 @@ public class SelectBookFragment extends SherlockFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
-				// TODO Auto-generated method stub
 				SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 				Editor editor = sp.edit();
 				editor.putInt(App.BOOK_ID, position+1);
@@ -147,12 +145,45 @@ public class SelectBookFragment extends SherlockFragment {
 				ft.commit();
 			}
 		});
-		super.onActivityCreated(savedInstanceState);
+		
+		lvShowBooks.setOnScrollListener(scrolListViewListener);
 	}
+	
+	private OnClickListener clickTestamentListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			if(positionTop < 39){
+				btnBook.setText(getString(R.string.new_testament));
+				lvShowBooks.setSelection(39);
+			}
+			else
+			{
+				btnBook.setText(getString(R.string.old_testament));
+				lvShowBooks.setSelection(0);
+			}
+		}
+	};
+	
+	private OnScrollListener scrolListViewListener = new OnScrollListener() {		
+		@Override
+		public void onScrollStateChanged(AbsListView view, int scrollState) {}		
+		@Override
+		public void onScroll(AbsListView view, int firstVisibleItem,
+				int visibleItemCount, int totalItemCount) {
+			positionTop = firstVisibleItem;
+			if(positionTop >= 39){
+				btnBook.setText(getString(R.string.new_testament));
+			}
+			else
+			{
+				btnBook.setText(getString(R.string.old_testament));
+			}
+		}
+	};
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.menu_main, menu);
 		menu.setQwertyMode(true);
 		super.onCreateOptionsMenu(menu, inflater);
@@ -160,7 +191,6 @@ public class SelectBookFragment extends SherlockFragment {
 	    
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	   	// TODO Auto-generated method stub
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
 	   		getSherlockActivity().finish();

@@ -223,8 +223,11 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		public void onClick(View v) {
 			StartSelectBook selectLinck = new StartSelectBook();
 			if(getSupportFragmentManager()
+					.findFragmentByTag(App.TAG_FRAGMENT_POEMS) == null
+					|| 
+					getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_POEMS).isVisible() == false)
-				selectLinck.execute();
+				selectLinck.execute();				
 		}
 	};
 	

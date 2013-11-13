@@ -29,7 +29,7 @@
         android:id="@+id/seekBar_set_speed_scroll_list_poem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="20"
+        android:max="60"
         android:paddingTop="8dp"
         android:progress="2" />
 

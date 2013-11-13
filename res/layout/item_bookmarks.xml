@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="4"
+            android:paddingBottom="2dp"
             android:src="@drawable/bookmark" />
 
         <LinearLayout
@@ -27,17 +28,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dp"
-                android:text="Medium Text"
+                android:text="Link"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/tv_smal_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
                 android:maxLines="2"
-                android:text="Small Text"
+                android:paddingTop="2dp"
+                android:singleLine="true"
+                android:text="Content"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/tv_comment_bookmark_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comments"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#000" />
 
         </LinearLayout>
 

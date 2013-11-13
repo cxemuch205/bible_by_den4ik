@@ -4,18 +4,24 @@ public class HistoryStruct {
 	
 	private String bookName = "";
 	private String translate = "";
+	private String dateCreate = "";
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
 	
 	public HistoryStruct(){}
 	
-	public HistoryStruct(String bookName, String translate, int bookId, int chapter, int poem){
+	public HistoryStruct(String dateCreate, String bookName, String translate, int bookId, int chapter, int poem){
+		this.dateCreate = dateCreate;
 		this.bookId = bookId;
 		this.translate = translate;
 		this.chapter = chapter;
 		this.poem = poem;
 		this.bookName = bookName;
+	}
+	
+	public void setDateCreated(String dateCreate) {
+		this.dateCreate = dateCreate;
 	}
 	
 	public void setBookId(int bookId) {
@@ -56,5 +62,9 @@ public class HistoryStruct {
 	
 	public String getTranslate() {
 		return translate;
+	}
+	
+	public String getDateCreated() {
+		return dateCreate;
 	}
 }
