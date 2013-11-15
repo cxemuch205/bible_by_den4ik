@@ -362,6 +362,8 @@
     
     <string name="dialog_added_to_bookmarks">Добавлено в закладки!</string>
     <string name="copyed_poem">Скопировано!</string>
+    <string name="popup_title_hint">Подсказка!</string>
+    <string name="popup_msg_swipe_listen_chapter">Проведите пальцем для переключения между главами</string>
     
     <string name="dialog_title_select_text">Выдилите текст:</string>
     <string name="dialog_dtn_copy_all">Копировать все</string>

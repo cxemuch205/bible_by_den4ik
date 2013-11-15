@@ -3,6 +3,7 @@ package ua.maker.gbible.constant;
 public class App {
 	
 	// Preference, intent extras
+	public static final String PREF_APP = "application_preferences";
 	public static final String PREF_SEND_DATA = "pref_send_data";
 	public static final String BOOK_ID = "book_id";
 	public static final String CHAPTER = "chapter";

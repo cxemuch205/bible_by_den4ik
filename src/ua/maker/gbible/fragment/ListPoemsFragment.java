@@ -64,6 +64,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -114,9 +115,10 @@ public class ListPoemsFragment extends SherlockFragment{
 	private EditText etNextLink = null;
 	private EditText etComments = null;
 	
-	private SharedPreferences sp = null, defPref = null;
+	private SharedPreferences sp = null, defPref = null, prefApp = null;
 	private boolean dayNight = false;
 	private boolean useVolBtn = false;
+	private boolean firstStart = true;
 	private int speedScroolList = App.DEFAULT_SCROOL_SPEED;
 	
 	private int poemBM = 1;
@@ -173,6 +175,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		listPlans = new ArrayList<PlanStruct>();
 		listPlans = dbUser.getPlansList();
 		
+		prefApp = getSherlockActivity().getSharedPreferences(App.PREF_APP, 0);
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
 		if(defPref.contains(getString(R.string.pref_default_translaters))){
@@ -301,8 +304,46 @@ public class ListPoemsFragment extends SherlockFragment{
 		{
 			getSherlockActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		}
+		
+		if(prefApp.contains("first_start_list_poem")){
+			firstStart = prefApp.getBoolean("first_start_list_poem", true);
+		}
+		else
+		{
+			firstStart = true;
+		}
+		
+		if(firstStart){
+			showInfoPopup();
+		}
 	}
 	
+	private void showInfoPopup() {
+		final PopupWindow popupInfo = new PopupWindow(getSherlockActivity());
+		
+		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+		View v = inflater.inflate(R.layout.popup_window_info_layout, null);
+		TextView tvTitlePopup = (TextView)v.findViewById(R.id.tv_title_popup);
+		TextView tvMsgPopup = (TextView)v.findViewById(R.id.tv_popup_msg);
+		
+		tvTitlePopup.setText(""+getString(R.string.popup_title_hint));
+		tvMsgPopup.setText(""+getString(R.string.popup_msg_swipe_listen_chapter));
+		
+		popupInfo.setContentView(v);
+		popupInfo.setOutsideTouchable(true);
+		popupInfo.showAsDropDown(getView());
+		
+		Timer timerClose = new Timer();
+		timerClose.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				if(popupInfo != null && popupInfo.isShowing())
+					popupInfo.dismiss();
+			}
+		}, 4000);
+	}
+
 	@Override
 	public void onStart() {
 		super.onStart();
