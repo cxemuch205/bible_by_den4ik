@@ -40,7 +40,17 @@
             android:entryValues="@array/select_pos_panel_id"
             android:defaultValue="0"
             android:dialogTitle="@string/dialog_title_pos_down_panel"/>
-        
+        <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:key="@string/pref_background_poem"
+            android:persistent="true"
+			android:title="@string/title_background_on_poem_fragment" 
+			android:summary="@string/summary_background_on_poem_fragment"
+			android:defaultValue="@integer/COLOR_WHITE"/>
+        <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:key="@string/pref_color_text"
+            android:persistent="true"
+			android:title="@string/title_color_text_dialog" 
+			android:summary="@string/summary_select_text_color"
+			android:defaultValue="@integer/COLOR_BLACK"/>
     </PreferenceCategory>
-
 </PreferenceScreen>

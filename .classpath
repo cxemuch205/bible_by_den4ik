@@ -4,8 +4,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="/SPenSDK_Demo_MultiWindow/libs/libspen23_multiwindow.jar"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="C:/Users/Daniil/android-sdks/platforms/android-10/android.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/Users/Daniil/android-sdks/docs/reference"/>
@@ -14,5 +12,11 @@
 			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
 		</accessrules>
 	</classpathentry>
+	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/drive-v2r107lv1.16.0-rc"/>
+	<classpathentry kind="con" path="com.google.gdt.eclipse.managedapis.MANAGED_API_CONTAINER/storage-v1beta2r31lv1.16.0-rc"/>
+	<classpathentry kind="lib" path="libs/google-play-services.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/actionbarsherlock/bin/actionbarsherlock.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
