@@ -4,6 +4,7 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.structs.PoemStruct;
+import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,6 +36,7 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		
 		defPref = PreferenceManager.getDefaultSharedPreferences(context);
 		dayNight = (defPref.getString(context.getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
+		String color = ""+defPref.getInt(context.getString(R.string.pref_color_text), context.getResources().getInteger(R.integer.COLOR_BLACK));
 		
 		if(view == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
@@ -73,8 +75,8 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		}
 		else
 		{
-			holder.tvContentPoem.setTextColor(Color.BLACK);
-			holder.tvNumberPoem.setTextColor(Color.BLACK);
+			holder.tvContentPoem.setTextColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+			holder.tvNumberPoem.setTextColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
 			holder.tvContentPoem.setText(content.getText());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));

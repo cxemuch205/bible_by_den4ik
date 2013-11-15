@@ -1,6 +1,7 @@
 package ua.maker.gbible.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.TextView;
@@ -220,20 +221,6 @@ public class Tools {
 		return name;
 	}
 	
-	public static int getNumberOfPoemInChapter(int bookId, int chapter){
-		int result = 0;
-		if(bookId == 1 && chapter == 1)
-			result = 31;
-		else
-			if(bookId == 1 && chapter == 2)
-				result = 25;
-			else
-				if(bookId == 1 && chapter == 3)
-					result = 24;
-		
-		return result;
-	}
-	
 	public static void showToast(Context context, String text) {
 		
 		if (text != null && text.equals(lastToastText)) {
@@ -251,6 +238,16 @@ public class Tools {
 	    toast.show();
 	      }
 		
+	}
+	
+	public static String getWebColor(String color) {
+		Log.e("Tools", "Color for set background " + color);
+		if (color.length() > 7) {
+			int lenght = color.length();
+			return "#FF" + color.substring(lenght - 6);
+		} else {
+			return color;
+		}
 	}
 
 }

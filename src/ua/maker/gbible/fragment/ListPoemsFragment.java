@@ -25,6 +25,7 @@ import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -114,11 +115,10 @@ public class ListPoemsFragment extends SherlockFragment{
 	private EditText etComments = null;
 	
 	private SharedPreferences sp = null, defPref = null;
-	private boolean dayNight = false; //false - day / true - night
+	private boolean dayNight = false;
 	private boolean useVolBtn = false;
 	private int speedScroolList = App.DEFAULT_SCROOL_SPEED;
 	
-	//link for bookmark
 	private int poemBM = 1;
 	private int chapterBM = 1;
 	private String contentBM = "";
@@ -150,13 +150,11 @@ public class ListPoemsFragment extends SherlockFragment{
 			
 			@Override
 			public void run() {
-				Log.d(TAG, "Thread getMaxCountPoemInChapter");
 				maxChapter = dataBase.getNumberOfChapterInBook(bookId, nameTranslate);
 			}
 		});
 		getMaxChapter.run();
 		getSherlockActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		Log.d(TAG, "END onCreateView");
 		
 		return view;
 	}
@@ -165,8 +163,6 @@ public class ListPoemsFragment extends SherlockFragment{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		widthScreen = getSherlockActivity().getResources().getDisplayMetrics().widthPixels;
-		Log.d("SCREEN_WIDTH", "width: " + widthScreen);
-		Log.d(TAG, "onActivityCreated()");
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(""
@@ -189,8 +185,18 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 		else
 		{
-			lvShowPoem.setBackgroundColor(Color.WHITE);
-			llMenuLink.setBackgroundColor(Color.WHITE);
+			if(defPref.contains(getString(R.string.pref_background_poem)))
+			{
+				String color = ""+defPref.getInt(getString(R.string.pref_background_poem), getSherlockActivity().getResources().getInteger(R.integer.COLOR_WHITE));
+				Log.e(TAG, "Color for set background " + color);
+				lvShowPoem.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+				llMenuLink.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+			}
+			else
+			{
+				lvShowPoem.setBackgroundColor(Color.WHITE);
+				llMenuLink.setBackgroundColor(Color.WHITE);
+			}
 		}
 		
 		speedScroolList = defPref.getInt(getString(R.string.pref_smooth_duration), 2);
@@ -257,13 +263,10 @@ public class ListPoemsFragment extends SherlockFragment{
 			}
 		});
 		
-		Log.d(TAG, "Start onActivityCreated");
 		changeChapter(chapterNumber);
 		
 		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
 		lvShowPoem.setAdapter(adapterListPoem);
-		
-		Log.d(TAG, "END onActivityCreated");
 		
 		lvShowPoem.setSmoothScrollbarEnabled(true);
 		lvShowPoem.setOnScrollListener(scrollChangeListener);		
@@ -684,7 +687,6 @@ public class ListPoemsFragment extends SherlockFragment{
 		{
 			chapterNumber--;
 			Tools.showToast(getSherlockActivity(), getString(R.string.it_is_chapter_last));
-			//In future? may make switch on next book
 		}
 	}
 
@@ -744,8 +746,18 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 		else
 		{
-			lvShowPoem.setBackgroundColor(Color.WHITE);
-			llMenuLink.setBackgroundColor(Color.WHITE);
+			if(defPref.contains(getString(R.string.pref_background_poem)))
+			{
+				String color = ""+defPref.getInt(getString(R.string.pref_background_poem), getSherlockActivity().getResources().getInteger(R.integer.COLOR_WHITE));
+				Log.e(TAG, "Color for set background " + color);
+				lvShowPoem.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+				llMenuLink.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+			}
+			else
+			{
+				lvShowPoem.setBackgroundColor(Color.WHITE);
+				llMenuLink.setBackgroundColor(Color.WHITE);
+			}
 		}
 		
 		selectPrefPoem();

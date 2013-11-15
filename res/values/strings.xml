@@ -311,6 +311,10 @@
     		<string name="title_background_on_poem_fragment">Цвет фона стихов</string>
     		<string name="dialogtitle_set_color_poem_list">Выбирите цвет:</string>
     		<string name="summary_background_on_poem_fragment">Выбирите цвет который в дневном режиме, будет на фоне страници чтения стихов.</string>
+    	
+    	<string name="pref_color_text">pref_color_poem</string>
+    		<string name="title_color_text_dialog">Цвет текста</string>
+    		<string name="summary_select_text_color">Выбирите цвет для текста стихов.</string>
     		
     <!-- Tools -->
     <string name="no_select_book">Выбирите книгу.</string>
@@ -398,6 +402,5 @@
     
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
-    <string name="press_color_to_apply">Нажмите на цвет для применения</string>    
     		
 </resources>

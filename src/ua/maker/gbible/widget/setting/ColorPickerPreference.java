@@ -166,27 +166,14 @@ public class ColorPickerPreference
 		mDialog.show();
 	}
 
-	/**
-	 * Toggle Alpha Slider visibility (by default it's disabled)
-	 * @param enable
-	 */
 	public void setAlphaSliderEnabled(boolean enable) {
 		mAlphaSliderEnabled = enable;
 	}
-
-	/**
-	 * Toggle Hex Value visibility (by default it's disabled)
-	 * @param enable
-	 */
+	
 	public void setHexValueEnabled(boolean enable) {
 		mHexValueEnabled = enable;
 	}
-
-	/**
-	 * For custom purposes. Not used by ColorPickerPreferrence
-	 * @param color
-	 * @author Unknown
-	 */
+	
     public static String convertToARGB(int color) {
         String alpha = Integer.toHexString(Color.alpha(color));
         String red = Integer.toHexString(Color.red(color));
@@ -212,13 +199,6 @@ public class ColorPickerPreference
         return "#" + alpha + red + green + blue;
     }
     
-    /**
-	 * For custom purposes. Not used by ColorPickerPreference
-	 * @param color
-	 * @author Charles Rosaaen
-	 * @return A string representing the hex value of color,
-	 * without the alpha value
-	 */
     public static String convertToRGB(int color) {
         String red = Integer.toHexString(Color.red(color));
         String green = Integer.toHexString(Color.green(color));
@@ -238,13 +218,7 @@ public class ColorPickerPreference
 
         return "#" + red + green + blue;
     }
-
-    /**
-     * For custom purposes. Not used by ColorPickerPreferrence
-     * @param argb
-     * @throws NumberFormatException
-     * @author Unknown
-     */
+    
 	public static int convertToColorInt(String argb) throws IllegalArgumentException {
 
 		if (!argb.startsWith("#")) {
@@ -269,7 +243,6 @@ public class ColorPickerPreference
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         if (state == null || !(state instanceof SavedState)) {
-            // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);
             return;
         }
