@@ -8,6 +8,7 @@
         android:id="@+id/ll_left_control_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
         android:layout_weight="12"
         android:orientation="vertical" >
 
@@ -15,7 +16,8 @@
             android:id="@+id/ll_select_link"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -26,14 +28,15 @@
                 android:id="@+id/ImageView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bible_select_ic_48" />
+                android:src="@drawable/select_link_bible_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -44,14 +47,15 @@
                 android:id="@+id/ImageView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_search" />
+                android:src="@drawable/search_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_bookmarks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -62,14 +66,15 @@
                 android:id="@+id/ImageView04"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_get" />
+                android:src="@drawable/bookmark_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_history"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -80,14 +85,15 @@
                 android:id="@+id/ImageView05"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_compass" />
+                android:src="@drawable/history_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -98,7 +104,7 @@
                 android:id="@+id/ImageView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_plan" />
+                android:src="@drawable/plan_ico" />
         </LinearLayout>
     </LinearLayout>
     
@@ -115,6 +121,7 @@
         android:id="@+id/ll_right_control_panel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="2dp"
         android:layout_weight="12"
         android:orientation="vertical"
         android:visibility="gone" >
@@ -123,7 +130,8 @@
             android:id="@+id/ll_select_link_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -134,14 +142,15 @@
                 android:id="@+id/iv_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bible_select_ic_48" />
+                android:src="@drawable/select_link_bible_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_search_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -152,14 +161,15 @@
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_search" />
+                android:src="@drawable/search_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_bookmarks_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -170,14 +180,15 @@
                 android:id="@+id/iv_bookmarks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_get" />
+                android:src="@drawable/bookmark_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_history_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -188,14 +199,15 @@
                 android:id="@+id/iv_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_compass" />
+                android:src="@drawable/history_ico" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_setting_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -206,7 +218,7 @@
                 android:id="@+id/iv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_plan" />
+                android:src="@drawable/plan_ico" />
         </LinearLayout>
     </LinearLayout>
 

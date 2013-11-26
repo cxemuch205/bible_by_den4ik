@@ -34,7 +34,7 @@
                 android:id="@+id/iv_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bible_select_ic_48"/>
+                android:src="@drawable/select_link_bible_ico" />
 
         </LinearLayout>
 
@@ -52,8 +52,8 @@
             <ImageView
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:src="@android:drawable/ic_menu_search" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_ico" />
 
         </LinearLayout>
 
@@ -72,7 +72,7 @@
                 android:id="@+id/iv_bookmarks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_get" />
+                android:src="@drawable/bookmark_ico" />
 
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                     android:id="@+id/iv_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_compass" />
+                    android:src="@drawable/history_ico" />
 
             </LinearLayout>
 
@@ -110,7 +110,7 @@
                     android:id="@+id/iv_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_plan" />
+                    android:src="@drawable/plan_ico" />
 
             </LinearLayout>
 

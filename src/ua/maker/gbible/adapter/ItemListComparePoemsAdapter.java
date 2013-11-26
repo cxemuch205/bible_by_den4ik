@@ -29,7 +29,6 @@ public class ItemListComparePoemsAdapter extends
 	public ItemListComparePoemsAdapter(Context context, int textViewResourceId,
 			List<HashMap<String, String>> objects) {
 		super(context, textViewResourceId, objects);
-		// TODO Auto-generated constructor stub
 		this.context = context;
 		layoutResId = textViewResourceId;
 		listComparePoems = objects;
@@ -37,7 +36,6 @@ public class ItemListComparePoemsAdapter extends
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
 		View row = convertView;
 		AdapterHolder holder = null;
 		
@@ -59,16 +57,27 @@ public class ItemListComparePoemsAdapter extends
 		HashMap<String,String> content = listComparePoems.get(position);
 		
 		if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_RST)){
-			Spannable nameTranslate = new SpannableString(DataBase.TRANSLATE_NAME_RST);
-			nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, DataBase.TRANSLATE_NAME_RST.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			String nameT = context.getString(R.string.rus_translate_str);
+			Spannable nameTranslate = new SpannableString(nameT);
+			nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			holder.tvLabelTranslate.setText(nameTranslate);
 		}
 		else
-		{
-			Spannable nameTranslate = new SpannableString(DataBase.TRANSLATE_NAME_MT);
-			nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, DataBase.TRANSLATE_NAME_MT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			holder.tvLabelTranslate.setText(nameTranslate);
-		}
+			if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_MT))
+			{
+				String nameT = context.getString(R.string.rus_modern_translate_str);
+				Spannable nameTranslate = new SpannableString(nameT);
+				nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				holder.tvLabelTranslate.setText(nameTranslate);
+			}
+			else
+				if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_UAT))
+				{
+					String nameT = context.getString(R.string.ua_translate_str);
+					Spannable nameTranslate = new SpannableString(nameT);
+					nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					holder.tvLabelTranslate.setText(nameTranslate);
+				}
 		holder.tvContent.setText(content.get(App.POEM));
 		return row;
 	}

@@ -41,6 +41,12 @@
             android:defaultValue="0"
             android:dialogTitle="@string/dialog_title_pos_down_panel"/>
         <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:key="@string/pref_backg_control_panel"
+            android:persistent="true"
+			android:title="@string/title_control_panel_pref" 
+			android:summary="@string/summary_control_panel_pref"
+			android:defaultValue="@integer/COLOR_WHITE"/>
+        <ua.maker.gbible.widget.setting.ColorPickerPreference
             android:key="@string/pref_background_poem"
             android:persistent="true"
 			android:title="@string/title_background_on_poem_fragment" 

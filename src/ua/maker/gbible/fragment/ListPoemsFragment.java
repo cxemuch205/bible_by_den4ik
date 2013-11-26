@@ -55,6 +55,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -64,7 +65,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
@@ -91,6 +91,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	private List<PoemStruct> listPoems = null;
 	private List<PlanStruct> listPlans = null;
 	private ItemListPoemAdapter adapterListPoem = null;
+	private WebView webviewActionView = null;
 	private Timer timer = null;
 	
 	private int bookId = 1;
@@ -144,7 +145,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		dataBase.openDataBase();
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		
-		nameTranslate = getTranslateWitchPreferences();
+		nameTranslate = Tools.getTranslateWitchPreferences(getSherlockActivity());
 		bookId = sp.getInt(App.BOOK_ID, 1);
 		chapterNumber = sp.getInt(App.CHAPTER, 1);
 		selectPoem = sp.getInt(App.POEM_SET_FOCUS, 1);
@@ -191,7 +192,6 @@ public class ListPoemsFragment extends SherlockFragment{
 			if(defPref.contains(getString(R.string.pref_background_poem)))
 			{
 				String color = ""+defPref.getInt(getString(R.string.pref_background_poem), getSherlockActivity().getResources().getInteger(R.integer.COLOR_WHITE));
-				Log.e(TAG, "Color for set background " + color);
 				lvShowPoem.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
 				llMenuLink.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
 			}
@@ -318,31 +318,41 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 	}
 	
-	private void showInfoPopup() {
-		final PopupWindow popupInfo = new PopupWindow(getSherlockActivity());
-		
-		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
-		View v = inflater.inflate(R.layout.popup_window_info_layout, null);
-		TextView tvTitlePopup = (TextView)v.findViewById(R.id.tv_title_popup);
-		TextView tvMsgPopup = (TextView)v.findViewById(R.id.tv_popup_msg);
-		
-		tvTitlePopup.setText(""+getString(R.string.popup_title_hint));
-		tvMsgPopup.setText(""+getString(R.string.popup_msg_swipe_listen_chapter));
-		
-		popupInfo.setContentView(v);
-		popupInfo.setOutsideTouchable(true);
-		popupInfo.showAsDropDown(getView());
-		
-		Timer timerClose = new Timer();
-		timerClose.schedule(new TimerTask() {
+	private void showInfoPopup() {		
+		AlertDialog.Builder showInfo = new AlertDialog.Builder(getSherlockActivity());
+		showInfo.setTitle(""+getString(R.string.popup_title_hint));
+		showInfo.setNeutralButton(getString(R.string.dialog_ok), new onDialogClickListener() {
 			
 			@Override
-			public void run() {
-				if(popupInfo != null && popupInfo.isShowing())
-					popupInfo.dismiss();
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
 			}
-		}, 4000);
+		});
+		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+		View v = inflater.inflate(R.layout.show_info_layout, null);
+        
+        TextView msg = (TextView)v.findViewById(R.id.tv_msg_alert);
+        msg.setText(""+getString(R.string.popup_msg_swipe_listen_chapter));
+        webviewActionView = (WebView)v.findViewById(R.id.webviewActionView);
+        webviewActionView.setWebViewClient(new MyWebViewClient());
+        webviewActionView.getSettings().setJavaScriptEnabled(true);
+        webviewActionView.setBackgroundColor(0x00000000);
+
+        webviewActionView.loadUrl("file:///android_asset/sliding_animation_tutorial.gif");
+		
+		showInfo.setView(v);
+		AlertDialog alert = showInfo.create();
+		alert.setCanceledOnTouchOutside(true);
+		alert.show();
+		prefApp.edit().putBoolean("first_start_list_poem", false).commit();
 	}
+	
+	private class MyWebViewClient extends WebViewClient {
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
 
 	@Override
 	public void onStart() {
@@ -571,7 +581,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			BookMarksStruct bookMark = new BookMarksStruct();
-			bookMark.setTableName(getTranslateWitchPreferences());
+			bookMark.setTableName(Tools.getTranslateWitchPreferences(getSherlockActivity()));
 			bookMark.setBookId(bookId);
 			bookMark.setChapter(chapterBM);
 			bookMark.setPoem(poemBM);
@@ -764,7 +774,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 			Log.d(TAG, "ChangeChapterAsyncTask() - END");
-			if(pd.isShowing()) pd.cancel();
+			if(pd != null && pd.isShowing()) pd.dismiss();
 			getSherlockActivity().getActionBar().setTitle(""+
 					Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " + chapterNumber);
 			btnChapter.setText(""+chapterNumber);
@@ -776,7 +786,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	@Override
 	public void onResume() {
 		super.onResume();
-		listPoems = dataBase.getPoemsInChapter(bookId, chapterNumber, getTranslateWitchPreferences());
+		listPoems = dataBase.getPoemsInChapter(bookId, chapterNumber, Tools.getTranslateWitchPreferences(getSherlockActivity()));
 		
 		updateList();
 		
@@ -823,22 +833,5 @@ public class ListPoemsFragment extends SherlockFragment{
 		Editor e = sp.edit();
 		e.putInt(App.POEM_SET_FOCUS, poemPos);
 		e.commit();
-	}
-	
-	public String getTranslateWitchPreferences(){
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-		String translateName = DataBase.TABLE_NAME_RST;
-		if(prefs.contains(getString(R.string.pref_default_translaters))){
-			
-			switch(Integer.parseInt(prefs.getString(getString(R.string.pref_default_translaters), "0"))){
-				case 0:
-					translateName = DataBase.TABLE_NAME_RST;
-					break;
-				case 1:
-					translateName = DataBase.TABLE_NAME_MT;
-					break;
-			}
-		}
-		return translateName;
 	}
 }

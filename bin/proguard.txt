@@ -1,23 +1,16 @@
-# view land\res/layout-land/dialog_color_picker.xml #generated:62
-# view land\res/layout-land/dialog_color_picker.xml #generated:77
--keep class net.margaritov.preference.colorpicker.ColorPickerPanelView { <init>(...); }
-
-# view land\res/layout-land/dialog_color_picker.xml #generated:26
--keep class net.margaritov.preference.colorpicker.ColorPickerView { <init>(...); }
-
-# view AndroidManifest.xml #generated:35
+# view AndroidManifest.xml #generated:34
 -keep class ua.maker.gbible.activity.ComparePoemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:27
+# view AndroidManifest.xml #generated:26
 -keep class ua.maker.gbible.activity.ListChaptersActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:31
+# view AndroidManifest.xml #generated:30
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:40
+# view AndroidManifest.xml #generated:39
 -keep class ua.maker.gbible.activity.SettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:17
+# view AndroidManifest.xml #generated:16
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:31
@@ -26,14 +19,18 @@
 # view res/xml/preference_bible.xml #generated:25
 -keep class ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference { <init>(...); }
 
+# view land\res/layout-land/dialog_color_picker.xml #generated:59
+# view land\res/layout-land/dialog_color_picker.xml #generated:74
 # view res/layout/dialog_color_picker.xml #generated:65
 # view res/layout/dialog_color_picker.xml #generated:80
 -keep class ua.maker.gbible.widget.setting.ColorPickerPanelView { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:43
 # view res/xml/preference_bible.xml #generated:49
+# view res/xml/preference_bible.xml #generated:55
 -keep class ua.maker.gbible.widget.setting.ColorPickerPreference { <init>(...); }
 
+# view land\res/layout-land/dialog_color_picker.xml #generated:23
 # view res/layout/dialog_color_picker.xml #generated:23
 -keep class ua.maker.gbible.widget.setting.ColorPickerView { <init>(...); }
 

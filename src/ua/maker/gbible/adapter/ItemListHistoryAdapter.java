@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.structs.HistoryStruct;
-import ua.maker.gbible.utils.DataBase;
+import ua.maker.gbible.utils.Tools;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -44,7 +44,7 @@ public class ItemListHistoryAdapter extends ArrayAdapter<HistoryStruct> {
 			holder = (ViewHolder)view.getTag();
 		
 		HistoryStruct item = data.get(position);
-		String translate = getTranslateWitchPreferences(item.getTranslate());
+		String translate = Tools.getTranslateWitchPreferences(item.getTranslate(), context);
 		holder.tvTranslate.setText(""+translate);
 		holder.tvLink.setText(""+item.getBookName()+" "+item.getChapter());
 		holder.tvDateCreated.setText(""+item.getDateCreated());
@@ -52,19 +52,7 @@ public class ItemListHistoryAdapter extends ArrayAdapter<HistoryStruct> {
 		return view;
 	}
 	
-	public String getTranslateWitchPreferences(String idTranslate){
-		String translateName = DataBase.TABLE_NAME_RST;
-
-		switch(Integer.parseInt(""+idTranslate)){
-			case 0:
-				translateName = context.getString(R.string.is_rst_translate);
-				break;
-			case 1:
-				translateName = context.getString(R.string.is_mt_translate);
-				break;
-		}
-		return translateName;
-	}
+	
 	
 	static class ViewHolder{
 		TextView tvTranslate;

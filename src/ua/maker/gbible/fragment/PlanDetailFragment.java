@@ -19,7 +19,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -209,7 +208,7 @@ public class PlanDetailFragment extends SherlockFragment {
 				long id) {
 			Log.d(TAG, "Get chapter in book: " + (position+1));
 			listChapter.clear();
-			listChapter.addAll(dbBible.getChapters(getTranslateWitchPreferences(), (position+1)));
+			listChapter.addAll(dbBible.getChapters(Tools.getTranslateWitchPreferences(getSherlockActivity()), (position+1)));
 			adapterChapters.notifyDataSetChanged();
 		}
 
@@ -227,7 +226,7 @@ public class PlanDetailFragment extends SherlockFragment {
 			numberOfPoem = dbBible.getNumberOfPoemInChapter(
 					(spinnerBooks.getSelectedItemPosition()+1), 
 					(spinnerChapter.getSelectedItemPosition()+1), 
-					getTranslateWitchPreferences());
+					Tools.getTranslateWitchPreferences(getSherlockActivity()));
 			for(int i = 1; i <= numberOfPoem; i++)
 				listPoem.add(i);
 			adapterPoem.notifyDataSetChanged();
@@ -331,10 +330,10 @@ public class PlanDetailFragment extends SherlockFragment {
 				itemPlan.setChapter(chapter);
 				itemPlan.setPoem(poem);
 				itemPlan.setToPoem(toPoem);
-				itemPlan.setTranslate(getTranslateWitchPreferences());
+				itemPlan.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
 				itemPlan.setDataType(PlanData.DATA_LINK);
 				if(cbQuotePoem.isChecked()){
-					itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, getTranslateWitchPreferences()));
+					itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
 					itemPlan.setDataType(PlanData.DATA_LINK_WITH_TEXT);
 				}
 				listItemsPlan.add(itemPlan);
@@ -488,22 +487,5 @@ public class PlanDetailFragment extends SherlockFragment {
 		}
 		
 		return super.onOptionsItemSelected(item);
-	}
-
-	public String getTranslateWitchPreferences(){
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-		String translateName = DataBase.TABLE_NAME_RST;
-		if(prefs.contains(getString(R.string.pref_default_translaters))){
-			
-			switch(Integer.parseInt(prefs.getString(getString(R.string.pref_default_translaters), "0"))){
-				case 0:
-					translateName = DataBase.TABLE_NAME_RST;
-					break;
-				case 1:
-					translateName = DataBase.TABLE_NAME_MT;
-					break;
-			}
-		}
-		return translateName;
 	}
 }

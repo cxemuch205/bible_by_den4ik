@@ -3,7 +3,6 @@
 
     <string name="app_name">gBible</string>
     <string name="action_select">Перейти</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_search">Поиск</string>
     <string name="action_bookmarks">Закладки</string>
     <string name="action_history">История</string>
@@ -12,6 +11,7 @@
     <string name="exit_question">Выйти?</string>
     <string name="closes_app">Закрытие приложения..</string>
     <string name="dialog_yes">Да</string>
+    <string name="dialog_ok">Ок</string>
     <string name="dialog_save">Сохранить</string>
     <string name="dialog_cancel">Отмена</string>
     
@@ -22,6 +22,11 @@
     <!-- ERROR -->
     <string name="empty_et">Поле для поиска не заполенно!</string>
     <!-- ############ -->
+    
+    <!-- Translates -->
+    <string name="rus_translate_str">Русский Синодальный перевод</string>
+    <string name="rus_modern_translate_str">Современный Русский перевод</string>
+    <string name="ua_translate_str">Украинский перевод</string>
        
     <!-- Books -->
     <string name="old_testament">Ветхий Завет</string>
@@ -261,10 +266,12 @@
     		<string-array name="trnaslaters_names">
     		    <item >Русский Синодальный перевод</item>
     		    <item >Современный Русский перевод</item>
+    		    <item >Украинский перевод(в будущем)</item>
     		</string-array>
     		<string-array name="trnaslaters_names_id">
     		    <item >0</item>
     		    <item >1</item>
+    		    <item >2</item>
     		</string-array>
     	<string name="pref_mode_read">mode_read</string>
     		<string name="title_mode_read">Режим День/Ночь</string>
@@ -315,6 +322,10 @@
     	<string name="pref_color_text">pref_color_poem</string>
     		<string name="title_color_text_dialog">Цвет текста</string>
     		<string name="summary_select_text_color">Выбирите цвет для текста стихов.</string>
+    	
+    	<string name="pref_backg_control_panel">pref_baground_control_panel</string>
+    		<string name="title_control_panel_pref">Фон ПУ</string>
+    		<string name="summary_control_panel_pref">Установите фон для нижней панели управления</string>
     		
     <!-- Tools -->
     <string name="no_select_book">Выбирите книгу.</string>
@@ -330,8 +341,10 @@
     <string name="title_activity_history">История</string>
     <string name="action_title_clear_history">Очистка</string>
     <string name="list_history_empty">История пуста</string>
+    
     <string name="is_rst_translate">РСП</string>
     <string name="is_mt_translate">СП</string>
+    <string name="is_ua_translate">УП</string>
     
     <string name="dialog_title_clear_history">Очистить историю?</string>
     <string name="dialog_message_clear_history">Данные о истории посещаемых глав будет очищена.</string>
@@ -365,7 +378,7 @@
     <string name="popup_title_hint">Подсказка!</string>
     <string name="popup_msg_swipe_listen_chapter">Проведите пальцем для переключения между главами</string>
     
-    <string name="dialog_title_select_text">Выдилите текст:</string>
+    <string name="dialog_title_select_text">Выделите текст:</string>
     <string name="dialog_dtn_copy_all">Копировать все</string>
     <string name="dialog_btn_copy_select_text">Копировать выделеное</string>
     

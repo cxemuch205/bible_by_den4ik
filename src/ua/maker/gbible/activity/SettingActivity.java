@@ -23,11 +23,11 @@ public class SettingActivity extends SherlockPreferenceActivity {
 		addPreferencesFromResource(R.xml.preference_bible);
 		
 		((ColorPickerPreference)findPreference(getString(R.string.pref_background_poem))).setAlphaSliderEnabled(true);
+		((ColorPickerPreference)findPreference(getString(R.string.pref_backg_control_panel))).setAlphaSliderEnabled(true);
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		
+	public boolean onOptionsItemSelected(MenuItem item) {		
 		switch(item.getItemId()){
 		case android.R.id.home:
 			finish();

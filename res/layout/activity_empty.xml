@@ -17,6 +17,7 @@
         android:id="@+id/ll_block_navi"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
         android:layout_weight="8"
         android:orientation="horizontal" >
 
@@ -24,7 +25,8 @@
             android:id="@+id/ll_select_link"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginLeft="2dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -35,7 +37,7 @@
                 android:id="@+id/iv_select"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/bible_select_ic_48"/>
+                android:src="@drawable/select_link_bible_ico" />
 
         </LinearLayout>
 
@@ -43,7 +45,8 @@
             android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -53,8 +56,8 @@
             <ImageView
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
-                android:src="@android:drawable/ic_menu_search" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_ico" />
 
         </LinearLayout>
 
@@ -62,7 +65,8 @@
             android:id="@+id/ll_bookmarks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="2dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:background="@drawable/menu_button_background"
             android:clickable="true"
@@ -73,7 +77,7 @@
                 android:id="@+id/iv_bookmarks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_input_get" />
+                android:src="@drawable/bookmark_ico" />
 
         </LinearLayout>
 
@@ -81,7 +85,8 @@
                 android:id="@+id/ll_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+            	android:layout_marginLeft="1dp"
+            	android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/menu_button_background"
                 android:clickable="true"
@@ -92,7 +97,7 @@
                     android:id="@+id/iv_history"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@android:drawable/ic_menu_compass" />
+                    android:src="@drawable/history_ico" />
 
             </LinearLayout>
 
@@ -100,7 +105,8 @@
                 android:id="@+id/ll_setting"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="2dp"
+            	android:layout_marginLeft="1dp"
+            	android:layout_marginRight="2dp"
                 android:layout_weight="1"
                 android:background="@drawable/menu_button_background"
                 android:clickable="true"
@@ -111,7 +117,7 @@
                     android:id="@+id/iv_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_plan" />
+                    android:src="@drawable/plan_ico" />
 
             </LinearLayout>
 

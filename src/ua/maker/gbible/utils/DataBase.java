@@ -10,8 +10,6 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.constant.App;
-import ua.maker.gbible.structs.BookMarksStruct;
-import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.structs.SearchStruct;
 import android.annotation.SuppressLint;
@@ -36,9 +34,11 @@ public class DataBase extends SQLiteOpenHelper {
 	
 	public static final String TABLE_NAME_RST = "rus_st";
 	public static final String TABLE_NAME_MT = "rus_mt";
+	public static final String TABLE_NAME_UAT = "ukr_t";
 	
 	public static final int TRANSLATE_RST_ID = 0;
 	public static final int TRANSLATE_MT_ID = 1;
+	public static final int TRANSLATE_UA_ID = 2;
 	
 	public static final String TABLE_SEARCH_RESULT = "search_history";
 	
@@ -52,9 +52,8 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final String KEY_ROWID = "_id";
 	
 	public static final String[] TABLE_NAMES = {"rus_st",
-												 "rus_mt"};
-	public static final String TRANSLATE_NAME_RST = "Русский Синодальный Перевод";
-	public static final String TRANSLATE_NAME_MT = "Современный Русский Перевод";
+												 "rus_mt"//,
+												 /*"ukr_t"*/};
 	
 	private SQLiteDatabase db = null;
 	private final Context mContext;
@@ -184,11 +183,11 @@ public class DataBase extends SQLiteOpenHelper {
 			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+", "+FIELD_CONTENT+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
 				do{
-					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId)
+					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId){
 						if(cursor.getInt(cursor.getColumnIndex(FIELD_CHAPTER)) == chapter){
 							poems.add(new PoemStruct(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT))));						
 						}
-					
+					}
 				}while(cursor.moveToNext());
 			}
 		}

@@ -1,9 +1,13 @@
 package ua.maker.gbible.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import ua.maker.gbible.R;
@@ -249,5 +253,59 @@ public class Tools {
 			return color;
 		}
 	}
+	
+	public static String getTranslateWitchPreferences(Context ctx){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+		String translateName = DataBase.TABLE_NAME_RST;
+		if(prefs.contains(ctx.getString(R.string.pref_default_translaters))){
+			
+			switch(Integer.parseInt(prefs.getString(ctx.getString(R.string.pref_default_translaters), "0"))){
+				case 0:
+					translateName = DataBase.TABLE_NAME_RST;
+					break;
+				case 1:
+					translateName = DataBase.TABLE_NAME_MT;
+					break;
+				case 2:
+					translateName = DataBase.TABLE_NAME_UAT;
+					break;
+			}
+		}
+		return translateName;
+	}
+	
+	public static String getTranslateWitchPreferences(String idTranslate, Context ctx){
+		String translateName = DataBase.TABLE_NAME_RST;
 
+		switch(Integer.parseInt(""+idTranslate)){
+			case 0:
+				translateName = ctx.getString(R.string.is_rst_translate);
+				break;
+			case 1:
+				translateName = ctx.getString(R.string.is_mt_translate);
+				break;
+			case 2:
+				translateName = ctx.getString(R.string.is_ua_translate);
+				break;
+		}
+		return translateName;
+	}
+	
+	public static void showKeyBoard(Activity activity){
+		if (activity != null) {
+			InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+			
+			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+		}
+	}
+	
+	public static void hideKeyBoard(Activity activity){
+		if (activity != null) {
+			InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+			
+	    	if (activity.getCurrentFocus() != null) {
+	    		imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+	    	}
+		}
+	}
 }

@@ -95,13 +95,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		bookId = sp.getInt(App.BOOK_ID, 1);
 		Log.d("Getting Book_id", "id = " + bookId);
 		String bookName = ""+Tools.getBookNameByBookId(bookId, getSherlockActivity());
-		if(bookName.length()>16 && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-			btnBook.setTextSize(13);
-		}
-		else
-		{
-			btnBook.setTextSize(16);
-		}
+		btnBook.setTextSize(16);
 		btnBook.setText(bookName);
 		btnBook.setOnClickListener(new OnClickListener() {
 			

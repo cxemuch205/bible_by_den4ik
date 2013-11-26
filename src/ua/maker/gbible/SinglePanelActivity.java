@@ -8,6 +8,8 @@ import ua.maker.gbible.fragment.PlansListFragment;
 import ua.maker.gbible.fragment.SearchFragment;
 import ua.maker.gbible.fragment.SelectBookFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
+import ua.maker.gbible.utils.Tools;
+import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -170,7 +172,15 @@ public abstract class SinglePanelActivity extends BaseActivity {
     		}
     		else
     		{
-    			llBlockNavi.setBackgroundColor(Color.WHITE);
+    			if(spDef.contains(getString(R.string.pref_backg_control_panel)))
+    			{
+    				String color = ""+spDef.getInt(getString(R.string.pref_backg_control_panel), getResources().getInteger(R.integer.COLOR_WHITE));
+    				llBlockNavi.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+    			}
+    			else
+    			{
+    				llBlockNavi.setBackgroundColor(Color.WHITE);
+    			}
     		}
     	}
     	
@@ -184,7 +194,15 @@ public abstract class SinglePanelActivity extends BaseActivity {
     			}
     			else
     			{
-    				llLeftPanel.setBackgroundColor(Color.WHITE);
+    				if(spDef.contains(getString(R.string.pref_backg_control_panel)))
+        			{
+        				String color = ""+spDef.getInt(getString(R.string.pref_backg_control_panel), getResources().getInteger(R.integer.COLOR_WHITE));
+        				llLeftPanel.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+        			}
+        			else
+        			{
+        				llLeftPanel.setBackgroundColor(Color.WHITE);
+        			}    				
     			}
     			llRightPanel.setVisibility(LinearLayout.GONE);
     		}
@@ -192,11 +210,19 @@ public abstract class SinglePanelActivity extends BaseActivity {
     		{
     			llRightPanel.setVisibility(LinearLayout.VISIBLE);
     			if(dayNight){
-    				llLeftPanel.setBackgroundColor(Color.BLACK);
+    				llRightPanel.setBackgroundColor(Color.BLACK);
     			}
     			else
     			{
-    				llLeftPanel.setBackgroundColor(Color.WHITE);
+    				if(spDef.contains(getString(R.string.pref_backg_control_panel)))
+        			{
+        				String color = ""+spDef.getInt(getString(R.string.pref_backg_control_panel), getResources().getInteger(R.integer.COLOR_WHITE));
+        				llRightPanel.setBackgroundColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
+        			}
+        			else
+        			{
+        				llRightPanel.setBackgroundColor(Color.WHITE);
+        			} 
     			}
     			llLeftPanel.setVisibility(LinearLayout.GONE);
     			
@@ -221,6 +247,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
+			Tools.hideKeyBoard(SinglePanelActivity.this);
 			StartSelectBook selectLinck = new StartSelectBook();
 			if(getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_POEMS) == null
@@ -266,6 +293,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
+			Tools.hideKeyBoard(SinglePanelActivity.this);
 			getSupportFragmentManager().beginTransaction()
 			.replace(R.id.flRoot, (getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_BOOKMARKS) != null)?
@@ -278,6 +306,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
+			Tools.hideKeyBoard(SinglePanelActivity.this);
 			getSupportFragmentManager().beginTransaction()
 			.replace(R.id.flRoot, (getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_HISTORY) != null)?
@@ -290,6 +319,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		@Override
 		public void onClick(View v) {
+			Tools.hideKeyBoard(SinglePanelActivity.this);
 			//int windowWidth = getWindowManager().getDefaultDisplay().getWidth();
 			
 			/*if((windowWidth>1100 || windowWidth>800) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
