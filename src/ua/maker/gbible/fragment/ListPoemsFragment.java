@@ -338,7 +338,7 @@ public class ListPoemsFragment extends SherlockFragment{
         webviewActionView.getSettings().setJavaScriptEnabled(true);
         webviewActionView.setBackgroundColor(0x00000000);
 
-        webviewActionView.loadUrl("file:///android_asset/sliding_animation_tutorial.gif");
+        webviewActionView.loadUrl("file:///android_asset/swipe_info.png");
 		
 		showInfo.setView(v);
 		AlertDialog alert = showInfo.create();

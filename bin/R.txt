@@ -335,12 +335,12 @@ int id action_cancel_drag_and_drop 0x7f0500a8
 int id action_clear_history 0x7f0500a4
 int id action_compare 0x7f0500a3
 int id action_copy_to_clipboard 0x7f0500a1
-int id action_exit 0x7f0500a5
+int id action_exit 0x7f0500a6
 int id action_history 0x7f05009e
 int id action_search 0x7f05009c
 int id action_select 0x7f05009b
 int id action_setting 0x7f05009f
-int id action_setting_app 0x7f0500a6
+int id action_setting_app 0x7f0500a5
 int id action_share 0x7f0500a2
 int id btn_book 0x7f050052
 int id btn_chapter 0x7f050053

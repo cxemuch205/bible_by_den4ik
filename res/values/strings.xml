@@ -266,7 +266,7 @@
     		<string-array name="trnaslaters_names">
     		    <item >Русский Синодальный перевод</item>
     		    <item >Современный Русский перевод</item>
-    		    <item >Украинский перевод(в будущем)</item>
+    		    <!-- item >Украинский перевод(в будущем)</item-->
     		</string-array>
     		<string-array name="trnaslaters_names_id">
     		    <item >0</item>

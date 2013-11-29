@@ -5,12 +5,16 @@ import java.io.IOException;
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.constant.App;
+import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +48,7 @@ public class SelectBookFragment extends SherlockFragment {
 	private Button btnChapter = null;
 	private Button btnPoem = null;
 	
-	private SharedPreferences sp = null;
+	private SharedPreferences sp = null, defPref = null;
 	
 	private int positionTop = 0;
 	
@@ -77,10 +81,11 @@ public class SelectBookFragment extends SherlockFragment {
 		} catch (IOException e) {}
 		dataBase.openDataBase();
 		
-		//btnBook.setBackgroundResource(R.drawable.btn_active_select);
 		btnBook.setOnClickListener(clickTestamentListener);
 		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+		
 		if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
@@ -147,8 +152,44 @@ public class SelectBookFragment extends SherlockFragment {
 		});
 		
 		lvShowBooks.setOnScrollListener(scrolListViewListener);
+		
+		boolean isFirstStartBookSelect = true;
+		if(sp.contains("is_first_start_select_book_fragment")){
+			isFirstStartBookSelect = sp.getBoolean("is_first_start_select_book_fragment", true);
+		}
+		else
+		{
+			isFirstStartBookSelect = true;
+		}
+		
+		if(isFirstStartBookSelect){
+			showDialogSelectTranslate();
+		}
 	}
 	
+	private void showDialogSelectTranslate() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+		builder.setTitle(R.string.dialogtitle_def_trans);
+		String[] listTrnsl = getSherlockActivity().getResources().getStringArray(R.array.trnaslaters_names);
+		builder.setSingleChoiceItems(listTrnsl, 0, new onDialogClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				defPref.edit().putString(getString(R.string.pref_default_translaters), ""+which).commit();
+				dialog.cancel();
+			}
+		});
+		builder.setNegativeButton(getString(R.string.dialog_cancel), new onDialogClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();				
+			}
+		});
+		builder.create().show();
+		sp.edit().putBoolean("is_first_start_select_book_fragment", false);
+	}
+
 	private OnClickListener clickTestamentListener = new OnClickListener() {
 		
 		@Override
