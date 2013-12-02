@@ -19,7 +19,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -154,15 +153,17 @@ public class PlansListFragment extends SherlockFragment {
 		public void onClick(DialogInterface dialog, int which) {
 			if(addEdit)
 			{
-				Log.d(TAG, "Create plan - OK - planId: " + (itemSelect+1));
 				PlanStruct plan = new PlanStruct();
 				plan.setName(etName.getText().toString());
 				plan.setSubDescription(""+etSubDescription.getText().toString());
 				plan.setDate(""+tvShowDataTime.getText());
-				plan.setId((itemSelect+1));
 				
+				int idPlan = db.insertPlan(plan);
+				
+				Log.d(TAG, "Create plan - OK - planId: " + idPlan);
+				
+				plan.setId(idPlan);
 				listPlans.add(plan);
-				db.insertPlan(plan);
 				updateListPlans();
 			}
 			else

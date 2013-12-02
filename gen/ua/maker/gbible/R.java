@@ -1262,17 +1262,17 @@ containing a value of this type.
         public static final int avvakum_str=0x7f0a0051;
         public static final int bitie_str=0x7f0a0022;
         public static final int bitie_str_small=0x7f0a0023;
-        public static final int bold_text=0x7f0a00d5;
+        public static final int bold_text=0x7f0a00d6;
         public static final int btn_empty_str=0x7f0a0078;
         public static final int btn_empty_str_small=0x7f0a0079;
         public static final int category_base=0x7f0a007d;
         public static final int category_design=0x7f0a008e;
-        public static final int click_on_point_paste=0x7f0a00d9;
+        public static final int click_on_point_paste=0x7f0a00da;
         public static final int closes_app=0x7f0a0014;
         public static final int comments_str=0x7f0a00b6;
         public static final int compare_str=0x7f0a0074;
         public static final int context_delete=0x7f0a00cf;
-        public static final int context_drag_and_drop=0x7f0a00d8;
+        public static final int context_drag_and_drop=0x7f0a00d9;
         public static final int context_edit=0x7f0a00ce;
         public static final int copyed_poem=0x7f0a00bf;
         public static final int create_plan_btn=0x7f0a00cd;
@@ -1291,10 +1291,11 @@ containing a value of this type.
  ##################### 
  Color Picker 
          */
-        public static final int dialog_color_picker=0x7f0a00da;
+        public static final int dialog_color_picker=0x7f0a00db;
         public static final int dialog_compare=0x7f0a00bb;
         public static final int dialog_copy_to_clicpboard=0x7f0a00b9;
         public static final int dialog_dtn_copy_all=0x7f0a00c3;
+        public static final int dialog_edit=0x7f0a00d2;
         public static final int dialog_enter_name_plan=0x7f0a00ca;
         public static final int dialog_enter_sub_description=0x7f0a00cb;
         public static final int dialog_message_clear_history=0x7f0a00ae;
@@ -1308,7 +1309,7 @@ containing a value of this type.
         public static final int dialog_select_size_text=0x7f0a007a;
         public static final int dialog_share=0x7f0a00ba;
         public static final int dialog_start_search=0x7f0a00a5;
-        public static final int dialog_title_add_item_plan=0x7f0a00d2;
+        public static final int dialog_title_add_item_plan=0x7f0a00d3;
         public static final int dialog_title_add_to_bookmark=0x7f0a00b5;
         public static final int dialog_title_clear_history=0x7f0a00ad;
         public static final int dialog_title_create_plan=0x7f0a00c9;
@@ -1326,7 +1327,7 @@ containing a value of this type.
  ERROR 
          */
         public static final int empty_et=0x7f0a001c;
-        public static final int error_text_msg=0x7f0a00d7;
+        public static final int error_text_msg=0x7f0a00d8;
         public static final int esfir_str=0x7f0a003f;
         public static final int evreyam_str=0x7f0a006f;
         public static final int exit_question=0x7f0a0013;
@@ -1363,7 +1364,7 @@ containing a value of this type.
         public static final int kolosyanam_str=0x7f0a0068;
         public static final int levit_str=0x7f0a0026;
         public static final int levit_str_small=0x7f0a0027;
-        public static final int link_str=0x7f0a00d4;
+        public static final int link_str=0x7f0a00d5;
         public static final int list_history_empty=0x7f0a00a9;
         public static final int luka_str=0x7f0a0058;
         public static final int malahia_str=0x7f0a0055;
@@ -1424,7 +1425,7 @@ containing a value of this type.
         public static final int progress_dialog_message=0x7f0a001a;
         public static final int progress_dialog_title=0x7f0a0019;
         public static final int psaltir_str=0x7f0a0041;
-        public static final int quote_poem=0x7f0a00d6;
+        public static final int quote_poem=0x7f0a00d7;
         public static final int replay_click_btn=0x7f0a00b4;
         public static final int rimlan_str=0x7f0a0062;
         public static final int ruf_str=0x7f0a0030;
@@ -1452,7 +1453,7 @@ containing a value of this type.
         public static final int summary_size_text_poem=0x7f0a0091;
         public static final int summary_smooth_scroll=0x7f0a008d;
         public static final int summary_use_vol_btn=0x7f0a0088;
-        public static final int text_str=0x7f0a00d3;
+        public static final int text_str=0x7f0a00d4;
         public static final int three_carstw_str=0x7f0a0035;
         public static final int three_carstw_str_small=0x7f0a0036;
         public static final int three_ioanna_str=0x7f0a0060;

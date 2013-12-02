@@ -10,16 +10,12 @@ import ua.maker.gbible.adapter.ItemListSearchAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.SearchStruct;
 import ua.maker.gbible.utils.DataBase;
-import ua.maker.gbible.utils.Tools;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -60,7 +56,6 @@ public class SearchFragment extends SherlockFragment {
 	private List<SearchStruct> searchResult = null;
 	
 	private DataBase db = null;
-	private SQLiteDatabase dbSearch = null;
 	
 	private int idBookStart = 1;
 	private int idBookEnd = 66;
@@ -100,7 +95,6 @@ public class SearchFragment extends SherlockFragment {
 		} catch (IOException e) {e.printStackTrace();}
 		
 		db.openDataBase();
-		dbSearch = db.getDb();
 		searchResult = new ArrayList<SearchStruct>();
 		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
 		updateListResult();

@@ -6,7 +6,7 @@ import ua.maker.gbible.R;
 import ua.maker.gbible.structs.BookMarksStruct;
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class ItemListBookmarksAdapter extends ArrayAdapter<BookMarksStruct> {
-	
-	private static final String TAG = "ItemListBookmarksAdapter";
 	
 	private Context mContext = null;
 	private List<BookMarksStruct> listBookmarks = null;
@@ -45,11 +43,21 @@ public class ItemListBookmarksAdapter extends ArrayAdapter<BookMarksStruct> {
 		else
 			holder = (ViewHolder)view.getTag();
 		
-		Log.d(TAG, "Add new item["+position+"]");
 		BookMarksStruct item = listBookmarks.get(position);
 		holder.tvLink.setText(""+item.getBookName()+" "+item.getChapter()+":"+item.getPoem()+item.getLinkNext());		
 		holder.tvSmallContent.setText(""+item.getContent());
-		holder.tvComment.setText(""+item.getComment());
+		String comment = item.getComment();
+		if(comment.length() > 0){
+			holder.tvSmallContent.setSingleLine(true);
+			holder.tvComment.setText(""+item.getComment());
+			holder.tvComment.setTextColor(Color.RED);
+		}
+		else
+		{
+			holder.tvSmallContent.setSingleLine(false);
+			holder.tvSmallContent.setMaxLines(2);
+			holder.tvComment.setVisibility(TextView.GONE);
+		}
 		
 		return view;
 	}

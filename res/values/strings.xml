@@ -404,6 +404,7 @@
     
     <!-- Plan Detail fragment -->
     <string name="menu_title_add_point">Добавить</string>
+    <string name="dialog_edit">Изменить</string>
     <string name="dialog_title_add_item_plan">Добавить пункт:</string>
     <string name="text_str">Текст</string>
     <string name="link_str">Ссылка</string>

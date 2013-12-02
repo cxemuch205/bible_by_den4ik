@@ -80,7 +80,13 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 			holder.tvContentPoem.setText(content.getText());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));
-			holder.tvNumberPoem.setTextSize(size-1);
+			if(size <=18){
+				holder.tvNumberPoem.setTextSize(size-3);
+			}
+			else
+			{
+				holder.tvNumberPoem.setTextSize(15);
+			}
 		}
 		
 		return view;

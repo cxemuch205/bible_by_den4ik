@@ -5,6 +5,7 @@ public class App {
 	// Preference, intent extras
 	public static final String PREF_APP = "application_preferences";
 	public static final String PREF_SEND_DATA = "pref_send_data";
+	public static final String PREF_DATA_BASE_VER = "data_base_current_version";
 	public static final String BOOK_ID = "book_id";
 	public static final String CHAPTER = "chapter";
 	public static final String POEM_SET_FOCUS = "poem_in_focus";

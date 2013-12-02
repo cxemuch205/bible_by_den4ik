@@ -57,19 +57,34 @@ public class DataBase extends SQLiteOpenHelper {
 	
 	private SQLiteDatabase db = null;
 	private final Context mContext;
+	
+	private SharedPreferences pref = null;
 
 	public DataBase(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		mContext = context;
+		pref = context.getSharedPreferences(App.PREF_APP, 0);
 	}
 
 	public void createDataBase() throws IOException{
     	boolean dbExist = checkDataBase();
 
     	if(dbExist){
-    		//ничего не делать - база уже есть
+    		int oldVer = pref.getInt(App.PREF_DATA_BASE_VER, 1);
+    		if(oldVer < DB_VERSION){
+    			try {
+    				SQLiteDatabase.releaseMemory();
+				} catch (Exception e) {}
+    			this.getWritableDatabase();
+
+            	try {
+        			copyDataBase();
+        		} catch (IOException e) {
+            		throw new Error("Error copying database");
+            	}
+    		}
     	}else{
-    		//вызывая этот метод создаем пустую базу, позже она будет перезаписана
+    		
         	this.getWritableDatabase();
 
         	try {
@@ -95,6 +110,9 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     private void copyDataBase() throws IOException{
+    	if(pref != null){
+    		pref.edit().putInt(App.PREF_DATA_BASE_VER, DB_VERSION).commit();
+    	}
     	InputStream myInput = mContext.getAssets().open(DB_NAME);
 
     	String outFileName = DB_PATH + DB_NAME;
@@ -129,12 +147,10 @@ public class DataBase extends SQLiteOpenHelper {
 	}
 
 	@Override
-	public void onCreate(SQLiteDatabase db) {
-	}
+	public void onCreate(SQLiteDatabase db) {}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-	}
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 	
 	public List<String> getBooks(String tableName){
 		Log.d(TAG, "Start getting books");

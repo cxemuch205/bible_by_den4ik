@@ -157,10 +157,6 @@ public class SelectBookFragment extends SherlockFragment {
 		if(sp.contains("is_first_start_select_book_fragment")){
 			isFirstStartBookSelect = sp.getBoolean("is_first_start_select_book_fragment", true);
 		}
-		else
-		{
-			isFirstStartBookSelect = true;
-		}
 		
 		if(isFirstStartBookSelect){
 			showDialogSelectTranslate();
@@ -171,7 +167,7 @@ public class SelectBookFragment extends SherlockFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
 		builder.setTitle(R.string.dialogtitle_def_trans);
 		String[] listTrnsl = getSherlockActivity().getResources().getStringArray(R.array.trnaslaters_names);
-		builder.setSingleChoiceItems(listTrnsl, 0, new onDialogClickListener() {
+		builder.setSingleChoiceItems(listTrnsl, -1, new onDialogClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -187,7 +183,7 @@ public class SelectBookFragment extends SherlockFragment {
 			}
 		});
 		builder.create().show();
-		sp.edit().putBoolean("is_first_start_select_book_fragment", false);
+		sp.edit().putBoolean("is_first_start_select_book_fragment", false).commit();
 	}
 
 	private OnClickListener clickTestamentListener = new OnClickListener() {

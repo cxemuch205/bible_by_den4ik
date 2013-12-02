@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
-
-	private static final String TAG = "PlanItemAdapter";
 	
 	private Context context = null;
 	private List<ItemPlanStruct> data = null;

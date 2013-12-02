@@ -47,7 +47,7 @@ public class UserDB extends SQLiteOpenHelper{
 	public static final String FIELD_PATH_IMG = "path_img";
 	
 	private static final String SQL_CREATE_TABLE_PLANS_LIST = "CREATE TABLE " + TABLE_PLAN_LIST + " ("
-			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
 			+ FIELD_NAME + " TEXT,"
 			+ FIELD_SUB_DESCRIPTION + " TEXT,"
 			+ FIELD_DATE + " TEXT);";
@@ -111,8 +111,9 @@ public class UserDB extends SQLiteOpenHelper{
 		onCreate(db);
 	}
 	
-	public void insertPlan(PlanStruct data){
+	public int insertPlan(PlanStruct data){
 		Log.d(TAG, "Start insert list plan to db");
+		long idINsertData = 1;
 		
 		if(db.isOpen()){
 			ContentValues values = new ContentValues();
@@ -121,9 +122,11 @@ public class UserDB extends SQLiteOpenHelper{
 			values.put(FIELD_SUB_DESCRIPTION, ""+data.getSubDescription());
 			values.put(FIELD_DATE, ""+data.getDate());
 			
-			long idINsertData = db.insert(TABLE_PLAN_LIST, null, values);
+			idINsertData = db.insert(TABLE_PLAN_LIST, null, values);
 			Log.d(TAG, "END write list plans to db | long id inser: " + idINsertData);
+			
 		}
+		return Integer.parseInt(""+idINsertData);
 	}
 	
 	public void updatePlan(PlanStruct data){

@@ -57,17 +57,20 @@ public class PlanDetailFragment extends SherlockFragment {
 	private DataBase dbBible = null;
 	private PlanStruct plan = null;
 	private AlertDialog dialog = null;
+	private ItemPlanStruct backUpItem = null;
 	
 	private ListView lvPlanItems = null;
 	private List<ItemPlanStruct> listItemsPlan = null;
 	private PlanItemAdapter adapter = null;
+	
 	private int planId = 1;
 	private int numberOfPoem = 0;
 	private int posStartItemDrag = 0;
 	private int itemSelected = 0;
 	
 	private boolean pasteItem = false;
-	private ItemPlanStruct itemBackUp = null;
+	private boolean isEdit = false;
+	
 	private MenuItem itemCancel = null;
 	
 	private RadioButton rbIsText = null;
@@ -244,6 +247,11 @@ public class PlanDetailFragment extends SherlockFragment {
 			listToPoem.clear();
 			for(int i = (spinnerPoem.getSelectedItemPosition()+1); i <= numberOfPoem; i++)
 				listToPoem.add(i);
+			if(isEdit){
+				spinnerChapter.setSelection(backUpItem.getChapter()-1);
+				spinnerPoem.setSelection(backUpItem.getPoem()-1);
+				spinnerToPoem.setSelection(backUpItem.getToPoem()-1);
+			}
 			adapterToPoem.notifyDataSetChanged();
 		}
 
@@ -293,52 +301,98 @@ public class PlanDetailFragment extends SherlockFragment {
 		
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			ItemPlanStruct itemPlan = new ItemPlanStruct();
-			itemPlan.setId(planId);
 			Log.d(TAG, "Dialog OK");
-			if(rbIsText.isChecked()){
-				Log.d(TAG, "New item plan is Text");
-				if(etTextItem.getText().toString().length()>0){
-					itemPlan.setText(""+etTextItem.getText().toString());
+			if(isEdit){				
+				switch (backUpItem.getDataType()) {
+				case PlanData.DATA_TEXT:
+					backUpItem.setText(""+etTextItem.getText().toString());
 					if(cbBoldText.isChecked()){
-						itemPlan.setDataType(PlanData.DATA_TEXT_BOLD);
+						backUpItem.setDataType(PlanData.DATA_TEXT_BOLD);
+					}
+					listItemsPlan.remove(itemSelected);
+					listItemsPlan.add(itemSelected, backUpItem);
+					break;
+				case PlanData.DATA_TEXT_BOLD:
+					backUpItem.setText(""+etTextItem.getText().toString());
+					if(!cbBoldText.isChecked()){
+						backUpItem.setDataType(PlanData.DATA_TEXT);
+					}
+					listItemsPlan.remove(itemSelected);
+					listItemsPlan.add(itemSelected, backUpItem);
+					break;
+					
+				case PlanData.DATA_LINK:
+				case PlanData.DATA_LINK_WITH_TEXT:
+					int bookId = spinnerBooks.getSelectedItemPosition()+1;
+					int chapter = spinnerChapter.getSelectedItemPosition()+1;
+					int poem = spinnerPoem.getSelectedItemPosition()+1;
+					int toPoem = spinnerToPoem.getSelectedItemPosition()+1;
+					backUpItem.setBookId(bookId);
+					backUpItem.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
+					backUpItem.setChapter(chapter);
+					backUpItem.setPoem(poem);
+					backUpItem.setToPoem(toPoem);
+					backUpItem.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
+					backUpItem.setDataType(PlanData.DATA_LINK);
+					if(cbQuotePoem.isChecked()){
+						backUpItem.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
+						backUpItem.setDataType(PlanData.DATA_LINK_WITH_TEXT);
+					}
+					listItemsPlan.remove(itemSelected);
+					listItemsPlan.add(itemSelected, backUpItem);
+					break;
+				}
+				updateList();
+			}
+			else
+			{
+				ItemPlanStruct itemPlan = new ItemPlanStruct();
+				itemPlan.setId(planId);
+				
+				if(rbIsText.isChecked()){
+					Log.d(TAG, "New item plan is Text");
+					if(etTextItem.getText().toString().length()>0){
+						itemPlan.setText(""+etTextItem.getText().toString());
+						if(cbBoldText.isChecked()){
+							itemPlan.setDataType(PlanData.DATA_TEXT_BOLD);
+						}
+						else
+						{
+							itemPlan.setDataType(PlanData.DATA_TEXT);
+						}
+						listItemsPlan.add(itemPlan);
+						updateList();
+						etTextItem.setText("");
+						
+						Log.d(TAG, "Item insert - SUCCESS");
 					}
 					else
 					{
-						itemPlan.setDataType(PlanData.DATA_TEXT);
+						etTextItem.setError(""+getString(R.string.error_text_msg));
+					}
+				}
+				else
+				if(rbIsLink.isChecked()){
+					Log.d(TAG, "New item plan is Link");
+					int bookId = spinnerBooks.getSelectedItemPosition()+1;
+					int chapter = spinnerChapter.getSelectedItemPosition()+1;
+					int poem = spinnerPoem.getSelectedItemPosition()+1;
+					int toPoem = spinnerToPoem.getSelectedItemPosition()+1;
+					itemPlan.setBookId(bookId);
+					itemPlan.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
+					itemPlan.setChapter(chapter);
+					itemPlan.setPoem(poem);
+					itemPlan.setToPoem(toPoem);
+					itemPlan.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
+					itemPlan.setDataType(PlanData.DATA_LINK);
+					if(cbQuotePoem.isChecked()){
+						itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
+						itemPlan.setDataType(PlanData.DATA_LINK_WITH_TEXT);
 					}
 					listItemsPlan.add(itemPlan);
 					updateList();
-					etTextItem.setText("");
-					
-					Log.d(TAG, "Item insert - SUCCESS");
 				}
-				else
-				{
-					etTextItem.setError(""+getString(R.string.error_text_msg));
-				}
-			}
-			else
-			if(rbIsLink.isChecked()){
-				Log.d(TAG, "New item plan is Link");
-				int bookId = spinnerBooks.getSelectedItemPosition()+1;
-				int chapter = spinnerChapter.getSelectedItemPosition()+1;
-				int poem = spinnerPoem.getSelectedItemPosition()+1;
-				int toPoem = Integer.parseInt(spinnerToPoem.getSelectedItem().toString());
-				itemPlan.setBookId(bookId);
-				itemPlan.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
-				itemPlan.setChapter(chapter);
-				itemPlan.setPoem(poem);
-				itemPlan.setToPoem(toPoem);
-				itemPlan.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
-				itemPlan.setDataType(PlanData.DATA_LINK);
-				if(cbQuotePoem.isChecked()){
-					itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
-					itemPlan.setDataType(PlanData.DATA_LINK_WITH_TEXT);
-				}
-				listItemsPlan.add(itemPlan);
-				updateList();
-			}
+			}			
 		}
 	};
 	
@@ -367,36 +421,43 @@ public class PlanDetailFragment extends SherlockFragment {
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			if(pasteItem){
-				ItemPlanStruct backup = listItemsPlan.get(position);
-				listItemsPlan.remove(posStartItemDrag);
-				listItemsPlan.add(posStartItemDrag, backup);
-				listItemsPlan.remove(position);
-				listItemsPlan.add(position, itemBackUp);
+				List<ItemPlanStruct> backupList = new ArrayList<ItemPlanStruct>();
+				for(int i = 0; i < listItemsPlan.size(); i++){
+					if(i == position){
+						backupList.add(listItemsPlan.get(posStartItemDrag));
+					}
+					if(i!= posStartItemDrag)
+						backupList.add(listItemsPlan.get(i));
+				}
+				listItemsPlan.clear();
+				listItemsPlan.addAll(backupList);
 				pasteItem = false;
 				itemCancel.setVisible(false);
 				updateList();
 			}
-			
-			switch (listItemsPlan.get(position).getDataType()) {
-			case PlanData.DATA_LINK:
-			case PlanData.DATA_LINK_WITH_TEXT:
-				Editor editor = pref.edit();
-				editor.putInt(App.BOOK_ID, listItemsPlan.get((int)id).getBookId());
-				editor.putInt(App.CHAPTER, listItemsPlan.get((int)id).getChapter());
-				editor.putInt(App.POEM_SET_FOCUS, listItemsPlan.get((int)id).getPoem()-1);
-				editor.commit();
-				
-				FragmentTransaction ft = getFragmentManager().
-						 beginTransaction();
-				ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
-				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-				ft.addToBackStack(null);
-				ft.commit();
-				break;
+			else
+			{
+				switch (listItemsPlan.get(position).getDataType()) {
+				case PlanData.DATA_LINK:
+				case PlanData.DATA_LINK_WITH_TEXT:
+					Editor editor = pref.edit();
+					editor.putInt(App.BOOK_ID, listItemsPlan.get((int)id).getBookId());
+					editor.putInt(App.CHAPTER, listItemsPlan.get((int)id).getChapter());
+					editor.putInt(App.POEM_SET_FOCUS, listItemsPlan.get((int)id).getPoem()-1);
+					editor.commit();
+					
+					FragmentTransaction ft = getFragmentManager().
+							 beginTransaction();
+					ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+					ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+					ft.addToBackStack(null);
+					ft.commit();
+					break;
 
-			default:
-				break;
-			}
+				default:
+					break;
+				}
+			}			
 		}
 	};
 	
@@ -423,31 +484,64 @@ public class PlanDetailFragment extends SherlockFragment {
 		
 		switch (item.getItemId()) {
 		case BTN_DRAP_AND_DROP:
-			itemBackUp = listItemsPlan.get(itemSelected);
+			isEdit = false;
 			posStartItemDrag = itemSelected;
 			pasteItem = true;
 			itemCancel.setVisible(true);
 			Tools.showToast(getSherlockActivity(), getString(R.string.click_on_point_paste));
 			return true;
 		case BTN_EDIT:
+			isEdit = true;
 			ItemPlanStruct itemSelectOfPlan = listItemsPlan.get(itemSelected);
+			backUpItem = itemSelectOfPlan;
+			try {
+				dialog.getButton(DialogInterface.BUTTON_POSITIVE).setText(getString(R.string.dialog_edit));
+			} catch (Exception e) {}
+			
 			switch (itemSelectOfPlan.getDataType()) {
 			case PlanData.DATA_TEXT:
-				
+				rbIsText.setChecked(true);
+				etTextItem.setText(itemSelectOfPlan.getText());
+				etTextItem.selectAll();
+				cbBoldText.setChecked(false);
+				dialog.show();
+				rbIsLink.setEnabled(false);
 				break;
 			case PlanData.DATA_TEXT_BOLD:
-				
+				rbIsText.setChecked(true);
+				etTextItem.setText(itemSelectOfPlan.getText());
+				etTextItem.selectAll();
+				cbBoldText.setChecked(true);
+				dialog.show();
+				rbIsLink.setEnabled(false);
 				break;
 				
 			case PlanData.DATA_LINK:
+				rbIsLink.setChecked(true);
+				spinnerBooks.setSelection(itemSelectOfPlan.getBookId()-1);
+				spinnerChapter.setSelection(itemSelectOfPlan.getChapter()-1);
+				spinnerPoem.setSelection(itemSelectOfPlan.getPoem()-1);
+				spinnerToPoem.setSelection(itemSelectOfPlan.getToPoem()-1);
 				
+				cbQuotePoem.setChecked(false);
+				dialog.show();
+				rbIsText.setEnabled(false);
 				break;
 			case PlanData.DATA_LINK_WITH_TEXT:
+				rbIsLink.setChecked(true);
+				spinnerBooks.setSelection(itemSelectOfPlan.getBookId()-1);
+				spinnerChapter.setSelection(itemSelectOfPlan.getChapter()-1);
+				spinnerPoem.setSelection(itemSelectOfPlan.getPoem()-1);
+				spinnerToPoem.setSelection(itemSelectOfPlan.getToPoem()-1);
 				
+				cbQuotePoem.setChecked(true);
+				dialog.show();
+				rbIsText.setEnabled(false);
 				break;
 			}
 			return true;
 		case BTN_DELETE:
+			isEdit = false;
 			db.deleteItemPlan(listItemsPlan.get(itemSelected).getIdItem());
 			listItemsPlan.remove(itemSelected);
 			updateList();
@@ -478,6 +572,14 @@ public class PlanDetailFragment extends SherlockFragment {
 							.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlansListFragment(), App.TAG_FRAGMENT_PLAN).commit();
 			break;
 		case R.id.item_add_poin_plan:
+			try {
+				dialog.getButton(DialogInterface.BUTTON_POSITIVE).setText(getString(R.string.menu_title_add_point));
+			} catch (Exception e) {}
+			isEdit = false;
+			cbBoldText.setChecked(false);
+			cbQuotePoem.setChecked(false);
+			rbIsLink.setEnabled(true);
+			rbIsText.setEnabled(true);
 			dialog.show();			
 			break;
 		case R.id.action_cancel_drag_and_drop:

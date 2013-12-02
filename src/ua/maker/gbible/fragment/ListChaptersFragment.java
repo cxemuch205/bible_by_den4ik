@@ -17,7 +17,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -55,7 +54,6 @@ public class ListChaptersFragment extends SherlockFragment {
 	
 	private ProgressDialog pd = null;
 	
-	@SuppressWarnings("unused")
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
 	
 	@Override
