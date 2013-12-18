@@ -9,6 +9,7 @@ public class App {
 	public static final String BOOK_ID = "book_id";
 	public static final String CHAPTER = "chapter";
 	public static final String POEM_SET_FOCUS = "poem_in_focus";
+	public static final String BOOK_SET_FOCUS = "book_in_focus";
 	public static final String POEM = "poem";
 	public static final String PLAN_ID = "id_plan_selected";
 	public static final String TRANSLATE_LABEL = "translate_label";

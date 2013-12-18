@@ -85,7 +85,7 @@ public class SelectBookFragment extends SherlockFragment {
 		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-		
+
 		if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
@@ -138,6 +138,7 @@ public class SelectBookFragment extends SherlockFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
+				sp.edit().putInt(App.BOOK_SET_FOCUS, position).commit();
 				SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 				Editor editor = sp.edit();
 				editor.putInt(App.BOOK_ID, position+1);
@@ -161,6 +162,13 @@ public class SelectBookFragment extends SherlockFragment {
 		if(isFirstStartBookSelect){
 			showDialogSelectTranslate();
 		}
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		int pos = sp.getInt(App.BOOK_SET_FOCUS, 0);
+		selectPrefBook(pos);
 	}
 	
 	private void showDialogSelectTranslate() {
@@ -217,6 +225,24 @@ public class SelectBookFragment extends SherlockFragment {
 				btnBook.setText(getString(R.string.old_testament));
 			}
 		}
+	};
+	
+	private void selectPrefBook(int position){
+		lvShowBooks.setSelection(position);
+		lvShowBooks.smoothScrollToPosition(position);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		int pos = sp.getInt(App.BOOK_SET_FOCUS, 0);
+		selectPrefBook(pos);
+	};
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		sp.edit().putInt(App.BOOK_SET_FOCUS, positionTop).commit();
 	};
 	
 	@Override

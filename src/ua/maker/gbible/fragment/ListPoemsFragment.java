@@ -810,7 +810,7 @@ public class ListPoemsFragment extends SherlockFragment{
 				llMenuLink.setBackgroundColor(Color.WHITE);
 			}
 		}
-		
+		selectPoem = sp.getInt(App.POEM_SET_FOCUS, 1);
 		selectPrefPoem();
 		useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
 		speedScroolList = defPref.getInt(getString(R.string.pref_smooth_duration), 2);
