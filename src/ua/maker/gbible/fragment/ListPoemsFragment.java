@@ -359,6 +359,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		super.onStart();
 		if(defPref.contains(getString(R.string.pref_use_vol_up_down_btn)))
 			useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
+		selectPrefPoem();
 	}
 	
 	private void updateList(){
@@ -438,7 +439,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	
 	private void selectPrefPoem(){
 		lvShowPoem.setSelection(selectPoem);
-		lvShowPoem.smoothScrollToPosition(selectPoem);
+		lvShowPoem.smoothScrollToPosition(selectPoem, 2);
 	}
 	
 	private OnScrollListener scrollChangeListener = new OnScrollListener() {
@@ -831,7 +832,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		super.onPause();
 		Log.d(TAG, "onPause");
 		Editor e = sp.edit();
-		e.putInt(App.POEM_SET_FOCUS, poemPos);
+		e.putInt(App.POEM_SET_FOCUS, (poemPos+1));
 		e.commit();
 	}
 }

@@ -229,7 +229,7 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	private void selectPrefBook(int position){
 		lvShowBooks.setSelection(position);
-		lvShowBooks.smoothScrollToPosition(position);
+		lvShowBooks.smoothScrollToPosition(position, 2);
 	}
 	
 	@Override
