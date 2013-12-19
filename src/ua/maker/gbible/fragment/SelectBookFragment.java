@@ -51,6 +51,7 @@ public class SelectBookFragment extends SherlockFragment {
 	private SharedPreferences sp = null, defPref = null;
 	
 	private int positionTop = 0;
+	private int positionClicked = 0;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -140,6 +141,8 @@ public class SelectBookFragment extends SherlockFragment {
 					long id) {
 				sp.edit().putInt(App.BOOK_SET_FOCUS, position).commit();
 				SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+				positionClicked = position;
+				sp.edit().putInt(App.BOOK_SET_FOCUS, position).commit();
 				Editor editor = sp.edit();
 				editor.putInt(App.BOOK_ID, position+1);
 				editor.commit();
@@ -229,7 +232,7 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	private void selectPrefBook(int position){
 		lvShowBooks.setSelection(position);
-		lvShowBooks.smoothScrollToPosition(position, 2);
+		lvShowBooks.smoothScrollToPosition(position);
 	}
 	
 	@Override
@@ -242,7 +245,7 @@ public class SelectBookFragment extends SherlockFragment {
 	@Override
 	public void onPause() {
 		super.onPause();
-		sp.edit().putInt(App.BOOK_SET_FOCUS, positionTop).commit();
+		sp.edit().putInt(App.BOOK_SET_FOCUS, positionClicked).commit();
 	};
 	
 	@Override
