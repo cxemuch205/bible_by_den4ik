@@ -38,6 +38,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class BookmarksFragment extends SherlockFragment {
 	
@@ -254,5 +255,17 @@ public class BookmarksFragment extends SherlockFragment {
 		    clipboard.setText(textSetClip);
 		}
 		 Tools.showToast(getSherlockActivity(), getString(R.string.copyed_poem));
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(getSherlockActivity());
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(getSherlockActivity());
 	}
 }

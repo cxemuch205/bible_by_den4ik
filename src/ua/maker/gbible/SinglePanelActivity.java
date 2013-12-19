@@ -1,5 +1,7 @@
 package ua.maker.gbible;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.fragment.BookmarksFragment;
 import ua.maker.gbible.fragment.HistoryFragment;
@@ -373,6 +375,18 @@ public abstract class SinglePanelActivity extends BaseActivity {
 			}
 		});
     	builder.create().show();
+    }
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	EasyTracker.getInstance().activityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	EasyTracker.getInstance().activityStop(this);
     }
         
     protected abstract Fragment onCreatePane();

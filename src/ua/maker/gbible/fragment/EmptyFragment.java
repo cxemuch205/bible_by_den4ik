@@ -18,20 +18,17 @@ public class EmptyFragment extends SherlockFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		return inflater.inflate(R.layout.empty_fragment, null);
 	}
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.menu_main, menu);
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		
 		switch(item.getItemId()){
 		case R.id.action_exit:

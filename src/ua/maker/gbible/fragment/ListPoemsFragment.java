@@ -45,6 +45,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -66,11 +67,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class ListPoemsFragment extends SherlockFragment{
 	
@@ -357,6 +360,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	@Override
 	public void onStart() {
 		super.onStart();
+		EasyTracker.getInstance().activityStart(getSherlockActivity());
 		if(defPref.contains(getString(R.string.pref_use_vol_up_down_btn)))
 			useVolBtn = defPref.getBoolean(getString(R.string.pref_use_vol_up_down_btn), false);
 		selectPrefPoem();
@@ -776,6 +780,13 @@ public class ListPoemsFragment extends SherlockFragment{
 			super.onPostExecute(result);
 			Log.d(TAG, "ChangeChapterAsyncTask() - END");
 			if(pd != null && pd.isShowing()) pd.dismiss();
+			if(getSherlockActivity().getActionBar().isShowing() == false){
+				Toast infoChapter = Toast.makeText(getSherlockActivity(), 
+						getString(R.string.title_activity_list_chapters)+": " + chapterNumber, Toast.LENGTH_SHORT);
+				infoChapter.setGravity(Gravity.TOP | Gravity.RIGHT, 0, 0);
+				infoChapter.getView().setBackgroundColor(Color.parseColor("#a62f00"));
+				infoChapter.show();
+			}
 			getSherlockActivity().getActionBar().setTitle(""+
 					Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " + chapterNumber);
 			btnChapter.setText(""+chapterNumber);
@@ -834,5 +845,11 @@ public class ListPoemsFragment extends SherlockFragment{
 		Editor e = sp.edit();
 		e.putInt(App.POEM_SET_FOCUS, poemPos);
 		e.commit();
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(getSherlockActivity());
 	}
 }
