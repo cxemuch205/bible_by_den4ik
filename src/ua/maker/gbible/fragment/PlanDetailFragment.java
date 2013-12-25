@@ -42,6 +42,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class PlanDetailFragment extends SherlockFragment {
 	
@@ -195,6 +196,7 @@ public class PlanDetailFragment extends SherlockFragment {
 	public void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart() - getItem - planId:" + plan.getId());
+		EasyTracker.getInstance().activityStart(getSherlockActivity());
 		listItemsPlan = db.getItemsPlanById(plan.getId());
 		updateList();
 	}
@@ -589,5 +591,11 @@ public class PlanDetailFragment extends SherlockFragment {
 		}
 		
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(getSherlockActivity());
 	}
 }

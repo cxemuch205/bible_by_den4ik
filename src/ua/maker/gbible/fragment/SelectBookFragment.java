@@ -33,6 +33,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class SelectBookFragment extends SherlockFragment {
 	
@@ -170,8 +171,15 @@ public class SelectBookFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+		EasyTracker.getInstance().activityStart(getSherlockActivity());
 		int pos = sp.getInt(App.BOOK_SET_FOCUS, 0);
 		selectPrefBook(pos);
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(getSherlockActivity());
 	}
 	
 	private void showDialogSelectTranslate() {

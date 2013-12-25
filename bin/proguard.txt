@@ -58,19 +58,19 @@
 # view res/layout/abs__search_view.xml #generated:84
 -keep class com.actionbarsherlock.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:34
+# view AndroidManifest.xml #generated:38
 -keep class ua.maker.gbible.activity.ComparePoemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:26
+# view AndroidManifest.xml #generated:30
 -keep class ua.maker.gbible.activity.ListChaptersActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:30
+# view AndroidManifest.xml #generated:34
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:39
+# view AndroidManifest.xml #generated:43
 -keep class ua.maker.gbible.activity.SettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:16
+# view AndroidManifest.xml #generated:19
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:31

@@ -5778,6 +5778,610 @@ com.actionbarsherlock.widget.SuggestionsAdapter$ChildViewCache -> com.actionbars
     android.widget.ImageView mIcon1 -> c
     android.widget.ImageView mIcon2 -> d
     android.widget.ImageView mIconRefine -> e
+com.google.ads.AdRequest -> com.google.a.a:
+    java.lang.String TEST_EMULATOR -> a
+com.google.analytics.tracking.android.AdHitIdGenerator -> com.google.b.a.a.a:
+    boolean mAdMobSdkInstalled -> a
+    int getAdHitId() -> a
+com.google.analytics.tracking.android.AdMobInfo -> com.google.b.a.a.b:
+    com.google.analytics.tracking.android.AdMobInfo INSTANCE -> a
+    int mAdHitId -> b
+    java.util.Random mRandom -> c
+    com.google.analytics.tracking.android.AdMobInfo getInstance() -> a
+    int generateAdHitId() -> b
+com.google.analytics.tracking.android.AnalyticsClient -> com.google.b.a.a.c:
+    void sendHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void clearHits() -> a
+    void connect() -> b
+    void disconnect() -> c
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient -> com.google.b.a.a.d:
+    android.content.ServiceConnection mConnection -> a
+    com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectedListener mOnConnectedListener -> b
+    com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectionFailedListener mOnConnectionFailedListener -> c
+    android.content.Context mContext -> d
+    com.google.android.gms.analytics.internal.IAnalyticsService mService -> e
+    void connect() -> b
+    void disconnect() -> c
+    void sendHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void clearHits() -> a
+    com.google.android.gms.analytics.internal.IAnalyticsService getService() -> f
+    void checkConnected() -> d
+    boolean isConnected() -> e
+    void onServiceBound() -> g
+    void onConnectionSuccess() -> h
+    com.google.android.gms.analytics.internal.IAnalyticsService access$002(com.google.analytics.tracking.android.AnalyticsGmsCoreClient,com.google.android.gms.analytics.internal.IAnalyticsService) -> a
+    void access$100(com.google.analytics.tracking.android.AnalyticsGmsCoreClient) -> a
+    android.content.Context access$200(com.google.analytics.tracking.android.AnalyticsGmsCoreClient) -> b
+    android.content.ServiceConnection access$302(com.google.analytics.tracking.android.AnalyticsGmsCoreClient,android.content.ServiceConnection) -> a
+    com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectionFailedListener access$400(com.google.analytics.tracking.android.AnalyticsGmsCoreClient) -> c
+    com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectedListener access$500(com.google.analytics.tracking.android.AnalyticsGmsCoreClient) -> d
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$AnalyticsServiceConnection -> com.google.b.a.a.e:
+    com.google.analytics.tracking.android.AnalyticsGmsCoreClient this$0 -> a
+    void onServiceConnected(android.content.ComponentName,android.os.IBinder) -> onServiceConnected
+    void onServiceDisconnected(android.content.ComponentName) -> onServiceDisconnected
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectedListener -> com.google.b.a.a.f:
+    void onConnected() -> a
+    void onDisconnected() -> b
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectionFailedListener -> com.google.b.a.a.g:
+    void onConnectionFailed(int,android.content.Intent) -> a
+com.google.analytics.tracking.android.AnalyticsStore -> com.google.b.a.a.h:
+    void putHit(java.util.Map,long,java.lang.String,java.util.Collection) -> a
+    void clearHits(long) -> a
+    void dispatch() -> a
+com.google.analytics.tracking.android.AnalyticsStoreStateListener -> com.google.b.a.a.i:
+    void reportStoreIsEmpty(boolean) -> a
+com.google.analytics.tracking.android.AnalyticsThread -> com.google.b.a.a.j:
+    void sendHit(java.util.Map) -> a
+    void dispatch() -> a
+    void requestAppOptOut(com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback) -> a
+    void requestClientId(com.google.analytics.tracking.android.AnalyticsThread$ClientIdCallback) -> a
+    java.util.concurrent.LinkedBlockingQueue getQueue() -> b
+    java.lang.Thread getThread() -> c
+com.google.analytics.tracking.android.AnalyticsThread$ClientIdCallback -> com.google.b.a.a.k:
+    void reportClientId(java.lang.String) -> a
+com.google.analytics.tracking.android.Clock -> com.google.b.a.a.l:
+    long currentTimeMillis() -> a
+com.google.analytics.tracking.android.Dispatcher -> com.google.b.a.a.m:
+    int dispatchHits(java.util.List) -> a
+    boolean okToDispatch() -> a
+com.google.analytics.tracking.android.EasyTracker -> com.google.b.a.a.n:
+    com.google.analytics.tracking.android.EasyTracker sInstance -> a
+    boolean mIsEnabled -> b
+    java.lang.String mTrackingId -> c
+    java.lang.String mAppName -> d
+    java.lang.String mAppVersion -> e
+    int mDispatchPeriod -> f
+    boolean mDebug -> g
+    java.lang.Double mSampleRate -> h
+    boolean mIsAnonymizeIpEnabled -> i
+    boolean mIsReportUncaughtExceptionsEnabled -> j
+    java.lang.Thread$UncaughtExceptionHandler mExceptionHandler -> k
+    boolean mIsAutoActivityTracking -> l
+    int mActivitiesActive -> m
+    long mSessionTimeout -> n
+    long mLastOnStopTime -> o
+    android.content.Context mContext -> p
+    java.util.Map mActivityNameMap -> q
+    com.google.analytics.tracking.android.Tracker mTracker -> r
+    com.google.analytics.tracking.android.ParameterLoader mParameterFetcher -> s
+    com.google.analytics.tracking.android.GoogleAnalytics mAnalyticsInstance -> t
+    com.google.analytics.tracking.android.ServiceManager mServiceManager -> u
+    com.google.analytics.tracking.android.Clock mClock -> v
+    java.util.Timer mTimer -> w
+    java.util.TimerTask mTimerTask -> x
+    boolean mIsInForeground -> y
+    com.google.analytics.tracking.android.EasyTracker getInstance() -> a
+    boolean checkForNewSession() -> b
+    void loadParameters() -> c
+    void setContext(android.content.Context) -> a
+    void setContext(android.content.Context,com.google.analytics.tracking.android.ParameterLoader,com.google.analytics.tracking.android.GoogleAnalytics,com.google.analytics.tracking.android.ServiceManager) -> a
+    void activityStart(android.app.Activity) -> a
+    void activityStop(android.app.Activity) -> b
+    void clearExistingTimer() -> d
+    java.lang.String getActivityName(android.app.Activity) -> c
+    boolean access$102(com.google.analytics.tracking.android.EasyTracker,boolean) -> a
+com.google.analytics.tracking.android.EasyTracker$1 -> com.google.b.a.a.o:
+    com.google.analytics.tracking.android.EasyTracker this$0 -> a
+    long currentTimeMillis() -> a
+com.google.analytics.tracking.android.EasyTracker$NoopTracker -> com.google.b.a.a.p:
+    double mSampleRate -> b
+    boolean mIsAnonymizeIp -> c
+    com.google.analytics.tracking.android.EasyTracker this$0 -> a
+    void setStartSession(boolean) -> a
+    void setAppName(java.lang.String) -> a
+    void setAppVersion(java.lang.String) -> b
+    void sendView(java.lang.String) -> c
+    void sendException(java.lang.String,boolean) -> a
+    void setAnonymizeIp(boolean) -> b
+    void setSampleRate(double) -> a
+    java.util.Map constructException(java.lang.String,boolean) -> b
+com.google.analytics.tracking.android.EasyTracker$NotInForegroundTimerTask -> com.google.b.a.a.q:
+    com.google.analytics.tracking.android.EasyTracker this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.ExceptionParser -> com.google.b.a.a.r:
+    java.lang.String getDescription(java.lang.String,java.lang.Throwable) -> a
+com.google.analytics.tracking.android.ExceptionReporter -> com.google.b.a.a.s:
+    java.lang.Thread$UncaughtExceptionHandler mOriginalHandler -> a
+    com.google.analytics.tracking.android.Tracker mTracker -> b
+    com.google.analytics.tracking.android.ServiceManager mServiceManager -> c
+    com.google.analytics.tracking.android.ExceptionParser mExceptionParser -> d
+    void uncaughtException(java.lang.Thread,java.lang.Throwable) -> uncaughtException
+com.google.analytics.tracking.android.FutureApis -> com.google.b.a.a.t:
+    int version() -> a
+    boolean setOwnerOnlyReadWrite(java.lang.String) -> a
+com.google.analytics.tracking.android.GANetworkReceiver -> com.google.b.a.a.u:
+    com.google.analytics.tracking.android.ServiceManager mManager -> a
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.google.analytics.tracking.android.GAServiceManager -> com.google.b.a.a.v:
+    java.lang.Object MSG_OBJECT -> a
+    android.content.Context ctx -> b
+    com.google.analytics.tracking.android.AnalyticsStore store -> c
+    com.google.analytics.tracking.android.AnalyticsThread thread -> d
+    int dispatchPeriodInSeconds -> e
+    boolean pendingDispatch -> f
+    boolean connected -> g
+    boolean listenForNetwork -> h
+    com.google.analytics.tracking.android.AnalyticsStoreStateListener listener -> i
+    android.os.Handler handler -> j
+    com.google.analytics.tracking.android.GANetworkReceiver networkReceiver -> k
+    boolean storeIsEmpty -> l
+    com.google.analytics.tracking.android.GAServiceManager instance -> m
+    com.google.analytics.tracking.android.GAServiceManager getInstance() -> a
+    void initializeNetworkReceiver() -> e
+    void initializeHandler() -> f
+    void initialize(android.content.Context,com.google.analytics.tracking.android.AnalyticsThread) -> a
+    com.google.analytics.tracking.android.AnalyticsStore getStore() -> b
+    void dispatch() -> c
+    void setDispatchPeriod(int) -> a
+    void updatePowerSaveMode(boolean,boolean) -> a
+    void updateConnectivityStatus(boolean) -> a
+    boolean access$000(com.google.analytics.tracking.android.GAServiceManager) -> a
+    java.lang.Object access$100() -> d
+    int access$200(com.google.analytics.tracking.android.GAServiceManager) -> b
+    boolean access$300(com.google.analytics.tracking.android.GAServiceManager) -> c
+    android.os.Handler access$400(com.google.analytics.tracking.android.GAServiceManager) -> d
+com.google.analytics.tracking.android.GAServiceManager$1 -> com.google.b.a.a.w:
+    com.google.analytics.tracking.android.GAServiceManager this$0 -> a
+    void reportStoreIsEmpty(boolean) -> a
+com.google.analytics.tracking.android.GAServiceManager$2 -> com.google.b.a.a.x:
+    com.google.analytics.tracking.android.GAServiceManager this$0 -> a
+    boolean handleMessage(android.os.Message) -> handleMessage
+com.google.analytics.tracking.android.GAServiceProxy -> com.google.b.a.a.y:
+    long lastRequestTime -> a
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState state -> b
+    com.google.analytics.tracking.android.AnalyticsClient client -> c
+    com.google.analytics.tracking.android.AnalyticsStore store -> d
+    com.google.analytics.tracking.android.AnalyticsStore testStore -> e
+    com.google.analytics.tracking.android.AnalyticsThread thread -> f
+    android.content.Context ctx -> g
+    java.util.Queue queue -> h
+    int connectTries -> i
+    java.util.Timer reConnectTimer -> j
+    java.util.Timer failedConnectTimer -> k
+    java.util.Timer disconnectCheckTimer -> l
+    boolean pendingDispatch -> m
+    boolean pendingClearHits -> n
+    com.google.analytics.tracking.android.Clock clock -> o
+    long idleTimeout -> p
+    void putHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void dispatch() -> c
+    void clearHits() -> d
+    java.util.Timer cancelTimer(java.util.Timer) -> a
+    void clearAllTimers() -> f
+    void createService() -> e
+    void sendQueue() -> g
+    void dispatchToStore() -> h
+    void useStore() -> i
+    void connectToService() -> j
+    void disconnectFromService() -> k
+    void onConnected() -> a
+    void onDisconnected() -> b
+    void onConnectionFailed(int,android.content.Intent) -> a
+    void fireReconnectAttempt() -> l
+    void access$000(com.google.analytics.tracking.android.GAServiceProxy) -> a
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState access$400(com.google.analytics.tracking.android.GAServiceProxy) -> b
+    void access$500(com.google.analytics.tracking.android.GAServiceProxy) -> c
+    void access$600(com.google.analytics.tracking.android.GAServiceProxy) -> d
+    java.util.Queue access$700(com.google.analytics.tracking.android.GAServiceProxy) -> e
+    long access$800(com.google.analytics.tracking.android.GAServiceProxy) -> f
+    long access$900(com.google.analytics.tracking.android.GAServiceProxy) -> g
+    com.google.analytics.tracking.android.Clock access$1000(com.google.analytics.tracking.android.GAServiceProxy) -> h
+    void access$1100(com.google.analytics.tracking.android.GAServiceProxy) -> i
+    java.util.Timer access$1200(com.google.analytics.tracking.android.GAServiceProxy) -> j
+com.google.analytics.tracking.android.GAServiceProxy$1 -> com.google.b.a.a.z:
+    com.google.analytics.tracking.android.GAServiceProxy this$0 -> a
+    long currentTimeMillis() -> a
+com.google.analytics.tracking.android.GAServiceProxy$2 -> com.google.b.a.a.aa:
+    com.google.analytics.tracking.android.GAServiceProxy this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.GAServiceProxy$3 -> com.google.b.a.a.ab:
+    int[] $SwitchMap$com$google$analytics$tracking$android$GAServiceProxy$ConnectState -> a
+com.google.analytics.tracking.android.GAServiceProxy$ConnectState -> com.google.b.a.a.ac:
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState CONNECTING -> a
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState CONNECTED_SERVICE -> b
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState CONNECTED_LOCAL -> c
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState BLOCKED -> d
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState PENDING_CONNECTION -> e
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState PENDING_DISCONNECT -> f
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState DISCONNECTED -> g
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState[] $VALUES -> h
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState[] values() -> values
+    com.google.analytics.tracking.android.GAServiceProxy$ConnectState valueOf(java.lang.String) -> valueOf
+com.google.analytics.tracking.android.GAServiceProxy$DisconnectCheckTask -> com.google.b.a.a.ad:
+    com.google.analytics.tracking.android.GAServiceProxy this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.GAServiceProxy$FailedConnectTask -> com.google.b.a.a.ae:
+    com.google.analytics.tracking.android.GAServiceProxy this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.GAServiceProxy$HitParams -> com.google.b.a.a.af:
+    java.util.Map wireFormatParams -> a
+    long hitTimeInMilliseconds -> b
+    java.lang.String path -> c
+    java.util.List commands -> d
+    java.util.Map getWireFormatParams() -> a
+    long getHitTimeInMilliseconds() -> b
+    java.lang.String getPath() -> c
+    java.util.List getCommands() -> d
+com.google.analytics.tracking.android.GAServiceProxy$ReconnectTask -> com.google.b.a.a.ag:
+    com.google.analytics.tracking.android.GAServiceProxy this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.GAThread -> com.google.b.a.a.ah:
+    java.util.concurrent.LinkedBlockingQueue queue -> a
+    boolean mDisabled -> b
+    boolean mClosed -> c
+    boolean mAppOptOut -> d
+    java.util.List mCommands -> e
+    com.google.analytics.tracking.android.MetaModel mMetaModel -> f
+    java.lang.String mInstallCampaign -> g
+    java.lang.String mClientId -> h
+    com.google.analytics.tracking.android.GAThread sInstance -> i
+    com.google.analytics.tracking.android.ServiceProxy mServiceProxy -> j
+    android.content.Context mContext -> k
+    com.google.analytics.tracking.android.GAThread getInstance(android.content.Context) -> a
+    void init() -> e
+    void sendHit(java.util.Map) -> a
+    java.lang.String getHostUrl(java.util.Map) -> b
+    void fillExceptionParameters(java.util.Map) -> c
+    boolean isSampledOut(java.util.Map) -> d
+    void fillAppParameters(java.util.Map) -> e
+    void putIfAbsent(java.util.Map,java.lang.String,java.lang.String) -> a
+    void fillCampaignParameters(java.util.Map) -> f
+    void dispatch() -> a
+    void requestAppOptOut(com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback) -> a
+    void requestClientId(com.google.analytics.tracking.android.AnalyticsThread$ClientIdCallback) -> a
+    void queueToThread(java.lang.Runnable) -> a
+    boolean loadAppOptOut() -> f
+    boolean storeClientId(java.lang.String) -> a
+    java.lang.String generateClientId() -> g
+    java.lang.String initializeClientId() -> d
+    java.lang.String getAndClearCampaign(android.content.Context) -> b
+    java.lang.String printStackTrace(java.lang.Throwable) -> a
+    void run() -> run
+    java.util.concurrent.LinkedBlockingQueue getQueue() -> b
+    java.lang.Thread getThread() -> c
+    java.lang.String access$000(com.google.analytics.tracking.android.GAThread) -> a
+    boolean access$100(com.google.analytics.tracking.android.GAThread) -> b
+    boolean access$200(com.google.analytics.tracking.android.GAThread,java.util.Map) -> a
+    java.lang.String access$300(com.google.analytics.tracking.android.GAThread) -> c
+    java.lang.String access$302(com.google.analytics.tracking.android.GAThread,java.lang.String) -> a
+    void access$400(com.google.analytics.tracking.android.GAThread,java.util.Map) -> b
+    void access$500(com.google.analytics.tracking.android.GAThread,java.util.Map) -> c
+    void access$600(com.google.analytics.tracking.android.GAThread,java.util.Map) -> d
+    com.google.analytics.tracking.android.MetaModel access$700(com.google.analytics.tracking.android.GAThread) -> d
+    java.lang.String access$800(com.google.analytics.tracking.android.GAThread,java.util.Map) -> e
+    java.util.List access$900(com.google.analytics.tracking.android.GAThread) -> e
+    com.google.analytics.tracking.android.ServiceProxy access$1000(com.google.analytics.tracking.android.GAThread) -> f
+com.google.analytics.tracking.android.GAThread$1 -> com.google.b.a.a.ai:
+    java.util.Map val$hitCopy -> a
+    long val$hitTime -> b
+    com.google.analytics.tracking.android.GAThread this$0 -> c
+    void run() -> run
+com.google.analytics.tracking.android.GAThread$2 -> com.google.b.a.a.aj:
+    com.google.analytics.tracking.android.GAThread this$0 -> a
+    void run() -> run
+com.google.analytics.tracking.android.GAThread$4 -> com.google.b.a.a.ak:
+    com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback val$callback -> a
+    com.google.analytics.tracking.android.GAThread this$0 -> b
+    void run() -> run
+com.google.analytics.tracking.android.GAThread$5 -> com.google.b.a.a.al:
+    com.google.analytics.tracking.android.AnalyticsThread$ClientIdCallback val$callback -> a
+    com.google.analytics.tracking.android.GAThread this$0 -> b
+    void run() -> run
+com.google.analytics.tracking.android.GAUsage -> com.google.b.a.a.am:
+    java.util.SortedSet mUsedFields -> a
+    java.lang.StringBuilder mSequence -> b
+    boolean mDisableUsage -> c
+    com.google.analytics.tracking.android.GAUsage INSTANCE -> d
+    com.google.analytics.tracking.android.GAUsage getInstance() -> a
+    void setDisableUsage(boolean) -> a
+    void setUsage(com.google.analytics.tracking.android.GAUsage$Field) -> a
+    java.lang.String getAndClearUsage() -> b
+    java.lang.String getAndClearSequence() -> c
+com.google.analytics.tracking.android.GAUsage$Field -> com.google.b.a.a.an:
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_VIEW -> a
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_VIEW_WITH_APPSCREEN -> b
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_EVENT -> c
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_TRANSACTION -> d
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_EXCEPTION_WITH_DESCRIPTION -> e
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_EXCEPTION_WITH_THROWABLE -> f
+    com.google.analytics.tracking.android.GAUsage$Field BLANK_06 -> g
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_TIMING -> h
+    com.google.analytics.tracking.android.GAUsage$Field TRACK_SOCIAL -> i
+    com.google.analytics.tracking.android.GAUsage$Field GET -> j
+    com.google.analytics.tracking.android.GAUsage$Field SET -> k
+    com.google.analytics.tracking.android.GAUsage$Field SEND -> l
+    com.google.analytics.tracking.android.GAUsage$Field SET_START_SESSION -> m
+    com.google.analytics.tracking.android.GAUsage$Field BLANK_13 -> n
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_NAME -> o
+    com.google.analytics.tracking.android.GAUsage$Field BLANK_15 -> p
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_VERSION -> q
+    com.google.analytics.tracking.android.GAUsage$Field BLANK_17 -> r
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_SCREEN -> s
+    com.google.analytics.tracking.android.GAUsage$Field GET_TRACKING_ID -> t
+    com.google.analytics.tracking.android.GAUsage$Field SET_ANONYMIZE_IP -> u
+    com.google.analytics.tracking.android.GAUsage$Field GET_ANONYMIZE_IP -> v
+    com.google.analytics.tracking.android.GAUsage$Field SET_SAMPLE_RATE -> w
+    com.google.analytics.tracking.android.GAUsage$Field GET_SAMPLE_RATE -> x
+    com.google.analytics.tracking.android.GAUsage$Field SET_USE_SECURE -> y
+    com.google.analytics.tracking.android.GAUsage$Field GET_USE_SECURE -> z
+    com.google.analytics.tracking.android.GAUsage$Field SET_REFERRER -> A
+    com.google.analytics.tracking.android.GAUsage$Field SET_CAMPAIGN -> B
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_ID -> C
+    com.google.analytics.tracking.android.GAUsage$Field GET_APP_ID -> D
+    com.google.analytics.tracking.android.GAUsage$Field SET_EXCEPTION_PARSER -> E
+    com.google.analytics.tracking.android.GAUsage$Field GET_EXCEPTION_PARSER -> F
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_TRANSACTION -> G
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_EXCEPTION -> H
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_RAW_EXCEPTION -> I
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_TIMING -> J
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_SOCIAL -> K
+    com.google.analytics.tracking.android.GAUsage$Field SET_DEBUG -> L
+    com.google.analytics.tracking.android.GAUsage$Field GET_DEBUG -> M
+    com.google.analytics.tracking.android.GAUsage$Field GET_TRACKER -> N
+    com.google.analytics.tracking.android.GAUsage$Field GET_DEFAULT_TRACKER -> O
+    com.google.analytics.tracking.android.GAUsage$Field SET_DEFAULT_TRACKER -> P
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_OPT_OUT -> Q
+    com.google.analytics.tracking.android.GAUsage$Field REQUEST_APP_OPT_OUT -> R
+    com.google.analytics.tracking.android.GAUsage$Field DISPATCH -> S
+    com.google.analytics.tracking.android.GAUsage$Field SET_DISPATCH_PERIOD -> T
+    com.google.analytics.tracking.android.GAUsage$Field BLANK_48 -> U
+    com.google.analytics.tracking.android.GAUsage$Field REPORT_UNCAUGHT_EXCEPTIONS -> V
+    com.google.analytics.tracking.android.GAUsage$Field SET_AUTO_ACTIVITY_TRACKING -> W
+    com.google.analytics.tracking.android.GAUsage$Field SET_SESSION_TIMEOUT -> X
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_EVENT -> Y
+    com.google.analytics.tracking.android.GAUsage$Field CONSTRUCT_ITEM -> Z
+    com.google.analytics.tracking.android.GAUsage$Field SET_APP_INSTALLER_ID -> aa
+    com.google.analytics.tracking.android.GAUsage$Field GET_APP_INSTALLER_ID -> ab
+    com.google.analytics.tracking.android.GAUsage$Field[] $VALUES -> ac
+    com.google.analytics.tracking.android.GAUsage$Field[] values() -> values
+    com.google.analytics.tracking.android.GAUsage$Field valueOf(java.lang.String) -> valueOf
+com.google.analytics.tracking.android.GoogleAnalytics -> com.google.b.a.a.ao:
+    boolean mDebug -> a
+    com.google.analytics.tracking.android.AnalyticsThread mThread -> b
+    android.content.Context mContext -> c
+    com.google.analytics.tracking.android.Tracker mDefaultTracker -> d
+    com.google.analytics.tracking.android.AdHitIdGenerator mAdHitIdGenerator -> e
+    java.lang.String mClientId -> f
+    java.lang.Boolean mAppOptOut -> g
+    java.util.Map mTrackers -> h
+    java.lang.String mLastTrackingId -> i
+    com.google.analytics.tracking.android.GoogleAnalytics sInstance -> j
+    com.google.analytics.tracking.android.GoogleAnalytics getInstance(android.content.Context) -> a
+    void setDebug(boolean) -> a
+    com.google.analytics.tracking.android.Tracker getTracker(java.lang.String) -> a
+    void sendHit(java.util.Map) -> a
+    java.lang.Boolean access$002(com.google.analytics.tracking.android.GoogleAnalytics,java.lang.Boolean) -> a
+    java.lang.String access$102(com.google.analytics.tracking.android.GoogleAnalytics,java.lang.String) -> a
+com.google.analytics.tracking.android.GoogleAnalytics$1 -> com.google.b.a.a.ap:
+    com.google.analytics.tracking.android.GoogleAnalytics this$0 -> a
+    void reportAppOptOut(boolean) -> a
+com.google.analytics.tracking.android.GoogleAnalytics$2 -> com.google.b.a.a.aq:
+    com.google.analytics.tracking.android.GoogleAnalytics this$0 -> a
+    void reportClientId(java.lang.String) -> a
+com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback -> com.google.b.a.a.ar:
+    void reportAppOptOut(boolean) -> a
+com.google.analytics.tracking.android.Hit -> com.google.b.a.a.as:
+    java.lang.String mHitString -> a
+    long mHitId -> b
+    long mHitTime -> c
+    java.lang.String mHitUrl -> d
+    java.lang.String getHitParams() -> a
+    void setHitString(java.lang.String) -> a
+    long getHitId() -> b
+    long getHitTime() -> c
+    java.lang.String getHitUrl() -> d
+    void setHitUrl(java.lang.String) -> b
+com.google.analytics.tracking.android.HitBuilder -> com.google.b.a.a.at:
+    java.util.Map generateHitParams(com.google.analytics.tracking.android.MetaModel,java.util.Map) -> a
+    java.lang.String postProcessHit(com.google.analytics.tracking.android.Hit,long) -> a
+    java.lang.String encode(java.lang.String) -> a
+com.google.analytics.tracking.android.HttpClientFactory -> com.google.b.a.a.au:
+    org.apache.http.client.HttpClient newInstance() -> a
+com.google.analytics.tracking.android.Log -> com.google.b.a.a.av:
+    boolean sDebug -> a
+    void setDebug(boolean) -> a
+    boolean isDebugEnabled() -> a
+    int d(java.lang.String) -> a
+    int dDebug(java.lang.String) -> b
+    int e(java.lang.String) -> c
+    int i(java.lang.String) -> d
+    int iDebug(java.lang.String) -> e
+    int v(java.lang.String) -> f
+    int vDebug(java.lang.String) -> g
+    int w(java.lang.String) -> h
+    int wDebug(java.lang.String) -> i
+    java.lang.String formatMessage(java.lang.String) -> j
+com.google.analytics.tracking.android.MetaModel -> com.google.b.a.a.aw:
+    java.util.Map mMetaInfos -> a
+    com.google.analytics.tracking.android.MetaModel$MetaInfo getMetaInfo(java.lang.String) -> a
+    void addField(java.lang.String,java.lang.String,java.lang.String,com.google.analytics.tracking.android.MetaModel$Formatter) -> a
+com.google.analytics.tracking.android.MetaModel$Formatter -> com.google.b.a.a.ax:
+    java.lang.String format(java.lang.String) -> a
+com.google.analytics.tracking.android.MetaModel$MetaInfo -> com.google.b.a.a.ay:
+    java.lang.String mUrlParam -> a
+    java.lang.String mDefaultValue -> b
+    com.google.analytics.tracking.android.MetaModel$Formatter mFormatter -> c
+    java.lang.String getUrlParam(java.lang.String) -> a
+    java.lang.String getDefaultValue() -> a
+    com.google.analytics.tracking.android.MetaModel$Formatter getFormatter() -> b
+com.google.analytics.tracking.android.MetaModelInitializer -> com.google.b.a.a.az:
+    com.google.analytics.tracking.android.MetaModel$Formatter BOOLEAN_FORMATTER -> a
+    com.google.analytics.tracking.android.MetaModel$Formatter UP_TO_TWO_DIGIT_FLOAT_FORMATTER -> b
+    void set(com.google.analytics.tracking.android.MetaModel) -> a
+com.google.analytics.tracking.android.MetaModelInitializer$1 -> com.google.b.a.a.ba:
+    java.lang.String format(java.lang.String) -> a
+com.google.analytics.tracking.android.MetaModelInitializer$2 -> com.google.b.a.a.bb:
+    java.text.DecimalFormat mFloatFormat -> a
+    java.lang.String format(java.lang.String) -> a
+com.google.analytics.tracking.android.ParameterLoader -> com.google.b.a.a.bc:
+    java.lang.String getString(java.lang.String) -> a
+    java.lang.Double getDoubleFromString(java.lang.String) -> b
+    boolean getBoolean(java.lang.String) -> c
+    int getInt(java.lang.String,int) -> a
+com.google.analytics.tracking.android.ParameterLoaderImpl -> com.google.b.a.a.bd:
+    android.content.Context mContext -> a
+    int getResourceIdForType(java.lang.String,java.lang.String) -> a
+    java.lang.String getString(java.lang.String) -> a
+    boolean getBoolean(java.lang.String) -> c
+    int getInt(java.lang.String,int) -> a
+    java.lang.Double getDoubleFromString(java.lang.String) -> b
+com.google.analytics.tracking.android.PersistentAnalyticsStore -> com.google.b.a.a.be:
+    java.lang.String CREATE_HITS_TABLE -> a
+    com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper mDbHelper -> b
+    com.google.analytics.tracking.android.Dispatcher mDispatcher -> c
+    com.google.analytics.tracking.android.AnalyticsStoreStateListener mListener -> d
+    android.content.Context mContext -> e
+    java.lang.String mDatabaseName -> f
+    long mLastDeleteStaleHitsTime -> g
+    com.google.analytics.tracking.android.Clock mClock -> h
+    com.google.analytics.tracking.android.HttpClientFactory createDefaultHttpClientFactory() -> e
+    void clearHits(long) -> a
+    void putHit(java.util.Map,long,java.lang.String,java.util.Collection) -> a
+    void fillVersionParametersIfNecessary(java.util.Map,java.util.Collection) -> a
+    void storeVersion(java.util.Map,java.lang.String,java.lang.String) -> a
+    void removeOldHitIfFull() -> f
+    void writeHitToDatabase(java.util.Map,long,java.lang.String) -> a
+    java.lang.String generateHitString(java.util.Map) -> a
+    java.util.List peekHits(int) -> a
+    int deleteStaleHits() -> b
+    void deleteHits(java.util.Collection) -> a
+    int getNumStoredHits() -> c
+    void dispatch() -> a
+    android.database.sqlite.SQLiteDatabase getWritableDatabase(java.lang.String) -> a
+    com.google.analytics.tracking.android.Clock access$000(com.google.analytics.tracking.android.PersistentAnalyticsStore) -> a
+    java.lang.String access$100(com.google.analytics.tracking.android.PersistentAnalyticsStore) -> b
+    android.content.Context access$200(com.google.analytics.tracking.android.PersistentAnalyticsStore) -> c
+    java.lang.String access$300() -> d
+com.google.analytics.tracking.android.PersistentAnalyticsStore$1 -> com.google.b.a.a.bf:
+    com.google.analytics.tracking.android.PersistentAnalyticsStore this$0 -> a
+    long currentTimeMillis() -> a
+com.google.analytics.tracking.android.PersistentAnalyticsStore$2 -> com.google.b.a.a.bg:
+    com.google.analytics.tracking.android.PersistentAnalyticsStore this$0 -> a
+    org.apache.http.client.HttpClient newInstance() -> a
+com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper -> com.google.b.a.a.bh:
+    boolean mBadDatabase -> b
+    long mLastDatabaseCheckTime -> c
+    com.google.analytics.tracking.android.PersistentAnalyticsStore this$0 -> a
+    boolean tablePresent(java.lang.String,android.database.sqlite.SQLiteDatabase) -> a
+    android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    void onOpen(android.database.sqlite.SQLiteDatabase) -> onOpen
+    void validateColumnsPresent(android.database.sqlite.SQLiteDatabase) -> a
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+com.google.analytics.tracking.android.ServiceManager -> com.google.b.a.a.bi:
+    void dispatch() -> c
+    void setDispatchPeriod(int) -> a
+    void updateConnectivityStatus(boolean) -> a
+com.google.analytics.tracking.android.ServiceProxy -> com.google.b.a.a.bj:
+    void putHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void dispatch() -> c
+    void createService() -> e
+com.google.analytics.tracking.android.SimpleNetworkDispatcher -> com.google.b.a.a.bk:
+    java.lang.String userAgent -> a
+    com.google.analytics.tracking.android.HttpClientFactory httpClientFactory -> b
+    android.content.Context ctx -> c
+    boolean okToDispatch() -> a
+    int dispatchHits(java.util.List) -> a
+    org.apache.http.HttpEntityEnclosingRequest buildRequest(java.lang.String,java.lang.String) -> a
+    void logDebugInformation(boolean,org.apache.http.HttpEntityEnclosingRequest) -> a
+    java.lang.String createUserAgentString(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+    java.net.URL getUrl(com.google.analytics.tracking.android.Hit) -> a
+com.google.analytics.tracking.android.StandardExceptionParser -> com.google.b.a.a.bl:
+    java.util.TreeSet includedPackages -> a
+    void setIncludedPackages(android.content.Context,java.util.Collection) -> a
+    java.lang.Throwable getCause(java.lang.Throwable) -> a
+    java.lang.StackTraceElement getBestStackTraceElement(java.lang.Throwable) -> b
+    java.lang.String getDescription(java.lang.Throwable,java.lang.StackTraceElement,java.lang.String) -> a
+    java.lang.String getDescription(java.lang.String,java.lang.Throwable) -> a
+com.google.analytics.tracking.android.Tracker -> com.google.b.a.a.bm:
+    java.text.DecimalFormat DF -> a
+    com.google.analytics.tracking.android.TrackerHandler mHandler -> b
+    com.google.analytics.tracking.android.Tracker$SimpleModel mModel -> c
+    boolean mIsTrackerClosed -> d
+    boolean mIsTrackingStarted -> e
+    long mTokens -> f
+    long mLastTrackTime -> g
+    boolean mIsThrottlingEnabled -> h
+    void assertTrackerOpen() -> b
+    void setStartSession(boolean) -> a
+    void setAppName(java.lang.String) -> a
+    void setAppVersion(java.lang.String) -> b
+    void sendView(java.lang.String) -> c
+    void sendException(java.lang.String,boolean) -> a
+    void internalSend(java.lang.String,java.util.Map) -> a
+    void setAnonymizeIp(boolean) -> b
+    void setSampleRate(double) -> a
+    java.util.Map constructException(java.lang.String,boolean) -> b
+    boolean tokensAvailable() -> a
+com.google.analytics.tracking.android.Tracker$1 -> com.google.b.a.a.bn:
+com.google.analytics.tracking.android.Tracker$SimpleModel -> com.google.b.a.a.bo:
+    java.util.Map temporaryMap -> a
+    java.util.Map permanentMap -> b
+    void setForNextHit(java.lang.String,java.lang.String) -> a
+    void set(java.lang.String,java.lang.String) -> b
+    void clearTemporaryValues() -> a
+    void setAll(java.util.Map,java.lang.Boolean) -> a
+    java.util.Map getKeysAndValues() -> b
+com.google.analytics.tracking.android.TrackerHandler -> com.google.b.a.a.bp:
+    void sendHit(java.util.Map) -> a
+com.google.analytics.tracking.android.Utils -> com.google.b.a.a.bq:
+    char[] HEXBYTES -> a
+    java.util.Map parseURLParameters(java.lang.String) -> a
+    double safeParseDouble(java.lang.String) -> b
+    boolean safeParseBoolean(java.lang.String) -> c
+    java.lang.String filterCampaign(java.lang.String) -> d
+    java.lang.String getLanguage(java.util.Locale) -> a
+    int fromHexDigit(char) -> a
+    byte[] hexDecode(java.lang.String) -> e
+com.google.android.gms.ads.AdRequest -> com.google.android.gms.a.a:
+    java.lang.String DEVICE_ID_EMULATOR -> a
+com.google.android.gms.analytics.internal.Command -> com.google.android.gms.analytics.internal.Command:
+    java.lang.String id -> a
+    java.lang.String urlParam -> b
+    java.lang.String value -> c
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    java.lang.String getId() -> a
+    java.lang.String getUrlParam() -> b
+    java.lang.String getValue() -> c
+    int describeContents() -> describeContents
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+    void readFromParcel(android.os.Parcel) -> a
+com.google.android.gms.analytics.internal.Command$1 -> com.google.android.gms.analytics.internal.a:
+    com.google.android.gms.analytics.internal.Command createFromParcel(android.os.Parcel) -> a
+    com.google.android.gms.analytics.internal.Command[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+com.google.android.gms.analytics.internal.IAnalyticsService -> com.google.android.gms.analytics.internal.b:
+    void sendHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void clearHits() -> a
+com.google.android.gms.analytics.internal.IAnalyticsService$Stub -> com.google.android.gms.analytics.internal.c:
+    com.google.android.gms.analytics.internal.IAnalyticsService asInterface(android.os.IBinder) -> a
+    boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
+com.google.android.gms.analytics.internal.IAnalyticsService$Stub$Proxy -> com.google.android.gms.analytics.internal.d:
+    android.os.IBinder mRemote -> a
+    android.os.IBinder asBinder() -> asBinder
+    void sendHit(java.util.Map,long,java.lang.String,java.util.List) -> a
+    void clearHits() -> a
 com.google.android.gms.auth.RecoveryDecision -> com.google.android.gms.auth.RecoveryDecision:
     com.google.android.gms.auth.RecoveryDecisionCreator CREATOR -> a
     int iM -> b
@@ -5986,15 +6590,15 @@ com.google.android.gms.common.internal.safeparcel.b -> com.google.android.gms.co
     void a(android.os.Parcel,android.os.Parcelable,int) -> a
     void a(android.os.Parcel,int,android.os.Parcel,boolean) -> a
     void c(android.os.Parcel,int,java.util.List,boolean) -> c
-com.google.android.gms.dynamic.b -> com.google.android.gms.a.a:
-com.google.android.gms.dynamic.b$a -> com.google.android.gms.a.b:
+com.google.android.gms.dynamic.b -> com.google.android.gms.b.a:
+com.google.android.gms.dynamic.b$a -> com.google.android.gms.b.b:
     com.google.android.gms.dynamic.b z(android.os.IBinder) -> a
     android.os.IBinder asBinder() -> asBinder
     boolean onTransact(int,android.os.Parcel,android.os.Parcel,int) -> onTransact
-com.google.android.gms.dynamic.b$a$a -> com.google.android.gms.a.c:
+com.google.android.gms.dynamic.b$a$a -> com.google.android.gms.b.c:
     android.os.IBinder dG -> a
     android.os.IBinder asBinder() -> asBinder
-com.google.android.gms.dynamic.c -> com.google.android.gms.a.d:
+com.google.android.gms.dynamic.c -> com.google.android.gms.b.d:
     java.lang.Object mh -> a
     com.google.android.gms.dynamic.b g(java.lang.Object) -> a
     java.lang.Object b(com.google.android.gms.dynamic.b) -> a
@@ -6465,7 +7069,10 @@ com.google.android.gms.internal.bx -> com.google.android.gms.internal.g:
     void a(com.google.android.gms.internal.bw,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.cn -> com.google.android.gms.internal.h:
+com.google.android.gms.internal.cm -> com.google.android.gms.internal.h:
+    android.os.Handler hO -> a
+    java.lang.String l(java.lang.String) -> a
+com.google.android.gms.internal.cn -> com.google.android.gms.internal.i:
     void m(java.lang.String) -> a
     void q(java.lang.String) -> b
     boolean k(int) -> a
@@ -6478,13 +7085,13 @@ com.google.android.gms.internal.co -> com.google.android.gms.internal.co:
     boolean hS -> f
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.cp -> com.google.android.gms.internal.i:
+com.google.android.gms.internal.cp -> com.google.android.gms.internal.j:
     com.google.android.gms.internal.co g(android.os.Parcel) -> a
     com.google.android.gms.internal.co[] l(int) -> a
     void a(com.google.android.gms.internal.co,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.cq -> com.google.android.gms.internal.j:
+com.google.android.gms.internal.cq -> com.google.android.gms.internal.k:
     android.content.MutableContextWrapper hU -> a
     java.lang.Object eJ -> b
     com.google.android.gms.internal.h go -> c
@@ -6494,7 +7101,7 @@ com.google.android.gms.internal.cq -> com.google.android.gms.internal.j:
     boolean onTouchEvent(android.view.MotionEvent) -> onTouchEvent
     void onMeasure(int,int) -> onMeasure
     void setContext(android.content.Context) -> setContext
-com.google.android.gms.internal.cz -> com.google.android.gms.internal.k:
+com.google.android.gms.internal.cz -> com.google.android.gms.internal.l:
     int kd -> a
     long ke -> b
     int kf -> c
@@ -6527,8 +7134,8 @@ com.google.android.gms.internal.cz -> com.google.android.gms.internal.k:
     android.graphics.drawable.Drawable aS() -> b
     void startTransition(int) -> a
     void draw(android.graphics.Canvas) -> draw
-com.google.android.gms.internal.cz$1 -> com.google.android.gms.internal.l:
-com.google.android.gms.internal.cz$a -> com.google.android.gms.internal.m:
+com.google.android.gms.internal.cz$1 -> com.google.android.gms.internal.m:
+com.google.android.gms.internal.cz$a -> com.google.android.gms.internal.n:
     com.google.android.gms.internal.cz$a ks -> a
     com.google.android.gms.internal.cz$a$a kt -> b
     void draw(android.graphics.Canvas) -> draw
@@ -6537,23 +7144,23 @@ com.google.android.gms.internal.cz$a -> com.google.android.gms.internal.m:
     int getOpacity() -> getOpacity
     android.graphics.drawable.Drawable$ConstantState getConstantState() -> getConstantState
     com.google.android.gms.internal.cz$a aT() -> a
-com.google.android.gms.internal.cz$a$a -> com.google.android.gms.internal.n:
+com.google.android.gms.internal.cz$a$a -> com.google.android.gms.internal.o:
     android.graphics.drawable.Drawable newDrawable() -> newDrawable
     int getChangingConfigurations() -> getChangingConfigurations
-com.google.android.gms.internal.cz$b -> com.google.android.gms.internal.o:
+com.google.android.gms.internal.cz$b -> com.google.android.gms.internal.p:
     int ku -> a
     int kv -> b
     android.graphics.drawable.Drawable newDrawable() -> newDrawable
     int getChangingConfigurations() -> getChangingConfigurations
-com.google.android.gms.internal.d -> com.google.android.gms.internal.p:
+com.google.android.gms.internal.d -> com.google.android.gms.internal.q:
     void a(android.view.MotionEvent) -> a
-com.google.android.gms.internal.da -> com.google.android.gms.internal.q:
+com.google.android.gms.internal.da -> com.google.android.gms.internal.r:
     android.net.Uri kw -> a
     int kx -> b
     void d(android.net.Uri) -> a
     int aU() -> a
     void w(int) -> a
-com.google.android.gms.internal.db -> com.google.android.gms.internal.r:
+com.google.android.gms.internal.db -> com.google.android.gms.internal.s:
     void c(java.lang.Object) -> a
     void k(boolean) -> a
     void w(java.lang.String) -> a
@@ -6568,24 +7175,24 @@ com.google.android.gms.internal.dd -> com.google.android.gms.internal.dd:
     boolean aX() -> v
     boolean y(java.lang.String) -> b
     boolean a(java.lang.Class) -> a
-com.google.android.gms.internal.dl -> com.google.android.gms.internal.s:
+com.google.android.gms.internal.dl -> com.google.android.gms.internal.t:
     boolean equal(java.lang.Object,java.lang.Object) -> a
     int hashCode(java.lang.Object[]) -> a
     com.google.android.gms.internal.dl$a d(java.lang.Object) -> a
-com.google.android.gms.internal.dl$1 -> com.google.android.gms.internal.t:
-com.google.android.gms.internal.dl$a -> com.google.android.gms.internal.u:
+com.google.android.gms.internal.dl$1 -> com.google.android.gms.internal.u:
+com.google.android.gms.internal.dl$a -> com.google.android.gms.internal.w:
     java.util.List lj -> a
     java.lang.Object lk -> b
     com.google.android.gms.internal.dl$a a(java.lang.String,java.lang.Object) -> a
     java.lang.String toString() -> toString
-com.google.android.gms.internal.dm -> com.google.android.gms.internal.w:
+com.google.android.gms.internal.dm -> com.google.android.gms.internal.y:
     java.lang.Object e(java.lang.Object) -> a
     java.lang.Object a(java.lang.Object,java.lang.Object) -> a
     void k(boolean) -> a
     void a(boolean,java.lang.Object) -> a
     void b(boolean,java.lang.Object) -> b
     void a(boolean,java.lang.String,java.lang.Object[]) -> a
-com.google.android.gms.internal.dq -> com.google.android.gms.internal.y:
+com.google.android.gms.internal.dq -> com.google.android.gms.internal.z:
     java.util.LinkedHashMap lm -> a
     int size -> b
     int ln -> c
@@ -6610,7 +7217,7 @@ com.google.android.gms.internal.dr -> com.google.android.gms.internal.dr:
     com.google.android.gms.internal.dw$b bl() -> c
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.ds -> com.google.android.gms.internal.z:
+com.google.android.gms.internal.ds -> com.google.android.gms.internal.aa:
     com.google.android.gms.internal.dr l(android.os.Parcel) -> a
     com.google.android.gms.internal.dr[] z(int) -> a
     void a(com.google.android.gms.internal.dr,android.os.Parcel,int) -> a
@@ -6639,13 +7246,13 @@ com.google.android.gms.internal.dt$a -> com.google.android.gms.internal.dt$a:
     int ly -> d
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.du -> com.google.android.gms.internal.aa:
+com.google.android.gms.internal.du -> com.google.android.gms.internal.ab:
     com.google.android.gms.internal.dt m(android.os.Parcel) -> a
     com.google.android.gms.internal.dt[] A(int) -> a
     void a(com.google.android.gms.internal.dt,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.dv -> com.google.android.gms.internal.ab:
+com.google.android.gms.internal.dv -> com.google.android.gms.internal.ac:
     com.google.android.gms.internal.dt$a n(android.os.Parcel) -> a
     com.google.android.gms.internal.dt$a[] B(int) -> a
     void a(com.google.android.gms.internal.dt$a,android.os.Parcel,int) -> a
@@ -6704,17 +7311,17 @@ com.google.android.gms.internal.dw$a -> com.google.android.gms.internal.dw$a:
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
     java.lang.String toString() -> toString
     com.google.android.gms.internal.dw$b c(com.google.android.gms.internal.dw$a) -> a
-com.google.android.gms.internal.dw$b -> com.google.android.gms.internal.ac:
+com.google.android.gms.internal.dw$b -> com.google.android.gms.internal.ad:
     int bn() -> c
     int bo() -> d
     java.lang.Object f(java.lang.Object) -> a
-com.google.android.gms.internal.dx -> com.google.android.gms.internal.ad:
+com.google.android.gms.internal.dx -> com.google.android.gms.internal.ae:
     com.google.android.gms.internal.dw$a o(android.os.Parcel) -> a
     com.google.android.gms.internal.dw$a[] C(int) -> a
     void a(com.google.android.gms.internal.dw$a,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.dy -> com.google.android.gms.internal.ae:
+com.google.android.gms.internal.dy -> com.google.android.gms.internal.af:
     com.google.android.gms.internal.dz$b p(android.os.Parcel) -> a
     com.google.android.gms.internal.dz$b[] D(int) -> a
     void a(com.google.android.gms.internal.dz$b,android.os.Parcel,int) -> a
@@ -6751,13 +7358,13 @@ com.google.android.gms.internal.dz$b -> com.google.android.gms.internal.dz$b:
     com.google.android.gms.internal.dw$a lO -> d
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.ea -> com.google.android.gms.internal.af:
+com.google.android.gms.internal.ea -> com.google.android.gms.internal.ag:
     com.google.android.gms.internal.dz q(android.os.Parcel) -> a
     com.google.android.gms.internal.dz[] E(int) -> a
     void a(com.google.android.gms.internal.dz,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.eb -> com.google.android.gms.internal.ag:
+com.google.android.gms.internal.eb -> com.google.android.gms.internal.ah:
     com.google.android.gms.internal.dz$a r(android.os.Parcel) -> a
     com.google.android.gms.internal.dz$a[] F(int) -> a
     void a(com.google.android.gms.internal.dz$a,android.os.Parcel,int) -> a
@@ -6790,13 +7397,13 @@ com.google.android.gms.internal.ec -> com.google.android.gms.internal.ec:
     void b(java.lang.StringBuilder,com.google.android.gms.internal.dw$a,java.util.ArrayList) -> a
     void a(java.lang.StringBuilder,int,java.lang.Object) -> a
     java.util.HashMap b(android.os.Bundle) -> a
-com.google.android.gms.internal.ed -> com.google.android.gms.internal.ah:
+com.google.android.gms.internal.ed -> com.google.android.gms.internal.ai:
     com.google.android.gms.internal.ec s(android.os.Parcel) -> a
     com.google.android.gms.internal.ec[] G(int) -> a
     void a(com.google.android.gms.internal.ec,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.ee -> com.google.android.gms.internal.ai:
+com.google.android.gms.internal.ee -> com.google.android.gms.internal.aj:
     void a(java.lang.StringBuilder,java.lang.Object[]) -> a
     void a(java.lang.StringBuilder,int[]) -> a
     void a(java.lang.StringBuilder,long[]) -> a
@@ -6804,18 +7411,18 @@ com.google.android.gms.internal.ee -> com.google.android.gms.internal.ai:
     void a(java.lang.StringBuilder,double[]) -> a
     void a(java.lang.StringBuilder,boolean[]) -> a
     void a(java.lang.StringBuilder,java.lang.String[]) -> a
-com.google.android.gms.internal.ef -> com.google.android.gms.internal.aj:
+com.google.android.gms.internal.ef -> com.google.android.gms.internal.ak:
     java.lang.String b(byte[]) -> a
     java.lang.String c(byte[]) -> b
-com.google.android.gms.internal.eh -> com.google.android.gms.internal.ak:
+com.google.android.gms.internal.eh -> com.google.android.gms.internal.al:
     boolean H(int) -> a
-com.google.android.gms.internal.ei -> com.google.android.gms.internal.al:
+com.google.android.gms.internal.ei -> com.google.android.gms.internal.am:
     java.util.regex.Pattern lT -> a
     java.util.regex.Pattern lU -> b
     java.lang.String I(java.lang.String) -> a
-com.google.android.gms.internal.ej -> com.google.android.gms.internal.am:
+com.google.android.gms.internal.ej -> com.google.android.gms.internal.an:
     void a(java.lang.StringBuilder,java.util.HashMap) -> a
-com.google.android.gms.internal.ek -> com.google.android.gms.internal.an:
+com.google.android.gms.internal.ek -> com.google.android.gms.internal.ao:
     boolean bJ() -> a
     boolean bO() -> b
     boolean I(int) -> a
@@ -6853,7 +7460,7 @@ com.google.android.gms.internal.fa -> com.google.android.gms.internal.fa:
     java.lang.String toString() -> toString
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
-com.google.android.gms.internal.fb -> com.google.android.gms.internal.ao:
+com.google.android.gms.internal.fb -> com.google.android.gms.internal.ap:
     com.google.android.gms.internal.fa z(android.os.Parcel) -> a
     com.google.android.gms.internal.fa[] ac(int) -> a
     void a(com.google.android.gms.internal.fa,android.os.Parcel,int) -> a
@@ -6884,7 +7491,7 @@ com.google.android.gms.internal.fn -> com.google.android.gms.internal.fn:
     boolean equals(java.lang.Object) -> equals
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.fp -> com.google.android.gms.internal.ap:
+com.google.android.gms.internal.fp -> com.google.android.gms.internal.aq:
     com.google.android.gms.internal.fn A(android.os.Parcel) -> a
     com.google.android.gms.internal.fn[] af(int) -> a
     void a(com.google.android.gms.internal.fn,android.os.Parcel,int) -> a
@@ -7016,7 +7623,7 @@ com.google.android.gms.internal.fq -> com.google.android.gms.internal.fq:
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     java.lang.Object freeze() -> a
-com.google.android.gms.internal.fr -> com.google.android.gms.internal.aq:
+com.google.android.gms.internal.fr -> com.google.android.gms.internal.ar:
     com.google.android.gms.internal.fq B(android.os.Parcel) -> a
     com.google.android.gms.internal.fq[] ag(int) -> a
     void a(com.google.android.gms.internal.fq,android.os.Parcel,int) -> a
@@ -7050,7 +7657,7 @@ com.google.android.gms.internal.fs -> com.google.android.gms.internal.fs:
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     java.lang.Object freeze() -> a
-com.google.android.gms.internal.ft -> com.google.android.gms.internal.ar:
+com.google.android.gms.internal.ft -> com.google.android.gms.internal.as:
     com.google.android.gms.internal.fs C(android.os.Parcel) -> a
     com.google.android.gms.internal.fs[] ah(int) -> a
     void a(com.google.android.gms.internal.fs,android.os.Parcel,int) -> a
@@ -7348,70 +7955,70 @@ com.google.android.gms.internal.fv$h -> com.google.android.gms.internal.fv$h:
     int hashCode() -> hashCode
     boolean equals(java.lang.Object) -> equals
     java.lang.Object freeze() -> a
-com.google.android.gms.internal.fw -> com.google.android.gms.internal.as:
+com.google.android.gms.internal.fw -> com.google.android.gms.internal.at:
     com.google.android.gms.internal.fv D(android.os.Parcel) -> a
     com.google.android.gms.internal.fv[] ai(int) -> a
     void a(com.google.android.gms.internal.fv,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.fx -> com.google.android.gms.internal.at:
+com.google.android.gms.internal.fx -> com.google.android.gms.internal.au:
     com.google.android.gms.internal.fv$a E(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$a[] aj(int) -> a
     void a(com.google.android.gms.internal.fv$a,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.fy -> com.google.android.gms.internal.au:
+com.google.android.gms.internal.fy -> com.google.android.gms.internal.av:
     com.google.android.gms.internal.fv$b F(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$b[] ak(int) -> a
     void a(com.google.android.gms.internal.fv$b,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.fz -> com.google.android.gms.internal.av:
+com.google.android.gms.internal.fz -> com.google.android.gms.internal.aw:
     com.google.android.gms.internal.fv$b$a G(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$b$a[] al(int) -> a
     void a(com.google.android.gms.internal.fv$b$a,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.ga -> com.google.android.gms.internal.aw:
+com.google.android.gms.internal.ga -> com.google.android.gms.internal.ax:
     com.google.android.gms.internal.fv$b$b H(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$b$b[] am(int) -> a
     void a(com.google.android.gms.internal.fv$b$b,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.gb -> com.google.android.gms.internal.ax:
+com.google.android.gms.internal.gb -> com.google.android.gms.internal.ay:
     com.google.android.gms.internal.fv$c I(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$c[] an(int) -> a
     void a(com.google.android.gms.internal.fv$c,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.gc -> com.google.android.gms.internal.ay:
+com.google.android.gms.internal.gc -> com.google.android.gms.internal.az:
     com.google.android.gms.internal.fv$d J(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$d[] ao(int) -> a
     void a(com.google.android.gms.internal.fv$d,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.gd -> com.google.android.gms.internal.az:
+com.google.android.gms.internal.gd -> com.google.android.gms.internal.ba:
     com.google.android.gms.internal.fv$f K(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$f[] ap(int) -> a
     void a(com.google.android.gms.internal.fv$f,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.ge -> com.google.android.gms.internal.ba:
+com.google.android.gms.internal.ge -> com.google.android.gms.internal.bb:
     com.google.android.gms.internal.fv$g L(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$g[] aq(int) -> a
     void a(com.google.android.gms.internal.fv$g,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.gf -> com.google.android.gms.internal.bb:
+com.google.android.gms.internal.gf -> com.google.android.gms.internal.bc:
     com.google.android.gms.internal.fv$h M(android.os.Parcel) -> a
     com.google.android.gms.internal.fv$h[] ar(int) -> a
     void a(com.google.android.gms.internal.fv$h,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.android.gms.internal.h -> com.google.android.gms.internal.bc:
+com.google.android.gms.internal.h -> com.google.android.gms.internal.bd:
     com.google.android.gms.internal.d dz -> a
     void a(android.view.MotionEvent) -> a
-com.google.android.gms.internal.q -> com.google.android.gms.internal.bd:
+com.google.android.gms.internal.q -> com.google.android.gms.internal.bf:
 com.google.android.gms.internal.v -> com.google.android.gms.internal.v:
     com.google.android.gms.internal.w CREATOR -> a
     int versionCode -> b
@@ -7423,7 +8030,7 @@ com.google.android.gms.internal.v -> com.google.android.gms.internal.v:
     int tagForChildDirectedTreatment -> h
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.w -> com.google.android.gms.internal.bf:
+com.google.android.gms.internal.w -> com.google.android.gms.internal.bg:
     com.google.android.gms.internal.v a(android.os.Parcel) -> a
     com.google.android.gms.internal.v[] b(int) -> a
     void a(com.google.android.gms.internal.v,android.os.Parcel,int) -> a
@@ -7440,7 +8047,7 @@ com.google.android.gms.internal.x -> com.google.android.gms.internal.x:
     int widthPixels -> h
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-com.google.android.gms.internal.y -> com.google.android.gms.internal.bg:
+com.google.android.gms.internal.y -> com.google.android.gms.internal.bi:
     com.google.android.gms.internal.x b(android.os.Parcel) -> a
     com.google.android.gms.internal.x[] c(int) -> a
     void a(com.google.android.gms.internal.x,android.os.Parcel,int) -> a
@@ -7840,18 +8447,18 @@ com.google.android.gms.maps.model.j -> com.google.android.gms.maps.model.x:
     void a(com.google.android.gms.maps.model.TileOverlayOptions,android.os.Parcel,int) -> a
 com.google.android.gms.maps.model.k -> com.google.android.gms.maps.model.y:
     void a(com.google.android.gms.maps.model.VisibleRegion,android.os.Parcel,int) -> a
-com.google.android.gms.plus.model.moments.ItemScope -> com.google.android.gms.b.a.a.a:
-com.google.android.gms.plus.model.moments.Moment -> com.google.android.gms.b.a.a.b:
-com.google.android.gms.plus.model.people.Person -> com.google.android.gms.b.a.b.a:
-com.google.android.gms.plus.model.people.Person$AgeRange -> com.google.android.gms.b.a.b.b:
-com.google.android.gms.plus.model.people.Person$Cover -> com.google.android.gms.b.a.b.c:
-com.google.android.gms.plus.model.people.Person$Cover$CoverInfo -> com.google.android.gms.b.a.b.d:
-com.google.android.gms.plus.model.people.Person$Cover$CoverPhoto -> com.google.android.gms.b.a.b.e:
-com.google.android.gms.plus.model.people.Person$Image -> com.google.android.gms.b.a.b.f:
-com.google.android.gms.plus.model.people.Person$Name -> com.google.android.gms.b.a.b.g:
-com.google.android.gms.plus.model.people.Person$Organizations -> com.google.android.gms.b.a.b.h:
-com.google.android.gms.plus.model.people.Person$PlacesLived -> com.google.android.gms.b.a.b.i:
-com.google.android.gms.plus.model.people.Person$Urls -> com.google.android.gms.b.a.b.j:
+com.google.android.gms.plus.model.moments.ItemScope -> com.google.android.gms.c.a.a.a:
+com.google.android.gms.plus.model.moments.Moment -> com.google.android.gms.c.a.a.b:
+com.google.android.gms.plus.model.people.Person -> com.google.android.gms.c.a.b.a:
+com.google.android.gms.plus.model.people.Person$AgeRange -> com.google.android.gms.c.a.b.b:
+com.google.android.gms.plus.model.people.Person$Cover -> com.google.android.gms.c.a.b.c:
+com.google.android.gms.plus.model.people.Person$Cover$CoverInfo -> com.google.android.gms.c.a.b.d:
+com.google.android.gms.plus.model.people.Person$Cover$CoverPhoto -> com.google.android.gms.c.a.b.e:
+com.google.android.gms.plus.model.people.Person$Image -> com.google.android.gms.c.a.b.f:
+com.google.android.gms.plus.model.people.Person$Name -> com.google.android.gms.c.a.b.g:
+com.google.android.gms.plus.model.people.Person$Organizations -> com.google.android.gms.c.a.b.h:
+com.google.android.gms.plus.model.people.Person$PlacesLived -> com.google.android.gms.c.a.b.i:
+com.google.android.gms.plus.model.people.Person$Urls -> com.google.android.gms.c.a.b.j:
 com.google.android.gms.wallet.Address -> com.google.android.gms.wallet.Address:
     android.os.Parcelable$Creator CREATOR -> CREATOR
     int iM -> l
@@ -8045,20 +8652,20 @@ com.google.android.gms.wallet.k -> com.google.android.gms.wallet.k:
     void a(com.google.android.gms.wallet.ProxyCard,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-com.google.common.base.Preconditions -> com.google.a.a.a:
+com.google.common.base.Preconditions -> com.google.c.a.a:
     java.lang.Object checkNotNull(java.lang.Object) -> a
-com.google.common.base.Throwables -> com.google.a.a.b:
+com.google.common.base.Throwables -> com.google.c.a.b:
     void propagateIfInstanceOf(java.lang.Throwable,java.lang.Class) -> a
     void propagateIfPossible(java.lang.Throwable) -> a
     java.lang.RuntimeException propagate(java.lang.Throwable) -> b
-com.google.common.cache.LoadingCache -> com.google.a.b.a:
+com.google.common.cache.LoadingCache -> com.google.c.b.a:
     java.lang.Object get(java.lang.Object) -> a
-com.google.common.collect.SetMultimap -> com.google.a.c.a:
+com.google.common.collect.SetMultimap -> com.google.c.c.a:
     java.util.Set get(java.lang.Object) -> a
-com.google.common.eventbus.DeadEvent -> com.google.a.d.a:
+com.google.common.eventbus.DeadEvent -> com.google.c.d.a:
     java.lang.Object source -> a
     java.lang.Object event -> b
-com.google.common.eventbus.EventBus -> com.google.a.d.b:
+com.google.common.eventbus.EventBus -> com.google.c.d.b:
     com.google.common.collect.SetMultimap handlersByType -> a
     java.util.logging.Logger logger -> b
     java.lang.ThreadLocal eventsToDispatch -> c
@@ -8070,10 +8677,10 @@ com.google.common.eventbus.EventBus -> com.google.a.d.b:
     void dispatch(java.lang.Object,com.google.common.eventbus.EventHandler) -> b
     java.util.Set getHandlersForEventType(java.lang.Class) -> a
     java.util.Set flattenHierarchy(java.lang.Class) -> b
-com.google.common.eventbus.EventBus$EventWithHandler -> com.google.a.d.c:
+com.google.common.eventbus.EventBus$EventWithHandler -> com.google.c.d.c:
     java.lang.Object event -> a
     com.google.common.eventbus.EventHandler handler -> b
-com.google.common.eventbus.EventHandler -> com.google.a.d.d:
+com.google.common.eventbus.EventHandler -> com.google.c.d.d:
     java.lang.Object target -> a
     java.lang.reflect.Method method -> b
     void handleEvent(java.lang.Object) -> a
@@ -8229,6 +8836,8 @@ ua.maker.gbible.SinglePanelActivity -> ua.maker.gbible.b:
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onBackPressed() -> onBackPressed
+    void onStart() -> onStart
+    void onStop() -> onStop
     android.support.v4.app.Fragment onCreatePane() -> a
     android.content.SharedPreferences access$0(ua.maker.gbible.SinglePanelActivity) -> a
 ua.maker.gbible.SinglePanelActivity$1 -> ua.maker.gbible.c:
@@ -8367,14 +8976,20 @@ ua.maker.gbible.fragment.BookmarksFragment -> ua.maker.gbible.b.a:
     android.view.View view -> a
     android.widget.ListView lvBookmarks -> b
     android.widget.TextView tvInfo -> c
-    ua.maker.gbible.adapter.ItemListBookmarksAdapter adapter -> d
-    java.util.List listBookmarks -> e
-    ua.maker.gbible.utils.UserDB db -> f
-    int selectItem -> g
-    android.widget.AdapterView$OnItemClickListener itemClickListener -> h
-    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> i
-    android.content.DialogInterface$OnClickListener clickCopyAllListener -> j
-    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> k
+    android.widget.TextView tvContentPoemToCopy -> d
+    ua.maker.gbible.adapter.ItemListBookmarksAdapter adapter -> e
+    android.view.View viewDialogCopy -> f
+    android.app.AlertDialog dialogSelect -> g
+    java.util.List listBookmarks -> h
+    java.util.List listPlans -> i
+    ua.maker.gbible.utils.UserDB db -> j
+    int selectItem -> k
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> l
+    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> m
+    android.view.View$OnLongClickListener longClickOnTextViewListener -> n
+    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> o
+    android.content.DialogInterface$OnClickListener clickCopyAllListener -> p
+    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> q
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void updateListView() -> a
@@ -8384,10 +8999,16 @@ ua.maker.gbible.fragment.BookmarksFragment -> ua.maker.gbible.b.a:
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
     boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
     void copyToClipBoard(java.lang.String) -> a
+    void onStart() -> onStart
+    void onStop() -> onStop
     java.util.List access$0(ua.maker.gbible.fragment.BookmarksFragment) -> a
     void access$1(ua.maker.gbible.fragment.BookmarksFragment,int) -> a
-    int access$2(ua.maker.gbible.fragment.BookmarksFragment) -> b
-    void access$3(ua.maker.gbible.fragment.BookmarksFragment,java.lang.String) -> a
+    android.widget.TextView access$2(ua.maker.gbible.fragment.BookmarksFragment) -> b
+    java.util.List access$3(ua.maker.gbible.fragment.BookmarksFragment) -> c
+    int access$4(ua.maker.gbible.fragment.BookmarksFragment) -> d
+    ua.maker.gbible.utils.UserDB access$5(ua.maker.gbible.fragment.BookmarksFragment) -> e
+    void access$6(ua.maker.gbible.fragment.BookmarksFragment,java.lang.String) -> a
+    android.app.AlertDialog access$7(ua.maker.gbible.fragment.BookmarksFragment) -> f
 ua.maker.gbible.fragment.BookmarksFragment$1 -> ua.maker.gbible.b.b:
     ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
@@ -8396,11 +9017,26 @@ ua.maker.gbible.fragment.BookmarksFragment$2 -> ua.maker.gbible.b.c:
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
 ua.maker.gbible.fragment.BookmarksFragment$3 -> ua.maker.gbible.b.d:
     ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
+    boolean onLongClick(android.view.View) -> onLongClick
 ua.maker.gbible.fragment.BookmarksFragment$4 -> ua.maker.gbible.b.e:
     ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.HistoryFragment -> ua.maker.gbible.b.f:
+ua.maker.gbible.fragment.BookmarksFragment$5 -> ua.maker.gbible.b.f:
+    ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.fragment.BookmarksFragment$6 -> ua.maker.gbible.b.g:
+    ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.fragment.BookmarksFragment$7 -> ua.maker.gbible.b.h:
+    ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.fragment.BookmarksFragment$ActionModeCallback -> ua.maker.gbible.b.i:
+    ua.maker.gbible.fragment.BookmarksFragment this$0 -> a
+    boolean onCreateActionMode(android.view.ActionMode,android.view.Menu) -> onCreateActionMode
+    boolean onPrepareActionMode(android.view.ActionMode,android.view.Menu) -> onPrepareActionMode
+    boolean onActionItemClicked(android.view.ActionMode,android.view.MenuItem) -> onActionItemClicked
+    void onDestroyActionMode(android.view.ActionMode) -> onDestroyActionMode
+ua.maker.gbible.fragment.HistoryFragment -> ua.maker.gbible.b.j:
     android.view.View view -> a
     android.widget.ListView lvListShowHistoryItem -> b
     android.widget.TextView tvShowInfoEmpty -> c
@@ -8417,20 +9053,21 @@ ua.maker.gbible.fragment.HistoryFragment -> ua.maker.gbible.b.f:
     void updateListHistory() -> b
     void onCreateOptionsMenu(com.actionbarsherlock.view.Menu,com.actionbarsherlock.view.MenuInflater) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     java.util.List access$0(ua.maker.gbible.fragment.HistoryFragment) -> a
     ua.maker.gbible.utils.UserDB access$1(ua.maker.gbible.fragment.HistoryFragment) -> b
     void access$2(ua.maker.gbible.fragment.HistoryFragment) -> c
-    void access$3(ua.maker.gbible.fragment.HistoryFragment) -> d
-ua.maker.gbible.fragment.HistoryFragment$1 -> ua.maker.gbible.b.g:
+ua.maker.gbible.fragment.HistoryFragment$1 -> ua.maker.gbible.b.k:
     ua.maker.gbible.fragment.HistoryFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.HistoryFragment$2 -> ua.maker.gbible.b.h:
+ua.maker.gbible.fragment.HistoryFragment$2 -> ua.maker.gbible.b.l:
     ua.maker.gbible.fragment.HistoryFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.HistoryFragment$3 -> ua.maker.gbible.b.i:
+ua.maker.gbible.fragment.HistoryFragment$3 -> ua.maker.gbible.b.m:
     ua.maker.gbible.fragment.HistoryFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.j:
+ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.n:
     android.view.View view -> a
     android.widget.GridView gvShowChapters -> b
     ua.maker.gbible.utils.DataBase dataBase -> c
@@ -8450,25 +9087,27 @@ ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.j:
     void onResume() -> onResume
     void onCreateOptionsMenu(com.actionbarsherlock.view.Menu,com.actionbarsherlock.view.MenuInflater) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     int access$0(ua.maker.gbible.fragment.ListChaptersFragment) -> a
     java.text.SimpleDateFormat access$1() -> a
     java.lang.String access$2(ua.maker.gbible.fragment.ListChaptersFragment) -> b
     ua.maker.gbible.utils.UserDB access$3(ua.maker.gbible.fragment.ListChaptersFragment) -> c
     android.content.SharedPreferences access$4(ua.maker.gbible.fragment.ListChaptersFragment) -> d
-ua.maker.gbible.fragment.ListChaptersFragment$1 -> ua.maker.gbible.b.k:
+ua.maker.gbible.fragment.ListChaptersFragment$1 -> ua.maker.gbible.b.o:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.ListChaptersFragment$2 -> ua.maker.gbible.b.l:
+ua.maker.gbible.fragment.ListChaptersFragment$2 -> ua.maker.gbible.b.p:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.ListChaptersFragment$3 -> ua.maker.gbible.b.m:
+ua.maker.gbible.fragment.ListChaptersFragment$3 -> ua.maker.gbible.b.q:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.n:
+ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     java.text.SimpleDateFormat dateFormat -> c
     android.view.View view -> d
     android.widget.ListView lvShowPoem -> e
-    android.webkit.WebView wvContent -> f
+    android.widget.TextView tvContentPoemToCopy -> f
     android.widget.LinearLayout llMenuLink -> g
     ua.maker.gbible.utils.DataBase dataBase -> h
     ua.maker.gbible.utils.UserDB dbUser -> i
@@ -8504,19 +9143,22 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.n:
     int poemBM -> M
     int chapterBM -> N
     java.lang.String contentBM -> O
+    android.view.View viewDialogCopy -> P
+    android.app.AlertDialog dialogSelect -> Q
+    android.view.View$OnLongClickListener longClickOnTextViewListener -> R
     android.view.GestureDetector$SimpleOnGestureListener gestureListener -> a
     android.view.GestureDetector gestureDetector -> b
-    android.view.View$OnTouchListener touchListener -> P
-    android.view.View$OnKeyListener keyListener -> Q
-    android.widget.AbsListView$OnScrollListener scrollChangeListener -> R
-    android.widget.AdapterView$OnItemClickListener itemClickListener -> S
-    android.content.DialogInterface$OnClickListener dialogItemClickListener -> T
-    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> U
-    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> V
-    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> W
-    android.content.DialogInterface$OnClickListener clickCopyAllListener -> X
-    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> Y
-    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> Z
+    android.view.View$OnTouchListener touchListener -> S
+    android.view.View$OnKeyListener keyListener -> T
+    android.widget.AbsListView$OnScrollListener scrollChangeListener -> U
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> V
+    android.content.DialogInterface$OnClickListener dialogItemClickListener -> W
+    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> X
+    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> Y
+    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> Z
+    android.content.DialogInterface$OnClickListener clickCopyAllListener -> aa
+    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ab
+    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> ac
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void showInfoPopup() -> a
@@ -8532,109 +9174,121 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.n:
     void changeChapter(int) -> a
     void onResume() -> onResume
     void onPause() -> onPause
-    int access$0(ua.maker.gbible.fragment.ListPoemsFragment) -> a
-    void access$1(ua.maker.gbible.fragment.ListPoemsFragment) -> b
+    void onStop() -> onStop
+    android.widget.TextView access$0(ua.maker.gbible.fragment.ListPoemsFragment) -> a
+    int access$1(ua.maker.gbible.fragment.ListPoemsFragment) -> b
     void access$2(ua.maker.gbible.fragment.ListPoemsFragment) -> c
-    void access$3(ua.maker.gbible.fragment.ListPoemsFragment,int) -> a
-    boolean access$4(ua.maker.gbible.fragment.ListPoemsFragment) -> d
-    int access$5(ua.maker.gbible.fragment.ListPoemsFragment) -> e
-    android.widget.ListView access$6(ua.maker.gbible.fragment.ListPoemsFragment) -> f
-    android.widget.Button access$7(ua.maker.gbible.fragment.ListPoemsFragment) -> g
-    void access$8(ua.maker.gbible.fragment.ListPoemsFragment,int) -> b
-    void access$9(ua.maker.gbible.fragment.ListPoemsFragment,int) -> c
-    void access$10(ua.maker.gbible.fragment.ListPoemsFragment,int) -> d
-    void access$11(ua.maker.gbible.fragment.ListPoemsFragment) -> h
-    void access$12(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> a
-    void access$13(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> b
-    int access$14(ua.maker.gbible.fragment.ListPoemsFragment) -> i
+    void access$3(ua.maker.gbible.fragment.ListPoemsFragment) -> d
+    void access$4(ua.maker.gbible.fragment.ListPoemsFragment,int) -> a
+    boolean access$5(ua.maker.gbible.fragment.ListPoemsFragment) -> e
+    int access$6(ua.maker.gbible.fragment.ListPoemsFragment) -> f
+    android.widget.ListView access$7(ua.maker.gbible.fragment.ListPoemsFragment) -> g
+    android.widget.Button access$8(ua.maker.gbible.fragment.ListPoemsFragment) -> h
+    void access$9(ua.maker.gbible.fragment.ListPoemsFragment,int) -> b
+    void access$10(ua.maker.gbible.fragment.ListPoemsFragment,int) -> c
+    void access$11(ua.maker.gbible.fragment.ListPoemsFragment,int) -> d
+    void access$12(ua.maker.gbible.fragment.ListPoemsFragment) -> i
+    void access$13(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> a
+    void access$14(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> b
     int access$15(ua.maker.gbible.fragment.ListPoemsFragment) -> j
     int access$16(ua.maker.gbible.fragment.ListPoemsFragment) -> k
-    android.content.DialogInterface$OnClickListener access$17(ua.maker.gbible.fragment.ListPoemsFragment) -> l
+    int access$17(ua.maker.gbible.fragment.ListPoemsFragment) -> l
     android.content.DialogInterface$OnClickListener access$18(ua.maker.gbible.fragment.ListPoemsFragment) -> m
-    void access$19(ua.maker.gbible.fragment.ListPoemsFragment,android.webkit.WebView) -> a
-    android.webkit.WebView access$20(ua.maker.gbible.fragment.ListPoemsFragment) -> n
-    int access$21(ua.maker.gbible.fragment.ListPoemsFragment) -> o
-    java.util.List access$22(ua.maker.gbible.fragment.ListPoemsFragment) -> p
-    android.content.DialogInterface$OnClickListener access$23(ua.maker.gbible.fragment.ListPoemsFragment) -> q
-    android.content.DialogInterface$OnClickListener access$24(ua.maker.gbible.fragment.ListPoemsFragment) -> r
-    int access$25(ua.maker.gbible.fragment.ListPoemsFragment) -> s
-    java.util.List access$26(ua.maker.gbible.fragment.ListPoemsFragment) -> t
-    android.content.DialogInterface$OnClickListener access$27(ua.maker.gbible.fragment.ListPoemsFragment) -> u
-    java.lang.String access$28(ua.maker.gbible.fragment.ListPoemsFragment) -> v
-    android.widget.EditText access$29(ua.maker.gbible.fragment.ListPoemsFragment) -> w
-    android.widget.EditText access$30(ua.maker.gbible.fragment.ListPoemsFragment) -> x
-    ua.maker.gbible.utils.UserDB access$31(ua.maker.gbible.fragment.ListPoemsFragment) -> y
-    void access$32(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> a
-    void access$33(ua.maker.gbible.fragment.ListPoemsFragment,int) -> e
-    void access$34(ua.maker.gbible.fragment.ListPoemsFragment,int) -> f
-    void access$35(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> b
-    android.app.AlertDialog access$36(ua.maker.gbible.fragment.ListPoemsFragment) -> z
-    ua.maker.gbible.utils.DataBase access$37(ua.maker.gbible.fragment.ListPoemsFragment) -> A
-    java.lang.String access$38(ua.maker.gbible.fragment.ListPoemsFragment) -> B
-    void access$39(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
-    void access$40(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
-    android.content.SharedPreferences access$41(ua.maker.gbible.fragment.ListPoemsFragment) -> C
-    android.widget.Button access$42(ua.maker.gbible.fragment.ListPoemsFragment) -> D
-    void access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
-    void access$44(ua.maker.gbible.fragment.ListPoemsFragment) -> F
-    void access$45(ua.maker.gbible.fragment.ListPoemsFragment,int) -> g
-    void access$46(ua.maker.gbible.fragment.ListPoemsFragment,int) -> h
-ua.maker.gbible.fragment.ListPoemsFragment$1 -> ua.maker.gbible.b.o:
+    android.content.DialogInterface$OnClickListener access$19(ua.maker.gbible.fragment.ListPoemsFragment) -> n
+    int access$20(ua.maker.gbible.fragment.ListPoemsFragment) -> o
+    java.util.List access$21(ua.maker.gbible.fragment.ListPoemsFragment) -> p
+    android.content.DialogInterface$OnClickListener access$22(ua.maker.gbible.fragment.ListPoemsFragment) -> q
+    android.content.DialogInterface$OnClickListener access$23(ua.maker.gbible.fragment.ListPoemsFragment) -> r
+    android.view.View access$24(ua.maker.gbible.fragment.ListPoemsFragment) -> s
+    void access$25(ua.maker.gbible.fragment.ListPoemsFragment,android.app.AlertDialog) -> a
+    android.app.AlertDialog access$26(ua.maker.gbible.fragment.ListPoemsFragment) -> t
+    int access$27(ua.maker.gbible.fragment.ListPoemsFragment) -> u
+    java.util.List access$28(ua.maker.gbible.fragment.ListPoemsFragment) -> v
+    android.content.DialogInterface$OnClickListener access$29(ua.maker.gbible.fragment.ListPoemsFragment) -> w
+    java.lang.String access$30(ua.maker.gbible.fragment.ListPoemsFragment) -> x
+    android.widget.EditText access$31(ua.maker.gbible.fragment.ListPoemsFragment) -> y
+    android.widget.EditText access$32(ua.maker.gbible.fragment.ListPoemsFragment) -> z
+    ua.maker.gbible.utils.UserDB access$33(ua.maker.gbible.fragment.ListPoemsFragment) -> A
+    void access$34(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> a
+    void access$35(ua.maker.gbible.fragment.ListPoemsFragment,int) -> e
+    void access$36(ua.maker.gbible.fragment.ListPoemsFragment,int) -> f
+    void access$37(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> b
+    android.app.AlertDialog access$38(ua.maker.gbible.fragment.ListPoemsFragment) -> B
+    ua.maker.gbible.utils.DataBase access$39(ua.maker.gbible.fragment.ListPoemsFragment) -> C
+    java.lang.String access$40(ua.maker.gbible.fragment.ListPoemsFragment) -> D
+    void access$41(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
+    void access$42(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
+    android.content.SharedPreferences access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
+    android.widget.Button access$44(ua.maker.gbible.fragment.ListPoemsFragment) -> F
+    void access$45(ua.maker.gbible.fragment.ListPoemsFragment) -> G
+    void access$46(ua.maker.gbible.fragment.ListPoemsFragment) -> H
+    void access$47(ua.maker.gbible.fragment.ListPoemsFragment,int) -> g
+    void access$48(ua.maker.gbible.fragment.ListPoemsFragment,int) -> h
+ua.maker.gbible.fragment.ListPoemsFragment$1 -> ua.maker.gbible.b.s:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
-ua.maker.gbible.fragment.ListPoemsFragment$10 -> ua.maker.gbible.b.p:
+    boolean onLongClick(android.view.View) -> onLongClick
+ua.maker.gbible.fragment.ListPoemsFragment$10 -> ua.maker.gbible.b.t:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$11 -> ua.maker.gbible.b.q:
+ua.maker.gbible.fragment.ListPoemsFragment$11 -> ua.maker.gbible.b.u:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$12 -> ua.maker.gbible.b.r:
+ua.maker.gbible.fragment.ListPoemsFragment$12 -> ua.maker.gbible.b.v:
+    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.fragment.ListPoemsFragment$13 -> ua.maker.gbible.b.w:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-ua.maker.gbible.fragment.ListPoemsFragment$13 -> ua.maker.gbible.b.s:
+ua.maker.gbible.fragment.ListPoemsFragment$14 -> ua.maker.gbible.b.x:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void run() -> run
-ua.maker.gbible.fragment.ListPoemsFragment$14 -> ua.maker.gbible.b.t:
+ua.maker.gbible.fragment.ListPoemsFragment$15 -> ua.maker.gbible.b.y:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$15 -> ua.maker.gbible.b.u:
+ua.maker.gbible.fragment.ListPoemsFragment$16 -> ua.maker.gbible.b.z:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$16 -> ua.maker.gbible.b.v:
+ua.maker.gbible.fragment.ListPoemsFragment$17 -> ua.maker.gbible.b.aa:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$17 -> ua.maker.gbible.b.w:
+ua.maker.gbible.fragment.ListPoemsFragment$18 -> ua.maker.gbible.b.ab:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void run() -> run
-ua.maker.gbible.fragment.ListPoemsFragment$2 -> ua.maker.gbible.b.x:
+ua.maker.gbible.fragment.ListPoemsFragment$2 -> ua.maker.gbible.b.ac:
+    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
+ua.maker.gbible.fragment.ListPoemsFragment$3 -> ua.maker.gbible.b.ad:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-ua.maker.gbible.fragment.ListPoemsFragment$3 -> ua.maker.gbible.b.y:
+ua.maker.gbible.fragment.ListPoemsFragment$4 -> ua.maker.gbible.b.ae:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
-ua.maker.gbible.fragment.ListPoemsFragment$4 -> ua.maker.gbible.b.z:
+ua.maker.gbible.fragment.ListPoemsFragment$5 -> ua.maker.gbible.b.af:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-ua.maker.gbible.fragment.ListPoemsFragment$5 -> ua.maker.gbible.b.aa:
+ua.maker.gbible.fragment.ListPoemsFragment$6 -> ua.maker.gbible.b.ag:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.ListPoemsFragment$6 -> ua.maker.gbible.b.ab:
+ua.maker.gbible.fragment.ListPoemsFragment$7 -> ua.maker.gbible.b.ah:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$6$1 -> ua.maker.gbible.b.ac:
-    ua.maker.gbible.fragment.ListPoemsFragment$6 this$1 -> a
+ua.maker.gbible.fragment.ListPoemsFragment$7$1 -> ua.maker.gbible.b.ai:
+    ua.maker.gbible.fragment.ListPoemsFragment$7 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$7 -> ua.maker.gbible.b.ad:
+ua.maker.gbible.fragment.ListPoemsFragment$8 -> ua.maker.gbible.b.aj:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$8 -> ua.maker.gbible.b.ae:
+ua.maker.gbible.fragment.ListPoemsFragment$9 -> ua.maker.gbible.b.ak:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$9 -> ua.maker.gbible.b.af:
+ua.maker.gbible.fragment.ListPoemsFragment$ActionModeCallback -> ua.maker.gbible.b.al:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gbible.b.ag:
+    boolean onCreateActionMode(android.view.ActionMode,android.view.Menu) -> onCreateActionMode
+    boolean onPrepareActionMode(android.view.ActionMode,android.view.Menu) -> onPrepareActionMode
+    boolean onActionItemClicked(android.view.ActionMode,android.view.MenuItem) -> onActionItemClicked
+    void onDestroyActionMode(android.view.ActionMode) -> onDestroyActionMode
+ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gbible.b.am:
     android.app.ProgressDialog pd -> b
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onPreExecute() -> onPreExecute
@@ -8642,10 +9296,10 @@ ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gb
     void onPostExecute(java.lang.Void) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.maker.gbible.fragment.ListPoemsFragment$MyWebViewClient -> ua.maker.gbible.b.ah:
+ua.maker.gbible.fragment.ListPoemsFragment$MyWebViewClient -> ua.maker.gbible.b.an:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     boolean shouldOverrideUrlLoading(android.webkit.WebView,java.lang.String) -> shouldOverrideUrlLoading
-ua.maker.gbible.fragment.PlanDetailFragment -> ua.maker.gbible.b.ai:
+ua.maker.gbible.fragment.PlanDetailFragment -> ua.maker.gbible.b.ao:
     android.view.View view -> a
     android.content.SharedPreferences pref -> b
     ua.maker.gbible.utils.UserDB db -> c
@@ -8700,6 +9354,7 @@ ua.maker.gbible.fragment.PlanDetailFragment -> ua.maker.gbible.b.ai:
     boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
     void onCreateOptionsMenu(com.actionbarsherlock.view.Menu,com.actionbarsherlock.view.MenuInflater) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStop() -> onStop
     java.util.List access$0(ua.maker.gbible.fragment.PlanDetailFragment) -> a
     ua.maker.gbible.utils.DataBase access$1(ua.maker.gbible.fragment.PlanDetailFragment) -> b
     android.widget.ArrayAdapter access$2(ua.maker.gbible.fragment.PlanDetailFragment) -> c
@@ -8732,37 +9387,37 @@ ua.maker.gbible.fragment.PlanDetailFragment -> ua.maker.gbible.b.ai:
     com.actionbarsherlock.view.MenuItem access$29(ua.maker.gbible.fragment.PlanDetailFragment) -> B
     android.content.SharedPreferences access$30(ua.maker.gbible.fragment.PlanDetailFragment) -> C
     void access$31(ua.maker.gbible.fragment.PlanDetailFragment,int) -> b
-ua.maker.gbible.fragment.PlanDetailFragment$1 -> ua.maker.gbible.b.aj:
+ua.maker.gbible.fragment.PlanDetailFragment$1 -> ua.maker.gbible.b.ap:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-ua.maker.gbible.fragment.PlanDetailFragment$2 -> ua.maker.gbible.b.ak:
+ua.maker.gbible.fragment.PlanDetailFragment$2 -> ua.maker.gbible.b.aq:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-ua.maker.gbible.fragment.PlanDetailFragment$3 -> ua.maker.gbible.b.al:
+ua.maker.gbible.fragment.PlanDetailFragment$3 -> ua.maker.gbible.b.ar:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-ua.maker.gbible.fragment.PlanDetailFragment$4 -> ua.maker.gbible.b.am:
+ua.maker.gbible.fragment.PlanDetailFragment$4 -> ua.maker.gbible.b.as:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-ua.maker.gbible.fragment.PlanDetailFragment$5 -> ua.maker.gbible.b.an:
+ua.maker.gbible.fragment.PlanDetailFragment$5 -> ua.maker.gbible.b.at:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-ua.maker.gbible.fragment.PlanDetailFragment$6 -> ua.maker.gbible.b.ao:
+ua.maker.gbible.fragment.PlanDetailFragment$6 -> ua.maker.gbible.b.au:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.PlanDetailFragment$7 -> ua.maker.gbible.b.ap:
+ua.maker.gbible.fragment.PlanDetailFragment$7 -> ua.maker.gbible.b.av:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.PlanDetailFragment$8 -> ua.maker.gbible.b.aq:
+ua.maker.gbible.fragment.PlanDetailFragment$8 -> ua.maker.gbible.b.aw:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.PlanDetailFragment$9 -> ua.maker.gbible.b.ar:
+ua.maker.gbible.fragment.PlanDetailFragment$9 -> ua.maker.gbible.b.ax:
     ua.maker.gbible.fragment.PlanDetailFragment this$0 -> a
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-ua.maker.gbible.fragment.PlansListFragment -> ua.maker.gbible.b.as:
+ua.maker.gbible.fragment.PlansListFragment -> ua.maker.gbible.b.ay:
     android.view.View view -> a
     android.widget.Button btnCreatePlan -> b
     android.widget.Button btnDialogOK -> c
@@ -8790,6 +9445,8 @@ ua.maker.gbible.fragment.PlansListFragment -> ua.maker.gbible.b.as:
     void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     boolean onContextItemSelected(android.view.MenuItem) -> onContextItemSelected
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     void access$0(ua.maker.gbible.fragment.PlansListFragment,int) -> a
     android.app.AlertDialog access$1(ua.maker.gbible.fragment.PlansListFragment) -> a
     void access$2(ua.maker.gbible.fragment.PlansListFragment,boolean) -> a
@@ -8805,27 +9462,27 @@ ua.maker.gbible.fragment.PlansListFragment -> ua.maker.gbible.b.as:
     void access$12(ua.maker.gbible.fragment.PlansListFragment) -> i
     int access$13(ua.maker.gbible.fragment.PlansListFragment) -> j
     android.content.SharedPreferences access$14(ua.maker.gbible.fragment.PlansListFragment) -> k
-ua.maker.gbible.fragment.PlansListFragment$1 -> ua.maker.gbible.b.at:
+ua.maker.gbible.fragment.PlansListFragment$1 -> ua.maker.gbible.b.az:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
-ua.maker.gbible.fragment.PlansListFragment$2 -> ua.maker.gbible.b.au:
+ua.maker.gbible.fragment.PlansListFragment$2 -> ua.maker.gbible.b.ba:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.PlansListFragment$3 -> ua.maker.gbible.b.av:
+ua.maker.gbible.fragment.PlansListFragment$3 -> ua.maker.gbible.b.bb:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.PlansListFragment$4 -> ua.maker.gbible.b.aw:
+ua.maker.gbible.fragment.PlansListFragment$4 -> ua.maker.gbible.b.bc:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.PlansListFragment$5 -> ua.maker.gbible.b.ax:
+ua.maker.gbible.fragment.PlansListFragment$5 -> ua.maker.gbible.b.bd:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-ua.maker.gbible.fragment.PlansListFragment$6 -> ua.maker.gbible.b.ay:
+ua.maker.gbible.fragment.PlansListFragment$6 -> ua.maker.gbible.b.be:
     ua.maker.gbible.fragment.PlansListFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.SearchFragment -> ua.maker.gbible.b.az:
+ua.maker.gbible.fragment.SearchFragment -> ua.maker.gbible.b.bf:
     android.view.View view -> a
     android.widget.EditText etSearchText -> b
     android.widget.Button btnStartSearch -> c
@@ -8852,6 +9509,8 @@ ua.maker.gbible.fragment.SearchFragment -> ua.maker.gbible.b.az:
     void startSearch(java.lang.String) -> a
     void onCreateOptionsMenu(com.actionbarsherlock.view.Menu,com.actionbarsherlock.view.MenuInflater) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     android.view.View$OnClickListener access$0(ua.maker.gbible.fragment.SearchFragment) -> a
     android.content.SharedPreferences access$1(ua.maker.gbible.fragment.SearchFragment) -> b
     java.util.List access$2(ua.maker.gbible.fragment.SearchFragment) -> c
@@ -8864,29 +9523,29 @@ ua.maker.gbible.fragment.SearchFragment -> ua.maker.gbible.b.az:
     void access$9(ua.maker.gbible.fragment.SearchFragment,int) -> b
     int access$10(ua.maker.gbible.fragment.SearchFragment) -> h
     int access$11(ua.maker.gbible.fragment.SearchFragment) -> i
-ua.maker.gbible.fragment.SearchFragment$1 -> ua.maker.gbible.b.ba:
+ua.maker.gbible.fragment.SearchFragment$1 -> ua.maker.gbible.b.bg:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
-ua.maker.gbible.fragment.SearchFragment$2 -> ua.maker.gbible.b.bb:
+ua.maker.gbible.fragment.SearchFragment$2 -> ua.maker.gbible.b.bh:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.SearchFragment$3 -> ua.maker.gbible.b.bc:
+ua.maker.gbible.fragment.SearchFragment$3 -> ua.maker.gbible.b.bi:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.SearchFragment$4 -> ua.maker.gbible.b.bd:
+ua.maker.gbible.fragment.SearchFragment$4 -> ua.maker.gbible.b.bj:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
     void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
     void afterTextChanged(android.text.Editable) -> afterTextChanged
-ua.maker.gbible.fragment.SearchFragment$5 -> ua.maker.gbible.b.be:
+ua.maker.gbible.fragment.SearchFragment$5 -> ua.maker.gbible.b.bk:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-ua.maker.gbible.fragment.SearchFragment$6 -> ua.maker.gbible.b.bf:
+ua.maker.gbible.fragment.SearchFragment$6 -> ua.maker.gbible.b.bl:
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
     void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
-ua.maker.gbible.fragment.SearchFragment$SearchTast -> ua.maker.gbible.b.bg:
+ua.maker.gbible.fragment.SearchFragment$SearchTast -> ua.maker.gbible.b.bm:
     android.app.ProgressDialog pd -> b
     ua.maker.gbible.fragment.SearchFragment this$0 -> a
     void onPreExecute() -> onPreExecute
@@ -8894,7 +9553,7 @@ ua.maker.gbible.fragment.SearchFragment$SearchTast -> ua.maker.gbible.b.bg:
     void onPostExecute(java.lang.Void) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-ua.maker.gbible.fragment.SelectBookFragment -> ua.maker.gbible.b.bh:
+ua.maker.gbible.fragment.SelectBookFragment -> ua.maker.gbible.b.bn:
     android.view.View view -> a
     android.widget.ListView lvShowBooks -> b
     android.widget.ArrayAdapter adapter -> c
@@ -8911,6 +9570,7 @@ ua.maker.gbible.fragment.SelectBookFragment -> ua.maker.gbible.b.bh:
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void onStart() -> onStart
+    void onStop() -> onStop
     void showDialogSelectTranslate() -> a
     void selectPrefBook(int) -> a
     void onResume() -> onResume
@@ -8924,26 +9584,26 @@ ua.maker.gbible.fragment.SelectBookFragment -> ua.maker.gbible.b.bh:
     android.content.SharedPreferences access$4(ua.maker.gbible.fragment.SelectBookFragment) -> d
     void access$5(ua.maker.gbible.fragment.SelectBookFragment,int) -> b
     android.content.SharedPreferences access$6(ua.maker.gbible.fragment.SelectBookFragment) -> e
-ua.maker.gbible.fragment.SelectBookFragment$1 -> ua.maker.gbible.b.bi:
+ua.maker.gbible.fragment.SelectBookFragment$1 -> ua.maker.gbible.b.bo:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.SelectBookFragment$2 -> ua.maker.gbible.b.bj:
+ua.maker.gbible.fragment.SelectBookFragment$2 -> ua.maker.gbible.b.bp:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-ua.maker.gbible.fragment.SelectBookFragment$3 -> ua.maker.gbible.b.bk:
+ua.maker.gbible.fragment.SelectBookFragment$3 -> ua.maker.gbible.b.bq:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.SelectBookFragment$4 -> ua.maker.gbible.b.bl:
+ua.maker.gbible.fragment.SelectBookFragment$4 -> ua.maker.gbible.b.br:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.view.View) -> onClick
-ua.maker.gbible.fragment.SelectBookFragment$5 -> ua.maker.gbible.b.bm:
+ua.maker.gbible.fragment.SelectBookFragment$5 -> ua.maker.gbible.b.bs:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.SelectBookFragment$6 -> ua.maker.gbible.b.bn:
+ua.maker.gbible.fragment.SelectBookFragment$6 -> ua.maker.gbible.b.bt:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.SelectBookFragment$7 -> ua.maker.gbible.b.bo:
+ua.maker.gbible.fragment.SelectBookFragment$7 -> ua.maker.gbible.b.bu:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.listeners.onDialogClickListener -> ua.maker.gbible.c.a:

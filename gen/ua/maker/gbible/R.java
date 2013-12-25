@@ -696,6 +696,12 @@ containing a value of this type.
          */
         public static final int abs__config_showMenuShortcutsWhenKeyboardPresent=0x7f060003;
         public static final int abs__split_action_bar_is_narrow=0x7f060001;
+        /** Enable automatic activity tracking
+         */
+        public static final int ga_autoActivityTracking=0x7f060006;
+        /** Enable automatic exception tracking
+         */
+        public static final int ga_reportUncaughtExceptions=0x7f060007;
     }
     public static final class color {
         public static final int abs__background_holo_dark=0x7f070000;
@@ -1102,6 +1108,7 @@ containing a value of this type.
         public static final int tabMode=0x7f050003;
         public static final int textView1=0x7f05005e;
         public static final int textView2=0x7f050073;
+        public static final int textView_selected_poem_to_copy=0x7f05007f;
         public static final int text_hex_wrapper=0x7f050076;
         public static final int tv_action=0x7f050088;
         public static final int tv_comment_bookmark_fragment=0x7f050083;
@@ -1137,7 +1144,6 @@ containing a value of this type.
         public static final int view1=0x7f050035;
         public static final int webviewActionView=0x7f05009a;
         public static final int wrap_content=0x7f050000;
-        public static final int wv_show_content_poem=0x7f05007f;
     }
     public static final class integer {
         public static final int COLOR_BLACK=0x7f090001;
@@ -1261,263 +1267,266 @@ containing a value of this type.
  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0007;
-        public static final int action_bookmarks=0x7f0a0010;
-        public static final int action_history=0x7f0a0011;
-        public static final int action_search=0x7f0a000f;
-        public static final int action_select=0x7f0a000e;
-        public static final int action_setting=0x7f0a0012;
-        public static final int action_title_clear_history=0x7f0a00a8;
-        public static final int add_to_plan_this_link=0x7f0a00b1;
-        public static final int aggey_str=0x7f0a0053;
-        public static final int amos_str=0x7f0a004c;
-        public static final int app_name=0x7f0a000d;
-        public static final int avdiy_str=0x7f0a004d;
-        public static final int avvakum_str=0x7f0a0051;
-        public static final int bitie_str=0x7f0a0022;
-        public static final int bitie_str_small=0x7f0a0023;
-        public static final int bold_text=0x7f0a00d6;
-        public static final int btn_empty_str=0x7f0a0078;
-        public static final int btn_empty_str_small=0x7f0a0079;
-        public static final int category_base=0x7f0a007d;
-        public static final int category_design=0x7f0a008e;
-        public static final int click_on_point_paste=0x7f0a00da;
-        public static final int closes_app=0x7f0a0014;
-        public static final int comments_str=0x7f0a00b6;
-        public static final int compare_str=0x7f0a0074;
-        public static final int context_delete=0x7f0a00cf;
-        public static final int context_drag_and_drop=0x7f0a00d9;
-        public static final int context_edit=0x7f0a00ce;
-        public static final int copyed_poem=0x7f0a00bf;
-        public static final int create_plan_btn=0x7f0a00cd;
-        public static final int create_plane=0x7f0a00c8;
-        public static final int daniil_str=0x7f0a0049;
-        public static final int data_time=0x7f0a00cc;
-        public static final int deleted_bookmark=0x7f0a00b2;
-        public static final int deyania_str=0x7f0a005a;
-        public static final int dialog_add_item_to_plan=0x7f0a00bc;
-        public static final int dialog_add_to_bookmarks=0x7f0a00b8;
-        public static final int dialog_added_to_bookmarks=0x7f0a00be;
-        public static final int dialog_btn_copy_select_text=0x7f0a00c4;
-        public static final int dialog_cancel=0x7f0a0018;
+        public static final int action_bookmarks=0x7f0a0011;
+        public static final int action_history=0x7f0a0012;
+        public static final int action_search=0x7f0a0010;
+        public static final int action_select=0x7f0a000f;
+        public static final int action_setting=0x7f0a0013;
+        public static final int action_title_clear_history=0x7f0a00a9;
+        public static final int add_to_plan_this_link=0x7f0a00b2;
+        public static final int aggey_str=0x7f0a0054;
+        public static final int amos_str=0x7f0a004d;
+        public static final int app_name=0x7f0a000e;
+        public static final int avdiy_str=0x7f0a004e;
+        public static final int avvakum_str=0x7f0a0052;
+        public static final int bitie_str=0x7f0a0023;
+        public static final int bitie_str_small=0x7f0a0024;
+        public static final int bold_text=0x7f0a00d7;
+        public static final int btn_empty_str=0x7f0a0079;
+        public static final int btn_empty_str_small=0x7f0a007a;
+        public static final int category_base=0x7f0a007e;
+        public static final int category_design=0x7f0a008f;
+        public static final int click_on_point_paste=0x7f0a00db;
+        public static final int closes_app=0x7f0a0015;
+        public static final int comments_str=0x7f0a00b7;
+        public static final int compare_str=0x7f0a0075;
+        public static final int context_delete=0x7f0a00d0;
+        public static final int context_drag_and_drop=0x7f0a00da;
+        public static final int context_edit=0x7f0a00cf;
+        public static final int copyed_poem=0x7f0a00c0;
+        public static final int create_plan_btn=0x7f0a00ce;
+        public static final int create_plane=0x7f0a00c9;
+        public static final int daniil_str=0x7f0a004a;
+        public static final int data_time=0x7f0a00cd;
+        public static final int deleted_bookmark=0x7f0a00b3;
+        public static final int deyania_str=0x7f0a005b;
+        public static final int dialog_add_item_to_plan=0x7f0a00bd;
+        public static final int dialog_add_to_bookmarks=0x7f0a00b9;
+        public static final int dialog_added_to_bookmarks=0x7f0a00bf;
+        public static final int dialog_btn_copy_select_text=0x7f0a00c5;
+        public static final int dialog_cancel=0x7f0a0019;
         /**  ##################### 
  Color Picker 
  ##################### 
  Color Picker 
          */
-        public static final int dialog_color_picker=0x7f0a00db;
-        public static final int dialog_compare=0x7f0a00bb;
-        public static final int dialog_copy_to_clicpboard=0x7f0a00b9;
-        public static final int dialog_dtn_copy_all=0x7f0a00c3;
-        public static final int dialog_edit=0x7f0a00d2;
-        public static final int dialog_enter_name_plan=0x7f0a00ca;
-        public static final int dialog_enter_sub_description=0x7f0a00cb;
-        public static final int dialog_message_clear_history=0x7f0a00ae;
-        public static final int dialog_ok=0x7f0a0016;
-        public static final int dialog_pref_message_speed_smooth_scroll=0x7f0a008b;
-        public static final int dialog_pref_title_speed_smooth_scroll=0x7f0a008a;
-        public static final int dialog_save=0x7f0a0017;
+        public static final int dialog_color_picker=0x7f0a00dc;
+        public static final int dialog_compare=0x7f0a00bc;
+        public static final int dialog_copy_to_clicpboard=0x7f0a00ba;
+        public static final int dialog_dtn_copy_all=0x7f0a00c4;
+        public static final int dialog_edit=0x7f0a00d3;
+        public static final int dialog_enter_name_plan=0x7f0a00cb;
+        public static final int dialog_enter_sub_description=0x7f0a00cc;
+        public static final int dialog_message_clear_history=0x7f0a00af;
+        public static final int dialog_ok=0x7f0a0017;
+        public static final int dialog_pref_message_speed_smooth_scroll=0x7f0a008c;
+        public static final int dialog_pref_title_speed_smooth_scroll=0x7f0a008b;
+        public static final int dialog_save=0x7f0a0018;
         /**  Preference string 
  Preference string 
          */
-        public static final int dialog_select_size_text=0x7f0a007a;
-        public static final int dialog_share=0x7f0a00ba;
-        public static final int dialog_start_search=0x7f0a00a5;
-        public static final int dialog_title_add_item_plan=0x7f0a00d3;
-        public static final int dialog_title_add_to_bookmark=0x7f0a00b5;
-        public static final int dialog_title_clear_history=0x7f0a00ad;
-        public static final int dialog_title_create_plan=0x7f0a00c9;
-        public static final int dialog_title_pos_down_panel=0x7f0a0097;
-        public static final int dialog_title_search=0x7f0a00a6;
-        public static final int dialog_title_select_text=0x7f0a00c2;
-        public static final int dialog_yes=0x7f0a0015;
-        public static final int dialogtitle_def_trans=0x7f0a0081;
-        public static final int dialogtitle_mode_read=0x7f0a0085;
-        public static final int dialogtitle_set_color_poem_list=0x7f0a009a;
-        public static final int dialogtitle_size_text_pem=0x7f0a0092;
-        public static final int ecclesiast_str=0x7f0a0043;
-        public static final int efesyanam_str=0x7f0a0066;
+        public static final int dialog_select_size_text=0x7f0a007b;
+        public static final int dialog_share=0x7f0a00bb;
+        public static final int dialog_start_search=0x7f0a00a6;
+        public static final int dialog_title_add_item_plan=0x7f0a00d4;
+        public static final int dialog_title_add_to_bookmark=0x7f0a00b6;
+        public static final int dialog_title_clear_history=0x7f0a00ae;
+        public static final int dialog_title_create_plan=0x7f0a00ca;
+        public static final int dialog_title_pos_down_panel=0x7f0a0098;
+        public static final int dialog_title_search=0x7f0a00a7;
+        public static final int dialog_title_select_text=0x7f0a00c3;
+        public static final int dialog_yes=0x7f0a0016;
+        public static final int dialogtitle_def_trans=0x7f0a0082;
+        public static final int dialogtitle_mode_read=0x7f0a0086;
+        public static final int dialogtitle_set_color_poem_list=0x7f0a009b;
+        public static final int dialogtitle_size_text_pem=0x7f0a0093;
+        public static final int ecclesiast_str=0x7f0a0044;
+        public static final int efesyanam_str=0x7f0a0067;
         /**  ERROR 
  ERROR 
          */
-        public static final int empty_et=0x7f0a001c;
-        public static final int error_text_msg=0x7f0a00d8;
-        public static final int esfir_str=0x7f0a003f;
-        public static final int evreyam_str=0x7f0a006f;
-        public static final int exit_question=0x7f0a0013;
-        public static final int exit_str=0x7f0a0075;
-        public static final int ezdra_str=0x7f0a003d;
-        public static final int filimonu_str=0x7f0a006e;
-        public static final int filipiycam_str=0x7f0a0067;
-        public static final int four_carstw_str=0x7f0a0037;
-        public static final int four_carstw_str_small=0x7f0a0038;
-        public static final int galatam_str=0x7f0a0065;
-        public static final int hint_link_add=0x7f0a00b7;
-        public static final int iakova_str=0x7f0a005b;
-        public static final int ieremia_str=0x7f0a0046;
-        public static final int iezekiil_str=0x7f0a0048;
-        public static final int iisus_navin_str=0x7f0a002c;
-        public static final int iisus_navin_str_small=0x7f0a002d;
-        public static final int ioanna_str=0x7f0a0059;
-        public static final int ioil_str=0x7f0a004b;
-        public static final int iona_str=0x7f0a004e;
-        public static final int iov_str=0x7f0a0040;
-        public static final int is_mt_translate=0x7f0a00ab;
-        public static final int is_rst_translate=0x7f0a00aa;
-        public static final int is_ua_translate=0x7f0a00ac;
-        public static final int isaia_str=0x7f0a0045;
-        public static final int ishod_str=0x7f0a0024;
-        public static final int ishod_str_small=0x7f0a0025;
+        public static final int empty_et=0x7f0a001d;
+        public static final int error_text_msg=0x7f0a00d9;
+        public static final int esfir_str=0x7f0a0040;
+        public static final int evreyam_str=0x7f0a0070;
+        public static final int exit_question=0x7f0a0014;
+        public static final int exit_str=0x7f0a0076;
+        public static final int ezdra_str=0x7f0a003e;
+        public static final int filimonu_str=0x7f0a006f;
+        public static final int filipiycam_str=0x7f0a0068;
+        public static final int four_carstw_str=0x7f0a0038;
+        public static final int four_carstw_str_small=0x7f0a0039;
+        /** Replace placeholder ID with your tracking ID
+         */
+        public static final int ga_trackingId=0x7f0a000d;
+        public static final int galatam_str=0x7f0a0066;
+        public static final int hint_link_add=0x7f0a00b8;
+        public static final int iakova_str=0x7f0a005c;
+        public static final int ieremia_str=0x7f0a0047;
+        public static final int iezekiil_str=0x7f0a0049;
+        public static final int iisus_navin_str=0x7f0a002d;
+        public static final int iisus_navin_str_small=0x7f0a002e;
+        public static final int ioanna_str=0x7f0a005a;
+        public static final int ioil_str=0x7f0a004c;
+        public static final int iona_str=0x7f0a004f;
+        public static final int iov_str=0x7f0a0041;
+        public static final int is_mt_translate=0x7f0a00ac;
+        public static final int is_rst_translate=0x7f0a00ab;
+        public static final int is_ua_translate=0x7f0a00ad;
+        public static final int isaia_str=0x7f0a0046;
+        public static final int ishod_str=0x7f0a0025;
+        public static final int ishod_str_small=0x7f0a0026;
         /**  ##################### 
  List poems 
  ##################### 
  List poems 
          */
-        public static final int it_is_chapter_last=0x7f0a00b3;
-        public static final int iudy_str=0x7f0a0061;
-        public static final int kolosyanam_str=0x7f0a0068;
-        public static final int levit_str=0x7f0a0026;
-        public static final int levit_str_small=0x7f0a0027;
-        public static final int link_str=0x7f0a00d5;
-        public static final int list_history_empty=0x7f0a00a9;
-        public static final int luka_str=0x7f0a0058;
-        public static final int malahia_str=0x7f0a0055;
-        public static final int mark_str=0x7f0a0057;
-        public static final int matfey_str=0x7f0a0056;
+        public static final int it_is_chapter_last=0x7f0a00b4;
+        public static final int iudy_str=0x7f0a0062;
+        public static final int kolosyanam_str=0x7f0a0069;
+        public static final int levit_str=0x7f0a0027;
+        public static final int levit_str_small=0x7f0a0028;
+        public static final int link_str=0x7f0a00d6;
+        public static final int list_history_empty=0x7f0a00aa;
+        public static final int luka_str=0x7f0a0059;
+        public static final int malahia_str=0x7f0a0056;
+        public static final int mark_str=0x7f0a0058;
+        public static final int matfey_str=0x7f0a0057;
         /**  ##################### 
  Plan Detail fragment 
  ##################### 
  Plan Detail fragment 
          */
-        public static final int menu_title_add_point=0x7f0a00d1;
-        public static final int michey_str=0x7f0a004f;
-        public static final int naum_str=0x7f0a0050;
-        public static final int neemia_str=0x7f0a003e;
-        public static final int new_testament=0x7f0a0021;
-        public static final int next_chapter_symbol=0x7f0a0076;
-        public static final int no_founded_bookmarks=0x7f0a00b0;
+        public static final int menu_title_add_point=0x7f0a00d2;
+        public static final int michey_str=0x7f0a0050;
+        public static final int naum_str=0x7f0a0051;
+        public static final int neemia_str=0x7f0a003f;
+        public static final int new_testament=0x7f0a0022;
+        public static final int next_chapter_symbol=0x7f0a0077;
+        public static final int no_founded_bookmarks=0x7f0a00b1;
         /**  Tools 
  Tools 
          */
-        public static final int no_select_book=0x7f0a00a2;
-        public static final int no_select_chapter=0x7f0a00a3;
-        public static final int number_str=0x7f0a0028;
-        public static final int number_str_small=0x7f0a0029;
+        public static final int no_select_book=0x7f0a00a3;
+        public static final int no_select_chapter=0x7f0a00a4;
+        public static final int number_str=0x7f0a0029;
+        public static final int number_str_small=0x7f0a002a;
         /**  Books 
  Books 
          */
-        public static final int old_testament=0x7f0a0020;
-        public static final int one_carstw_str=0x7f0a0031;
-        public static final int one_carstw_str_small=0x7f0a0032;
-        public static final int one_fessalonikiycam_str=0x7f0a0069;
-        public static final int one_ioanna_str=0x7f0a005e;
-        public static final int one_korinfyanam_str=0x7f0a0063;
-        public static final int one_paralipamenon_str=0x7f0a0039;
-        public static final int one_paralipamenon_str_small=0x7f0a003a;
-        public static final int one_petra_str=0x7f0a005c;
-        public static final int one_timofeu_str=0x7f0a006b;
-        public static final int osia_str=0x7f0a004a;
-        public static final int otkrovenie_str=0x7f0a0070;
-        public static final int pesni_pesney_str=0x7f0a0044;
-        public static final int plach_ieremii_str=0x7f0a0047;
-        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c1;
-        public static final int popup_title_hint=0x7f0a00c0;
-        public static final int pref_backg_control_panel=0x7f0a009f;
-        public static final int pref_background_poem=0x7f0a0098;
-        public static final int pref_color_text=0x7f0a009c;
-        public static final int pref_default_translaters=0x7f0a007e;
-        public static final int pref_message_select_use_btn_lov=0x7f0a007c;
-        public static final int pref_mode_read=0x7f0a0082;
-        public static final int pref_pos_down_panel=0x7f0a0094;
-        public static final int pref_size_text_poem=0x7f0a008f;
-        public static final int pref_smooth_duration=0x7f0a0089;
-        public static final int pref_use_vol_up_down_btn=0x7f0a0086;
-        public static final int press_color_to_apply=0x7f0a0093;
-        public static final int previous_chapter_symbol=0x7f0a0077;
-        public static final int pritchi_str=0x7f0a0042;
-        public static final int progress_dialog_download_chapter=0x7f0a001b;
-        public static final int progress_dialog_message=0x7f0a001a;
-        public static final int progress_dialog_title=0x7f0a0019;
-        public static final int psaltir_str=0x7f0a0041;
-        public static final int quote_poem=0x7f0a00d7;
-        public static final int replay_click_btn=0x7f0a00b4;
-        public static final int rimlan_str=0x7f0a0062;
-        public static final int ruf_str=0x7f0a0030;
-        public static final int rus_modern_translate_str=0x7f0a001e;
+        public static final int old_testament=0x7f0a0021;
+        public static final int one_carstw_str=0x7f0a0032;
+        public static final int one_carstw_str_small=0x7f0a0033;
+        public static final int one_fessalonikiycam_str=0x7f0a006a;
+        public static final int one_ioanna_str=0x7f0a005f;
+        public static final int one_korinfyanam_str=0x7f0a0064;
+        public static final int one_paralipamenon_str=0x7f0a003a;
+        public static final int one_paralipamenon_str_small=0x7f0a003b;
+        public static final int one_petra_str=0x7f0a005d;
+        public static final int one_timofeu_str=0x7f0a006c;
+        public static final int osia_str=0x7f0a004b;
+        public static final int otkrovenie_str=0x7f0a0071;
+        public static final int pesni_pesney_str=0x7f0a0045;
+        public static final int plach_ieremii_str=0x7f0a0048;
+        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c2;
+        public static final int popup_title_hint=0x7f0a00c1;
+        public static final int pref_backg_control_panel=0x7f0a00a0;
+        public static final int pref_background_poem=0x7f0a0099;
+        public static final int pref_color_text=0x7f0a009d;
+        public static final int pref_default_translaters=0x7f0a007f;
+        public static final int pref_message_select_use_btn_lov=0x7f0a007d;
+        public static final int pref_mode_read=0x7f0a0083;
+        public static final int pref_pos_down_panel=0x7f0a0095;
+        public static final int pref_size_text_poem=0x7f0a0090;
+        public static final int pref_smooth_duration=0x7f0a008a;
+        public static final int pref_use_vol_up_down_btn=0x7f0a0087;
+        public static final int press_color_to_apply=0x7f0a0094;
+        public static final int previous_chapter_symbol=0x7f0a0078;
+        public static final int pritchi_str=0x7f0a0043;
+        public static final int progress_dialog_download_chapter=0x7f0a001c;
+        public static final int progress_dialog_message=0x7f0a001b;
+        public static final int progress_dialog_title=0x7f0a001a;
+        public static final int psaltir_str=0x7f0a0042;
+        public static final int quote_poem=0x7f0a00d8;
+        public static final int replay_click_btn=0x7f0a00b5;
+        public static final int rimlan_str=0x7f0a0063;
+        public static final int ruf_str=0x7f0a0031;
+        public static final int rus_modern_translate_str=0x7f0a001f;
         /**  ############ 
  Translates 
  ############ 
  Translates 
          */
-        public static final int rus_translate_str=0x7f0a001d;
+        public static final int rus_translate_str=0x7f0a001e;
         /**  Search fragment 
  Search fragment 
          */
-        public static final int search_str=0x7f0a00a4;
-        public static final int sofonia_str=0x7f0a0052;
-        public static final int str_sample_size_text=0x7f0a007b;
-        public static final int sudii_str=0x7f0a002e;
-        public static final int sudii_str_small=0x7f0a002f;
-        public static final int summary_background_on_poem_fragment=0x7f0a009b;
-        public static final int summary_control_panel_pref=0x7f0a00a1;
-        public static final int summary_def_trans=0x7f0a0080;
-        public static final int summary_mode_read=0x7f0a0084;
-        public static final int summary_pos_down_panel=0x7f0a0096;
-        public static final int summary_select_text_color=0x7f0a009e;
-        public static final int summary_size_text_poem=0x7f0a0091;
-        public static final int summary_smooth_scroll=0x7f0a008d;
-        public static final int summary_use_vol_btn=0x7f0a0088;
-        public static final int text_str=0x7f0a00d4;
-        public static final int three_carstw_str=0x7f0a0035;
-        public static final int three_carstw_str_small=0x7f0a0036;
-        public static final int three_ioanna_str=0x7f0a0060;
+        public static final int search_str=0x7f0a00a5;
+        public static final int sofonia_str=0x7f0a0053;
+        public static final int str_sample_size_text=0x7f0a007c;
+        public static final int sudii_str=0x7f0a002f;
+        public static final int sudii_str_small=0x7f0a0030;
+        public static final int summary_background_on_poem_fragment=0x7f0a009c;
+        public static final int summary_control_panel_pref=0x7f0a00a2;
+        public static final int summary_def_trans=0x7f0a0081;
+        public static final int summary_mode_read=0x7f0a0085;
+        public static final int summary_pos_down_panel=0x7f0a0097;
+        public static final int summary_select_text_color=0x7f0a009f;
+        public static final int summary_size_text_poem=0x7f0a0092;
+        public static final int summary_smooth_scroll=0x7f0a008e;
+        public static final int summary_use_vol_btn=0x7f0a0089;
+        public static final int text_str=0x7f0a00d5;
+        public static final int three_carstw_str=0x7f0a0036;
+        public static final int three_carstw_str_small=0x7f0a0037;
+        public static final int three_ioanna_str=0x7f0a0061;
         /**  ##################### 
  PlanList fragment 
  ##################### 
  PlanList fragment 
          */
-        public static final int title_activit_plan=0x7f0a00c5;
+        public static final int title_activit_plan=0x7f0a00c6;
         /**  ##################### 
  Bookmarks 
  ##################### 
  Bookmarks 
          */
-        public static final int title_activity_bookmarks=0x7f0a00af;
+        public static final int title_activity_bookmarks=0x7f0a00b0;
         /**  ##################### 
  History Fragment 
  ##################### 
  History Fragment 
          */
-        public static final int title_activity_history=0x7f0a00a7;
-        public static final int title_activity_list_chapters=0x7f0a0071;
-        public static final int title_activity_list_compare_poems=0x7f0a0073;
-        public static final int title_background_on_poem_fragment=0x7f0a0099;
-        public static final int title_color_text_dialog=0x7f0a009d;
-        public static final int title_control_panel_pref=0x7f0a00a0;
-        public static final int title_def_trans=0x7f0a007f;
-        public static final int title_dialog_plans=0x7f0a00c6;
-        public static final int title_list_poem=0x7f0a0072;
-        public static final int title_mode_read=0x7f0a0083;
-        public static final int title_pos_down_panel=0x7f0a0095;
-        public static final int title_size_text_poem=0x7f0a0090;
-        public static final int title_smooth_scroll=0x7f0a008c;
-        public static final int title_use_vol_btn=0x7f0a0087;
-        public static final int titu_str=0x7f0a006d;
-        public static final int toast_added_to_plan=0x7f0a00bd;
-        public static final int toast_delete_plan_msg=0x7f0a00d0;
-        public static final int toast_msg_no_plans=0x7f0a00c7;
-        public static final int two_carstw_str=0x7f0a0033;
-        public static final int two_carstw_str_small=0x7f0a0034;
-        public static final int two_fessalonikiycam_str=0x7f0a006a;
-        public static final int two_ioanna_str=0x7f0a005f;
-        public static final int two_korinfyanam_str=0x7f0a0064;
-        public static final int two_paralipamenon_str=0x7f0a003b;
-        public static final int two_paralipamenon_str_small=0x7f0a003c;
-        public static final int two_petra_str=0x7f0a005d;
-        public static final int two_timofeu_str=0x7f0a006c;
-        public static final int ua_translate_str=0x7f0a001f;
-        public static final int vtorozakonie_str=0x7f0a002a;
-        public static final int vtorozakonie_str_small=0x7f0a002b;
-        public static final int zaharia_str=0x7f0a0054;
+        public static final int title_activity_history=0x7f0a00a8;
+        public static final int title_activity_list_chapters=0x7f0a0072;
+        public static final int title_activity_list_compare_poems=0x7f0a0074;
+        public static final int title_background_on_poem_fragment=0x7f0a009a;
+        public static final int title_color_text_dialog=0x7f0a009e;
+        public static final int title_control_panel_pref=0x7f0a00a1;
+        public static final int title_def_trans=0x7f0a0080;
+        public static final int title_dialog_plans=0x7f0a00c7;
+        public static final int title_list_poem=0x7f0a0073;
+        public static final int title_mode_read=0x7f0a0084;
+        public static final int title_pos_down_panel=0x7f0a0096;
+        public static final int title_size_text_poem=0x7f0a0091;
+        public static final int title_smooth_scroll=0x7f0a008d;
+        public static final int title_use_vol_btn=0x7f0a0088;
+        public static final int titu_str=0x7f0a006e;
+        public static final int toast_added_to_plan=0x7f0a00be;
+        public static final int toast_delete_plan_msg=0x7f0a00d1;
+        public static final int toast_msg_no_plans=0x7f0a00c8;
+        public static final int two_carstw_str=0x7f0a0034;
+        public static final int two_carstw_str_small=0x7f0a0035;
+        public static final int two_fessalonikiycam_str=0x7f0a006b;
+        public static final int two_ioanna_str=0x7f0a0060;
+        public static final int two_korinfyanam_str=0x7f0a0065;
+        public static final int two_paralipamenon_str=0x7f0a003c;
+        public static final int two_paralipamenon_str_small=0x7f0a003d;
+        public static final int two_petra_str=0x7f0a005e;
+        public static final int two_timofeu_str=0x7f0a006d;
+        public static final int ua_translate_str=0x7f0a0020;
+        public static final int vtorozakonie_str=0x7f0a002b;
+        public static final int vtorozakonie_str_small=0x7f0a002c;
+        public static final int zaharia_str=0x7f0a0055;
     }
     public static final class style {
         /** 
@@ -1546,6 +1555,9 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b005a;
+        public static final int MyCustomStyle=0x7f0b005b;
+        public static final int MyTheme_ActionBar_TitleTextStyle=0x7f0b005d;
+        public static final int MyTheme_ActionBarStyle=0x7f0b005c;
         public static final int Sherlock___TextAppearance_Small=0x7f0b0046;
         public static final int Sherlock___Theme=0x7f0b0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b0053;

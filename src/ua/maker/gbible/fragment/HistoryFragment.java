@@ -32,6 +32,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 public class HistoryFragment extends SherlockFragment {
 	
@@ -78,7 +79,7 @@ public class HistoryFragment extends SherlockFragment {
 	}
 	
 	private void getLIstHistory(){
-		listHistory.addAll(db.getHistory());
+		listHistory = db.getHistory();
 		updateListHistory();
 	}
 
@@ -127,7 +128,6 @@ public class HistoryFragment extends SherlockFragment {
 		public void onClick(DialogInterface dialog, int which) {
 			db.clearHistory();
 			getLIstHistory();
-			updateListHistory();
 			dialog.cancel();
 		}
 	};
@@ -169,5 +169,17 @@ public class HistoryFragment extends SherlockFragment {
 	   		return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		EasyTracker.getInstance().activityStart(getSherlockActivity());
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		EasyTracker.getInstance().activityStop(getSherlockActivity());
 	}
 }

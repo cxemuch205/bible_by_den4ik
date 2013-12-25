@@ -4011,12 +4011,20 @@ com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode[] values(
 com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode valueOf(java.lang.String)
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender[] values()
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender valueOf(java.lang.String)
+com.google.analytics.tracking.android.AdMobInfo$AdMobKey: com.google.analytics.tracking.android.AdMobInfo$AdMobKey[] values()
+com.google.analytics.tracking.android.AdMobInfo$AdMobKey: com.google.analytics.tracking.android.AdMobInfo$AdMobKey valueOf(java.lang.String)
+com.google.analytics.tracking.android.GAServiceProxy$ConnectState: com.google.analytics.tracking.android.GAServiceProxy$ConnectState[] values()
+com.google.analytics.tracking.android.GAServiceProxy$ConnectState: com.google.analytics.tracking.android.GAServiceProxy$ConnectState valueOf(java.lang.String)
+com.google.analytics.tracking.android.GAUsage$Field: com.google.analytics.tracking.android.GAUsage$Field[] values()
+com.google.analytics.tracking.android.GAUsage$Field: com.google.analytics.tracking.android.GAUsage$Field valueOf(java.lang.String)
 com.google.android.gms.ads.AdView: com.google.android.gms.ads.AdListener getAdListener()
 com.google.android.gms.ads.AdView: com.google.android.gms.ads.AdSize getAdSize()
 com.google.android.gms.ads.AdView: java.lang.String getAdUnitId()
 com.google.android.gms.ads.AdView: void setAdListener(com.google.android.gms.ads.AdListener)
 com.google.android.gms.ads.AdView: void setAdSize(com.google.android.gms.ads.AdSize)
 com.google.android.gms.ads.AdView: void setAdUnitId(java.lang.String)
+com.google.android.gms.analytics.internal.Command
+com.google.android.gms.analytics.internal.Command: android.os.Parcelable$Creator CREATOR
 com.google.android.gms.auth.RecoveryDecision
 com.google.android.gms.common.SignInButton: void setSize(int)
 com.google.android.gms.common.SignInButton: void setColorScheme(int)
@@ -4705,6 +4713,8 @@ ua.maker.gbible.R$bool: int abs__config_actionMenuItemAllCaps
 ua.maker.gbible.R$bool: int abs__config_allowActionMenuItemTextWithIcon
 ua.maker.gbible.R$bool: int abs__config_showMenuShortcutsWhenKeyboardPresent
 ua.maker.gbible.R$bool: int abs__split_action_bar_is_narrow
+ua.maker.gbible.R$bool: int ga_autoActivityTracking
+ua.maker.gbible.R$bool: int ga_reportUncaughtExceptions
 ua.maker.gbible.R$color: int abs__background_holo_dark
 ua.maker.gbible.R$color: int abs__background_holo_light
 ua.maker.gbible.R$color: int abs__bright_foreground_disabled_holo_dark
@@ -5013,6 +5023,7 @@ ua.maker.gbible.R$id: int spinner_to_poem
 ua.maker.gbible.R$id: int tabMode
 ua.maker.gbible.R$id: int textView1
 ua.maker.gbible.R$id: int textView2
+ua.maker.gbible.R$id: int textView_selected_poem_to_copy
 ua.maker.gbible.R$id: int text_hex_wrapper
 ua.maker.gbible.R$id: int tv_action
 ua.maker.gbible.R$id: int tv_comment_bookmark_fragment
@@ -5048,7 +5059,6 @@ ua.maker.gbible.R$id: int useLogo
 ua.maker.gbible.R$id: int view1
 ua.maker.gbible.R$id: int webviewActionView
 ua.maker.gbible.R$id: int wrap_content
-ua.maker.gbible.R$id: int wv_show_content_poem
 ua.maker.gbible.R$integer: int COLOR_BLACK
 ua.maker.gbible.R$integer: int COLOR_GREEN
 ua.maker.gbible.R$integer: int COLOR_WHITE
@@ -5203,6 +5213,7 @@ ua.maker.gbible.R$string: int filimonu_str
 ua.maker.gbible.R$string: int filipiycam_str
 ua.maker.gbible.R$string: int four_carstw_str
 ua.maker.gbible.R$string: int four_carstw_str_small
+ua.maker.gbible.R$string: int ga_trackingId
 ua.maker.gbible.R$string: int galatam_str
 ua.maker.gbible.R$string: int hint_link_add
 ua.maker.gbible.R$string: int iakova_str
@@ -5334,6 +5345,9 @@ ua.maker.gbible.R$string: int vtorozakonie_str_small
 ua.maker.gbible.R$string: int zaharia_str
 ua.maker.gbible.R$style: int AppBaseTheme
 ua.maker.gbible.R$style: int AppTheme
+ua.maker.gbible.R$style: int MyCustomStyle
+ua.maker.gbible.R$style: int MyTheme_ActionBar_TitleTextStyle
+ua.maker.gbible.R$style: int MyTheme_ActionBarStyle
 ua.maker.gbible.R$style: int Sherlock___TextAppearance_Small
 ua.maker.gbible.R$style: int Sherlock___Theme
 ua.maker.gbible.R$style: int Sherlock___Theme_DarkActionBar
