@@ -5662,6 +5662,7 @@ ua.maker.gbible.fragment.BookmarksFragment:
     private static final int BTN_ADD_TO_PLAN
     private static final int BTN_DELETE
     private static final int BTN_COPY
+    private static final int BTN_SHARE
 ua.maker.gbible.fragment.EmptyFragment
 ua.maker.gbible.fragment.HistoryFragment:
     private static final java.lang.String TAG

@@ -5,9 +5,13 @@
     android:orientation="vertical"
     android:padding="4dp" >
 
-    <WebView
-        android:id="@+id/wv_show_content_poem"
+    <TextView
+        android:id="@+id/textView_selected_poem_to_copy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:textIsSelectable="true"
+        android:text="TextView" />
 
 </LinearLayout>

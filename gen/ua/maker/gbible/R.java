@@ -1108,6 +1108,7 @@ containing a value of this type.
         public static final int tabMode=0x7f050003;
         public static final int textView1=0x7f05005e;
         public static final int textView2=0x7f050073;
+        public static final int textView_selected_poem_to_copy=0x7f05007f;
         public static final int text_hex_wrapper=0x7f050076;
         public static final int tv_action=0x7f050088;
         public static final int tv_comment_bookmark_fragment=0x7f050083;
@@ -1143,7 +1144,6 @@ containing a value of this type.
         public static final int view1=0x7f050035;
         public static final int webviewActionView=0x7f05009a;
         public static final int wrap_content=0x7f050000;
-        public static final int wv_show_content_poem=0x7f05007f;
     }
     public static final class integer {
         public static final int COLOR_BLACK=0x7f090001;
@@ -1555,6 +1555,9 @@ containing a value of this type.
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0b005a;
+        public static final int MyCustomStyle=0x7f0b005b;
+        public static final int MyTheme_ActionBar_TitleTextStyle=0x7f0b005d;
+        public static final int MyTheme_ActionBarStyle=0x7f0b005c;
         public static final int Sherlock___TextAppearance_Small=0x7f0b0046;
         public static final int Sherlock___Theme=0x7f0b0051;
         public static final int Sherlock___Theme_DarkActionBar=0x7f0b0053;

@@ -34,5 +34,10 @@ public class App {
 	public static final int MIN_SCROOL_SPEED = 1;
 	public static final int MAX_SIZE_TEXT = 50;
 	public static final int MIN_SIZE_TEXT = 8;
+	
+	//Context menu items
+	public static final int MENU_GROUP_ID = 1001;
+	public static final int MENU_COPY_ID = 101;
+	public static final int MENU_SHARE_ID = 102;
 
 }

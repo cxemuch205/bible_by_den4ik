@@ -420,6 +420,7 @@ int id spinner_to_poem 0x7f05006c
 int id tabMode 0x7f050003
 int id textView1 0x7f05005e
 int id textView2 0x7f050073
+int id textView_selected_poem_to_copy 0x7f05007f
 int id text_hex_wrapper 0x7f050076
 int id tv_action 0x7f050088
 int id tv_comment_bookmark_fragment 0x7f050083
@@ -455,7 +456,6 @@ int id useLogo 0x7f050004
 int id view1 0x7f050035
 int id webviewActionView 0x7f05009a
 int id wrap_content 0x7f050000
-int id wv_show_content_poem 0x7f05007f
 int integer COLOR_BLACK 0x7f090001
 int integer COLOR_GREEN 0x7f090002
 int integer COLOR_WHITE 0x7f090003
@@ -742,6 +742,9 @@ int string vtorozakonie_str_small 0x7f0a002c
 int string zaharia_str 0x7f0a0055
 int style AppBaseTheme 0x7f0b0059
 int style AppTheme 0x7f0b005a
+int style MyCustomStyle 0x7f0b005b
+int style MyTheme_ActionBar_TitleTextStyle 0x7f0b005d
+int style MyTheme_ActionBarStyle 0x7f0b005c
 int style Sherlock___TextAppearance_Small 0x7f0b0046
 int style Sherlock___Theme 0x7f0b0051
 int style Sherlock___Theme_DarkActionBar 0x7f0b0053

@@ -5023,6 +5023,7 @@ ua.maker.gbible.R$id: int spinner_to_poem
 ua.maker.gbible.R$id: int tabMode
 ua.maker.gbible.R$id: int textView1
 ua.maker.gbible.R$id: int textView2
+ua.maker.gbible.R$id: int textView_selected_poem_to_copy
 ua.maker.gbible.R$id: int text_hex_wrapper
 ua.maker.gbible.R$id: int tv_action
 ua.maker.gbible.R$id: int tv_comment_bookmark_fragment
@@ -5058,7 +5059,6 @@ ua.maker.gbible.R$id: int useLogo
 ua.maker.gbible.R$id: int view1
 ua.maker.gbible.R$id: int webviewActionView
 ua.maker.gbible.R$id: int wrap_content
-ua.maker.gbible.R$id: int wv_show_content_poem
 ua.maker.gbible.R$integer: int COLOR_BLACK
 ua.maker.gbible.R$integer: int COLOR_GREEN
 ua.maker.gbible.R$integer: int COLOR_WHITE
@@ -5345,6 +5345,9 @@ ua.maker.gbible.R$string: int vtorozakonie_str_small
 ua.maker.gbible.R$string: int zaharia_str
 ua.maker.gbible.R$style: int AppBaseTheme
 ua.maker.gbible.R$style: int AppTheme
+ua.maker.gbible.R$style: int MyCustomStyle
+ua.maker.gbible.R$style: int MyTheme_ActionBar_TitleTextStyle
+ua.maker.gbible.R$style: int MyTheme_ActionBarStyle
 ua.maker.gbible.R$style: int Sherlock___TextAppearance_Small
 ua.maker.gbible.R$style: int Sherlock___Theme
 ua.maker.gbible.R$style: int Sherlock___Theme_DarkActionBar

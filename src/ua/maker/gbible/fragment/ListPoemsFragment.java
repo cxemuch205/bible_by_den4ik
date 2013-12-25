@@ -42,7 +42,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.ActionMode.Callback;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
@@ -50,6 +55,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.WindowManager;
 import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
@@ -86,7 +92,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	
 	private View view = null;
 	private ListView lvShowPoem = null;
-	private WebView wvContent = null;
+	private TextView tvContentPoemToCopy = null;
 	private LinearLayout llMenuLink = null;
 	private DataBase dataBase = null;
 	private UserDB dbUser = null;
@@ -128,6 +134,8 @@ public class ListPoemsFragment extends SherlockFragment{
 	private int poemBM = 1;
 	private int chapterBM = 1;
 	private String contentBM = "";
+	private View viewDialogCopy = null;
+	private AlertDialog dialogSelect = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -168,6 +176,11 @@ public class ListPoemsFragment extends SherlockFragment{
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+		viewDialogCopy = inflater.inflate(R.layout.dialog_select_poem, null);
+		tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
+		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
+		
 		widthScreen = getSherlockActivity().getResources().getDisplayMetrics().widthPixels;
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
@@ -320,6 +333,44 @@ public class ListPoemsFragment extends SherlockFragment{
 			showInfoPopup();
 		}
 	}
+	
+	private OnLongClickListener longClickOnTextViewListener = new OnLongClickListener() {
+		
+		@Override
+		public boolean onLongClick(View v) {
+			Log.d(TAG, "onLongClick()");
+			tvContentPoemToCopy.setCustomSelectionActionModeCallback(new ActionModeCallback());
+			return false;
+		}
+	};
+	
+	private class ActionModeCallback implements Callback {
+		 
+        @Override
+        public boolean onCreateActionMode(android.view.ActionMode mode, android.view.Menu menu) {
+        	Log.d(TAG, "onCreateActionMode()");
+            return true;
+        }
+ 
+        @Override
+        public boolean onPrepareActionMode(android.view.ActionMode mode, android.view.Menu menu) {
+            return false;
+        }
+ 
+        @Override
+        public boolean onActionItemClicked(android.view.ActionMode mode, android.view.MenuItem item) {
+        	Log.d(TAG, "onActionItemClicked() - " + item.getItemId());
+        	if(item.getItemId() == 16908321){
+        		dialogSelect.dismiss();
+        	}
+        	return false;
+        }
+ 
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+        	Log.d(TAG, "onDestroyActionMode()");
+        }
+    }
 	
 	private void showInfoPopup() {		
 		AlertDialog.Builder showInfo = new AlertDialog.Builder(getSherlockActivity());
@@ -519,23 +570,17 @@ public class ListPoemsFragment extends SherlockFragment{
 				AlertDialog.Builder builderSelect = new AlertDialog.Builder(getSherlockActivity());
 				builderSelect.setTitle(getString(R.string.dialog_title_select_text));
 				
-				LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
-				View view = inflater.inflate(R.layout.dialog_select_poem, null);
-				wvContent = (WebView)view.findViewById(R.id.wv_show_content_poem);
-				wvContent.getSettings().setJavaScriptEnabled(true);
-				wvContent.setBackgroundColor(0x00000000);
-				
 				StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(bookId, getSherlockActivity())
 		        		+" "+chapterNumber+":"+poemBM+"</b></p>"
 		        		+"<p>"+listPoems.get(poemBM-1).getText()+"</p>");
 				
-				wvContent.loadDataWithBaseURL(null, builderString.toString(), "text/html", "utf-8", null);
+				tvContentPoemToCopy.setText(""+Html.fromHtml(builderString.toString()));
 				
 				builderSelect.setNegativeButton(getString(R.string.dialog_cancel), clickCancelCopyListener);
 				builderSelect.setPositiveButton(getString(R.string.dialog_dtn_copy_all), clickCopyAllListener);
-				builderSelect.setView(view);
+				builderSelect.setView(viewDialogCopy);
 				
-				AlertDialog dialogSelect = builderSelect.create();
+				dialogSelect = builderSelect.create();
 				dialogSelect.show();
 				
 				break;
@@ -544,7 +589,7 @@ public class ListPoemsFragment extends SherlockFragment{
 				intent.setType("text/*");
 				intent.putExtra(Intent.EXTRA_TEXT, Tools.getBookNameByBookId(bookId, getSherlockActivity())
 	        		+" "+chapterNumber+":"+poemBM+"\n"
-	        		+listPoems.get(poemBM-1));
+	        		+listPoems.get(poemBM-1).getText());
 				getSherlockActivity().startActivity(intent);
 				
 				break;
