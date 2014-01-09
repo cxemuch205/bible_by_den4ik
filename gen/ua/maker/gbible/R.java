@@ -1191,20 +1191,21 @@ containing a value of this type.
         public static final int dialog_pref_speed_scroll=0x7f030024;
         public static final int dialog_pref_text_size=0x7f030025;
         public static final int dialog_select_poem=0x7f030026;
-        public static final int empty_fragment=0x7f030027;
-        public static final int item_bookmarks=0x7f030028;
-        public static final int item_chapter_layout=0x7f030029;
-        public static final int item_compare_poem=0x7f03002a;
-        public static final int item_dialog_list=0x7f03002b;
-        public static final int item_list_history=0x7f03002c;
-        public static final int item_list_poems=0x7f03002d;
-        public static final int item_list_poems_search=0x7f03002e;
-        public static final int item_plan_item_text=0x7f03002f;
-        public static final int item_plans_list=0x7f030030;
-        public static final int preference_fragment=0x7f030031;
-        public static final int sherlock_spinner_dropdown_item=0x7f030032;
-        public static final int sherlock_spinner_item=0x7f030033;
-        public static final int show_info_layout=0x7f030034;
+        public static final int donate_layout=0x7f030027;
+        public static final int empty_fragment=0x7f030028;
+        public static final int item_bookmarks=0x7f030029;
+        public static final int item_chapter_layout=0x7f03002a;
+        public static final int item_compare_poem=0x7f03002b;
+        public static final int item_dialog_list=0x7f03002c;
+        public static final int item_list_history=0x7f03002d;
+        public static final int item_list_poems=0x7f03002e;
+        public static final int item_list_poems_search=0x7f03002f;
+        public static final int item_plan_item_text=0x7f030030;
+        public static final int item_plans_list=0x7f030031;
+        public static final int preference_fragment=0x7f030032;
+        public static final int sherlock_spinner_dropdown_item=0x7f030033;
+        public static final int sherlock_spinner_item=0x7f030034;
+        public static final int show_info_layout=0x7f030035;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;

@@ -42,9 +42,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.ActionMode.Callback;
@@ -129,6 +127,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	private boolean dayNight = false;
 	private boolean useVolBtn = false;
 	private boolean firstStart = true;
+	private boolean bolGetingContent = true;
 	private int speedScroolList = App.DEFAULT_SCROOL_SPEED;
 	
 	private int poemBM = 1;
@@ -136,10 +135,15 @@ public class ListPoemsFragment extends SherlockFragment{
 	private String contentBM = "";
 	private View viewDialogCopy = null;
 	private AlertDialog dialogSelect = null;
+	private ProgressDialog pd = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		pd = ProgressDialog.show(getSherlockActivity(), 
+				getString(R.string.progress_dialog_title), 
+				getString(R.string.progress_dialog_download_chapter));
+		pd.dismiss();
 		Log.d(TAG, "Start onCreateView");		
 		view = inflater.inflate(R.layout.activity_list_poems, null);
 		lvShowPoem = (ListView)view.findViewById(R.id.lv_show_poems);
@@ -751,6 +755,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 	
 	private void toPreviousChapter() {
+		bolGetingContent = true;
 		chapterNumber--;
 		if(chapterNumber > 0 && chapterNumber <= maxChapter){
 			changeChapter(chapterNumber);
@@ -771,6 +776,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 
 	private void toNextChapter() {
+		bolGetingContent = true;
 		chapterNumber++;
 		if(chapterNumber > 0 && chapterNumber <= maxChapter){
 			changeChapter(chapterNumber);
@@ -792,27 +798,26 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 
 	public void changeChapter(int count){
-		ChangeChapterAsyncTask changechapterTask = new ChangeChapterAsyncTask();
-		changechapterTask.execute();
+		if(bolGetingContent){
+			ChangeChapterAsyncTask changechapterTask = new ChangeChapterAsyncTask();
+			changechapterTask.execute();
+		}
 	}
 	
 	class ChangeChapterAsyncTask extends AsyncTask<Void, Void, Void>{
-
-		private ProgressDialog pd = null;
 		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pd = ProgressDialog.show(getSherlockActivity(), 
-					getString(R.string.progress_dialog_title), 
-					getString(R.string.progress_dialog_download_chapter));
+			bolGetingContent = false;
+			pd.show();
+			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		}
 		
 		@Override
 		protected Void doInBackground(Void... params) {
 			Log.d(TAG, "ChangeChapterAsyncTask()");
 			listPoems = dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate);
-			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 			Editor editor = sp.edit();
 			editor.putInt(App.BOOK_ID, bookId);
 			editor.putInt(App.CHAPTER, chapterNumber);

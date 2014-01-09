@@ -65,7 +65,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
     	getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
     	sp = getSharedPreferences(App.PREF_SEND_DATA, 0);
     	spDef = PreferenceManager.getDefaultSharedPreferences(SinglePanelActivity.this);
-
+    	
     	Editor editor = sp.edit();
 		editor.putBoolean(App.is_OPEN_SETTING, true);
 		editor.commit();
