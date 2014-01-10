@@ -58,25 +58,28 @@
 # view res/layout/abs__search_view.xml #generated:84
 -keep class com.actionbarsherlock.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:38
+# view AndroidManifest.xml #generated:39
 -keep class ua.maker.gbible.activity.ComparePoemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:30
+# view AndroidManifest.xml #generated:50
+-keep class ua.maker.gbible.activity.DonateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
 -keep class ua.maker.gbible.activity.ListChaptersActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:34
+# view AndroidManifest.xml #generated:35
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:43
+# view AndroidManifest.xml #generated:44
 -keep class ua.maker.gbible.activity.SettingActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:19
+# view AndroidManifest.xml #generated:20
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:31
+# view res/xml/preference_bible.xml #generated:34
 -keep class ua.maker.gbible.widget.setting.ChangeSizeTextPreference { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:25
+# view res/xml/preference_bible.xml #generated:28
 -keep class ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference { <init>(...); }
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:59
@@ -85,12 +88,15 @@
 # view res/layout/dialog_color_picker.xml #generated:80
 -keep class ua.maker.gbible.widget.setting.ColorPickerPanelView { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:43
-# view res/xml/preference_bible.xml #generated:49
-# view res/xml/preference_bible.xml #generated:55
+# view res/xml/preference_bible.xml #generated:46
+# view res/xml/preference_bible.xml #generated:52
+# view res/xml/preference_bible.xml #generated:58
 -keep class ua.maker.gbible.widget.setting.ColorPickerPreference { <init>(...); }
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:23
 # view res/layout/dialog_color_picker.xml #generated:23
 -keep class ua.maker.gbible.widget.setting.ColorPickerView { <init>(...); }
+
+# view res/xml/preference_bible.xml #generated:3
+-keep class ua.maker.gbible.widget.setting.DonatePreferences { <init>(...); }
 

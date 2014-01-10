@@ -258,6 +258,9 @@
     <string name="str_sample_size_text">Пример.</string>
     <string name="pref_message_select_use_btn_lov">Вы не выбрали пункт \"Кнопки громкоски\"!</string>
     
+    <string name="donate_title">Пожертвовать</string>
+    <string name="donate_summary">Нуждаемся в материальной поддержке, здесь инфо счета в украинском банке ПриватБ</string>
+    
     <string name="category_base">Общие</string>
     	<string name="pref_default_translaters">def_translates</string>
     		<string name="title_def_trans">Перевод по-умлч.</string>
@@ -414,6 +417,15 @@
     
     <string name="context_drag_and_drop">Переместить</string>
     <string name="click_on_point_paste">Тап для вставки</string>
+    <!-- ##################### -->
+    
+    <!-- Donate activity -->
+    <string name="card_info_title">Реквизиты для пожертвований</string>
+    <string name="copy_to_clip_board_str">Копировать в буфер</string>
+    <string name="donate_info">ФИО: Павенко Даниил Евгеньевич\n\nМФО банка: 305299\nКОД ОКПО получателя: 14360570\nКОД ОКПО банка: 14360570\nИНН получателя: 3484203653\n\n№ карты: 4731185505692514</string>
+    <string name="save_image_title">Сохранить qr-код?</string>
+    <string name="saved_into_galary">Будет сохранено в папку изображений, предложено прочесть если на устройстве есть спец приложение</string>
+    <string name="saved_str">Сохранено!</string>
     <!-- ##################### -->
     
     <!-- Color Picker -->

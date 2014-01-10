@@ -10,6 +10,7 @@
     
     <uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -46,6 +47,10 @@
             android:parentActivityName="ua.maker.gbible.SinglePanelActivity" 
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
+        <activity
+            android:name="ua.maker.gbible.activity.DonateActivity"
+            android:label="@string/donate_title"
+            android:parentActivityName="ua.maker.gbible.SinglePanelActivity"/>
         
         <uses-library required="false" name="com.sec.android.app.multiwindow"> </uses-library>
         <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
