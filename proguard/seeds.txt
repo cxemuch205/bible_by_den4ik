@@ -4864,6 +4864,7 @@ ua.maker.gbible.R$drawable: int abs__toast_frame
 ua.maker.gbible.R$drawable: int action_select
 ua.maker.gbible.R$drawable: int add_bookmark_small
 ua.maker.gbible.R$drawable: int background_action_bar
+ua.maker.gbible.R$drawable: int backgroung_image_view
 ua.maker.gbible.R$drawable: int bible_select
 ua.maker.gbible.R$drawable: int bible_select_ic_48
 ua.maker.gbible.R$drawable: int bookmark
@@ -4886,6 +4887,7 @@ ua.maker.gbible.R$drawable: int plan_ico
 ua.maker.gbible.R$drawable: int plus
 ua.maker.gbible.R$drawable: int pointer_next
 ua.maker.gbible.R$drawable: int pointer_previous
+ua.maker.gbible.R$drawable: int qr_code_donate_info
 ua.maker.gbible.R$drawable: int search_ico
 ua.maker.gbible.R$drawable: int select_link_bible_ico
 ua.maker.gbible.R$drawable: int selector_item_chapter
@@ -4949,6 +4951,7 @@ ua.maker.gbible.R$id: int action_setting_app
 ua.maker.gbible.R$id: int action_share
 ua.maker.gbible.R$id: int btn_book
 ua.maker.gbible.R$id: int btn_chapter
+ua.maker.gbible.R$id: int btn_copy_info_donate
 ua.maker.gbible.R$id: int btn_create_plan
 ua.maker.gbible.R$id: int btn_poem
 ua.maker.gbible.R$id: int btn_start_search
@@ -4973,6 +4976,7 @@ ua.maker.gbible.R$id: int iv_action
 ua.maker.gbible.R$id: int iv_bookmarks
 ua.maker.gbible.R$id: int iv_history
 ua.maker.gbible.R$id: int iv_img
+ua.maker.gbible.R$id: int iv_qr_share
 ua.maker.gbible.R$id: int iv_search
 ua.maker.gbible.R$id: int iv_select
 ua.maker.gbible.R$id: int iv_setting
@@ -5102,6 +5106,7 @@ ua.maker.gbible.R$layout: int dialog_color_picker
 ua.maker.gbible.R$layout: int dialog_pref_speed_scroll
 ua.maker.gbible.R$layout: int dialog_pref_text_size
 ua.maker.gbible.R$layout: int dialog_select_poem
+ua.maker.gbible.R$layout: int donate_layout
 ua.maker.gbible.R$layout: int empty_fragment
 ua.maker.gbible.R$layout: int item_bookmarks
 ua.maker.gbible.R$layout: int item_chapter_layout
@@ -5152,6 +5157,7 @@ ua.maker.gbible.R$string: int bitie_str_small
 ua.maker.gbible.R$string: int bold_text
 ua.maker.gbible.R$string: int btn_empty_str
 ua.maker.gbible.R$string: int btn_empty_str_small
+ua.maker.gbible.R$string: int card_info_title
 ua.maker.gbible.R$string: int category_base
 ua.maker.gbible.R$string: int category_design
 ua.maker.gbible.R$string: int click_on_point_paste
@@ -5161,6 +5167,7 @@ ua.maker.gbible.R$string: int compare_str
 ua.maker.gbible.R$string: int context_delete
 ua.maker.gbible.R$string: int context_drag_and_drop
 ua.maker.gbible.R$string: int context_edit
+ua.maker.gbible.R$string: int copy_to_clip_board_str
 ua.maker.gbible.R$string: int copyed_poem
 ua.maker.gbible.R$string: int create_plan_btn
 ua.maker.gbible.R$string: int create_plane
@@ -5200,6 +5207,9 @@ ua.maker.gbible.R$string: int dialogtitle_def_trans
 ua.maker.gbible.R$string: int dialogtitle_mode_read
 ua.maker.gbible.R$string: int dialogtitle_set_color_poem_list
 ua.maker.gbible.R$string: int dialogtitle_size_text_pem
+ua.maker.gbible.R$string: int donate_info
+ua.maker.gbible.R$string: int donate_summary
+ua.maker.gbible.R$string: int donate_title
 ua.maker.gbible.R$string: int ecclesiast_str
 ua.maker.gbible.R$string: int efesyanam_str
 ua.maker.gbible.R$string: int empty_et
@@ -5292,6 +5302,9 @@ ua.maker.gbible.R$string: int rimlan_str
 ua.maker.gbible.R$string: int ruf_str
 ua.maker.gbible.R$string: int rus_modern_translate_str
 ua.maker.gbible.R$string: int rus_translate_str
+ua.maker.gbible.R$string: int save_image_title
+ua.maker.gbible.R$string: int saved_into_galary
+ua.maker.gbible.R$string: int saved_str
 ua.maker.gbible.R$string: int search_str
 ua.maker.gbible.R$string: int sofonia_str
 ua.maker.gbible.R$string: int str_sample_size_text
@@ -5592,6 +5605,8 @@ ua.maker.gbible.R$xml: int preference_bible
 ua.maker.gbible.SinglePanelActivity: SinglePanelActivity()
 ua.maker.gbible.activity.ComparePoemActivity
 ua.maker.gbible.activity.ComparePoemActivity: ComparePoemActivity()
+ua.maker.gbible.activity.DonateActivity
+ua.maker.gbible.activity.DonateActivity: DonateActivity()
 ua.maker.gbible.activity.ListChaptersActivity
 ua.maker.gbible.activity.ListChaptersActivity: ListChaptersActivity()
 ua.maker.gbible.activity.ListPoemsActivity
@@ -5641,3 +5656,7 @@ ua.maker.gbible.widget.setting.ColorPickerView: int getSliderTrackerColor()
 ua.maker.gbible.widget.setting.ColorPickerView: void setAlphaSliderText(int)
 ua.maker.gbible.widget.setting.ColorPickerView: void setAlphaSliderText(java.lang.String)
 ua.maker.gbible.widget.setting.ColorPickerView: java.lang.String getAlphaSliderText()
+ua.maker.gbible.widget.setting.DonatePreferences
+ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context)
+ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context,android.util.AttributeSet)
+ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context,android.util.AttributeSet,int)

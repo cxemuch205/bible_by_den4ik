@@ -8887,6 +8887,29 @@ ua.maker.gbible.activity.ComparePoemActivity -> ua.maker.gbible.activity.Compare
     int chapter -> f
     int poem -> g
     void onCreate(android.os.Bundle) -> onCreate
+ua.maker.gbible.activity.DonateActivity -> ua.maker.gbible.activity.DonateActivity:
+    android.widget.Button btnCopyToClipBoard -> a
+    android.widget.ImageView ivQr -> b
+    android.view.View$OnClickListener clickBtnCopyListener -> c
+    android.view.View$OnClickListener clickIVShareListener -> d
+    void onCreate(android.os.Bundle) -> onCreate
+    void copyToClipBoard(java.lang.String) -> a
+    boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void access$0(ua.maker.gbible.activity.DonateActivity,java.lang.String) -> a
+    android.widget.ImageView access$1(ua.maker.gbible.activity.DonateActivity) -> a
+ua.maker.gbible.activity.DonateActivity$1 -> ua.maker.gbible.activity.a:
+    ua.maker.gbible.activity.DonateActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+ua.maker.gbible.activity.DonateActivity$2 -> ua.maker.gbible.activity.b:
+    ua.maker.gbible.activity.DonateActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+    ua.maker.gbible.activity.DonateActivity access$0(ua.maker.gbible.activity.DonateActivity$2) -> a
+ua.maker.gbible.activity.DonateActivity$2$1 -> ua.maker.gbible.activity.c:
+    ua.maker.gbible.activity.DonateActivity$2 this$1 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.activity.DonateActivity$2$2 -> ua.maker.gbible.activity.d:
+    ua.maker.gbible.activity.DonateActivity$2 this$1 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.activity.ListChaptersActivity -> ua.maker.gbible.activity.ListChaptersActivity:
     void onCreate(android.os.Bundle) -> onCreate
     android.support.v4.app.Fragment onCreatePane() -> a
@@ -9139,26 +9162,28 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     boolean dayNight -> I
     boolean useVolBtn -> J
     boolean firstStart -> K
-    int speedScroolList -> L
-    int poemBM -> M
-    int chapterBM -> N
-    java.lang.String contentBM -> O
-    android.view.View viewDialogCopy -> P
-    android.app.AlertDialog dialogSelect -> Q
-    android.view.View$OnLongClickListener longClickOnTextViewListener -> R
+    boolean bolGetingContent -> L
+    int speedScroolList -> M
+    int poemBM -> N
+    int chapterBM -> O
+    java.lang.String contentBM -> P
+    android.view.View viewDialogCopy -> Q
+    android.app.AlertDialog dialogSelect -> R
+    android.app.ProgressDialog pd -> S
+    android.view.View$OnLongClickListener longClickOnTextViewListener -> T
     android.view.GestureDetector$SimpleOnGestureListener gestureListener -> a
     android.view.GestureDetector gestureDetector -> b
-    android.view.View$OnTouchListener touchListener -> S
-    android.view.View$OnKeyListener keyListener -> T
-    android.widget.AbsListView$OnScrollListener scrollChangeListener -> U
-    android.widget.AdapterView$OnItemClickListener itemClickListener -> V
-    android.content.DialogInterface$OnClickListener dialogItemClickListener -> W
-    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> X
-    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> Y
-    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> Z
-    android.content.DialogInterface$OnClickListener clickCopyAllListener -> aa
-    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ab
-    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> ac
+    android.view.View$OnTouchListener touchListener -> U
+    android.view.View$OnKeyListener keyListener -> V
+    android.widget.AbsListView$OnScrollListener scrollChangeListener -> W
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> X
+    android.content.DialogInterface$OnClickListener dialogItemClickListener -> Y
+    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> Z
+    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> aa
+    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> ab
+    android.content.DialogInterface$OnClickListener clickCopyAllListener -> ac
+    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ad
+    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> ae
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void showInfoPopup() -> a
@@ -9214,16 +9239,18 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     void access$36(ua.maker.gbible.fragment.ListPoemsFragment,int) -> f
     void access$37(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> b
     android.app.AlertDialog access$38(ua.maker.gbible.fragment.ListPoemsFragment) -> B
-    ua.maker.gbible.utils.DataBase access$39(ua.maker.gbible.fragment.ListPoemsFragment) -> C
-    java.lang.String access$40(ua.maker.gbible.fragment.ListPoemsFragment) -> D
-    void access$41(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
-    void access$42(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
-    android.content.SharedPreferences access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
-    android.widget.Button access$44(ua.maker.gbible.fragment.ListPoemsFragment) -> F
-    void access$45(ua.maker.gbible.fragment.ListPoemsFragment) -> G
-    void access$46(ua.maker.gbible.fragment.ListPoemsFragment) -> H
-    void access$47(ua.maker.gbible.fragment.ListPoemsFragment,int) -> g
-    void access$48(ua.maker.gbible.fragment.ListPoemsFragment,int) -> h
+    void access$39(ua.maker.gbible.fragment.ListPoemsFragment,boolean) -> a
+    android.app.ProgressDialog access$40(ua.maker.gbible.fragment.ListPoemsFragment) -> C
+    void access$41(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
+    ua.maker.gbible.utils.DataBase access$42(ua.maker.gbible.fragment.ListPoemsFragment) -> D
+    java.lang.String access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
+    void access$44(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
+    android.content.SharedPreferences access$45(ua.maker.gbible.fragment.ListPoemsFragment) -> F
+    android.widget.Button access$46(ua.maker.gbible.fragment.ListPoemsFragment) -> G
+    void access$47(ua.maker.gbible.fragment.ListPoemsFragment) -> H
+    void access$48(ua.maker.gbible.fragment.ListPoemsFragment) -> I
+    void access$49(ua.maker.gbible.fragment.ListPoemsFragment,int) -> g
+    void access$50(ua.maker.gbible.fragment.ListPoemsFragment,int) -> h
 ua.maker.gbible.fragment.ListPoemsFragment$1 -> ua.maker.gbible.b.s:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     boolean onLongClick(android.view.View) -> onLongClick
@@ -9289,7 +9316,6 @@ ua.maker.gbible.fragment.ListPoemsFragment$ActionModeCallback -> ua.maker.gbible
     boolean onActionItemClicked(android.view.ActionMode,android.view.MenuItem) -> onActionItemClicked
     void onDestroyActionMode(android.view.ActionMode) -> onDestroyActionMode
 ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gbible.b.am:
-    android.app.ProgressDialog pd -> b
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onPreExecute() -> onPreExecute
     java.lang.Void doInBackground(java.lang.Void[]) -> a
@@ -9998,3 +10024,6 @@ ua.maker.gbible.widget.setting.ColorPickerView -> ua.maker.gbible.widget.setting
     java.lang.String getAlphaSliderText() -> getAlphaSliderText
 ua.maker.gbible.widget.setting.ColorPickerView$OnColorChangedListener -> ua.maker.gbible.widget.setting.l:
     void onColorChanged(int) -> a
+ua.maker.gbible.widget.setting.DonatePreferences -> ua.maker.gbible.widget.setting.DonatePreferences:
+    void init() -> a
+    boolean onPreferenceClick(android.preference.Preference) -> onPreferenceClick
