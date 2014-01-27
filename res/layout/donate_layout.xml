@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_info_title"
+                android:textSize="15dp"/>
+            
+            <View android:layout_width="match_parent" android:layout_height="2dp" android:background="#55000000"/>
+
+            <TextView
+                android:paddingTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/donate_info"
+                android:textIsSelectable="true"
+                android:textColor="#000"
+                android:textSize="18dp"
+                android:paddingBottom="8dp"/>
+            
+            <Button 
+                android:id="@+id/btn_copy_info_donate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textColor="#fff"
+                android:paddingBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/menu_button_background"
+                android:text="@string/copy_to_clip_board_str"/>
+            
+            <ImageView 
+                android:id="@+id/iv_qr_share"
+                android:clickable="true"
+                android:background="@drawable/backgroung_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/qr_code_donate_info"/>
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

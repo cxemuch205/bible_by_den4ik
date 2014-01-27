@@ -259,7 +259,10 @@
     <string name="str_sample_size_text">Приклад.</string>
     <string name="pref_message_select_use_btn_lov">Ви не відмітили пункт \"Кнопки гучності\"!</string>
     
-    <string name="category_base">Загальны</string>
+    <string name="donate_title">Пожертвувати</string>
+    <string name="donate_summary">Потребуємо матеріальнї підтримки, тут інфо рахунку в українському банку ПриватБ</string>
+    
+    <string name="category_base">Загальні</string>
     	<string name="pref_default_translaters">def_translates</string>
     		<string name="title_def_trans">Переклад стандр.</string>
     		<string name="summary_def_trans">Встановлюе текст обраного перекладу.</string>
@@ -415,6 +418,15 @@
     
     <string name="context_drag_and_drop">Перемеістити</string>
     <string name="click_on_point_paste">Тап для вставки</string>
+    <!-- ##################### -->
+    
+    <!-- Donate activity -->
+    <string name="card_info_title">Реквізити для пожертвуваняя</string>
+    <string name="copy_to_clip_board_str">Скопіювати в буфер</string>
+    <string name="donate_info">Павенко Данило Євгенiйович\n\nМФО банку: 305299\nКОД ОКПО отримувача: 14360570\nКОД ОКПО банку: 14360570\nИНН отримувача: 3484203653\n\n№ карти: 4731185505692514</string>
+    <string name="save_image_title">Збереження qr-коду?</string>
+    <string name="saved_into_galary">Буде збережено в папку зображень, запропоновано прочитати якщо на пристрої є спец додаток</string>
+    <string name="saved_str">Збережено!</string>
     <!-- ##################### -->
     
     <!-- Color Picker -->

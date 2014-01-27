@@ -947,32 +947,34 @@ containing a value of this type.
         public static final int action_select=0x7f020070;
         public static final int add_bookmark_small=0x7f020071;
         public static final int background_action_bar=0x7f020072;
-        public static final int bible_select=0x7f020073;
-        public static final int bible_select_ic_48=0x7f020074;
-        public static final int bookmark=0x7f020075;
-        public static final int bookmark_ico=0x7f020076;
-        public static final int btn_active_select=0x7f020077;
-        public static final int btn_background_v4=0x7f020078;
-        public static final int copy_ico_small=0x7f020079;
-        public static final int exit=0x7f02007a;
-        public static final int history_ico=0x7f02007b;
-        public static final int ic_launcher=0x7f02007c;
-        public static final int ico_add_item_in_plan_v2=0x7f02007d;
-        public static final int ico_bible_t1=0x7f02007e;
-        public static final int ico_bible_usualy=0x7f02007f;
-        public static final int ico_bible_v2=0x7f020080;
-        public static final int ico_compare_poem=0x7f020081;
-        public static final int ico_share_smal_v2=0x7f020082;
-        public static final int icon_app_bible_n=0x7f020083;
-        public static final int menu_button_background=0x7f020084;
-        public static final int plan_ico=0x7f020085;
-        public static final int plus=0x7f020086;
-        public static final int pointer_next=0x7f020087;
-        public static final int pointer_previous=0x7f020088;
-        public static final int search_ico=0x7f020089;
-        public static final int select_link_bible_ico=0x7f02008a;
-        public static final int selector_item_chapter=0x7f02008b;
-        public static final int setting_ico42=0x7f02008c;
+        public static final int backgroung_image_view=0x7f020073;
+        public static final int bible_select=0x7f020074;
+        public static final int bible_select_ic_48=0x7f020075;
+        public static final int bookmark=0x7f020076;
+        public static final int bookmark_ico=0x7f020077;
+        public static final int btn_active_select=0x7f020078;
+        public static final int btn_background_v4=0x7f020079;
+        public static final int copy_ico_small=0x7f02007a;
+        public static final int exit=0x7f02007b;
+        public static final int history_ico=0x7f02007c;
+        public static final int ic_launcher=0x7f02007d;
+        public static final int ico_add_item_in_plan_v2=0x7f02007e;
+        public static final int ico_bible_t1=0x7f02007f;
+        public static final int ico_bible_usualy=0x7f020080;
+        public static final int ico_bible_v2=0x7f020081;
+        public static final int ico_compare_poem=0x7f020082;
+        public static final int ico_share_smal_v2=0x7f020083;
+        public static final int icon_app_bible_n=0x7f020084;
+        public static final int menu_button_background=0x7f020085;
+        public static final int plan_ico=0x7f020086;
+        public static final int plus=0x7f020087;
+        public static final int pointer_next=0x7f020088;
+        public static final int pointer_previous=0x7f020089;
+        public static final int qr_code_donate_info=0x7f02008a;
+        public static final int search_ico=0x7f02008b;
+        public static final int select_link_bible_ico=0x7f02008c;
+        public static final int selector_item_chapter=0x7f02008d;
+        public static final int setting_ico42=0x7f02008e;
     }
     public static final class id {
         public static final int ImageView01=0x7f050045;
@@ -1019,21 +1021,22 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050013;
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
-        public static final int action_add_to_bookmarks=0x7f0500a0;
-        public static final int action_bookmarks=0x7f05009d;
-        public static final int action_cancel_drag_and_drop=0x7f0500a8;
-        public static final int action_clear_history=0x7f0500a4;
-        public static final int action_compare=0x7f0500a3;
-        public static final int action_copy_to_clipboard=0x7f0500a1;
-        public static final int action_exit=0x7f0500a6;
-        public static final int action_history=0x7f05009e;
-        public static final int action_search=0x7f05009c;
-        public static final int action_select=0x7f05009b;
-        public static final int action_setting=0x7f05009f;
-        public static final int action_setting_app=0x7f0500a5;
-        public static final int action_share=0x7f0500a2;
+        public static final int action_add_to_bookmarks=0x7f0500a2;
+        public static final int action_bookmarks=0x7f05009f;
+        public static final int action_cancel_drag_and_drop=0x7f0500aa;
+        public static final int action_clear_history=0x7f0500a6;
+        public static final int action_compare=0x7f0500a5;
+        public static final int action_copy_to_clipboard=0x7f0500a3;
+        public static final int action_exit=0x7f0500a8;
+        public static final int action_history=0x7f0500a0;
+        public static final int action_search=0x7f05009e;
+        public static final int action_select=0x7f05009d;
+        public static final int action_setting=0x7f0500a1;
+        public static final int action_setting_app=0x7f0500a7;
+        public static final int action_share=0x7f0500a4;
         public static final int btn_book=0x7f050052;
         public static final int btn_chapter=0x7f050053;
+        public static final int btn_copy_info_donate=0x7f050080;
         public static final int btn_create_plan=0x7f050059;
         public static final int btn_poem=0x7f050054;
         public static final int btn_start_search=0x7f05005c;
@@ -1052,12 +1055,13 @@ containing a value of this type.
         public static final int gv_show_chapters=0x7f050055;
         public static final int hex_val=0x7f050077;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f050080;
-        public static final int item_add_poin_plan=0x7f0500a7;
-        public static final int iv_action=0x7f050087;
+        public static final int imageView1=0x7f050082;
+        public static final int item_add_poin_plan=0x7f0500a9;
+        public static final int iv_action=0x7f050089;
         public static final int iv_bookmarks=0x7f05003e;
         public static final int iv_history=0x7f050040;
-        public static final int iv_img=0x7f050094;
+        public static final int iv_img=0x7f050096;
+        public static final int iv_qr_share=0x7f050081;
         public static final int iv_search=0x7f05003c;
         public static final int iv_select=0x7f05003a;
         public static final int iv_setting=0x7f050042;
@@ -1070,7 +1074,7 @@ containing a value of this type.
         public static final int ll_history=0x7f05003f;
         public static final int ll_history_paige=0x7f05004f;
         public static final int ll_history_right=0x7f05004d;
-        public static final int ll_img_text=0x7f050093;
+        public static final int ll_img_text=0x7f050095;
         public static final int ll_left_control_panel=0x7f050043;
         public static final int ll_right_control_panel=0x7f050049;
         public static final int ll_search=0x7f05003b;
@@ -1110,39 +1114,39 @@ containing a value of this type.
         public static final int textView2=0x7f050073;
         public static final int textView_selected_poem_to_copy=0x7f05007f;
         public static final int text_hex_wrapper=0x7f050076;
-        public static final int tv_action=0x7f050088;
-        public static final int tv_comment_bookmark_fragment=0x7f050083;
-        public static final int tv_compare_content_poem=0x7f050086;
-        public static final int tv_content_poem_search=0x7f05008e;
+        public static final int tv_action=0x7f05008a;
+        public static final int tv_comment_bookmark_fragment=0x7f050085;
+        public static final int tv_compare_content_poem=0x7f050088;
+        public static final int tv_content_poem_search=0x7f050090;
         public static final int tv_current_value_speed_scroll=0x7f05007a;
-        public static final int tv_date_created=0x7f05008b;
-        public static final int tv_for_img=0x7f050095;
+        public static final int tv_date_created=0x7f05008d;
+        public static final int tv_for_img=0x7f050097;
         public static final int tv_info_bookmarks=0x7f050033;
         public static final int tv_info_empty_history=0x7f050050;
-        public static final int tv_link=0x7f050081;
+        public static final int tv_link=0x7f050083;
         public static final int tv_link_dialog_bookmark=0x7f050071;
-        public static final int tv_link_h=0x7f05008a;
-        public static final int tv_link_poem_search=0x7f05008d;
-        public static final int tv_medium_msg=0x7f050092;
-        public static final int tv_msg_alert=0x7f050099;
-        public static final int tv_msg_small=0x7f050091;
-        public static final int tv_number_chapter=0x7f050084;
-        public static final int tv_number_of_poem=0x7f05008c;
-        public static final int tv_pl_date=0x7f050098;
-        public static final int tv_pl_name=0x7f050096;
-        public static final int tv_pl_sub_description=0x7f050097;
+        public static final int tv_link_h=0x7f05008c;
+        public static final int tv_link_poem_search=0x7f05008f;
+        public static final int tv_medium_msg=0x7f050094;
+        public static final int tv_msg_alert=0x7f05009b;
+        public static final int tv_msg_small=0x7f050093;
+        public static final int tv_number_chapter=0x7f050086;
+        public static final int tv_number_of_poem=0x7f05008e;
+        public static final int tv_pl_date=0x7f05009a;
+        public static final int tv_pl_name=0x7f050098;
+        public static final int tv_pl_sub_description=0x7f050099;
         public static final int tv_sample_size=0x7f05007d;
         public static final int tv_show_data_time=0x7f050070;
         public static final int tv_show_link=0x7f050034;
-        public static final int tv_smal_content=0x7f050082;
+        public static final int tv_smal_content=0x7f050084;
         public static final int tv_text_size_dialog=0x7f05007c;
-        public static final int tv_title_bold_text=0x7f050090;
-        public static final int tv_title_text=0x7f05008f;
-        public static final int tv_translate=0x7f050089;
-        public static final int tv_translate_label=0x7f050085;
+        public static final int tv_title_bold_text=0x7f050092;
+        public static final int tv_title_text=0x7f050091;
+        public static final int tv_translate=0x7f05008b;
+        public static final int tv_translate_label=0x7f050087;
         public static final int useLogo=0x7f050004;
         public static final int view1=0x7f050035;
-        public static final int webviewActionView=0x7f05009a;
+        public static final int webviewActionView=0x7f05009c;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -1191,20 +1195,21 @@ containing a value of this type.
         public static final int dialog_pref_speed_scroll=0x7f030024;
         public static final int dialog_pref_text_size=0x7f030025;
         public static final int dialog_select_poem=0x7f030026;
-        public static final int empty_fragment=0x7f030027;
-        public static final int item_bookmarks=0x7f030028;
-        public static final int item_chapter_layout=0x7f030029;
-        public static final int item_compare_poem=0x7f03002a;
-        public static final int item_dialog_list=0x7f03002b;
-        public static final int item_list_history=0x7f03002c;
-        public static final int item_list_poems=0x7f03002d;
-        public static final int item_list_poems_search=0x7f03002e;
-        public static final int item_plan_item_text=0x7f03002f;
-        public static final int item_plans_list=0x7f030030;
-        public static final int preference_fragment=0x7f030031;
-        public static final int sherlock_spinner_dropdown_item=0x7f030032;
-        public static final int sherlock_spinner_item=0x7f030033;
-        public static final int show_info_layout=0x7f030034;
+        public static final int donate_layout=0x7f030027;
+        public static final int empty_fragment=0x7f030028;
+        public static final int item_bookmarks=0x7f030029;
+        public static final int item_chapter_layout=0x7f03002a;
+        public static final int item_compare_poem=0x7f03002b;
+        public static final int item_dialog_list=0x7f03002c;
+        public static final int item_list_history=0x7f03002d;
+        public static final int item_list_poems=0x7f03002e;
+        public static final int item_list_poems_search=0x7f03002f;
+        public static final int item_plan_item_text=0x7f030030;
+        public static final int item_plans_list=0x7f030031;
+        public static final int preference_fragment=0x7f030032;
+        public static final int sherlock_spinner_dropdown_item=0x7f030033;
+        public static final int sherlock_spinner_item=0x7f030034;
+        public static final int show_info_layout=0x7f030035;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1272,8 +1277,8 @@ containing a value of this type.
         public static final int action_search=0x7f0a0010;
         public static final int action_select=0x7f0a000f;
         public static final int action_setting=0x7f0a0013;
-        public static final int action_title_clear_history=0x7f0a00a9;
-        public static final int add_to_plan_this_link=0x7f0a00b2;
+        public static final int action_title_clear_history=0x7f0a00ab;
+        public static final int add_to_plan_this_link=0x7f0a00b4;
         public static final int aggey_str=0x7f0a0054;
         public static final int amos_str=0x7f0a004d;
         public static final int app_name=0x7f0a000e;
@@ -1281,72 +1286,82 @@ containing a value of this type.
         public static final int avvakum_str=0x7f0a0052;
         public static final int bitie_str=0x7f0a0023;
         public static final int bitie_str_small=0x7f0a0024;
-        public static final int bold_text=0x7f0a00d7;
+        public static final int bold_text=0x7f0a00d9;
         public static final int btn_empty_str=0x7f0a0079;
         public static final int btn_empty_str_small=0x7f0a007a;
-        public static final int category_base=0x7f0a007e;
-        public static final int category_design=0x7f0a008f;
-        public static final int click_on_point_paste=0x7f0a00db;
+        /**  ##################### 
+ Donate activity 
+ ##################### 
+ Donate activity 
+         */
+        public static final int card_info_title=0x7f0a00de;
+        public static final int category_base=0x7f0a0080;
+        public static final int category_design=0x7f0a0091;
+        public static final int click_on_point_paste=0x7f0a00dd;
         public static final int closes_app=0x7f0a0015;
-        public static final int comments_str=0x7f0a00b7;
+        public static final int comments_str=0x7f0a00b9;
         public static final int compare_str=0x7f0a0075;
-        public static final int context_delete=0x7f0a00d0;
-        public static final int context_drag_and_drop=0x7f0a00da;
-        public static final int context_edit=0x7f0a00cf;
-        public static final int copyed_poem=0x7f0a00c0;
-        public static final int create_plan_btn=0x7f0a00ce;
-        public static final int create_plane=0x7f0a00c9;
+        public static final int context_delete=0x7f0a00d2;
+        public static final int context_drag_and_drop=0x7f0a00dc;
+        public static final int context_edit=0x7f0a00d1;
+        public static final int copy_to_clip_board_str=0x7f0a00df;
+        public static final int copyed_poem=0x7f0a00c2;
+        public static final int create_plan_btn=0x7f0a00d0;
+        public static final int create_plane=0x7f0a00cb;
         public static final int daniil_str=0x7f0a004a;
-        public static final int data_time=0x7f0a00cd;
-        public static final int deleted_bookmark=0x7f0a00b3;
+        public static final int data_time=0x7f0a00cf;
+        public static final int deleted_bookmark=0x7f0a00b5;
         public static final int deyania_str=0x7f0a005b;
-        public static final int dialog_add_item_to_plan=0x7f0a00bd;
-        public static final int dialog_add_to_bookmarks=0x7f0a00b9;
-        public static final int dialog_added_to_bookmarks=0x7f0a00bf;
-        public static final int dialog_btn_copy_select_text=0x7f0a00c5;
+        public static final int dialog_add_item_to_plan=0x7f0a00bf;
+        public static final int dialog_add_to_bookmarks=0x7f0a00bb;
+        public static final int dialog_added_to_bookmarks=0x7f0a00c1;
+        public static final int dialog_btn_copy_select_text=0x7f0a00c7;
         public static final int dialog_cancel=0x7f0a0019;
         /**  ##################### 
  Color Picker 
  ##################### 
  Color Picker 
          */
-        public static final int dialog_color_picker=0x7f0a00dc;
-        public static final int dialog_compare=0x7f0a00bc;
-        public static final int dialog_copy_to_clicpboard=0x7f0a00ba;
-        public static final int dialog_dtn_copy_all=0x7f0a00c4;
-        public static final int dialog_edit=0x7f0a00d3;
-        public static final int dialog_enter_name_plan=0x7f0a00cb;
-        public static final int dialog_enter_sub_description=0x7f0a00cc;
-        public static final int dialog_message_clear_history=0x7f0a00af;
+        public static final int dialog_color_picker=0x7f0a00e4;
+        public static final int dialog_compare=0x7f0a00be;
+        public static final int dialog_copy_to_clicpboard=0x7f0a00bc;
+        public static final int dialog_dtn_copy_all=0x7f0a00c6;
+        public static final int dialog_edit=0x7f0a00d5;
+        public static final int dialog_enter_name_plan=0x7f0a00cd;
+        public static final int dialog_enter_sub_description=0x7f0a00ce;
+        public static final int dialog_message_clear_history=0x7f0a00b1;
         public static final int dialog_ok=0x7f0a0017;
-        public static final int dialog_pref_message_speed_smooth_scroll=0x7f0a008c;
-        public static final int dialog_pref_title_speed_smooth_scroll=0x7f0a008b;
+        public static final int dialog_pref_message_speed_smooth_scroll=0x7f0a008e;
+        public static final int dialog_pref_title_speed_smooth_scroll=0x7f0a008d;
         public static final int dialog_save=0x7f0a0018;
         /**  Preference string 
  Preference string 
          */
         public static final int dialog_select_size_text=0x7f0a007b;
-        public static final int dialog_share=0x7f0a00bb;
-        public static final int dialog_start_search=0x7f0a00a6;
-        public static final int dialog_title_add_item_plan=0x7f0a00d4;
-        public static final int dialog_title_add_to_bookmark=0x7f0a00b6;
-        public static final int dialog_title_clear_history=0x7f0a00ae;
-        public static final int dialog_title_create_plan=0x7f0a00ca;
-        public static final int dialog_title_pos_down_panel=0x7f0a0098;
-        public static final int dialog_title_search=0x7f0a00a7;
-        public static final int dialog_title_select_text=0x7f0a00c3;
+        public static final int dialog_share=0x7f0a00bd;
+        public static final int dialog_start_search=0x7f0a00a8;
+        public static final int dialog_title_add_item_plan=0x7f0a00d6;
+        public static final int dialog_title_add_to_bookmark=0x7f0a00b8;
+        public static final int dialog_title_clear_history=0x7f0a00b0;
+        public static final int dialog_title_create_plan=0x7f0a00cc;
+        public static final int dialog_title_pos_down_panel=0x7f0a009a;
+        public static final int dialog_title_search=0x7f0a00a9;
+        public static final int dialog_title_select_text=0x7f0a00c5;
         public static final int dialog_yes=0x7f0a0016;
-        public static final int dialogtitle_def_trans=0x7f0a0082;
-        public static final int dialogtitle_mode_read=0x7f0a0086;
-        public static final int dialogtitle_set_color_poem_list=0x7f0a009b;
-        public static final int dialogtitle_size_text_pem=0x7f0a0093;
+        public static final int dialogtitle_def_trans=0x7f0a0084;
+        public static final int dialogtitle_mode_read=0x7f0a0088;
+        public static final int dialogtitle_set_color_poem_list=0x7f0a009d;
+        public static final int dialogtitle_size_text_pem=0x7f0a0095;
+        public static final int donate_info=0x7f0a00e0;
+        public static final int donate_summary=0x7f0a007f;
+        public static final int donate_title=0x7f0a007e;
         public static final int ecclesiast_str=0x7f0a0044;
         public static final int efesyanam_str=0x7f0a0067;
         /**  ERROR 
  ERROR 
          */
         public static final int empty_et=0x7f0a001d;
-        public static final int error_text_msg=0x7f0a00d9;
+        public static final int error_text_msg=0x7f0a00db;
         public static final int esfir_str=0x7f0a0040;
         public static final int evreyam_str=0x7f0a0070;
         public static final int exit_question=0x7f0a0014;
@@ -1360,7 +1375,7 @@ containing a value of this type.
          */
         public static final int ga_trackingId=0x7f0a000d;
         public static final int galatam_str=0x7f0a0066;
-        public static final int hint_link_add=0x7f0a00b8;
+        public static final int hint_link_add=0x7f0a00ba;
         public static final int iakova_str=0x7f0a005c;
         public static final int ieremia_str=0x7f0a0047;
         public static final int iezekiil_str=0x7f0a0049;
@@ -1370,9 +1385,9 @@ containing a value of this type.
         public static final int ioil_str=0x7f0a004c;
         public static final int iona_str=0x7f0a004f;
         public static final int iov_str=0x7f0a0041;
-        public static final int is_mt_translate=0x7f0a00ac;
-        public static final int is_rst_translate=0x7f0a00ab;
-        public static final int is_ua_translate=0x7f0a00ad;
+        public static final int is_mt_translate=0x7f0a00ae;
+        public static final int is_rst_translate=0x7f0a00ad;
+        public static final int is_ua_translate=0x7f0a00af;
         public static final int isaia_str=0x7f0a0046;
         public static final int ishod_str=0x7f0a0025;
         public static final int ishod_str_small=0x7f0a0026;
@@ -1381,13 +1396,13 @@ containing a value of this type.
  ##################### 
  List poems 
          */
-        public static final int it_is_chapter_last=0x7f0a00b4;
+        public static final int it_is_chapter_last=0x7f0a00b6;
         public static final int iudy_str=0x7f0a0062;
         public static final int kolosyanam_str=0x7f0a0069;
         public static final int levit_str=0x7f0a0027;
         public static final int levit_str_small=0x7f0a0028;
-        public static final int link_str=0x7f0a00d6;
-        public static final int list_history_empty=0x7f0a00aa;
+        public static final int link_str=0x7f0a00d8;
+        public static final int list_history_empty=0x7f0a00ac;
         public static final int luka_str=0x7f0a0059;
         public static final int malahia_str=0x7f0a0056;
         public static final int mark_str=0x7f0a0058;
@@ -1397,18 +1412,18 @@ containing a value of this type.
  ##################### 
  Plan Detail fragment 
          */
-        public static final int menu_title_add_point=0x7f0a00d2;
+        public static final int menu_title_add_point=0x7f0a00d4;
         public static final int michey_str=0x7f0a0050;
         public static final int naum_str=0x7f0a0051;
         public static final int neemia_str=0x7f0a003f;
         public static final int new_testament=0x7f0a0022;
         public static final int next_chapter_symbol=0x7f0a0077;
-        public static final int no_founded_bookmarks=0x7f0a00b1;
+        public static final int no_founded_bookmarks=0x7f0a00b3;
         /**  Tools 
  Tools 
          */
-        public static final int no_select_book=0x7f0a00a3;
-        public static final int no_select_chapter=0x7f0a00a4;
+        public static final int no_select_book=0x7f0a00a5;
+        public static final int no_select_chapter=0x7f0a00a6;
         public static final int number_str=0x7f0a0029;
         public static final int number_str_small=0x7f0a002a;
         /**  Books 
@@ -1428,27 +1443,27 @@ containing a value of this type.
         public static final int otkrovenie_str=0x7f0a0071;
         public static final int pesni_pesney_str=0x7f0a0045;
         public static final int plach_ieremii_str=0x7f0a0048;
-        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c2;
-        public static final int popup_title_hint=0x7f0a00c1;
-        public static final int pref_backg_control_panel=0x7f0a00a0;
-        public static final int pref_background_poem=0x7f0a0099;
-        public static final int pref_color_text=0x7f0a009d;
-        public static final int pref_default_translaters=0x7f0a007f;
+        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c4;
+        public static final int popup_title_hint=0x7f0a00c3;
+        public static final int pref_backg_control_panel=0x7f0a00a2;
+        public static final int pref_background_poem=0x7f0a009b;
+        public static final int pref_color_text=0x7f0a009f;
+        public static final int pref_default_translaters=0x7f0a0081;
         public static final int pref_message_select_use_btn_lov=0x7f0a007d;
-        public static final int pref_mode_read=0x7f0a0083;
-        public static final int pref_pos_down_panel=0x7f0a0095;
-        public static final int pref_size_text_poem=0x7f0a0090;
-        public static final int pref_smooth_duration=0x7f0a008a;
-        public static final int pref_use_vol_up_down_btn=0x7f0a0087;
-        public static final int press_color_to_apply=0x7f0a0094;
+        public static final int pref_mode_read=0x7f0a0085;
+        public static final int pref_pos_down_panel=0x7f0a0097;
+        public static final int pref_size_text_poem=0x7f0a0092;
+        public static final int pref_smooth_duration=0x7f0a008c;
+        public static final int pref_use_vol_up_down_btn=0x7f0a0089;
+        public static final int press_color_to_apply=0x7f0a0096;
         public static final int previous_chapter_symbol=0x7f0a0078;
         public static final int pritchi_str=0x7f0a0043;
         public static final int progress_dialog_download_chapter=0x7f0a001c;
         public static final int progress_dialog_message=0x7f0a001b;
         public static final int progress_dialog_title=0x7f0a001a;
         public static final int psaltir_str=0x7f0a0042;
-        public static final int quote_poem=0x7f0a00d8;
-        public static final int replay_click_btn=0x7f0a00b5;
+        public static final int quote_poem=0x7f0a00da;
+        public static final int replay_click_btn=0x7f0a00b7;
         public static final int rimlan_str=0x7f0a0063;
         public static final int ruf_str=0x7f0a0031;
         public static final int rus_modern_translate_str=0x7f0a001f;
@@ -1458,24 +1473,27 @@ containing a value of this type.
  Translates 
          */
         public static final int rus_translate_str=0x7f0a001e;
+        public static final int save_image_title=0x7f0a00e1;
+        public static final int saved_into_galary=0x7f0a00e2;
+        public static final int saved_str=0x7f0a00e3;
         /**  Search fragment 
  Search fragment 
          */
-        public static final int search_str=0x7f0a00a5;
+        public static final int search_str=0x7f0a00a7;
         public static final int sofonia_str=0x7f0a0053;
         public static final int str_sample_size_text=0x7f0a007c;
         public static final int sudii_str=0x7f0a002f;
         public static final int sudii_str_small=0x7f0a0030;
-        public static final int summary_background_on_poem_fragment=0x7f0a009c;
-        public static final int summary_control_panel_pref=0x7f0a00a2;
-        public static final int summary_def_trans=0x7f0a0081;
-        public static final int summary_mode_read=0x7f0a0085;
-        public static final int summary_pos_down_panel=0x7f0a0097;
-        public static final int summary_select_text_color=0x7f0a009f;
-        public static final int summary_size_text_poem=0x7f0a0092;
-        public static final int summary_smooth_scroll=0x7f0a008e;
-        public static final int summary_use_vol_btn=0x7f0a0089;
-        public static final int text_str=0x7f0a00d5;
+        public static final int summary_background_on_poem_fragment=0x7f0a009e;
+        public static final int summary_control_panel_pref=0x7f0a00a4;
+        public static final int summary_def_trans=0x7f0a0083;
+        public static final int summary_mode_read=0x7f0a0087;
+        public static final int summary_pos_down_panel=0x7f0a0099;
+        public static final int summary_select_text_color=0x7f0a00a1;
+        public static final int summary_size_text_poem=0x7f0a0094;
+        public static final int summary_smooth_scroll=0x7f0a0090;
+        public static final int summary_use_vol_btn=0x7f0a008b;
+        public static final int text_str=0x7f0a00d7;
         public static final int three_carstw_str=0x7f0a0036;
         public static final int three_carstw_str_small=0x7f0a0037;
         public static final int three_ioanna_str=0x7f0a0061;
@@ -1484,36 +1502,36 @@ containing a value of this type.
  ##################### 
  PlanList fragment 
          */
-        public static final int title_activit_plan=0x7f0a00c6;
+        public static final int title_activit_plan=0x7f0a00c8;
         /**  ##################### 
  Bookmarks 
  ##################### 
  Bookmarks 
          */
-        public static final int title_activity_bookmarks=0x7f0a00b0;
+        public static final int title_activity_bookmarks=0x7f0a00b2;
         /**  ##################### 
  History Fragment 
  ##################### 
  History Fragment 
          */
-        public static final int title_activity_history=0x7f0a00a8;
+        public static final int title_activity_history=0x7f0a00aa;
         public static final int title_activity_list_chapters=0x7f0a0072;
         public static final int title_activity_list_compare_poems=0x7f0a0074;
-        public static final int title_background_on_poem_fragment=0x7f0a009a;
-        public static final int title_color_text_dialog=0x7f0a009e;
-        public static final int title_control_panel_pref=0x7f0a00a1;
-        public static final int title_def_trans=0x7f0a0080;
-        public static final int title_dialog_plans=0x7f0a00c7;
+        public static final int title_background_on_poem_fragment=0x7f0a009c;
+        public static final int title_color_text_dialog=0x7f0a00a0;
+        public static final int title_control_panel_pref=0x7f0a00a3;
+        public static final int title_def_trans=0x7f0a0082;
+        public static final int title_dialog_plans=0x7f0a00c9;
         public static final int title_list_poem=0x7f0a0073;
-        public static final int title_mode_read=0x7f0a0084;
-        public static final int title_pos_down_panel=0x7f0a0096;
-        public static final int title_size_text_poem=0x7f0a0091;
-        public static final int title_smooth_scroll=0x7f0a008d;
-        public static final int title_use_vol_btn=0x7f0a0088;
+        public static final int title_mode_read=0x7f0a0086;
+        public static final int title_pos_down_panel=0x7f0a0098;
+        public static final int title_size_text_poem=0x7f0a0093;
+        public static final int title_smooth_scroll=0x7f0a008f;
+        public static final int title_use_vol_btn=0x7f0a008a;
         public static final int titu_str=0x7f0a006e;
-        public static final int toast_added_to_plan=0x7f0a00be;
-        public static final int toast_delete_plan_msg=0x7f0a00d1;
-        public static final int toast_msg_no_plans=0x7f0a00c8;
+        public static final int toast_added_to_plan=0x7f0a00c0;
+        public static final int toast_delete_plan_msg=0x7f0a00d3;
+        public static final int toast_msg_no_plans=0x7f0a00ca;
         public static final int two_carstw_str=0x7f0a0034;
         public static final int two_carstw_str_small=0x7f0a0035;
         public static final int two_fessalonikiycam_str=0x7f0a006b;
@@ -1717,7 +1735,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:background
+          @attr name ua.maker.gbible:background
         */
         public static final int SherlockActionBar_background = 2;
         /**
@@ -1731,7 +1749,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundSplit
+          @attr name ua.maker.gbible:backgroundSplit
         */
         public static final int SherlockActionBar_backgroundSplit = 3;
         /**
@@ -1745,7 +1763,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundStacked
+          @attr name ua.maker.gbible:backgroundStacked
         */
         public static final int SherlockActionBar_backgroundStacked = 12;
         /**
@@ -1757,7 +1775,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:customNavigationLayout
+          @attr name ua.maker.gbible:customNavigationLayout
         */
         public static final int SherlockActionBar_customNavigationLayout = 13;
         /**
@@ -1780,7 +1798,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:displayOptions
+          @attr name ua.maker.gbible:displayOptions
         */
         public static final int SherlockActionBar_displayOptions = 7;
         /**
@@ -1792,7 +1810,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:divider
+          @attr name ua.maker.gbible:divider
         */
         public static final int SherlockActionBar_divider = 5;
         /**
@@ -1810,7 +1828,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:height
+          @attr name ua.maker.gbible:height
         */
         public static final int SherlockActionBar_height = 4;
         /**
@@ -1822,7 +1840,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:homeLayout
+          @attr name ua.maker.gbible:homeLayout
         */
         public static final int SherlockActionBar_homeLayout = 14;
         /**
@@ -1834,7 +1852,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:icon
+          @attr name ua.maker.gbible:icon
         */
         public static final int SherlockActionBar_icon = 10;
         /**
@@ -1846,7 +1864,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:indeterminateProgressStyle
+          @attr name ua.maker.gbible:indeterminateProgressStyle
         */
         public static final int SherlockActionBar_indeterminateProgressStyle = 16;
         /**
@@ -1865,7 +1883,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:itemPadding
+          @attr name ua.maker.gbible:itemPadding
         */
         public static final int SherlockActionBar_itemPadding = 18;
         /**
@@ -1877,7 +1895,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:logo
+          @attr name ua.maker.gbible:logo
         */
         public static final int SherlockActionBar_logo = 11;
         /**
@@ -1897,7 +1915,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:navigationMode
+          @attr name ua.maker.gbible:navigationMode
         */
         public static final int SherlockActionBar_navigationMode = 6;
         /**
@@ -1915,7 +1933,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:progressBarPadding
+          @attr name ua.maker.gbible:progressBarPadding
         */
         public static final int SherlockActionBar_progressBarPadding = 17;
         /**
@@ -1927,7 +1945,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:progressBarStyle
+          @attr name ua.maker.gbible:progressBarStyle
         */
         public static final int SherlockActionBar_progressBarStyle = 15;
         /**
@@ -1943,7 +1961,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:subtitle
+          @attr name ua.maker.gbible:subtitle
         */
         public static final int SherlockActionBar_subtitle = 9;
         /**
@@ -1955,7 +1973,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:subtitleTextStyle
+          @attr name ua.maker.gbible:subtitleTextStyle
         */
         public static final int SherlockActionBar_subtitleTextStyle = 1;
         /**
@@ -1971,7 +1989,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:title
+          @attr name ua.maker.gbible:title
         */
         public static final int SherlockActionBar_title = 8;
         /**
@@ -1983,7 +2001,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:titleTextStyle
+          @attr name ua.maker.gbible:titleTextStyle
         */
         public static final int SherlockActionBar_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActionMenuItemView.
@@ -1992,7 +2010,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth ua.maker.gbible:android_minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth android:minWidth}</code></td><td></td></tr>
            </table>
            @see #SherlockActionMenuItemView_android_minWidth
          */
@@ -2000,9 +2018,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x0101013f
         };
         /**
-          <p>This symbol is the offset where the {@link ua.maker.gbible.R.attr#android_minWidth}
+          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
           attribute's value can be found in the {@link #SherlockActionMenuItemView} array.
-          @attr name android:android_minWidth
+          @attr name android:minWidth
         */
         public static final int SherlockActionMenuItemView_android_minWidth = 0;
         /** Attributes that can be used with a SherlockActionMode.
@@ -2038,7 +2056,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:background
+          @attr name ua.maker.gbible:background
         */
         public static final int SherlockActionMode_background = 2;
         /**
@@ -2052,7 +2070,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:backgroundSplit
+          @attr name ua.maker.gbible:backgroundSplit
         */
         public static final int SherlockActionMode_backgroundSplit = 3;
         /**
@@ -2070,7 +2088,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:height
+          @attr name ua.maker.gbible:height
         */
         public static final int SherlockActionMode_height = 4;
         /**
@@ -2082,7 +2100,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:subtitleTextStyle
+          @attr name ua.maker.gbible:subtitleTextStyle
         */
         public static final int SherlockActionMode_subtitleTextStyle = 1;
         /**
@@ -2094,7 +2112,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:titleTextStyle
+          @attr name ua.maker.gbible:titleTextStyle
         */
         public static final int SherlockActionMode_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActivityChooserView.
@@ -2103,7 +2121,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActivityChooserView_android_background ua.maker.gbible:android_background}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActivityChooserView_android_background android:background}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_expandActivityOverflowButtonDrawable ua.maker.gbible:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_initialActivityCount ua.maker.gbible:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
            </table>
@@ -2115,9 +2133,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x010100d4, 0x7f01005e, 0x7f01005f
         };
         /**
-          <p>This symbol is the offset where the {@link ua.maker.gbible.R.attr#android_background}
+          <p>This symbol is the offset where the {@link android.R.attr#background}
           attribute's value can be found in the {@link #SherlockActivityChooserView} array.
-          @attr name android:android_background
+          @attr name android:background
         */
         public static final int SherlockActivityChooserView_android_background = 0;
         /**
@@ -2134,7 +2152,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:expandActivityOverflowButtonDrawable
+          @attr name ua.maker.gbible:expandActivityOverflowButtonDrawable
         */
         public static final int SherlockActivityChooserView_expandActivityOverflowButtonDrawable = 2;
         /**
@@ -2150,7 +2168,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:initialActivityCount
+          @attr name ua.maker.gbible:initialActivityCount
         */
         public static final int SherlockActivityChooserView_initialActivityCount = 1;
         /**  Base attributes that are available to all groups. 
@@ -2159,12 +2177,12 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior ua.maker.gbible:android_checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_enabled ua.maker.gbible:android_enabled}</code></td><td> Whether the items are enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_id ua.maker.gbible:android_id}</code></td><td> The ID of the group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory ua.maker.gbible:android_menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory ua.maker.gbible:android_orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_visible ua.maker.gbible:android_visible}</code></td><td> Whether the items are shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior android:checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_enabled android:enabled}</code></td><td> Whether the items are enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_id android:id}</code></td><td> The ID of the group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory android:menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_visible android:visible}</code></td><td> Whether the items are shown/visible.</td></tr>
            </table>
            @see #SherlockMenuGroup_android_checkableBehavior
            @see #SherlockMenuGroup_android_enabled
@@ -2181,24 +2199,27 @@ containing a value of this type.
           <p>
           @attr description
            Whether the items are capable of displaying a check mark. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_checkableBehavior}.
-          @attr name android:android_checkableBehavior
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checkableBehavior}.
+          @attr name android:checkableBehavior
         */
         public static final int SherlockMenuGroup_android_checkableBehavior = 5;
         /**
           <p>
           @attr description
            Whether the items are enabled. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_enabled}.
-          @attr name android:android_enabled
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#enabled}.
+          @attr name android:enabled
         */
         public static final int SherlockMenuGroup_android_enabled = 0;
         /**
           <p>
           @attr description
            The ID of the group. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_id}.
-          @attr name android:android_id
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#id}.
+          @attr name android:id
         */
         public static final int SherlockMenuGroup_android_id = 1;
         /**
@@ -2206,8 +2227,9 @@ containing a value of this type.
           @attr description
            The category applied to all items within this group.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_menuCategory}.
-          @attr name android:android_menuCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#menuCategory}.
+          @attr name android:menuCategory
         */
         public static final int SherlockMenuGroup_android_menuCategory = 3;
         /**
@@ -2215,16 +2237,18 @@ containing a value of this type.
           @attr description
            The order within the category applied to all items within this group.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_orderInCategory}.
-          @attr name android:android_orderInCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orderInCategory}.
+          @attr name android:orderInCategory
         */
         public static final int SherlockMenuGroup_android_orderInCategory = 4;
         /**
           <p>
           @attr description
            Whether the items are shown/visible. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_visible}.
-          @attr name android:android_visible
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#visible}.
+          @attr name android:visible
         */
         public static final int SherlockMenuGroup_android_visible = 2;
         /**  Base attributes that are available to all Item objects. 
@@ -2233,26 +2257,26 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout ua.maker.gbible:android_actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass ua.maker.gbible:android_actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
+           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout android:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass android:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass ua.maker.gbible:android_actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
+           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass android:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
              action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut ua.maker.gbible:android_alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checkable ua.maker.gbible:android_checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checked ua.maker.gbible:android_checked}</code></td><td> Whether the item is checked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_enabled ua.maker.gbible:android_enabled}</code></td><td> Whether the item is enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_icon ua.maker.gbible:android_icon}</code></td><td> The icon associated with this item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_id ua.maker.gbible:android_id}</code></td><td> The ID of the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory ua.maker.gbible:android_menuCategory}</code></td><td> The category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut ua.maker.gbible:android_numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_onClick ua.maker.gbible:android_onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
+           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checkable android:checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checked android:checked}</code></td><td> Whether the item is checked.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_enabled android:enabled}</code></td><td> Whether the item is enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_icon android:icon}</code></td><td> The icon associated with this item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_id android:id}</code></td><td> The ID of the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory android:menuCategory}</code></td><td> The category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut android:numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_onClick android:onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory ua.maker.gbible:android_orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction ua.maker.gbible:android_showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_title ua.maker.gbible:android_title}</code></td><td> The title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed ua.maker.gbible:android_titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_visible ua.maker.gbible:android_visible}</code></td><td> Whether the item is shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction android:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_title android:title}</code></td><td> The title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed android:titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_visible android:visible}</code></td><td> Whether the item is shown/visible.</td></tr>
            </table>
            @see #SherlockMenuItem_android_actionLayout
            @see #SherlockMenuItem_android_actionProviderClass
@@ -2285,8 +2309,9 @@ containing a value of this type.
            An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_actionLayout}.
-          @attr name android:android_actionLayout
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionLayout}.
+          @attr name android:actionLayout
         */
         public static final int SherlockMenuItem_android_actionLayout = 14;
         /**
@@ -2296,8 +2321,9 @@ containing a value of this type.
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_actionProviderClass}.
-          @attr name android:android_actionProviderClass
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionProviderClass}.
+          @attr name android:actionProviderClass
         */
         public static final int SherlockMenuItem_android_actionProviderClass = 16;
         /**
@@ -2306,8 +2332,9 @@ containing a value of this type.
            The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_actionViewClass}.
-          @attr name android:android_actionViewClass
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#actionViewClass}.
+          @attr name android:actionViewClass
         */
         public static final int SherlockMenuItem_android_actionViewClass = 15;
         /**
@@ -2315,16 +2342,18 @@ containing a value of this type.
           @attr description
            The alphabetic shortcut key.  This is the shortcut when using a keyboard
              with alphabetic keys. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_alphabeticShortcut}.
-          @attr name android:android_alphabeticShortcut
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#alphabeticShortcut}.
+          @attr name android:alphabeticShortcut
         */
         public static final int SherlockMenuItem_android_alphabeticShortcut = 9;
         /**
           <p>
           @attr description
            Whether the item is capable of displaying a check mark. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_checkable}.
-          @attr name android:android_checkable
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checkable}.
+          @attr name android:checkable
         */
         public static final int SherlockMenuItem_android_checkable = 11;
         /**
@@ -2332,16 +2361,18 @@ containing a value of this type.
           @attr description
            Whether the item is checked.  Note that you must first have enabled checking with
              the checkable attribute or else the check mark will not appear. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_checked}.
-          @attr name android:android_checked
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#checked}.
+          @attr name android:checked
         */
         public static final int SherlockMenuItem_android_checked = 3;
         /**
           <p>
           @attr description
            Whether the item is enabled. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_enabled}.
-          @attr name android:android_enabled
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#enabled}.
+          @attr name android:enabled
         */
         public static final int SherlockMenuItem_android_enabled = 1;
         /**
@@ -2349,16 +2380,18 @@ containing a value of this type.
           @attr description
            The icon associated with this item.  This icon will not always be shown, so
              the title should be sufficient in describing this item. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_icon}.
-          @attr name android:android_icon
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#icon}.
+          @attr name android:icon
         */
         public static final int SherlockMenuItem_android_icon = 0;
         /**
           <p>
           @attr description
            The ID of the item. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_id}.
-          @attr name android:android_id
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#id}.
+          @attr name android:id
         */
         public static final int SherlockMenuItem_android_id = 2;
         /**
@@ -2366,8 +2399,9 @@ containing a value of this type.
           @attr description
            The category applied to the item.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_menuCategory}.
-          @attr name android:android_menuCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#menuCategory}.
+          @attr name android:menuCategory
         */
         public static final int SherlockMenuItem_android_menuCategory = 5;
         /**
@@ -2375,8 +2409,9 @@ containing a value of this type.
           @attr description
            The numeric shortcut key.  This is the shortcut when using a numeric (e.g., 12-key)
              keyboard. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_numericShortcut}.
-          @attr name android:android_numericShortcut
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#numericShortcut}.
+          @attr name android:numericShortcut
         */
         public static final int SherlockMenuItem_android_numericShortcut = 10;
         /**
@@ -2384,8 +2419,9 @@ containing a value of this type.
           @attr description
            Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_onClick}.
-          @attr name android:android_onClick
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#onClick}.
+          @attr name android:onClick
         */
         public static final int SherlockMenuItem_android_onClick = 12;
         /**
@@ -2393,24 +2429,27 @@ containing a value of this type.
           @attr description
            The order within the category applied to the item.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_orderInCategory}.
-          @attr name android:android_orderInCategory
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orderInCategory}.
+          @attr name android:orderInCategory
         */
         public static final int SherlockMenuItem_android_orderInCategory = 6;
         /**
           <p>
           @attr description
            How this item should display in the Action Bar, if present. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_showAsAction}.
-          @attr name android:android_showAsAction
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#showAsAction}.
+          @attr name android:showAsAction
         */
         public static final int SherlockMenuItem_android_showAsAction = 13;
         /**
           <p>
           @attr description
            The title associated with the item. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_title}.
-          @attr name android:android_title
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#title}.
+          @attr name android:title
         */
         public static final int SherlockMenuItem_android_title = 7;
         /**
@@ -2418,16 +2457,18 @@ containing a value of this type.
           @attr description
            The condensed title associated with the item.  This is used in situations where the
              normal title may be too long to be displayed. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_titleCondensed}.
-          @attr name android:android_titleCondensed
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#titleCondensed}.
+          @attr name android:titleCondensed
         */
         public static final int SherlockMenuItem_android_titleCondensed = 8;
         /**
           <p>
           @attr description
            Whether the item is shown/visible. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_visible}.
-          @attr name android:android_visible
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#visible}.
+          @attr name android:visible
         */
         public static final int SherlockMenuItem_android_visible = 4;
         /** Attributes that can be used with a SherlockMenuView.
@@ -2469,7 +2510,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:headerBackground
+          @attr name ua.maker.gbible:headerBackground
         */
         public static final int SherlockMenuView_headerBackground = 3;
         /**
@@ -2481,7 +2522,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:horizontalDivider
+          @attr name ua.maker.gbible:horizontalDivider
         */
         public static final int SherlockMenuView_horizontalDivider = 1;
         /**
@@ -2495,7 +2536,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:itemBackground
+          @attr name ua.maker.gbible:itemBackground
         */
         public static final int SherlockMenuView_itemBackground = 4;
         /**
@@ -2511,7 +2552,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:itemIconDisabledAlpha
+          @attr name ua.maker.gbible:itemIconDisabledAlpha
         */
         public static final int SherlockMenuView_itemIconDisabledAlpha = 6;
         /**
@@ -2523,7 +2564,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:itemTextAppearance
+          @attr name ua.maker.gbible:itemTextAppearance
         */
         public static final int SherlockMenuView_itemTextAppearance = 0;
         /**
@@ -2539,7 +2580,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:preserveIconSpacing
+          @attr name ua.maker.gbible:preserveIconSpacing
         */
         public static final int SherlockMenuView_preserveIconSpacing = 7;
         /**
@@ -2551,7 +2592,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:verticalDivider
+          @attr name ua.maker.gbible:verticalDivider
         */
         public static final int SherlockMenuView_verticalDivider = 2;
         /**
@@ -2563,7 +2604,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:windowAnimationStyle
+          @attr name ua.maker.gbible:windowAnimationStyle
         */
         public static final int SherlockMenuView_windowAnimationStyle = 5;
         /** Attributes that can be used with a SherlockSearchView.
@@ -2572,9 +2613,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_imeOptions ua.maker.gbible:android_imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_inputType ua.maker.gbible:android_inputType}</code></td><td> The input type to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_maxWidth ua.maker.gbible:android_maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_imeOptions android:imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_inputType android:inputType}</code></td><td> The input type to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_maxWidth android:maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_iconifiedByDefault ua.maker.gbible:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_queryHint ua.maker.gbible:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
            </table>
@@ -2592,24 +2633,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>
           @attr description
            The IME options to set on the query text field. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_imeOptions}.
-          @attr name android:android_imeOptions
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#imeOptions}.
+          @attr name android:imeOptions
         */
         public static final int SherlockSearchView_android_imeOptions = 2;
         /**
           <p>
           @attr description
            The input type to set on the query text field. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_inputType}.
-          @attr name android:android_inputType
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#inputType}.
+          @attr name android:inputType
         */
         public static final int SherlockSearchView_android_inputType = 1;
         /**
           <p>
           @attr description
            An optional maximum width of the SearchView. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_maxWidth}.
-          @attr name android:android_maxWidth
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#maxWidth}.
+          @attr name android:maxWidth
         */
         public static final int SherlockSearchView_android_maxWidth = 0;
         /**
@@ -2626,7 +2670,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:iconifiedByDefault
+          @attr name ua.maker.gbible:iconifiedByDefault
         */
         public static final int SherlockSearchView_iconifiedByDefault = 3;
         /**
@@ -2642,7 +2686,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:queryHint
+          @attr name ua.maker.gbible:queryHint
         */
         public static final int SherlockSearchView_queryHint = 4;
         /** Attributes that can be used with a SherlockSpinner.
@@ -2651,17 +2695,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset ua.maker.gbible:android_dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset android:dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector ua.maker.gbible:android_dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset ua.maker.gbible:android_dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector android:dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset android:dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth ua.maker.gbible:android_dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_gravity ua.maker.gbible:android_gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupBackground ua.maker.gbible:android_popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView ua.maker.gbible:android_popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth android:dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_gravity android:gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupBackground android:popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView android:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_prompt ua.maker.gbible:android_prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_prompt android:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
            </table>
            @see #SherlockSpinner_android_dropDownHorizontalOffset
            @see #SherlockSpinner_android_dropDownSelector
@@ -2681,16 +2725,18 @@ containing a value of this type.
           @attr description
            Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_dropDownHorizontalOffset}.
-          @attr name android:android_dropDownHorizontalOffset
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownHorizontalOffset}.
+          @attr name android:dropDownHorizontalOffset
         */
         public static final int SherlockSpinner_android_dropDownHorizontalOffset = 5;
         /**
           <p>
           @attr description
            List selector to use for spinnerMode="dropdown" display. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_dropDownSelector}.
-          @attr name android:android_dropDownSelector
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownSelector}.
+          @attr name android:dropDownSelector
         */
         public static final int SherlockSpinner_android_dropDownSelector = 1;
         /**
@@ -2698,32 +2744,36 @@ containing a value of this type.
           @attr description
            Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_dropDownVerticalOffset}.
-          @attr name android:android_dropDownVerticalOffset
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownVerticalOffset}.
+          @attr name android:dropDownVerticalOffset
         */
         public static final int SherlockSpinner_android_dropDownVerticalOffset = 6;
         /**
           <p>
           @attr description
            Width of the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_dropDownWidth}.
-          @attr name android:android_dropDownWidth
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#dropDownWidth}.
+          @attr name android:dropDownWidth
         */
         public static final int SherlockSpinner_android_dropDownWidth = 4;
         /**
           <p>
           @attr description
            Gravity setting for positioning the currently selected item. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_gravity}.
-          @attr name android:android_gravity
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#gravity}.
+          @attr name android:gravity
         */
         public static final int SherlockSpinner_android_gravity = 0;
         /**
           <p>
           @attr description
            Background drawable to use for the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_popupBackground}.
-          @attr name android:android_popupBackground
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#popupBackground}.
+          @attr name android:popupBackground
         */
         public static final int SherlockSpinner_android_popupBackground = 2;
         /**
@@ -2733,15 +2783,16 @@ containing a value of this type.
              spinnerMode="dropdown". This layout must contain a TextView with the id
              @android:id/text1 to be populated with the prompt text. 
           <p>This is a private symbol.
-          @attr name android:android_popupPromptView
+          @attr name android:popupPromptView
         */
         public static final int SherlockSpinner_android_popupPromptView = 7;
         /**
           <p>
           @attr description
            The prompt to display when the spinner's dialog is shown. 
-          <p>This corresponds to the global attribute          resource symbol {@link ua.maker.gbible.R.attr#android_prompt}.
-          @attr name android:android_prompt
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#prompt}.
+          @attr name android:prompt
         */
         public static final int SherlockSpinner_android_prompt = 3;
         /** Attributes that can be used with a SherlockTheme.
@@ -2918,7 +2969,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarDivider
+          @attr name ua.maker.gbible:actionBarDivider
         */
         public static final int SherlockTheme_actionBarDivider = 8;
         /**
@@ -2930,7 +2981,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarItemBackground
+          @attr name ua.maker.gbible:actionBarItemBackground
         */
         public static final int SherlockTheme_actionBarItemBackground = 9;
         /**
@@ -2957,7 +3008,7 @@ containing a value of this type.
 <tr><td><code>wrap_content</code></td><td>0</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name android:actionBarSize
+          @attr name ua.maker.gbible:actionBarSize
         */
         public static final int SherlockTheme_actionBarSize = 7;
         /**
@@ -2972,7 +3023,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarSplitStyle
+          @attr name ua.maker.gbible:actionBarSplitStyle
         */
         public static final int SherlockTheme_actionBarSplitStyle = 5;
         /**
@@ -2984,7 +3035,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarStyle
+          @attr name ua.maker.gbible:actionBarStyle
         */
         public static final int SherlockTheme_actionBarStyle = 4;
         /**
@@ -2994,7 +3045,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionBarTabBarStyle
+          @attr name ua.maker.gbible:actionBarTabBarStyle
         */
         public static final int SherlockTheme_actionBarTabBarStyle = 1;
         /**
@@ -3006,7 +3057,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarTabStyle
+          @attr name ua.maker.gbible:actionBarTabStyle
         */
         public static final int SherlockTheme_actionBarTabStyle = 0;
         /**
@@ -3016,7 +3067,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionBarTabTextStyle
+          @attr name ua.maker.gbible:actionBarTabTextStyle
         */
         public static final int SherlockTheme_actionBarTabTextStyle = 2;
         /**
@@ -3034,7 +3085,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionBarWidgetTheme
+          @attr name ua.maker.gbible:actionBarWidgetTheme
         */
         public static final int SherlockTheme_actionBarWidgetTheme = 6;
         /**
@@ -3044,7 +3095,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionButtonStyle
+          @attr name ua.maker.gbible:actionButtonStyle
         */
         public static final int SherlockTheme_actionButtonStyle = 52;
         /**
@@ -3054,7 +3105,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionDropDownStyle
+          @attr name ua.maker.gbible:actionDropDownStyle
         */
         public static final int SherlockTheme_actionDropDownStyle = 51;
         /**
@@ -3067,7 +3118,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionMenuTextAppearance
+          @attr name ua.maker.gbible:actionMenuTextAppearance
         */
         public static final int SherlockTheme_actionMenuTextAppearance = 10;
         /**
@@ -3081,7 +3132,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionMenuTextColor
+          @attr name ua.maker.gbible:actionMenuTextColor
         */
         public static final int SherlockTheme_actionMenuTextColor = 11;
         /**
@@ -3093,7 +3144,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeBackground
+          @attr name ua.maker.gbible:actionModeBackground
         */
         public static final int SherlockTheme_actionModeBackground = 14;
         /**
@@ -3103,7 +3154,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionModeCloseButtonStyle
+          @attr name ua.maker.gbible:actionModeCloseButtonStyle
         */
         public static final int SherlockTheme_actionModeCloseButtonStyle = 13;
         /**
@@ -3115,7 +3166,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeCloseDrawable
+          @attr name ua.maker.gbible:actionModeCloseDrawable
         */
         public static final int SherlockTheme_actionModeCloseDrawable = 16;
         /**
@@ -3127,7 +3178,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModePopupWindowStyle
+          @attr name ua.maker.gbible:actionModePopupWindowStyle
         */
         public static final int SherlockTheme_actionModePopupWindowStyle = 18;
         /**
@@ -3139,7 +3190,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeShareDrawable
+          @attr name ua.maker.gbible:actionModeShareDrawable
         */
         public static final int SherlockTheme_actionModeShareDrawable = 17;
         /**
@@ -3151,7 +3202,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:actionModeSplitBackground
+          @attr name ua.maker.gbible:actionModeSplitBackground
         */
         public static final int SherlockTheme_actionModeSplitBackground = 15;
         /**
@@ -3161,7 +3212,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionModeStyle
+          @attr name ua.maker.gbible:actionModeStyle
         */
         public static final int SherlockTheme_actionModeStyle = 12;
         /**
@@ -3171,7 +3222,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionOverflowButtonStyle
+          @attr name ua.maker.gbible:actionOverflowButtonStyle
         */
         public static final int SherlockTheme_actionOverflowButtonStyle = 3;
         /**
@@ -3181,7 +3232,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:actionSpinnerItemStyle
+          @attr name ua.maker.gbible:actionSpinnerItemStyle
         */
         public static final int SherlockTheme_actionSpinnerItemStyle = 57;
         /**
@@ -3193,7 +3244,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:activatedBackgroundIndicator
+          @attr name ua.maker.gbible:activatedBackgroundIndicator
         */
         public static final int SherlockTheme_activatedBackgroundIndicator = 65;
         /**
@@ -3205,7 +3256,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:activityChooserViewStyle
+          @attr name ua.maker.gbible:activityChooserViewStyle
         */
         public static final int SherlockTheme_activityChooserViewStyle = 64;
         /**
@@ -3217,7 +3268,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:buttonStyleSmall
+          @attr name ua.maker.gbible:buttonStyleSmall
         */
         public static final int SherlockTheme_buttonStyleSmall = 19;
         /**
@@ -3229,7 +3280,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:dividerVertical
+          @attr name ua.maker.gbible:dividerVertical
         */
         public static final int SherlockTheme_dividerVertical = 50;
         /**
@@ -3239,7 +3290,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:dropDownHintAppearance
+          @attr name ua.maker.gbible:dropDownHintAppearance
         */
         public static final int SherlockTheme_dropDownHintAppearance = 66;
         /**
@@ -3249,7 +3300,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:dropDownListViewStyle
+          @attr name ua.maker.gbible:dropDownListViewStyle
         */
         public static final int SherlockTheme_dropDownListViewStyle = 54;
         /**
@@ -3265,7 +3316,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:dropdownListPreferredItemHeight
+          @attr name ua.maker.gbible:dropdownListPreferredItemHeight
         */
         public static final int SherlockTheme_dropdownListPreferredItemHeight = 56;
         /**
@@ -3275,7 +3326,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:homeAsUpIndicator
+          @attr name ua.maker.gbible:homeAsUpIndicator
         */
         public static final int SherlockTheme_homeAsUpIndicator = 53;
         /**
@@ -3285,7 +3336,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:listPopupWindowStyle
+          @attr name ua.maker.gbible:listPopupWindowStyle
         */
         public static final int SherlockTheme_listPopupWindowStyle = 63;
         /**
@@ -3303,7 +3354,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemHeightSmall
+          @attr name ua.maker.gbible:listPreferredItemHeightSmall
         */
         public static final int SherlockTheme_listPreferredItemHeightSmall = 44;
         /**
@@ -3321,7 +3372,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemPaddingLeft
+          @attr name ua.maker.gbible:listPreferredItemPaddingLeft
         */
         public static final int SherlockTheme_listPreferredItemPaddingLeft = 45;
         /**
@@ -3339,7 +3390,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:listPreferredItemPaddingRight
+          @attr name ua.maker.gbible:listPreferredItemPaddingRight
         */
         public static final int SherlockTheme_listPreferredItemPaddingRight = 46;
         /**
@@ -3349,7 +3400,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:popupMenuStyle
+          @attr name ua.maker.gbible:popupMenuStyle
         */
         public static final int SherlockTheme_popupMenuStyle = 55;
         /**
@@ -3361,7 +3412,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchAutoCompleteTextView
+          @attr name ua.maker.gbible:searchAutoCompleteTextView
         */
         public static final int SherlockTheme_searchAutoCompleteTextView = 30;
         /**
@@ -3373,7 +3424,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchDropdownBackground
+          @attr name ua.maker.gbible:searchDropdownBackground
         */
         public static final int SherlockTheme_searchDropdownBackground = 31;
         /**
@@ -3391,7 +3442,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:searchResultListItemHeight
+          @attr name ua.maker.gbible:searchResultListItemHeight
         */
         public static final int SherlockTheme_searchResultListItemHeight = 41;
         /**
@@ -3403,7 +3454,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewCloseIcon
+          @attr name ua.maker.gbible:searchViewCloseIcon
         */
         public static final int SherlockTheme_searchViewCloseIcon = 32;
         /**
@@ -3415,7 +3466,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewEditQuery
+          @attr name ua.maker.gbible:searchViewEditQuery
         */
         public static final int SherlockTheme_searchViewEditQuery = 36;
         /**
@@ -3427,7 +3478,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewEditQueryBackground
+          @attr name ua.maker.gbible:searchViewEditQueryBackground
         */
         public static final int SherlockTheme_searchViewEditQueryBackground = 37;
         /**
@@ -3439,7 +3490,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewGoIcon
+          @attr name ua.maker.gbible:searchViewGoIcon
         */
         public static final int SherlockTheme_searchViewGoIcon = 33;
         /**
@@ -3451,7 +3502,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewSearchIcon
+          @attr name ua.maker.gbible:searchViewSearchIcon
         */
         public static final int SherlockTheme_searchViewSearchIcon = 34;
         /**
@@ -3463,7 +3514,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewTextField
+          @attr name ua.maker.gbible:searchViewTextField
         */
         public static final int SherlockTheme_searchViewTextField = 38;
         /**
@@ -3475,7 +3526,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewTextFieldRight
+          @attr name ua.maker.gbible:searchViewTextFieldRight
         */
         public static final int SherlockTheme_searchViewTextFieldRight = 39;
         /**
@@ -3487,7 +3538,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:searchViewVoiceIcon
+          @attr name ua.maker.gbible:searchViewVoiceIcon
         */
         public static final int SherlockTheme_searchViewVoiceIcon = 35;
         /**
@@ -3499,7 +3550,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:selectableItemBackground
+          @attr name ua.maker.gbible:selectableItemBackground
         */
         public static final int SherlockTheme_selectableItemBackground = 20;
         /**
@@ -3509,7 +3560,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:spinnerDropDownItemStyle
+          @attr name ua.maker.gbible:spinnerDropDownItemStyle
         */
         public static final int SherlockTheme_spinnerDropDownItemStyle = 29;
         /**
@@ -3519,7 +3570,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:spinnerItemStyle
+          @attr name ua.maker.gbible:spinnerItemStyle
         */
         public static final int SherlockTheme_spinnerItemStyle = 28;
         /**
@@ -3531,7 +3582,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceLargePopupMenu
+          @attr name ua.maker.gbible:textAppearanceLargePopupMenu
         */
         public static final int SherlockTheme_textAppearanceLargePopupMenu = 22;
         /**
@@ -3543,7 +3594,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceListItemSmall
+          @attr name ua.maker.gbible:textAppearanceListItemSmall
         */
         public static final int SherlockTheme_textAppearanceListItemSmall = 47;
         /**
@@ -3555,7 +3606,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSearchResultSubtitle
+          @attr name ua.maker.gbible:textAppearanceSearchResultSubtitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultSubtitle = 43;
         /**
@@ -3567,7 +3618,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSearchResultTitle
+          @attr name ua.maker.gbible:textAppearanceSearchResultTitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultTitle = 42;
         /**
@@ -3579,7 +3630,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSmall
+          @attr name ua.maker.gbible:textAppearanceSmall
         */
         public static final int SherlockTheme_textAppearanceSmall = 24;
         /**
@@ -3591,7 +3642,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:textAppearanceSmallPopupMenu
+          @attr name ua.maker.gbible:textAppearanceSmallPopupMenu
         */
         public static final int SherlockTheme_textAppearanceSmallPopupMenu = 23;
         /**
@@ -3606,7 +3657,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimary
+          @attr name ua.maker.gbible:textColorPrimary
         */
         public static final int SherlockTheme_textColorPrimary = 25;
         /**
@@ -3621,7 +3672,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimaryDisableOnly
+          @attr name ua.maker.gbible:textColorPrimaryDisableOnly
         */
         public static final int SherlockTheme_textColorPrimaryDisableOnly = 26;
         /**
@@ -3636,7 +3687,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:textColorPrimaryInverse
+          @attr name ua.maker.gbible:textColorPrimaryInverse
         */
         public static final int SherlockTheme_textColorPrimaryInverse = 27;
         /**
@@ -3650,7 +3701,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name android:textColorSearchUrl
+          @attr name ua.maker.gbible:textColorSearchUrl
         */
         public static final int SherlockTheme_textColorSearchUrl = 40;
         /**
@@ -3664,7 +3715,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionBar
+          @attr name ua.maker.gbible:windowActionBar
         */
         public static final int SherlockTheme_windowActionBar = 59;
         /**
@@ -3678,7 +3729,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionBarOverlay
+          @attr name ua.maker.gbible:windowActionBarOverlay
         */
         public static final int SherlockTheme_windowActionBarOverlay = 60;
         /**
@@ -3692,7 +3743,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowActionModeOverlay
+          @attr name ua.maker.gbible:windowActionModeOverlay
         */
         public static final int SherlockTheme_windowActionModeOverlay = 61;
         /**
@@ -3705,7 +3756,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name android:windowContentOverlay
+          @attr name ua.maker.gbible:windowContentOverlay
         */
         public static final int SherlockTheme_windowContentOverlay = 21;
         /**
@@ -3721,7 +3772,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowMinWidthMajor
+          @attr name ua.maker.gbible:windowMinWidthMajor
         */
         public static final int SherlockTheme_windowMinWidthMajor = 48;
         /**
@@ -3737,7 +3788,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowMinWidthMinor
+          @attr name ua.maker.gbible:windowMinWidthMinor
         */
         public static final int SherlockTheme_windowMinWidthMinor = 49;
         /**
@@ -3751,7 +3802,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowNoTitle
+          @attr name ua.maker.gbible:windowNoTitle
         */
         public static final int SherlockTheme_windowNoTitle = 58;
         /**
@@ -3765,7 +3816,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:windowSplitActionBar
+          @attr name ua.maker.gbible:windowSplitActionBar
         */
         public static final int SherlockTheme_windowSplitActionBar = 62;
         /** Attributes that can be used with a SherlockView.
@@ -3774,7 +3825,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockView_android_focusable ua.maker.gbible:android_focusable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockView_android_focusable android:focusable}</code></td><td></td></tr>
            </table>
            @see #SherlockView_android_focusable
          */
@@ -3782,9 +3833,9 @@ containing a value of this type.
             0x010100da
         };
         /**
-          <p>This symbol is the offset where the {@link ua.maker.gbible.R.attr#android_focusable}
+          <p>This symbol is the offset where the {@link android.R.attr#focusable}
           attribute's value can be found in the {@link #SherlockView} array.
-          @attr name android:android_focusable
+          @attr name android:focusable
         */
         public static final int SherlockView_android_focusable = 0;
     };
