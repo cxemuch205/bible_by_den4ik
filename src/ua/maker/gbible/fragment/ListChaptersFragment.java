@@ -181,7 +181,7 @@ public class ListChaptersFragment extends SherlockFragment {
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.menu_main, menu);
+		inflater.inflate(R.menu.menu_main_in_list_poem, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 	    
