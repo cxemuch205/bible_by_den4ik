@@ -1,0 +1,2 @@
+int drawable scrollbar_handle_holo_dark 0x7f020000
+int drawable scrollbar_handle_holo_light 0x7f020001

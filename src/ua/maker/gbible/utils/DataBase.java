@@ -10,6 +10,7 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.constant.App;
+import ua.maker.gbible.structs.ItemReadDay;
 import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.structs.SearchStruct;
 import android.annotation.SuppressLint;
@@ -27,7 +28,7 @@ import android.util.Log;
 public class DataBase extends SQLiteOpenHelper {
 	
 	private static final String TAG = "DataBase";	
-	private static final int DB_VERSION = 1;	
+	private static final int DB_VERSION = 2;	
 	@SuppressLint("SdCardPath")
 	private static final String DB_PATH = "/data/data/ua.maker.gbible/databases/";
 	private static final String DB_NAME = "bible_android.db";
@@ -35,12 +36,15 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final String TABLE_NAME_RST = "rus_st";
 	public static final String TABLE_NAME_MT = "rus_mt";
 	public static final String TABLE_NAME_UAT = "ukr_t";
+	public static final String TABLE_NAME_ENT = "en_t";
 	
 	public static final int TRANSLATE_RST_ID = 0;
 	public static final int TRANSLATE_MT_ID = 1;
 	public static final int TRANSLATE_UA_ID = 2;
+	public static final int TRANSLATE_EN_ID = 3;
 	
 	public static final String TABLE_SEARCH_RESULT = "search_history";
+	public static final String TABLE_READ_FOR_EVERY_DAY = "read_for_every_day";
 	
 	public static final String FIELD_BOOK_ID = "bookId";
 	public static final String FIELD_TRANSLATE = "translate";
@@ -50,10 +54,20 @@ public class DataBase extends SQLiteOpenHelper {
 	public static final String FIELD_POEM = "poem";
 	public static final String FIELD_CONTENT = "content";
 	public static final String KEY_ROWID = "_id";
+	public static final String FIELD_MONTH = "month";
+	public static final String FIELD_DAY = "day";
+	public static final String FIELD_BOOK_NAME_OLD_T = "book_name_old_testament";
+	public static final String FIELD_BOOK_NAME_NEW_T = "book_name_new_testament";
+	public static final String FIELD_CHAPTERS_OLD_T = "chapters_old_testament";
+	public static final String FIELD_CHAPTERS_NEW_T = "chapters_new_testament";
+	public static final String FIELD_BOOK_ID_NEW_T = "book_id_new_testament";
+	public static final String FIELD_BOOK_ID_OLD_T = "book_id_old_testament";
+	public static final String FIELD_STATUS_READED = "status_readed";
 	
 	public static final String[] TABLE_NAMES = {"rus_st",
 												 "rus_mt"//,
-												 /*"ukr_t"*/};
+												 /*"ukr_t",
+												  *"en_t"*/};
 	
 	private SQLiteDatabase db = null;
 	private final Context mContext;
@@ -378,6 +392,163 @@ public class DataBase extends SQLiteOpenHelper {
     				result.add(new SearchStruct(bookId, bookName, chapter, poem, content));
     			}while(c.moveToNext());
     		}
+    	}
+    	
+    	return result;
+    }
+    
+    public void setStatusItemReadForEveryDay(int index, boolean status){
+    	if(db.isOpen()){
+    		ContentValues values = new ContentValues();
+			
+			values.put(FIELD_STATUS_READED, String.valueOf(status));
+			int idUpdateRow = db.update(TABLE_READ_FOR_EVERY_DAY, values, KEY_ROWID + " = " + (index+1), null);
+			Log.d(TAG, "ROW Update: " + idUpdateRow);
+    	}
+    }
+    
+    public void setDefaultStatusItemRead(int countItems){
+    	if(db.isOpen()){
+    		ContentValues v = new ContentValues();
+    		v.put(FIELD_STATUS_READED, String.valueOf(false));
+    		for(int i = 0; i < countItems; i++){
+    			db.update(TABLE_READ_FOR_EVERY_DAY, v, KEY_ROWID + " = " + (i+1), null);
+    		}
+    	}
+    }
+    
+    public List<ItemReadDay> getListReadForEveryDay(){
+    	List<ItemReadDay> result = new ArrayList<ItemReadDay>();
+    	
+    	if(db.isOpen()){
+    		Log.d(TAG, "START - getListReadForEveryDay()");
+    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_READ_FOR_EVERY_DAY+"'", null);
+    		if(c.moveToFirst()){
+    			int monthIndex = c.getColumnIndex(FIELD_MONTH);
+    			int dayIndex = c.getColumnIndex(FIELD_DAY);
+    			int bookNameOldTestamentIndex = c.getColumnIndex(FIELD_BOOK_NAME_OLD_T);
+    			int bookNameNewTestamentIndex = c.getColumnIndex(FIELD_BOOK_NAME_NEW_T);
+    			int bookIdOldTestamentIndex = c.getColumnIndex(FIELD_BOOK_ID_OLD_T);
+    			int bookIdNewTestamentIndex = c.getColumnIndex(FIELD_BOOK_ID_NEW_T);
+    			int chaptersOldTestamentIndex = c.getColumnIndex(FIELD_CHAPTERS_OLD_T);
+    			int chaptersNewTestamentIndex = c.getColumnIndex(FIELD_CHAPTERS_NEW_T);
+    			int statusIndex = c.getColumnIndex(FIELD_STATUS_READED);
+    			
+    			do {
+    				String month = c.getString(monthIndex);
+    				int day = c.getInt(dayIndex);
+    				String bookNameOldTestament = c.getString(bookNameOldTestamentIndex);
+    				String bookNameNewTestament = c.getString(bookNameNewTestamentIndex);
+    				String bookIdOldTestament = c.getString(bookIdOldTestamentIndex);
+    				String bookIdNewTestament = c.getString(bookIdNewTestamentIndex);
+    				String chaptersOldTestament = c.getString(chaptersOldTestamentIndex);
+    				String chaptersNewTestament = c.getString(chaptersNewTestamentIndex);
+    				boolean status = Boolean.parseBoolean(c.getString(statusIndex));
+    				
+    				ItemReadDay item = new ItemReadDay();
+    				item.setDay(day);
+    				item.setMonth(month);
+    				item.setListPoemOld(parseChapterString(chaptersOldTestament, bookNameOldTestament, bookIdOldTestament));
+    				item.setListPoemNew(parseChapterString(chaptersNewTestament, bookNameNewTestament, bookIdNewTestament));
+    				item.setContentChapterOldTFull(chaptersOldTestament);
+    				item.setContentChapterNewTFull(chaptersNewTestament);
+    				item.setStatus(status);
+    				
+    				result.add(item);
+					
+				} while (c.moveToNext());
+    		}
+    	}
+    	
+    	return result;
+    }
+    
+    private List<PoemStruct> parseChapterString(String contentChapter, String bookName, String bookId){
+    	List<PoemStruct> result = new ArrayList<PoemStruct>();
+    	int countBook = 0;
+    	List<String> bookNames = new ArrayList<String>();
+    	List<Integer> bookIds = new ArrayList<Integer>();
+    	
+    	int t = 0;
+    	for(int i = 0; i <= bookId.length(); i++){
+    		if((i == bookId.length() 
+    				&& ( i>=3 && (bookId.substring((i-2), (i-1)).equals("|") 
+    						|| bookId.substring((i-3), (i-2)).equals("|")))) 
+    				|| ( i != bookId.length() && bookId.substring(i, (i+1)).equals("|"))){
+    			int bI = Integer.parseInt(bookId.substring(t, i));
+    			bookIds.add(bI);
+    			String name = Tools.getBookNameByBookId(bI, mContext);
+    			bookNames.add(name);
+    			t = i+1;
+    			countBook++;
+    		}
+    		
+    	}
+    	if(countBook == 0){
+    		int r = 0;
+        	for(int i = 0; i <= contentChapter.length(); i++){
+        		if(i == (contentChapter.length()) 
+        				|| contentChapter.substring(i, (i+1)).equals(":")
+        				|| contentChapter.substring(i, (i+1)).equals(",")){
+        			PoemStruct item = new PoemStruct();
+        			int chapter = Integer.parseInt(contentChapter.substring(r, i));
+        			item.setChapter(chapter);
+        			item.setBookName(bookName);
+        			item.setBookId(Integer.parseInt(bookId));
+        			boolean isNoStandart = false;
+        			if(i != contentChapter.length() && contentChapter.substring(i, (i+1)).equals(":")){
+        				for(int j = 0; j < contentChapter.length(); j++){
+        					if(contentChapter.substring(j, (j+1)).equals("-")){
+        						int poem = Integer.parseInt(contentChapter.substring((i+1), j));
+        						item.setPoem(poem);
+        						int poemTo = Integer.parseInt(contentChapter.substring((j+1), contentChapter.length()));
+        						item.setPoemTo(poemTo);
+        					}
+        				}
+        				isNoStandart = true;
+        			}
+        			result.add(item);
+        			r = i+1;
+        			if(isNoStandart)
+        				break;
+        		}
+        	}
+    	}
+    	else
+    	for(int k = 0; k < countBook; k++){
+    		int r = 0;
+        	for(int i = 0; i <= contentChapter.length(); i++){
+        		if(i == (contentChapter.length()) 
+        				|| contentChapter.substring(i, (i+1)).equals(":")
+        				|| contentChapter.substring(i, (i+1)).equals("|")
+        				|| contentChapter.substring(i, (i+1)).equals(",")){
+        			PoemStruct item = new PoemStruct();
+        			int chapter = Integer.parseInt(contentChapter.substring(r, i));
+        			item.setChapter(chapter);
+        			String name = bookNames.get(k);
+        			item.setBookName(name);
+        			int id = bookIds.get(k);
+        			item.setBookId(id);
+        			boolean isNoStandart = false;
+        			if(i != contentChapter.length() && contentChapter.substring(i, (i+1)).equals(":")){
+        				for(int j = 0; j < contentChapter.length(); j++){
+        					if(contentChapter.substring(j, (j+1)).equals("-")){
+        						int poem = Integer.parseInt(contentChapter.substring((i+1), j));
+        						item.setPoem(poem);
+        					}
+        				}
+        				isNoStandart = true;
+        			}
+        			result.add(item);
+        			r = i+1;
+        			if(isNoStandart)
+        				break;
+        		}
+        		if(i != (contentChapter.length()) && contentChapter.substring(i, (i+1)).equals("|")){
+        			contentChapter = contentChapter.substring((i+1), contentChapter.length());
+        			break;
+        		}
+        	}
     	}
     	
     	return result;

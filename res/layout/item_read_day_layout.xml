@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:shrinkColumns="*"
+    android:stretchColumns="*"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left">
+        <TextView 
+            android:id="@+id/tv_day"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="#000"/>
+        <TextView 
+            android:text="@string/old_testament"/>
+        <TextView 
+            android:text="@string/new_testament"/>
+    </TableRow>
+    
+    <TableRow 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ToggleButton 
+            android:id="@+id/tb_status"
+            android:maxWidth="95dp"
+            android:textOn="@string/link_status_readed"
+            android:textOff="@string/link_status_no_readed"/>
+        <TextView 
+            android:id="@+id/tv_list_old_testament"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tv_list_new_testament"/>
+    </TableRow>
+        
+</TableLayout>

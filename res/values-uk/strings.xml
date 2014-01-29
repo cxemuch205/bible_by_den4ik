@@ -429,7 +429,27 @@
     <string name="saved_str">Збережено!</string>
     <!-- ##################### -->
     
+    <!-- Read for every day activity -->
+    <string name="title_activity_read_for_every_day">Читання на кожен день</string>
+    <string name="link_status_readed">Прочитане</string>
+    <string name="link_status_no_readed">Не прочитане</string>
+    <!-- ##################### -->
+    
     <!-- Color Picker -->
     <string name="dialog_color_picker">Вибір кольору</string>
+    
+	<!-- Month -->
+    <string name="month_jan">Січнь</string> 
+	<string name="month_feb">Лютий</string> 
+	<string name="month_mar">Березнь</string> 
+	<string name="month_apr">Квітень</string> 
+	<string name="month_may">Травень</string> 
+	<string name="month_jun">Червень</string> 
+	<string name="month_jul">Липень</string> 
+	<string name="month_aug">Серпень</string> 
+	<string name="month_sep">Вересень</string> 
+	<string name="month_okt">Жовтень</string> 
+	<string name="month_nov">Листопад</string> 
+	<string name="month_dec">Грудень</string>
     		
 </resources>

@@ -7,10 +7,10 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="17" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,46 +18,66 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.StartActivity"
+            android:name="ua.maker.gbible.activity.StartActivity"
+            android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:theme="@style/MyCustomStyle"
-            android:configChanges="keyboardHidden|orientation">
+            android:theme="@style/MyCustomStyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.MULTIWINDOW_LAUNCHER"/>
+
+                <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.ListChaptersActivity"
-            android:label="@string/title_activity_list_chapters">
+            android:label="@string/title_activity_list_chapters" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.ListPoemsActivity"
-            android:label="">
+            android:label="" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.ComparePoemActivity"
             android:label="@string/title_activity_list_compare_poems"
-            android:parentActivityName="ua.maker.gbible.activity.ListPoemsActivity">
+            android:parentActivityName="ua.maker.gbible.activity.ListPoemsActivity" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.SettingActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/action_setting"
-            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" 
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.DonateActivity"
             android:label="@string/donate_title"
-            android:parentActivityName="ua.maker.gbible.SinglePanelActivity"/>
-        
-        <uses-library required="false" name="com.sec.android.app.multiwindow"> </uses-library>
-        <meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
-        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W" android:resource="@dimen/app_defaultsize_w" />
-        <meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" />
-        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" />
-        <meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" /> 
+            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" />
+
+        <uses-library
+            name="com.sec.android.app.multiwindow"
+            required="false" >
+        </uses-library>
+
+        <meta-data
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
+            android:resource="@dimen/app_defaultsize_w" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
+            android:resource="@dimen/app_defaultsize_h" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
+            android:resource="@dimen/app_minimumsize_w" />
+        <meta-data
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
+            android:resource="@dimen/app_minimumsize_h" />
+
+        <activity
+            android:name="ua.maker.gbible.activity.ReadForEveryDayActivity"
+            android:label="@string/title_activity_read_for_every_day" >
+        </activity>
     </application>
 
 </manifest>

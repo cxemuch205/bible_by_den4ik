@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.activity.ReadForEveryDayActivity;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemChapterAdapter;
 import ua.maker.gbible.constant.App;
@@ -194,6 +195,10 @@ public class ListChaptersFragment extends SherlockFragment {
 	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
+	   	case R.id.action_read_for_every_day:
+			Intent startRead = new Intent(getSherlockActivity(), ReadForEveryDayActivity.class);
+			getSherlockActivity().startActivity(startRead);
+			return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);
 	}

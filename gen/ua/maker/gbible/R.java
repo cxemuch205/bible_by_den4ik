@@ -20,7 +20,7 @@ public final class R {
         public static final int mode_read_array_id=0x7f0c0005;
         public static final int select_pos_panel=0x7f0c0006;
         public static final int select_pos_panel_id=0x7f0c0007;
-        /**  item >Украинский перевод(в будущем)</item
+        /**  item >Украинский перевод(в будущем)</item 
  item >Український переклад(скоро)</item
          */
         public static final int trnaslaters_names=0x7f0c0002;
@@ -971,10 +971,12 @@ containing a value of this type.
         public static final int pointer_next=0x7f020088;
         public static final int pointer_previous=0x7f020089;
         public static final int qr_code_donate_info=0x7f02008a;
-        public static final int search_ico=0x7f02008b;
-        public static final int select_link_bible_ico=0x7f02008c;
-        public static final int selector_item_chapter=0x7f02008d;
-        public static final int setting_ico42=0x7f02008e;
+        public static final int scrollbar_handle_holo_dark=0x7f02008b;
+        public static final int scrollbar_handle_holo_light=0x7f02008c;
+        public static final int search_ico=0x7f02008d;
+        public static final int select_link_bible_ico=0x7f02008e;
+        public static final int selector_item_chapter=0x7f02008f;
+        public static final int setting_ico42=0x7f020090;
     }
     public static final class id {
         public static final int ImageView01=0x7f050045;
@@ -1021,19 +1023,20 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050013;
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
-        public static final int action_add_to_bookmarks=0x7f0500a2;
-        public static final int action_bookmarks=0x7f05009f;
-        public static final int action_cancel_drag_and_drop=0x7f0500aa;
-        public static final int action_clear_history=0x7f0500a6;
-        public static final int action_compare=0x7f0500a5;
-        public static final int action_copy_to_clipboard=0x7f0500a3;
-        public static final int action_exit=0x7f0500a8;
-        public static final int action_history=0x7f0500a0;
-        public static final int action_search=0x7f05009e;
-        public static final int action_select=0x7f05009d;
-        public static final int action_setting=0x7f0500a1;
-        public static final int action_setting_app=0x7f0500a7;
-        public static final int action_share=0x7f0500a4;
+        public static final int action_add_to_bookmarks=0x7f0500a9;
+        public static final int action_bookmarks=0x7f0500a6;
+        public static final int action_cancel_drag_and_drop=0x7f0500b2;
+        public static final int action_clear_history=0x7f0500ad;
+        public static final int action_compare=0x7f0500ac;
+        public static final int action_copy_to_clipboard=0x7f0500aa;
+        public static final int action_exit=0x7f0500af;
+        public static final int action_history=0x7f0500a7;
+        public static final int action_read_for_every_day=0x7f0500b0;
+        public static final int action_search=0x7f0500a5;
+        public static final int action_select=0x7f0500a4;
+        public static final int action_setting=0x7f0500a8;
+        public static final int action_setting_app=0x7f0500ae;
+        public static final int action_share=0x7f0500ab;
         public static final int btn_book=0x7f050052;
         public static final int btn_chapter=0x7f050053;
         public static final int btn_copy_info_donate=0x7f050080;
@@ -1056,7 +1059,7 @@ containing a value of this type.
         public static final int hex_val=0x7f050077;
         public static final int homeAsUp=0x7f050006;
         public static final int imageView1=0x7f050082;
-        public static final int item_add_poin_plan=0x7f0500a9;
+        public static final int item_add_poin_plan=0x7f0500b1;
         public static final int iv_action=0x7f050089;
         public static final int iv_bookmarks=0x7f05003e;
         public static final int iv_history=0x7f050040;
@@ -1084,6 +1087,7 @@ containing a value of this type.
         public static final int ll_setting=0x7f050041;
         public static final int ll_setting_right=0x7f05004e;
         public static final int lv_compare_poems=0x7f050036;
+        public static final int lv_links_poems=0x7f0500a1;
         public static final int lv_list_bookmarks=0x7f050032;
         public static final int lv_list_plans=0x7f05005a;
         public static final int lv_plan_items=0x7f050058;
@@ -1110,6 +1114,7 @@ containing a value of this type.
         public static final int spinner_poem=0x7f05006b;
         public static final int spinner_to_poem=0x7f05006c;
         public static final int tabMode=0x7f050003;
+        public static final int tb_status=0x7f05009c;
         public static final int textView1=0x7f05005e;
         public static final int textView2=0x7f050073;
         public static final int textView_selected_poem_to_copy=0x7f05007f;
@@ -1120,6 +1125,7 @@ containing a value of this type.
         public static final int tv_content_poem_search=0x7f050090;
         public static final int tv_current_value_speed_scroll=0x7f05007a;
         public static final int tv_date_created=0x7f05008d;
+        public static final int tv_day=0x7f05009b;
         public static final int tv_for_img=0x7f050097;
         public static final int tv_info_bookmarks=0x7f050033;
         public static final int tv_info_empty_history=0x7f050050;
@@ -1127,8 +1133,10 @@ containing a value of this type.
         public static final int tv_link_dialog_bookmark=0x7f050071;
         public static final int tv_link_h=0x7f05008c;
         public static final int tv_link_poem_search=0x7f05008f;
+        public static final int tv_list_new_testament=0x7f05009e;
+        public static final int tv_list_old_testament=0x7f05009d;
         public static final int tv_medium_msg=0x7f050094;
-        public static final int tv_msg_alert=0x7f05009b;
+        public static final int tv_msg_alert=0x7f0500a2;
         public static final int tv_msg_small=0x7f050093;
         public static final int tv_number_chapter=0x7f050086;
         public static final int tv_number_of_poem=0x7f05008e;
@@ -1136,6 +1144,8 @@ containing a value of this type.
         public static final int tv_pl_name=0x7f050098;
         public static final int tv_pl_sub_description=0x7f050099;
         public static final int tv_sample_size=0x7f05007d;
+        public static final int tv_sect_name=0x7f0500a0;
+        public static final int tv_section_name=0x7f05009f;
         public static final int tv_show_data_time=0x7f050070;
         public static final int tv_show_link=0x7f050034;
         public static final int tv_smal_content=0x7f050084;
@@ -1146,7 +1156,7 @@ containing a value of this type.
         public static final int tv_translate_label=0x7f050087;
         public static final int useLogo=0x7f050004;
         public static final int view1=0x7f050035;
-        public static final int webviewActionView=0x7f05009c;
+        public static final int webviewActionView=0x7f0500a3;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -1206,10 +1216,13 @@ containing a value of this type.
         public static final int item_list_poems_search=0x7f03002f;
         public static final int item_plan_item_text=0x7f030030;
         public static final int item_plans_list=0x7f030031;
-        public static final int preference_fragment=0x7f030032;
-        public static final int sherlock_spinner_dropdown_item=0x7f030033;
-        public static final int sherlock_spinner_item=0x7f030034;
-        public static final int show_info_layout=0x7f030035;
+        public static final int item_read_day_layout=0x7f030032;
+        public static final int item_section_layout=0x7f030033;
+        public static final int preference_fragment=0x7f030034;
+        public static final int read_for_every_day_layout=0x7f030035;
+        public static final int sherlock_spinner_dropdown_item=0x7f030036;
+        public static final int sherlock_spinner_item=0x7f030037;
+        public static final int show_info_layout=0x7f030038;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1322,7 +1335,7 @@ containing a value of this type.
  ##################### 
  Color Picker 
          */
-        public static final int dialog_color_picker=0x7f0a00e4;
+        public static final int dialog_color_picker=0x7f0a00e7;
         public static final int dialog_compare=0x7f0a00be;
         public static final int dialog_copy_to_clicpboard=0x7f0a00bc;
         public static final int dialog_dtn_copy_all=0x7f0a00c6;
@@ -1401,6 +1414,8 @@ containing a value of this type.
         public static final int kolosyanam_str=0x7f0a0069;
         public static final int levit_str=0x7f0a0027;
         public static final int levit_str_small=0x7f0a0028;
+        public static final int link_status_no_readed=0x7f0a00e6;
+        public static final int link_status_readed=0x7f0a00e5;
         public static final int link_str=0x7f0a00d8;
         public static final int list_history_empty=0x7f0a00ac;
         public static final int luka_str=0x7f0a0059;
@@ -1414,6 +1429,21 @@ containing a value of this type.
          */
         public static final int menu_title_add_point=0x7f0a00d4;
         public static final int michey_str=0x7f0a0050;
+        public static final int month_apr=0x7f0a00eb;
+        public static final int month_aug=0x7f0a00ef;
+        public static final int month_dec=0x7f0a00f3;
+        public static final int month_feb=0x7f0a00e9;
+        /**  Month 
+ Month 
+         */
+        public static final int month_jan=0x7f0a00e8;
+        public static final int month_jul=0x7f0a00ee;
+        public static final int month_jun=0x7f0a00ed;
+        public static final int month_mar=0x7f0a00ea;
+        public static final int month_may=0x7f0a00ec;
+        public static final int month_nov=0x7f0a00f2;
+        public static final int month_okt=0x7f0a00f1;
+        public static final int month_sep=0x7f0a00f0;
         public static final int naum_str=0x7f0a0051;
         public static final int neemia_str=0x7f0a003f;
         public static final int new_testament=0x7f0a0022;
@@ -1517,6 +1547,12 @@ containing a value of this type.
         public static final int title_activity_history=0x7f0a00aa;
         public static final int title_activity_list_chapters=0x7f0a0072;
         public static final int title_activity_list_compare_poems=0x7f0a0074;
+        /**  ##################### 
+ Read for every day activity 
+ ##################### 
+ Read for every day activity 
+         */
+        public static final int title_activity_read_for_every_day=0x7f0a00e4;
         public static final int title_background_on_poem_fragment=0x7f0a009c;
         public static final int title_color_text_dialog=0x7f0a00a0;
         public static final int title_control_panel_pref=0x7f0a00a3;
