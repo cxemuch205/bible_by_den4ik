@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:shrinkColumns="*"
-    android:stretchColumns="*"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="8dp"
     android:paddingTop="8dp">
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="left">
         <TextView 
             android:id="@+id/tv_day"
             android:text=""
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:textStyle="bold"
             android:textColor="#000"/>
         <TextView 
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:text="@string/old_testament"/>
         <TextView 
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:text="@string/new_testament"/>
-    </TableRow>
+    </LinearLayout>
     
-    <TableRow 
+    <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ToggleButton 
-            android:id="@+id/tb_status"
-            android:maxWidth="95dp"
-            android:textOn="@string/link_status_readed"
-            android:textOff="@string/link_status_no_readed"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ToggleButton
+                android:id="@+id/tb_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:maxWidth="95dp"
+                android:textOff="@string/link_status_no_readed"
+                android:textOn="@string/link_status_readed" />
+
+        </LinearLayout>
         <TextView 
             android:id="@+id/tv_list_old_testament"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:id="@+id/tv_list_new_testament"/>
-    </TableRow>
+    </LinearLayout>
         
-</TableLayout>
+</LinearLayout>

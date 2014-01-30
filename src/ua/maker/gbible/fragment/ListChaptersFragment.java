@@ -76,6 +76,14 @@ public class ListChaptersFragment extends SherlockFragment {
 			dataBase.createDataBase();
 		} catch (IOException e) {}
 		dataBase.openDataBase();
+
+		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+		
+		pd = ProgressDialog.show(getSherlockActivity(), 
+				getString(R.string.progress_dialog_title), 
+				getString(R.string.progress_dialog_message));
+		
 		return view;
 	}
 	
@@ -86,8 +94,6 @@ public class ListChaptersFragment extends SherlockFragment {
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_list_chapters));
 		
-		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");
 		
 		btnChapter.setBackgroundResource(R.drawable.btn_active_select);		
@@ -97,27 +103,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		String bookName = ""+Tools.getBookNameByBookId(bookId, getSherlockActivity());
 		btnBook.setTextSize(16);
 		btnBook.setText(bookName);
-		btnBook.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if(getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null){
-					FragmentTransaction ft = getFragmentManager().
-							 beginTransaction();
-					ft.remove(getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_BOOKS));
-					ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-					ft.addToBackStack(null);
-					ft.commit();
-				}
-				
-				FragmentTransaction ft = getFragmentManager().
-						 beginTransaction();
-				ft.replace(R.id.flRoot, new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS);
-				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-				ft.addToBackStack(null);
-				ft.commit();
-			}
-		});
+		btnBook.setOnClickListener(clickSelectBookListener);
 		
 		btnPoem.setOnClickListener(new OnClickListener() {
 			
@@ -128,17 +114,34 @@ public class ListChaptersFragment extends SherlockFragment {
 			}
 		});
 		
-		//Start get content from dataBase
-		pd = ProgressDialog.show(getSherlockActivity(), 
-				getString(R.string.progress_dialog_title), 
-				getString(R.string.progress_dialog_message));
-		
 		List<Integer> listChapters = dataBase.getChapters(DataBase.TABLE_NAME_RST, bookId);
 		ItemChapterAdapter adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
 		gvShowChapters.setAdapter(adapter);
 		if(pd.isShowing()) pd.cancel();
 		gvShowChapters.setOnItemClickListener(listenerItemGriatView);
 	}
+	
+	private OnClickListener clickSelectBookListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			if(getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null){
+				FragmentTransaction ft = getFragmentManager().
+						 beginTransaction();
+				ft.remove(getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_BOOKS));
+				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+				ft.addToBackStack(null);
+				ft.commit();
+			}
+			
+			FragmentTransaction ft = getFragmentManager().
+					 beginTransaction();
+			ft.replace(R.id.flRoot, new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS);
+			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+			ft.addToBackStack(null);
+			ft.commit();
+		}
+	};
 	
 	private OnItemClickListener listenerItemGriatView = new OnItemClickListener() {
 

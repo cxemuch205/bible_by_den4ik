@@ -436,7 +436,11 @@
     <!-- Read for every day activity -->
     <string name="title_activity_read_for_every_day">Чтение на каждый день</string>
     <string name="link_status_readed">Прочтено</string>
-    <string name="link_status_no_readed">Не прочтено</string>
+    <string name="link_status_no_readed">Не прочитано</string>
+    <string name="title_select_link">Выберите ссылку:</string>
+    <string name="set_def_value_status_read">Обнуление списка</string>
+    <string name="title_dialog_set_def_val_status_read">Обнулить список?</string>
+    <string name="msg_dialog_set_def_val_status_read">Статус прочтения дней будет установлен как "не прочитано".</string>
     <!-- ##################### -->
 
     <!-- Color Picker -->

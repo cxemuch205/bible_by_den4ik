@@ -70,7 +70,7 @@
 # view AndroidManifest.xml #generated:36
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:77
+# view AndroidManifest.xml #generated:78
 -keep class ua.maker.gbible.activity.ReadForEveryDayActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:45

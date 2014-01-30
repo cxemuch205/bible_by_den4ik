@@ -433,6 +433,10 @@
     <string name="title_activity_read_for_every_day">Читання на кожен день</string>
     <string name="link_status_readed">Прочитане</string>
     <string name="link_status_no_readed">Не прочитане</string>
+    <string name="title_select_link">Оберіть посилання:</string>
+    <string name="set_def_value_status_read">Обнулення списку</string>
+    <string name="title_dialog_set_def_val_status_read">Обнити список?</string>
+    <string name="msg_dialog_set_def_val_status_read">Статус читання днів буде встановлений як "не прочитано".</string>
     <!-- ##################### -->
     
     <!-- Color Picker -->

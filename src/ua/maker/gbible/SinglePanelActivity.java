@@ -322,18 +322,6 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			Tools.hideKeyBoard(SinglePanelActivity.this);
-			//int windowWidth = getWindowManager().getDefaultDisplay().getWidth();
-			
-			/*if((windowWidth>1100 || windowWidth>800) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-			{
-				getSupportFragmentManager().beginTransaction()
-				.replace(R.id.flRoot_plan, (getSupportFragmentManager()
-						.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
-								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlanFragment(), App.TAG_FRAGMENT_PLAN).commit();
-			}
-			else
-			{*/
 			if(sp.getInt(App.PLAN_ID, -1) != -1){
 				getSupportFragmentManager().beginTransaction()
 				.replace(R.id.flRoot, (getSupportFragmentManager()
@@ -349,8 +337,6 @@ public abstract class SinglePanelActivity extends BaseActivity {
 								getSupportFragmentManager()
 								.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlansListFragment(), App.TAG_FRAGMENT_PLAN).commit();
 			}
-				
-			//}
 		}
 	};
     
