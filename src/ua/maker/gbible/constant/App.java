@@ -8,6 +8,8 @@ public class App {
 	public static final String PREF_DATA_BASE_VER = "data_base_current_version";
 	public static final String BOOK_ID = "book_id";
 	public static final String CHAPTER = "chapter";
+	public static final String IS_ITEM_READ = "is_item_read";
+	public static final String LAST_ITEM_SELECT = "last_item_read_select";
 	public static final String POEM_SET_FOCUS = "poem_in_focus";
 	public static final String BOOK_SET_FOCUS = "book_in_focus";
 	public static final String POEM = "poem";

@@ -180,6 +180,18 @@ public class ListChaptersFragment extends SherlockFragment {
 	public void onResume() {
 		super.onResume();
 		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");
+		boolean isReadActivity = false;
+		if(sp.contains(App.IS_ITEM_READ)){
+			isReadActivity = sp.getBoolean(App.IS_ITEM_READ, false);
+		}
+		if(isReadActivity){
+			FragmentTransaction ft = getFragmentManager().
+					 beginTransaction();
+			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+			ft.addToBackStack(null);
+			ft.commit();
+		}
 	};
 	
 	@Override

@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,6 +91,8 @@ public class SelectBookFragment extends SherlockFragment {
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 
 		if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
+//			Fragment fragmetnPoem = getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_POEMS);
+//			getFragmentManager().beginTransaction().show(fragmetnPoem);
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
 			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
@@ -247,6 +250,18 @@ public class SelectBookFragment extends SherlockFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		boolean isReadActivity = false;
+		if(sp.contains(App.IS_ITEM_READ)){
+			isReadActivity = sp.getBoolean(App.IS_ITEM_READ, false);
+		}
+		if(isReadActivity){
+			FragmentTransaction ft = getFragmentManager().
+					 beginTransaction();
+			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
+			ft.addToBackStack(null);
+			ft.commit();
+		}
 		int pos = sp.getInt(App.BOOK_SET_FOCUS, 0);
 		selectPrefBook(pos);
 	};

@@ -4,10 +4,12 @@ import java.util.List;
 
 import ua.maker.gbible.BuildConfig;
 import ua.maker.gbible.R;
+import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.ItemReadDay;
 import ua.maker.gbible.utils.DataBase;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +26,14 @@ public class ItemLinksWithHeadersAdapter extends ArrayAdapter<ItemReadDay> {
 	private List<ItemReadDay> data = null;
 	private Context context = null;
 	private DataBase db = null;
+	private SharedPreferences pref;
 	
-	public ItemLinksWithHeadersAdapter(Context context, List<ItemReadDay> data, DataBase db) {
+	public ItemLinksWithHeadersAdapter(Context context, List<ItemReadDay> data, DataBase db, SharedPreferences pref) {
 		super(context, R.layout.item_read_day_layout, data);
 		this.data = data;
 		this.context = context;
 		this.db = db;
+		this.pref = pref;
 	}
 	
 	@Override
@@ -122,6 +126,8 @@ public class ItemLinksWithHeadersAdapter extends ArrayAdapter<ItemReadDay> {
 			public void onClick(View v) {
 				item.setStatus(!item.isStatusReaded());
 				db.setStatusItemReadForEveryDay(position, item.isStatusReaded());
+				if(item.isStatusReaded())
+					pref.edit().putInt(App.LAST_ITEM_SELECT, position).commit();
 			}
 		});
 		

@@ -448,8 +448,8 @@ public class DataBase extends SQLiteOpenHelper {
     				ItemReadDay item = new ItemReadDay();
     				item.setDay(day);
     				item.setMonth(month);
-    				item.setListPoemOld(parseChapterString(chaptersOldTestament, bookNameOldTestament, bookIdOldTestament));
-    				item.setListPoemNew(parseChapterString(chaptersNewTestament, bookNameNewTestament, bookIdNewTestament));
+    				item.setListPoemOld(parseValueChapterBookIdString(chaptersOldTestament, bookNameOldTestament, bookIdOldTestament));
+    				item.setListPoemNew(parseValueChapterBookIdString(chaptersNewTestament, bookNameNewTestament, bookIdNewTestament));
     				item.setContentChapterOldTFull(chaptersOldTestament);
     				item.setContentChapterNewTFull(chaptersNewTestament);
     				item.setStatus(status);
@@ -463,7 +463,7 @@ public class DataBase extends SQLiteOpenHelper {
     	return result;
     }
     
-    private List<PoemStruct> parseChapterString(String contentChapter, String bookName, String bookId){
+    private List<PoemStruct> parseValueChapterBookIdString(String contentChapter, String bookName, String bookId){
     	List<PoemStruct> result = new ArrayList<PoemStruct>();
     	int countBook = 0;
     	List<String> bookNames = new ArrayList<String>();
