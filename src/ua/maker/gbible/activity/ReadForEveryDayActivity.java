@@ -1,7 +1,9 @@
 package ua.maker.gbible.activity;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import ua.maker.gbible.R;
@@ -17,6 +19,7 @@ import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -73,7 +76,11 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		
 		listLinks.addAll(db.getListReadForEveryDay());
 		
-		adapter = new ItemLinksWithHeadersAdapter(ReadForEveryDayActivity.this, listLinks, db, pref);
+		SimpleDateFormat dataFormatDay = new SimpleDateFormat("D");
+		String dayS = dataFormatDay.format(new Date());
+		int day = Integer.parseInt(dayS);
+		
+		adapter = new ItemLinksWithHeadersAdapter(ReadForEveryDayActivity.this, listLinks, db, pref, day);
 		adapterDialog = new ItemDialogReadAdapter(ReadForEveryDayActivity.this, listItemsReadDialog);
 		
 		lvListLinks.setAdapter(adapter);
@@ -97,6 +104,10 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		if(pref.contains(App.LAST_ITEM_SELECT)){
 			posClick = pref.getInt(App.LAST_ITEM_SELECT, 0);
 			setLastReadedItemToFocus();
+		}
+		else
+		{
+			posClick = day-1;
 		}
 	}
 	
@@ -192,7 +203,8 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(Menu.NONE, ACTION_SET_DEF_ITEMS_READ, Menu.NONE, getString(R.string.set_def_value_status_read))
-				.setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+				.setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+				.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	};
 	

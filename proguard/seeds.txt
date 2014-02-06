@@ -3985,6 +3985,10 @@ com.actionbarsherlock.widget.ShareActionProvider: java.lang.String access$1(com.
 com.actionbarsherlock.widget.ShareActionProvider: com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener access$2(com.actionbarsherlock.widget.ShareActionProvider)
 com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener
 com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener: boolean onShareTargetSelected(com.actionbarsherlock.widget.ShareActionProvider,android.content.Intent)
+com.applidium.headerlistview.HeaderListView: void setAdapter(com.applidium.headerlistview.SectionAdapter)
+com.applidium.headerlistview.HeaderListView: android.widget.ListView getListView()
+com.applidium.headerlistview.R$drawable: int scrollbar_handle_holo_dark
+com.applidium.headerlistview.R$drawable: int scrollbar_handle_holo_light
 com.bst.HwBeautify.BeautifyNative
 com.bst.HwBeautify.BeautifyNative: int nativeCBInitEngine()
 com.bst.HwBeautify.BeautifyNative: void nativeCBCloseEngine()
@@ -4888,6 +4892,8 @@ ua.maker.gbible.R$drawable: int plus
 ua.maker.gbible.R$drawable: int pointer_next
 ua.maker.gbible.R$drawable: int pointer_previous
 ua.maker.gbible.R$drawable: int qr_code_donate_info
+ua.maker.gbible.R$drawable: int scrollbar_handle_holo_dark
+ua.maker.gbible.R$drawable: int scrollbar_handle_holo_light
 ua.maker.gbible.R$drawable: int search_ico
 ua.maker.gbible.R$drawable: int select_link_bible_ico
 ua.maker.gbible.R$drawable: int selector_item_chapter
@@ -4944,6 +4950,7 @@ ua.maker.gbible.R$id: int action_compare
 ua.maker.gbible.R$id: int action_copy_to_clipboard
 ua.maker.gbible.R$id: int action_exit
 ua.maker.gbible.R$id: int action_history
+ua.maker.gbible.R$id: int action_read_for_every_day
 ua.maker.gbible.R$id: int action_search
 ua.maker.gbible.R$id: int action_select
 ua.maker.gbible.R$id: int action_setting
@@ -4999,7 +5006,9 @@ ua.maker.gbible.R$id: int ll_select_link_right
 ua.maker.gbible.R$id: int ll_setting
 ua.maker.gbible.R$id: int ll_setting_right
 ua.maker.gbible.R$id: int lv_compare_poems
+ua.maker.gbible.R$id: int lv_links_poems
 ua.maker.gbible.R$id: int lv_list_bookmarks
+ua.maker.gbible.R$id: int lv_list_links_read
 ua.maker.gbible.R$id: int lv_list_plans
 ua.maker.gbible.R$id: int lv_plan_items
 ua.maker.gbible.R$id: int lv_search_result
@@ -5025,6 +5034,7 @@ ua.maker.gbible.R$id: int spinner_chapter
 ua.maker.gbible.R$id: int spinner_poem
 ua.maker.gbible.R$id: int spinner_to_poem
 ua.maker.gbible.R$id: int tabMode
+ua.maker.gbible.R$id: int tb_status
 ua.maker.gbible.R$id: int textView1
 ua.maker.gbible.R$id: int textView2
 ua.maker.gbible.R$id: int textView_selected_poem_to_copy
@@ -5035,6 +5045,7 @@ ua.maker.gbible.R$id: int tv_compare_content_poem
 ua.maker.gbible.R$id: int tv_content_poem_search
 ua.maker.gbible.R$id: int tv_current_value_speed_scroll
 ua.maker.gbible.R$id: int tv_date_created
+ua.maker.gbible.R$id: int tv_day
 ua.maker.gbible.R$id: int tv_for_img
 ua.maker.gbible.R$id: int tv_info_bookmarks
 ua.maker.gbible.R$id: int tv_info_empty_history
@@ -5042,6 +5053,8 @@ ua.maker.gbible.R$id: int tv_link
 ua.maker.gbible.R$id: int tv_link_dialog_bookmark
 ua.maker.gbible.R$id: int tv_link_h
 ua.maker.gbible.R$id: int tv_link_poem_search
+ua.maker.gbible.R$id: int tv_list_new_testament
+ua.maker.gbible.R$id: int tv_list_old_testament
 ua.maker.gbible.R$id: int tv_medium_msg
 ua.maker.gbible.R$id: int tv_msg_alert
 ua.maker.gbible.R$id: int tv_msg_small
@@ -5051,6 +5064,8 @@ ua.maker.gbible.R$id: int tv_pl_date
 ua.maker.gbible.R$id: int tv_pl_name
 ua.maker.gbible.R$id: int tv_pl_sub_description
 ua.maker.gbible.R$id: int tv_sample_size
+ua.maker.gbible.R$id: int tv_sect_name
+ua.maker.gbible.R$id: int tv_section_name
 ua.maker.gbible.R$id: int tv_show_data_time
 ua.maker.gbible.R$id: int tv_show_link
 ua.maker.gbible.R$id: int tv_smal_content
@@ -5103,6 +5118,7 @@ ua.maker.gbible.R$layout: int dialog_add_item_to_plan
 ua.maker.gbible.R$layout: int dialog_add_plan_settings
 ua.maker.gbible.R$layout: int dialog_add_to_bookmark
 ua.maker.gbible.R$layout: int dialog_color_picker
+ua.maker.gbible.R$layout: int dialog_item_read_layout
 ua.maker.gbible.R$layout: int dialog_pref_speed_scroll
 ua.maker.gbible.R$layout: int dialog_pref_text_size
 ua.maker.gbible.R$layout: int dialog_select_poem
@@ -5117,7 +5133,10 @@ ua.maker.gbible.R$layout: int item_list_poems
 ua.maker.gbible.R$layout: int item_list_poems_search
 ua.maker.gbible.R$layout: int item_plan_item_text
 ua.maker.gbible.R$layout: int item_plans_list
+ua.maker.gbible.R$layout: int item_read_day_layout
+ua.maker.gbible.R$layout: int item_section_layout
 ua.maker.gbible.R$layout: int preference_fragment
+ua.maker.gbible.R$layout: int read_for_every_day_layout
 ua.maker.gbible.R$layout: int sherlock_spinner_dropdown_item
 ua.maker.gbible.R$layout: int sherlock_spinner_item
 ua.maker.gbible.R$layout: int show_info_layout
@@ -5246,6 +5265,8 @@ ua.maker.gbible.R$string: int iudy_str
 ua.maker.gbible.R$string: int kolosyanam_str
 ua.maker.gbible.R$string: int levit_str
 ua.maker.gbible.R$string: int levit_str_small
+ua.maker.gbible.R$string: int link_status_no_readed
+ua.maker.gbible.R$string: int link_status_readed
 ua.maker.gbible.R$string: int link_str
 ua.maker.gbible.R$string: int list_history_empty
 ua.maker.gbible.R$string: int luka_str
@@ -5254,6 +5275,19 @@ ua.maker.gbible.R$string: int mark_str
 ua.maker.gbible.R$string: int matfey_str
 ua.maker.gbible.R$string: int menu_title_add_point
 ua.maker.gbible.R$string: int michey_str
+ua.maker.gbible.R$string: int month_apr
+ua.maker.gbible.R$string: int month_aug
+ua.maker.gbible.R$string: int month_dec
+ua.maker.gbible.R$string: int month_feb
+ua.maker.gbible.R$string: int month_jan
+ua.maker.gbible.R$string: int month_jul
+ua.maker.gbible.R$string: int month_jun
+ua.maker.gbible.R$string: int month_mar
+ua.maker.gbible.R$string: int month_may
+ua.maker.gbible.R$string: int month_nov
+ua.maker.gbible.R$string: int month_okt
+ua.maker.gbible.R$string: int month_sep
+ua.maker.gbible.R$string: int msg_dialog_set_def_val_status_read
 ua.maker.gbible.R$string: int naum_str
 ua.maker.gbible.R$string: int neemia_str
 ua.maker.gbible.R$string: int new_testament
@@ -5306,6 +5340,7 @@ ua.maker.gbible.R$string: int save_image_title
 ua.maker.gbible.R$string: int saved_into_galary
 ua.maker.gbible.R$string: int saved_str
 ua.maker.gbible.R$string: int search_str
+ua.maker.gbible.R$string: int set_def_value_status_read
 ua.maker.gbible.R$string: int sofonia_str
 ua.maker.gbible.R$string: int str_sample_size_text
 ua.maker.gbible.R$string: int sudii_str
@@ -5328,14 +5363,17 @@ ua.maker.gbible.R$string: int title_activity_bookmarks
 ua.maker.gbible.R$string: int title_activity_history
 ua.maker.gbible.R$string: int title_activity_list_chapters
 ua.maker.gbible.R$string: int title_activity_list_compare_poems
+ua.maker.gbible.R$string: int title_activity_read_for_every_day
 ua.maker.gbible.R$string: int title_background_on_poem_fragment
 ua.maker.gbible.R$string: int title_color_text_dialog
 ua.maker.gbible.R$string: int title_control_panel_pref
 ua.maker.gbible.R$string: int title_def_trans
 ua.maker.gbible.R$string: int title_dialog_plans
+ua.maker.gbible.R$string: int title_dialog_set_def_val_status_read
 ua.maker.gbible.R$string: int title_list_poem
 ua.maker.gbible.R$string: int title_mode_read
 ua.maker.gbible.R$string: int title_pos_down_panel
+ua.maker.gbible.R$string: int title_select_link
 ua.maker.gbible.R$string: int title_size_text_poem
 ua.maker.gbible.R$string: int title_smooth_scroll
 ua.maker.gbible.R$string: int title_use_vol_btn
@@ -5607,10 +5645,8 @@ ua.maker.gbible.activity.ComparePoemActivity
 ua.maker.gbible.activity.ComparePoemActivity: ComparePoemActivity()
 ua.maker.gbible.activity.DonateActivity
 ua.maker.gbible.activity.DonateActivity: DonateActivity()
-ua.maker.gbible.activity.ListChaptersActivity
-ua.maker.gbible.activity.ListChaptersActivity: ListChaptersActivity()
-ua.maker.gbible.activity.ListPoemsActivity
-ua.maker.gbible.activity.ListPoemsActivity: ListPoemsActivity()
+ua.maker.gbible.activity.ReadForEveryDayActivity
+ua.maker.gbible.activity.ReadForEveryDayActivity: ReadForEveryDayActivity()
 ua.maker.gbible.activity.SettingActivity
 ua.maker.gbible.activity.SettingActivity: SettingActivity()
 ua.maker.gbible.activity.StartActivity

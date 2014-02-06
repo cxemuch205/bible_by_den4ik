@@ -491,7 +491,8 @@ public class DataBase extends SQLiteOpenHelper {
         				|| contentChapter.substring(i, (i+1)).equals(":")
         				|| contentChapter.substring(i, (i+1)).equals(",")){
         			PoemStruct item = new PoemStruct();
-        			int chapter = Integer.parseInt(contentChapter.substring(r, i));
+        			String chapterStr = contentChapter.substring(r, i);
+        			int chapter = Integer.parseInt(chapterStr);
         			item.setChapter(chapter);
         			item.setBookName(bookName);
         			item.setBookId(Integer.parseInt(bookId));
@@ -535,6 +536,8 @@ public class DataBase extends SQLiteOpenHelper {
         					if(contentChapter.substring(j, (j+1)).equals("-")){
         						int poem = Integer.parseInt(contentChapter.substring((i+1), j));
         						item.setPoem(poem);
+								int poemTo = Integer.parseInt(contentChapter.substring((j+1), contentChapter.length()));
+        						item.setPoemTo(poemTo);
         					}
         				}
         				isNoStandart = true;

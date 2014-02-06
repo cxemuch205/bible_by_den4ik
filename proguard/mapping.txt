@@ -8910,12 +8910,65 @@ ua.maker.gbible.activity.DonateActivity$2$1 -> ua.maker.gbible.activity.c:
 ua.maker.gbible.activity.DonateActivity$2$2 -> ua.maker.gbible.activity.d:
     ua.maker.gbible.activity.DonateActivity$2 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.activity.ListChaptersActivity -> ua.maker.gbible.activity.ListChaptersActivity:
+ua.maker.gbible.activity.ReadForEveryDayActivity -> ua.maker.gbible.activity.ReadForEveryDayActivity:
+    android.widget.ListView lvListLinks -> a
+    ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter adapter -> b
+    java.util.List listLinks -> c
+    android.widget.TextView tvSectionName -> d
+    ua.maker.gbible.utils.DataBase db -> e
+    android.app.AlertDialog$Builder builderDialogSetDef -> f
+    android.app.AlertDialog$Builder builderItemDialog -> g
+    android.app.AlertDialog dialogItemRead -> h
+    android.view.View dialogView -> i
+    android.widget.ListView lvDialogItems -> j
+    ua.maker.gbible.adapter.ItemDialogReadAdapter adapterDialog -> k
+    java.util.List listItemsReadDialog -> l
+    int posClick -> m
+    android.content.SharedPreferences pref -> n
+    android.widget.AdapterView$OnItemClickListener itemReadClickInDialogListener -> o
+    android.content.DialogInterface$OnClickListener clickOkClearDialogListener -> p
+    android.content.DialogInterface$OnClickListener clickCancelClearDialogListener -> q
+    android.content.DialogInterface$OnClickListener clickCancelItemListDialogListener -> r
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> s
+    android.widget.AbsListView$OnScrollListener scrollListViewListener -> t
     void onCreate(android.os.Bundle) -> onCreate
-    android.support.v4.app.Fragment onCreatePane() -> a
-ua.maker.gbible.activity.ListPoemsActivity -> ua.maker.gbible.activity.ListPoemsActivity:
-    void onCreate(android.os.Bundle) -> onCreate
-    android.support.v4.app.Fragment onCreatePane() -> a
+    void setLastReadedItemToFocus() -> a
+    boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu) -> onCreateOptionsMenu
+    void onResume() -> onResume
+    boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    android.content.SharedPreferences access$0(ua.maker.gbible.activity.ReadForEveryDayActivity) -> a
+    java.util.List access$1(ua.maker.gbible.activity.ReadForEveryDayActivity) -> b
+    ua.maker.gbible.utils.DataBase access$2(ua.maker.gbible.activity.ReadForEveryDayActivity) -> c
+    java.util.List access$3(ua.maker.gbible.activity.ReadForEveryDayActivity) -> d
+    ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter access$4(ua.maker.gbible.activity.ReadForEveryDayActivity) -> e
+    void access$5(ua.maker.gbible.activity.ReadForEveryDayActivity,int) -> a
+    int access$6(ua.maker.gbible.activity.ReadForEveryDayActivity) -> f
+    ua.maker.gbible.adapter.ItemDialogReadAdapter access$7(ua.maker.gbible.activity.ReadForEveryDayActivity) -> g
+    android.app.AlertDialog access$8(ua.maker.gbible.activity.ReadForEveryDayActivity) -> h
+    android.widget.TextView access$9(ua.maker.gbible.activity.ReadForEveryDayActivity) -> i
+ua.maker.gbible.activity.ReadForEveryDayActivity$1 -> ua.maker.gbible.activity.e:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+ua.maker.gbible.activity.ReadForEveryDayActivity$2 -> ua.maker.gbible.activity.f:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+    ua.maker.gbible.activity.ReadForEveryDayActivity access$0(ua.maker.gbible.activity.ReadForEveryDayActivity$2) -> a
+ua.maker.gbible.activity.ReadForEveryDayActivity$2$1 -> ua.maker.gbible.activity.g:
+    ua.maker.gbible.activity.ReadForEveryDayActivity$2 this$1 -> a
+    void run() -> run
+ua.maker.gbible.activity.ReadForEveryDayActivity$3 -> ua.maker.gbible.activity.h:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.activity.ReadForEveryDayActivity$4 -> ua.maker.gbible.activity.i:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+ua.maker.gbible.activity.ReadForEveryDayActivity$5 -> ua.maker.gbible.activity.j:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+ua.maker.gbible.activity.ReadForEveryDayActivity$6 -> ua.maker.gbible.activity.k:
+    ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
+    void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
+    void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
 ua.maker.gbible.activity.SettingActivity -> ua.maker.gbible.activity.SettingActivity:
     void onCreate(android.os.Bundle) -> onCreate
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
@@ -8936,59 +8989,84 @@ ua.maker.gbible.adapter.ItemDialogAdapter -> ua.maker.gbible.a.c:
 ua.maker.gbible.adapter.ItemDialogAdapter$ViewHolder -> ua.maker.gbible.a.d:
     android.widget.ImageView ivAction -> a
     android.widget.TextView tvAction -> b
-ua.maker.gbible.adapter.ItemListBookmarksAdapter -> ua.maker.gbible.a.e:
+ua.maker.gbible.adapter.ItemDialogReadAdapter -> ua.maker.gbible.a.e:
+    android.content.Context context -> a
+    java.util.List data -> b
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+ua.maker.gbible.adapter.ItemDialogReadAdapter$ViewHolder -> ua.maker.gbible.a.f:
+    android.widget.TextView tvData -> a
+ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter -> ua.maker.gbible.a.g:
+    java.util.List data -> a
+    android.content.Context context -> b
+    ua.maker.gbible.utils.DataBase db -> c
+    android.content.SharedPreferences pref -> d
+    int day -> e
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+    ua.maker.gbible.utils.DataBase access$0(ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter) -> a
+    android.content.SharedPreferences access$1(ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter) -> b
+ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter$1 -> ua.maker.gbible.a.h:
+    ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter this$0 -> a
+    ua.maker.gbible.structs.ItemReadDay val$item -> b
+    int val$position -> c
+    void onClick(android.view.View) -> onClick
+ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter$ViewHolder -> ua.maker.gbible.a.i:
+    android.widget.TextView tvDay -> a
+    android.widget.ToggleButton tbStatus -> b
+    android.widget.TextView llOldTestament -> c
+    android.widget.TextView llNewTestament -> d
+ua.maker.gbible.adapter.ItemListBookmarksAdapter -> ua.maker.gbible.a.j:
     android.content.Context mContext -> a
     java.util.List listBookmarks -> b
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemListBookmarksAdapter$ViewHolder -> ua.maker.gbible.a.f:
+ua.maker.gbible.adapter.ItemListBookmarksAdapter$ViewHolder -> ua.maker.gbible.a.k:
     android.widget.TextView tvLink -> a
     android.widget.TextView tvSmallContent -> b
     android.widget.TextView tvComment -> c
-ua.maker.gbible.adapter.ItemListComparePoemsAdapter -> ua.maker.gbible.a.g:
+ua.maker.gbible.adapter.ItemListComparePoemsAdapter -> ua.maker.gbible.a.l:
     int layoutResId -> a
     android.content.Context context -> b
     java.util.List listComparePoems -> c
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemListComparePoemsAdapter$AdapterHolder -> ua.maker.gbible.a.h:
+ua.maker.gbible.adapter.ItemListComparePoemsAdapter$AdapterHolder -> ua.maker.gbible.a.m:
     android.widget.TextView tvLabelTranslate -> a
     android.widget.TextView tvContent -> b
-ua.maker.gbible.adapter.ItemListHistoryAdapter -> ua.maker.gbible.a.i:
+ua.maker.gbible.adapter.ItemListHistoryAdapter -> ua.maker.gbible.a.n:
     android.content.Context context -> a
     java.util.List data -> b
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemListHistoryAdapter$ViewHolder -> ua.maker.gbible.a.j:
+ua.maker.gbible.adapter.ItemListHistoryAdapter$ViewHolder -> ua.maker.gbible.a.o:
     android.widget.TextView tvTranslate -> a
     android.widget.TextView tvLink -> b
     android.widget.TextView tvDateCreated -> c
-ua.maker.gbible.adapter.ItemListPoemAdapter -> ua.maker.gbible.a.k:
+ua.maker.gbible.adapter.ItemListPoemAdapter -> ua.maker.gbible.a.p:
     java.util.List listPoems -> a
     android.content.Context context -> b
     android.content.SharedPreferences defPref -> c
     boolean dayNight -> d
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemListPoemAdapter$AdapterHolder -> ua.maker.gbible.a.l:
+ua.maker.gbible.adapter.ItemListPoemAdapter$AdapterHolder -> ua.maker.gbible.a.q:
     android.widget.TextView tvNumberPoem -> a
     android.widget.TextView tvContentPoem -> b
-ua.maker.gbible.adapter.ItemListSearchAdapter -> ua.maker.gbible.a.m:
+ua.maker.gbible.adapter.ItemListSearchAdapter -> ua.maker.gbible.a.r:
     java.util.List listPoems -> a
     android.content.Context context -> b
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemListSearchAdapter$AdapterHolder -> ua.maker.gbible.a.n:
+ua.maker.gbible.adapter.ItemListSearchAdapter$AdapterHolder -> ua.maker.gbible.a.s:
     android.widget.TextView tvLinkPoem -> a
     android.widget.TextView tvContentPoem -> b
-ua.maker.gbible.adapter.ItemPlanListAdapter -> ua.maker.gbible.a.o:
+ua.maker.gbible.adapter.ItemPlanListAdapter -> ua.maker.gbible.a.t:
     android.content.Context context -> a
     java.util.List data -> b
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.ItemPlanListAdapter$ViewHolder -> ua.maker.gbible.a.p:
+ua.maker.gbible.adapter.ItemPlanListAdapter$ViewHolder -> ua.maker.gbible.a.u:
     android.widget.TextView tvName -> a
     android.widget.TextView tvDescription -> b
     android.widget.TextView tvDate -> c
-ua.maker.gbible.adapter.PlanItemAdapter -> ua.maker.gbible.a.q:
+ua.maker.gbible.adapter.PlanItemAdapter -> ua.maker.gbible.a.v:
     android.content.Context context -> a
     java.util.List data -> b
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-ua.maker.gbible.adapter.PlanItemAdapter$ViewHolder -> ua.maker.gbible.a.r:
+ua.maker.gbible.adapter.PlanItemAdapter$ViewHolder -> ua.maker.gbible.a.w:
     android.widget.TextView tvTitle -> a
     android.widget.TextView tvBoldTitle -> b
     android.widget.TextView tvMsgSmall -> c
@@ -9104,7 +9182,8 @@ ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.n:
     android.content.SharedPreferences spDef -> k
     android.app.ProgressDialog pd -> l
     java.text.SimpleDateFormat dateFormat -> m
-    android.widget.AdapterView$OnItemClickListener listenerItemGriatView -> n
+    android.view.View$OnClickListener clickSelectBookListener -> n
+    android.widget.AdapterView$OnItemClickListener listenerItemGriatView -> o
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void onResume() -> onResume
@@ -9119,10 +9198,10 @@ ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.n:
     android.content.SharedPreferences access$4(ua.maker.gbible.fragment.ListChaptersFragment) -> d
 ua.maker.gbible.fragment.ListChaptersFragment$1 -> ua.maker.gbible.b.o:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+    void onClick(android.view.View) -> onClick
 ua.maker.gbible.fragment.ListChaptersFragment$2 -> ua.maker.gbible.b.p:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
 ua.maker.gbible.fragment.ListChaptersFragment$3 -> ua.maker.gbible.b.q:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -9170,20 +9249,24 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     android.view.View viewDialogCopy -> Q
     android.app.AlertDialog dialogSelect -> R
     android.app.ProgressDialog pd -> S
-    android.view.View$OnLongClickListener longClickOnTextViewListener -> T
+    android.app.AlertDialog$Builder builder -> T
+    android.view.View$OnClickListener clickChapterBtnListener -> U
+    android.view.View$OnClickListener clickSelectBookListener -> V
+    android.view.View$OnLongClickListener longClickOnTextViewListener -> W
     android.view.GestureDetector$SimpleOnGestureListener gestureListener -> a
     android.view.GestureDetector gestureDetector -> b
-    android.view.View$OnTouchListener touchListener -> U
-    android.view.View$OnKeyListener keyListener -> V
-    android.widget.AbsListView$OnScrollListener scrollChangeListener -> W
-    android.widget.AdapterView$OnItemClickListener itemClickListener -> X
-    android.content.DialogInterface$OnClickListener dialogItemClickListener -> Y
-    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> Z
-    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> aa
-    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> ab
-    android.content.DialogInterface$OnClickListener clickCopyAllListener -> ac
-    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ad
-    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> ae
+    android.view.View$OnTouchListener touchListener -> X
+    android.view.View$OnKeyListener keyListener -> Y
+    android.widget.AbsListView$OnScrollListener scrollChangeListener -> Z
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> aa
+    android.content.DialogInterface$OnClickListener dialogItemClickListener -> ab
+    android.content.DialogInterface$OnClickListener clickAddToBookMarkListener -> ac
+    android.content.DialogInterface$OnClickListener clickCalcelAddToBookMarkListener -> ad
+    android.content.DialogInterface$OnClickListener itemDialogListPlanListener -> ae
+    android.content.DialogInterface$OnClickListener clickCopyAllListener -> af
+    android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ag
+    android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> ah
+    void onAttach(android.app.Activity) -> onAttach
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onActivityCreated(android.os.Bundle) -> onActivityCreated
     void showInfoPopup() -> a
@@ -9200,52 +9283,52 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     void onResume() -> onResume
     void onPause() -> onPause
     void onStop() -> onStop
-    android.widget.TextView access$0(ua.maker.gbible.fragment.ListPoemsFragment) -> a
-    int access$1(ua.maker.gbible.fragment.ListPoemsFragment) -> b
-    void access$2(ua.maker.gbible.fragment.ListPoemsFragment) -> c
+    android.content.SharedPreferences access$0(ua.maker.gbible.fragment.ListPoemsFragment) -> a
+    android.widget.TextView access$1(ua.maker.gbible.fragment.ListPoemsFragment) -> b
+    int access$2(ua.maker.gbible.fragment.ListPoemsFragment) -> c
     void access$3(ua.maker.gbible.fragment.ListPoemsFragment) -> d
-    void access$4(ua.maker.gbible.fragment.ListPoemsFragment,int) -> a
-    boolean access$5(ua.maker.gbible.fragment.ListPoemsFragment) -> e
-    int access$6(ua.maker.gbible.fragment.ListPoemsFragment) -> f
-    android.widget.ListView access$7(ua.maker.gbible.fragment.ListPoemsFragment) -> g
-    android.widget.Button access$8(ua.maker.gbible.fragment.ListPoemsFragment) -> h
-    void access$9(ua.maker.gbible.fragment.ListPoemsFragment,int) -> b
-    void access$10(ua.maker.gbible.fragment.ListPoemsFragment,int) -> c
-    void access$11(ua.maker.gbible.fragment.ListPoemsFragment,int) -> d
-    void access$12(ua.maker.gbible.fragment.ListPoemsFragment) -> i
-    void access$13(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> a
-    void access$14(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> b
-    int access$15(ua.maker.gbible.fragment.ListPoemsFragment) -> j
+    void access$4(ua.maker.gbible.fragment.ListPoemsFragment) -> e
+    void access$5(ua.maker.gbible.fragment.ListPoemsFragment,int) -> a
+    boolean access$6(ua.maker.gbible.fragment.ListPoemsFragment) -> f
+    int access$7(ua.maker.gbible.fragment.ListPoemsFragment) -> g
+    android.widget.ListView access$8(ua.maker.gbible.fragment.ListPoemsFragment) -> h
+    android.widget.Button access$9(ua.maker.gbible.fragment.ListPoemsFragment) -> i
+    void access$10(ua.maker.gbible.fragment.ListPoemsFragment,int) -> b
+    void access$11(ua.maker.gbible.fragment.ListPoemsFragment,int) -> c
+    void access$12(ua.maker.gbible.fragment.ListPoemsFragment,int) -> d
+    void access$13(ua.maker.gbible.fragment.ListPoemsFragment) -> j
+    void access$14(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> a
+    void access$15(ua.maker.gbible.fragment.ListPoemsFragment,android.widget.EditText) -> b
     int access$16(ua.maker.gbible.fragment.ListPoemsFragment) -> k
     int access$17(ua.maker.gbible.fragment.ListPoemsFragment) -> l
-    android.content.DialogInterface$OnClickListener access$18(ua.maker.gbible.fragment.ListPoemsFragment) -> m
+    int access$18(ua.maker.gbible.fragment.ListPoemsFragment) -> m
     android.content.DialogInterface$OnClickListener access$19(ua.maker.gbible.fragment.ListPoemsFragment) -> n
-    int access$20(ua.maker.gbible.fragment.ListPoemsFragment) -> o
-    java.util.List access$21(ua.maker.gbible.fragment.ListPoemsFragment) -> p
-    android.content.DialogInterface$OnClickListener access$22(ua.maker.gbible.fragment.ListPoemsFragment) -> q
+    android.content.DialogInterface$OnClickListener access$20(ua.maker.gbible.fragment.ListPoemsFragment) -> o
+    int access$21(ua.maker.gbible.fragment.ListPoemsFragment) -> p
+    java.util.List access$22(ua.maker.gbible.fragment.ListPoemsFragment) -> q
     android.content.DialogInterface$OnClickListener access$23(ua.maker.gbible.fragment.ListPoemsFragment) -> r
-    android.view.View access$24(ua.maker.gbible.fragment.ListPoemsFragment) -> s
-    void access$25(ua.maker.gbible.fragment.ListPoemsFragment,android.app.AlertDialog) -> a
-    android.app.AlertDialog access$26(ua.maker.gbible.fragment.ListPoemsFragment) -> t
-    int access$27(ua.maker.gbible.fragment.ListPoemsFragment) -> u
-    java.util.List access$28(ua.maker.gbible.fragment.ListPoemsFragment) -> v
-    android.content.DialogInterface$OnClickListener access$29(ua.maker.gbible.fragment.ListPoemsFragment) -> w
-    java.lang.String access$30(ua.maker.gbible.fragment.ListPoemsFragment) -> x
-    android.widget.EditText access$31(ua.maker.gbible.fragment.ListPoemsFragment) -> y
+    android.content.DialogInterface$OnClickListener access$24(ua.maker.gbible.fragment.ListPoemsFragment) -> s
+    android.view.View access$25(ua.maker.gbible.fragment.ListPoemsFragment) -> t
+    void access$26(ua.maker.gbible.fragment.ListPoemsFragment,android.app.AlertDialog) -> a
+    android.app.AlertDialog access$27(ua.maker.gbible.fragment.ListPoemsFragment) -> u
+    int access$28(ua.maker.gbible.fragment.ListPoemsFragment) -> v
+    java.util.List access$29(ua.maker.gbible.fragment.ListPoemsFragment) -> w
+    android.content.DialogInterface$OnClickListener access$30(ua.maker.gbible.fragment.ListPoemsFragment) -> x
+    java.lang.String access$31(ua.maker.gbible.fragment.ListPoemsFragment) -> y
     android.widget.EditText access$32(ua.maker.gbible.fragment.ListPoemsFragment) -> z
-    ua.maker.gbible.utils.UserDB access$33(ua.maker.gbible.fragment.ListPoemsFragment) -> A
-    void access$34(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> a
-    void access$35(ua.maker.gbible.fragment.ListPoemsFragment,int) -> e
-    void access$36(ua.maker.gbible.fragment.ListPoemsFragment,int) -> f
-    void access$37(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> b
-    android.app.AlertDialog access$38(ua.maker.gbible.fragment.ListPoemsFragment) -> B
-    void access$39(ua.maker.gbible.fragment.ListPoemsFragment,boolean) -> a
-    android.app.ProgressDialog access$40(ua.maker.gbible.fragment.ListPoemsFragment) -> C
-    void access$41(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
-    ua.maker.gbible.utils.DataBase access$42(ua.maker.gbible.fragment.ListPoemsFragment) -> D
-    java.lang.String access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
-    void access$44(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
-    android.content.SharedPreferences access$45(ua.maker.gbible.fragment.ListPoemsFragment) -> F
+    android.widget.EditText access$33(ua.maker.gbible.fragment.ListPoemsFragment) -> A
+    ua.maker.gbible.utils.UserDB access$34(ua.maker.gbible.fragment.ListPoemsFragment) -> B
+    void access$35(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> a
+    void access$36(ua.maker.gbible.fragment.ListPoemsFragment,int) -> e
+    void access$37(ua.maker.gbible.fragment.ListPoemsFragment,int) -> f
+    void access$38(ua.maker.gbible.fragment.ListPoemsFragment,java.lang.String) -> b
+    android.app.AlertDialog access$39(ua.maker.gbible.fragment.ListPoemsFragment) -> C
+    void access$40(ua.maker.gbible.fragment.ListPoemsFragment,boolean) -> a
+    android.app.ProgressDialog access$41(ua.maker.gbible.fragment.ListPoemsFragment) -> D
+    void access$42(ua.maker.gbible.fragment.ListPoemsFragment,android.content.SharedPreferences) -> a
+    ua.maker.gbible.utils.DataBase access$43(ua.maker.gbible.fragment.ListPoemsFragment) -> E
+    java.lang.String access$44(ua.maker.gbible.fragment.ListPoemsFragment) -> F
+    void access$45(ua.maker.gbible.fragment.ListPoemsFragment,java.util.List) -> a
     android.widget.Button access$46(ua.maker.gbible.fragment.ListPoemsFragment) -> G
     void access$47(ua.maker.gbible.fragment.ListPoemsFragment) -> H
     void access$48(ua.maker.gbible.fragment.ListPoemsFragment) -> I
@@ -9253,7 +9336,7 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     void access$50(ua.maker.gbible.fragment.ListPoemsFragment,int) -> h
 ua.maker.gbible.fragment.ListPoemsFragment$1 -> ua.maker.gbible.b.s:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onLongClick(android.view.View) -> onLongClick
+    void onClick(android.view.View) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$10 -> ua.maker.gbible.b.t:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -9265,16 +9348,16 @@ ua.maker.gbible.fragment.ListPoemsFragment$12 -> ua.maker.gbible.b.v:
     void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$13 -> ua.maker.gbible.b.w:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
+    void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$14 -> ua.maker.gbible.b.x:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    void run() -> run
+    void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$15 -> ua.maker.gbible.b.y:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
+    boolean onItemLongClick(android.widget.AdapterView,android.view.View,int,long) -> onItemLongClick
 ua.maker.gbible.fragment.ListPoemsFragment$16 -> ua.maker.gbible.b.z:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    void onClick(android.view.View) -> onClick
+    void run() -> run
 ua.maker.gbible.fragment.ListPoemsFragment$17 -> ua.maker.gbible.b.aa:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
@@ -9283,31 +9366,31 @@ ua.maker.gbible.fragment.ListPoemsFragment$18 -> ua.maker.gbible.b.ab:
     void run() -> run
 ua.maker.gbible.fragment.ListPoemsFragment$2 -> ua.maker.gbible.b.ac:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
+    void onClick(android.view.View) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$3 -> ua.maker.gbible.b.ad:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+    boolean onLongClick(android.view.View) -> onLongClick
 ua.maker.gbible.fragment.ListPoemsFragment$4 -> ua.maker.gbible.b.ae:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
+    boolean onFling(android.view.MotionEvent,android.view.MotionEvent,float,float) -> onFling
 ua.maker.gbible.fragment.ListPoemsFragment$5 -> ua.maker.gbible.b.af:
+    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+ua.maker.gbible.fragment.ListPoemsFragment$6 -> ua.maker.gbible.b.ag:
+    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+    boolean onKey(android.view.View,int,android.view.KeyEvent) -> onKey
+ua.maker.gbible.fragment.ListPoemsFragment$7 -> ua.maker.gbible.b.ah:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onScrollStateChanged(android.widget.AbsListView,int) -> onScrollStateChanged
     void onScroll(android.widget.AbsListView,int,int,int) -> onScroll
-ua.maker.gbible.fragment.ListPoemsFragment$6 -> ua.maker.gbible.b.ag:
+ua.maker.gbible.fragment.ListPoemsFragment$8 -> ua.maker.gbible.b.ai:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-ua.maker.gbible.fragment.ListPoemsFragment$7 -> ua.maker.gbible.b.ah:
+ua.maker.gbible.fragment.ListPoemsFragment$9 -> ua.maker.gbible.b.aj:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$7$1 -> ua.maker.gbible.b.ai:
-    ua.maker.gbible.fragment.ListPoemsFragment$7 this$1 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$8 -> ua.maker.gbible.b.aj:
-    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.fragment.ListPoemsFragment$9 -> ua.maker.gbible.b.ak:
-    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+ua.maker.gbible.fragment.ListPoemsFragment$9$1 -> ua.maker.gbible.b.ak:
+    ua.maker.gbible.fragment.ListPoemsFragment$9 this$1 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.fragment.ListPoemsFragment$ActionModeCallback -> ua.maker.gbible.b.al:
     ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
@@ -9320,6 +9403,7 @@ ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gb
     void onPreExecute() -> onPreExecute
     java.lang.Void doInBackground(java.lang.Void[]) -> a
     void onPostExecute(java.lang.Void) -> a
+    void startFunc() -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 ua.maker.gbible.fragment.ListPoemsFragment$MyWebViewClient -> ua.maker.gbible.b.an:
@@ -9713,7 +9797,32 @@ ua.maker.gbible.structs.ItemPlanStruct -> ua.maker.gbible.d.c:
     java.lang.String getPathImg() -> i
     int getPoem() -> j
     java.lang.String getText() -> k
-ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.d:
+ua.maker.gbible.structs.ItemReadDay -> ua.maker.gbible.d.d:
+    int day -> a
+    java.lang.String month -> b
+    int year -> c
+    java.util.List listPoemOld -> d
+    java.util.List listPoemNew -> e
+    boolean status -> f
+    int row -> g
+    int section -> h
+    java.lang.String contentChapterOldTFull -> i
+    java.lang.String contentChapterNewTFull -> j
+    java.lang.String getContentChapterNewTFull() -> a
+    java.lang.String getContentChapterOldTFull() -> b
+    void setContentChapterNewTFull(java.lang.String) -> a
+    void setContentChapterOldTFull(java.lang.String) -> b
+    int getDay() -> c
+    boolean isStatusReaded() -> d
+    void setStatus(boolean) -> a
+    java.util.List getListPoemNew() -> e
+    java.util.List getListPoemOld() -> f
+    java.lang.String getMonth() -> g
+    void setDay(int) -> a
+    void setListPoemNew(java.util.List) -> a
+    void setListPoemOld(java.util.List) -> b
+    void setMonth(java.lang.String) -> c
+ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.e:
     java.lang.String name -> a
     java.lang.String subDescription -> b
     java.lang.String date -> c
@@ -9726,12 +9835,27 @@ ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.d:
     java.lang.String getName() -> b
     java.lang.String getSubDescription() -> c
     int getId() -> d
-ua.maker.gbible.structs.PoemStruct -> ua.maker.gbible.d.e:
+ua.maker.gbible.structs.PoemStruct -> ua.maker.gbible.d.f:
     java.lang.String text -> a
     boolean checked -> b
-    java.lang.String getText() -> a
-    boolean isChecked() -> b
-ua.maker.gbible.structs.SearchStruct -> ua.maker.gbible.d.f:
+    java.lang.String bookName -> c
+    int bookId -> d
+    int chapter -> e
+    int poem -> f
+    int poemTo -> g
+    int getPoemTo() -> a
+    void setPoemTo(int) -> a
+    int getBookId() -> b
+    void setBookId(int) -> b
+    int getPoem() -> c
+    void setPoem(int) -> c
+    java.lang.String getBookName() -> d
+    int getChapter() -> e
+    void setBookName(java.lang.String) -> a
+    void setChapter(int) -> d
+    java.lang.String getText() -> f
+    boolean isChecked() -> g
+ua.maker.gbible.structs.SearchStruct -> ua.maker.gbible.d.g:
     int idBook -> a
     java.lang.String bookName -> b
     int chapter -> c
@@ -9753,8 +9877,8 @@ ua.maker.gbible.utils.DataBase -> ua.maker.gbible.e.a:
     android.content.Context mContext -> c
     android.content.SharedPreferences pref -> d
     void createDataBase() -> a
-    boolean checkDataBase() -> e
-    void copyDataBase() -> f
+    boolean checkDataBase() -> f
+    void copyDataBase() -> g
     void openDataBase() -> b
     void close() -> close
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
@@ -9770,6 +9894,10 @@ ua.maker.gbible.utils.DataBase -> ua.maker.gbible.e.a:
     java.util.List searchInDataBase(java.lang.String,int,int) -> a
     void insertSearchResult(java.util.List) -> a
     java.util.List getSearchResult() -> d
+    void setStatusItemReadForEveryDay(int,boolean) -> a
+    void setDefaultStatusItemRead(int) -> a
+    java.util.List getListReadForEveryDay() -> e
+    java.util.List parseValueChapterBookIdString(java.lang.String,java.lang.String,java.lang.String) -> a
 ua.maker.gbible.utils.Tools -> ua.maker.gbible.e.b:
     android.widget.Toast toast -> a
     java.lang.String lastToastText -> b

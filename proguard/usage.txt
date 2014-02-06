@@ -1058,6 +1058,13 @@ com.actionbarsherlock.widget.SuggestionsAdapter:
     250:252:public void close()
     690:701:private android.graphics.drawable.Drawable getActivityIconWithCache(android.content.ComponentName)
     712:729:private android.graphics.drawable.Drawable getActivityIcon(android.content.ComponentName)
+com.applidium.headerlistview.HeaderListView
+com.applidium.headerlistview.HeaderListView$1
+com.applidium.headerlistview.HeaderListView$HeaderListViewOnScrollListener
+com.applidium.headerlistview.HeaderListView$InternalListView
+com.applidium.headerlistview.R
+com.applidium.headerlistview.R$drawable
+com.applidium.headerlistview.SectionAdapter
 com.bst.HwBeautify.BasicBezier
 com.bst.HwBeautify.BeautifyDef
 com.bst.HwBeautify.BeautifyManager
@@ -5644,14 +5651,14 @@ ua.maker.gbible.R$xml
 ua.maker.gbible.SinglePanelActivity:
     private static final java.lang.String TAG
     87:93:public void startFragment(android.support.v4.app.Fragment,java.lang.String)
-ua.maker.gbible.activity.BookmarksActivity
-ua.maker.gbible.activity.HistoryActivity
-ua.maker.gbible.activity.PlanDetailActivity
-ua.maker.gbible.activity.PlansListActivity
-ua.maker.gbible.activity.SearchActivity
+ua.maker.gbible.activity.ReadForEveryDayActivity:
+    private static final java.lang.String TAG
+    private static final int ACTION_SET_DEF_ITEMS_READ
 ua.maker.gbible.activity.SettingActivity:
     private static final java.lang.String TAG
 ua.maker.gbible.adapter.ItemDialogAdapter:
+    private static final java.lang.String TAG
+ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter:
     private static final java.lang.String TAG
 ua.maker.gbible.constant.App
 ua.maker.gbible.constant.BooksId
@@ -5698,13 +5705,23 @@ ua.maker.gbible.structs.ItemPlanStruct:
     66:70:public ItemPlanStruct(int,android.graphics.Bitmap)
     117:118:public void setImgBitMap(android.graphics.Bitmap)
     149:149:public android.graphics.Bitmap getImgBitMap()
+ua.maker.gbible.structs.ItemReadDay:
+    20:26:public ItemReadDay(int,java.lang.String,int,java.util.List,java.util.List)
+    45:45:public int getSection()
+    49:50:public void setSection(int)
+    53:53:public int getRow()
+    57:58:public void setRow(int)
+    85:85:public int getYear()
+    105:106:public void setYear(int)
 ua.maker.gbible.structs.PlanStruct:
     12:15:public PlanStruct(java.lang.String,java.lang.String)
     17:21:public PlanStruct(java.lang.String,java.lang.String,java.lang.String)
 ua.maker.gbible.structs.PoemStruct:
-    14:17:public PoemStruct(java.lang.String,boolean)
-    28:29:public void setText(java.lang.String)
-    32:33:public void setChecked(boolean)
+    19:22:public PoemStruct(java.lang.String,boolean)
+    24:28:public PoemStruct(java.lang.String,java.lang.String,int)
+    30:35:public PoemStruct(java.lang.String,java.lang.String,int,int)
+    86:87:public void setText(java.lang.String)
+    90:91:public void setChecked(boolean)
 ua.maker.gbible.utils.DataBase:
     private static final java.lang.String TAG
     private static final int DB_VERSION
@@ -5713,10 +5730,13 @@ ua.maker.gbible.utils.DataBase:
     public static final java.lang.String TABLE_NAME_RST
     public static final java.lang.String TABLE_NAME_MT
     public static final java.lang.String TABLE_NAME_UAT
+    public static final java.lang.String TABLE_NAME_ENT
     public static final int TRANSLATE_RST_ID
     public static final int TRANSLATE_MT_ID
     public static final int TRANSLATE_UA_ID
+    public static final int TRANSLATE_EN_ID
     public static final java.lang.String TABLE_SEARCH_RESULT
+    public static final java.lang.String TABLE_READ_FOR_EVERY_DAY
     public static final java.lang.String FIELD_BOOK_ID
     public static final java.lang.String FIELD_TRANSLATE
     public static final java.lang.String FIELD_BOOK_NAME
@@ -5725,7 +5745,16 @@ ua.maker.gbible.utils.DataBase:
     public static final java.lang.String FIELD_POEM
     public static final java.lang.String FIELD_CONTENT
     public static final java.lang.String KEY_ROWID
-    146:146:public android.database.sqlite.SQLiteDatabase getDb()
+    public static final java.lang.String FIELD_MONTH
+    public static final java.lang.String FIELD_DAY
+    public static final java.lang.String FIELD_BOOK_NAME_OLD_T
+    public static final java.lang.String FIELD_BOOK_NAME_NEW_T
+    public static final java.lang.String FIELD_CHAPTERS_OLD_T
+    public static final java.lang.String FIELD_CHAPTERS_NEW_T
+    public static final java.lang.String FIELD_BOOK_ID_NEW_T
+    public static final java.lang.String FIELD_BOOK_ID_OLD_T
+    public static final java.lang.String FIELD_STATUS_READED
+    160:160:public android.database.sqlite.SQLiteDatabase getDb()
 ua.maker.gbible.utils.Tools:
     16:16:public Tools()
     248:253:public static java.lang.String getWebColor(java.lang.String)

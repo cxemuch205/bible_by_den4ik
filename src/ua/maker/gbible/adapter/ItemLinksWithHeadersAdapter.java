@@ -10,6 +10,7 @@ import ua.maker.gbible.utils.DataBase;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +28,15 @@ public class ItemLinksWithHeadersAdapter extends ArrayAdapter<ItemReadDay> {
 	private Context context = null;
 	private DataBase db = null;
 	private SharedPreferences pref;
+	private int day = 0;
 	
-	public ItemLinksWithHeadersAdapter(Context context, List<ItemReadDay> data, DataBase db, SharedPreferences pref) {
+	public ItemLinksWithHeadersAdapter(Context context, List<ItemReadDay> data, DataBase db, SharedPreferences pref, int day) {
 		super(context, R.layout.item_read_day_layout, data);
 		this.data = data;
 		this.context = context;
 		this.db = db;
 		this.pref = pref;
+		this.day = day;
 	}
 	
 	@Override
@@ -75,8 +78,6 @@ public class ItemLinksWithHeadersAdapter extends ArrayAdapter<ItemReadDay> {
 		
 		String poemOldLink = "";
 		boolean noStandartOld = false;
-		if(BuildConfig.DEBUG)
-			Log.i(TAG, "Pos error: " + position);
 		for(int i = 0; i < item.getListPoemOld().size(); i++)
 			if(item.getListPoemOld().get(i).getPoemTo() != 0){
 				noStandartOld = true;
@@ -130,6 +131,14 @@ public class ItemLinksWithHeadersAdapter extends ArrayAdapter<ItemReadDay> {
 					pref.edit().putInt(App.LAST_ITEM_SELECT, position).commit();
 			}
 		});
+		
+		if(position == (day-1)){
+			view.setBackgroundColor(Color.parseColor("#5500af64"));
+		}
+		else
+		{
+			view.setBackgroundColor(Color.parseColor("#0000af64"));
+		}
 		
 		return view;
 	}
