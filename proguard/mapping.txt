@@ -8887,6 +8887,8 @@ ua.maker.gbible.activity.ComparePoemActivity -> ua.maker.gbible.activity.Compare
     int chapter -> f
     int poem -> g
     void onCreate(android.os.Bundle) -> onCreate
+    void onStart() -> onStart
+    void onStop() -> onStop
 ua.maker.gbible.activity.DonateActivity -> ua.maker.gbible.activity.DonateActivity:
     android.widget.Button btnCopyToClipBoard -> a
     android.widget.ImageView ivQr -> b
@@ -8895,6 +8897,8 @@ ua.maker.gbible.activity.DonateActivity -> ua.maker.gbible.activity.DonateActivi
     void onCreate(android.os.Bundle) -> onCreate
     void copyToClipBoard(java.lang.String) -> a
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     void access$0(ua.maker.gbible.activity.DonateActivity,java.lang.String) -> a
     android.widget.ImageView access$1(ua.maker.gbible.activity.DonateActivity) -> a
 ua.maker.gbible.activity.DonateActivity$1 -> ua.maker.gbible.activity.a:
@@ -8936,6 +8940,8 @@ ua.maker.gbible.activity.ReadForEveryDayActivity -> ua.maker.gbible.activity.Rea
     boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu) -> onCreateOptionsMenu
     void onResume() -> onResume
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
     android.content.SharedPreferences access$0(ua.maker.gbible.activity.ReadForEveryDayActivity) -> a
     java.util.List access$1(ua.maker.gbible.activity.ReadForEveryDayActivity) -> b
     ua.maker.gbible.utils.DataBase access$2(ua.maker.gbible.activity.ReadForEveryDayActivity) -> c
@@ -8972,6 +8978,8 @@ ua.maker.gbible.activity.ReadForEveryDayActivity$6 -> ua.maker.gbible.activity.k
 ua.maker.gbible.activity.SettingActivity -> ua.maker.gbible.activity.SettingActivity:
     void onCreate(android.os.Bundle) -> onCreate
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
+    void onStart() -> onStart
+    void onStop() -> onStop
 ua.maker.gbible.activity.StartActivity -> ua.maker.gbible.activity.StartActivity:
     void onCreate(android.os.Bundle) -> onCreate
     android.support.v4.app.Fragment onCreatePane() -> a
