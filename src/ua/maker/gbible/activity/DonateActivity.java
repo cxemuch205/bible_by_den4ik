@@ -2,6 +2,7 @@ package ua.maker.gbible.activity;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -109,4 +110,16 @@ public class DonateActivity extends SherlockActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	EasyTracker.getInstance().activityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	EasyTracker.getInstance().activityStop(this);
+    }
 }

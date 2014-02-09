@@ -42,7 +42,6 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
@@ -454,14 +453,8 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 	
 	private void updateList(){
-		if(adapterListPoem == null){
-			adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
-			lvShowPoem.setAdapter(adapterListPoem);
-		}
-		else
-		{
-			adapterListPoem.notifyDataSetChanged();
-		}
+		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
+		lvShowPoem.setAdapter(adapterListPoem);
 	}
 	
 	SimpleOnGestureListener gestureListener = new SimpleOnGestureListener(){
@@ -840,7 +833,9 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 
 	public void changeChapter(int count){
+		Log.i(TAG, "bolGetingContent: " + bolGetingContent);
 		if(bolGetingContent){
+			Log.i(TAG, "changeChapter: " + chapterNumber);
 			ChangeChapterAsyncTask changechapterTask = new ChangeChapterAsyncTask();
 			changechapterTask.execute();
 		}

@@ -2,6 +2,7 @@ package ua.maker.gbible.activity;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
@@ -36,4 +37,16 @@ public class SettingActivity extends SherlockPreferenceActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	EasyTracker.getInstance().activityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    	EasyTracker.getInstance().activityStop(this);
+    }
 }
