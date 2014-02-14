@@ -7,6 +7,7 @@
     <string name="action_bookmarks">Закладки</string>
     <string name="action_history">Історія</string>
     <string name="action_setting">Налаштування</string>
+    <string name="tnx_for_donate">Сердечно благодарю за ваш вклад в развитие приложения! С ув. Даниил.</string>
     
     <string name="exit_question">Вийти?</string>
     <string name="closes_app">Закриття программи..</string>
@@ -427,6 +428,7 @@
     <string name="save_image_title">Збереження qr-коду?</string>
     <string name="saved_into_galary">Буде збережено в папку зображень, запропоновано прочитати якщо на пристрої є спец додаток</string>
     <string name="saved_str">Збережено!</string>
+    <string name="enter_count">Введіть кількість в USD</string>
     <!-- ##################### -->
     
     <!-- Read for every day activity -->
@@ -441,19 +443,5 @@
     
     <!-- Color Picker -->
     <string name="dialog_color_picker">Вибір кольору</string>
-    
-	<!-- Month -->
-    <string name="month_jan">Січнь</string> 
-	<string name="month_feb">Лютий</string> 
-	<string name="month_mar">Березнь</string> 
-	<string name="month_apr">Квітень</string> 
-	<string name="month_may">Травень</string> 
-	<string name="month_jun">Червень</string> 
-	<string name="month_jul">Липень</string> 
-	<string name="month_aug">Серпень</string> 
-	<string name="month_sep">Вересень</string> 
-	<string name="month_okt">Жовтень</string> 
-	<string name="month_nov">Листопад</string> 
-	<string name="month_dec">Грудень</string>
     		
 </resources>

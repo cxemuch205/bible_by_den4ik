@@ -36,10 +36,14 @@ public class App {
 	public static final int MIN_SCROOL_SPEED = 1;
 	public static final int MAX_SIZE_TEXT = 50;
 	public static final int MIN_SIZE_TEXT = 8;
+	public static final String PAY_PAL_KEY_LIVE = "APP-8CC22631SH9890325";
+	public static final String PAY_PAL_KEY_SANDBOX = "APP-80W284485P519543T";
 	
 	//Context menu items
 	public static final int MENU_GROUP_ID = 1001;
 	public static final int MENU_COPY_ID = 101;
 	public static final int MENU_SHARE_ID = 102;
+	
+	public static final String MY_EMAIL = "cxemuch@gmail.com";
 
 }

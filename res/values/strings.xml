@@ -16,6 +16,7 @@
     <string name="progress_dialog_title">Загрузка&#8230;</string>
     <string name="progress_dialog_message">Загрузка данных&#8230;</string>
     <string name="progress_dialog_download_chapter">Загрузка главы&#8230;</string>
+    <string name="tnx_for_donate">Щиро дякую за ваш внесок в розвиток програми! З пов. Данило.</string>
 
     <!-- ERROR -->
     <string name="empty_et">Поле для поиска не заполенно!</string>
@@ -431,6 +432,7 @@
     <string name="save_image_title">Сохранить qr-код?</string>
     <string name="saved_into_galary">Будет сохранено в папку изображений, предложено прочесть если на устройстве есть спец приложение</string>
     <string name="saved_str">Сохранено!</string>
+    <string name="enter_count">Введите сумму в USD</string>
     <!-- ##################### -->
     
     <!-- Read for every day activity -->
@@ -445,19 +447,5 @@
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
-    
-    <!-- Month -->
-    <string name="month_jan">Январь</string>
-	<string name="month_feb">Февраль</string>
-	<string name="month_mar">Март</string>
-	<string name="month_apr">Апрель</string>
-	<string name="month_may">Май</string>
-	<string name="month_jun">Июнь</string>
-	<string name="month_jul">Июль</string>
-	<string name="month_aug">Август</string>
-	<string name="month_sep">Сентябрь</string>
-	<string name="month_okt">Октябрь</string>
-	<string name="month_nov">Ноябрь</string>
-	<string name="month_dec">Декабрь</string>
 
 </resources>

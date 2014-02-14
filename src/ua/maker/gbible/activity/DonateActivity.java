@@ -1,9 +1,14 @@
 package ua.maker.gbible.activity;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
-import com.google.analytics.tracking.android.EasyTracker;
+import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
 
+import ua.maker.gbible.R;
+import ua.maker.gbible.constant.App;
+import ua.maker.gbible.listeners.onDialogClickListener;
+import ua.maker.gbible.utils.Tools;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -14,18 +19,28 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import ua.maker.gbible.R;
-import ua.maker.gbible.listeners.onDialogClickListener;
-import ua.maker.gbible.utils.Tools;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.MenuItem;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.paypal.android.MEP.PayPal;
+import com.paypal.android.MEP.PayPalActivity;
+import com.paypal.android.MEP.PayPalPayment;
 
 public class DonateActivity extends SherlockActivity {
 	
 	private Button btnCopyToClipBoard = null;
+	private Button btnPayOnPayPal;
 	private ImageView ivQr = null;
+	private PayPal pp;
+	private EditText etMoney;
+	public static final String TAG = "PayPalMethActivity";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +51,39 @@ public class DonateActivity extends SherlockActivity {
 		
 		btnCopyToClipBoard = (Button)findViewById(R.id.btn_copy_info_donate);
 		ivQr = (ImageView)findViewById(R.id.iv_qr_share);
+		btnPayOnPayPal = (Button)findViewById(R.id.btn_pay_pal_donating);
+		etMoney = (EditText)findViewById(R.id.et_enter_price);
 		
+		btnPayOnPayPal.setOnClickListener(clickPayPalDonateListener);
 		btnCopyToClipBoard.setOnClickListener(clickBtnCopyListener);
 		ivQr.setOnClickListener(clickIVShareListener);
+		
+		pp = PayPal.getInstance();
+		if(pp == null){
+			pp = PayPal.initWithAppID(DonateActivity.this, App.PAY_PAL_KEY_LIVE, PayPal.ENV_LIVE);
+			pp.setLanguage(Locale.ROOT.getLanguage());
+			pp.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
+			pp.setShippingEnabled(true);
+		}
 	}
+	
+	private OnClickListener clickPayPalDonateListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			String count = etMoney.getText().toString();
+			if(count.length() > 0){
+				PayPalPayment payment = new PayPalPayment();
+				payment.setCurrencyType(Currency.getInstance(Locale.US));
+				payment.setRecipient(App.MY_EMAIL);
+				payment.setSubtotal(new BigDecimal(Double.parseDouble(count)));
+				payment.setPaymentType(PayPal.PAY_TYPE_SIMPLE);
+				startActivityForResult(PayPal.getInstance().checkout(payment, DonateActivity.this), 105);
+			}else{
+				etMoney.setError(getString(R.string.enter_count));
+			}
+		}
+	};
 	
 	private OnClickListener clickBtnCopyListener = new OnClickListener() {
 		
@@ -122,4 +166,27 @@ public class DonateActivity extends SherlockActivity {
     	super.onStop();
     	EasyTracker.getInstance().activityStop(this);
     }
+    
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		switch (resultCode) {
+		case Activity.RESULT_OK:
+			String payKey = intent.getStringExtra(PayPalActivity.EXTRA_PAY_KEY);
+			Log.i(TAG, "RESULT_OK: " + payKey);
+			Tools.showToast(getApplicationContext(), getString(R.string.tnx_for_donate));
+			break;
+		case Activity.RESULT_CANCELED:
+			Log.i(TAG, "RESULT_CANCELED");
+			break;
+
+		case PayPalActivity.RESULT_FAILURE:
+			String errorID = intent
+					.getStringExtra(PayPalActivity.EXTRA_ERROR_ID);
+			String errorMessage = intent
+					.getStringExtra(PayPalActivity.EXTRA_ERROR_MESSAGE);
+			Log.i(TAG, "RESULT_FAILURE: errId: "+errorID+" |ErrMsg: "+errorMessage);
+			Tools.showToast(getApplicationContext(), "ERROR - латеж не проведен!");
+		}
+	};
 }
