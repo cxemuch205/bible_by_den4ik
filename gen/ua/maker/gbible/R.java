@@ -971,12 +971,10 @@ containing a value of this type.
         public static final int pointer_next=0x7f020088;
         public static final int pointer_previous=0x7f020089;
         public static final int qr_code_donate_info=0x7f02008a;
-        public static final int scrollbar_handle_holo_dark=0x7f02008b;
-        public static final int scrollbar_handle_holo_light=0x7f02008c;
-        public static final int search_ico=0x7f02008d;
-        public static final int select_link_bible_ico=0x7f02008e;
-        public static final int selector_item_chapter=0x7f02008f;
-        public static final int setting_ico42=0x7f020090;
+        public static final int search_ico=0x7f02008b;
+        public static final int select_link_bible_ico=0x7f02008c;
+        public static final int selector_item_chapter=0x7f02008d;
+        public static final int setting_ico42=0x7f02008e;
     }
     public static final class id {
         public static final int ImageView01=0x7f050045;

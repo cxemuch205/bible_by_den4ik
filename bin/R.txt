@@ -285,12 +285,10 @@ int drawable plus 0x7f020087
 int drawable pointer_next 0x7f020088
 int drawable pointer_previous 0x7f020089
 int drawable qr_code_donate_info 0x7f02008a
-int drawable scrollbar_handle_holo_dark 0x7f02008b
-int drawable scrollbar_handle_holo_light 0x7f02008c
-int drawable search_ico 0x7f02008d
-int drawable select_link_bible_ico 0x7f02008e
-int drawable selector_item_chapter 0x7f02008f
-int drawable setting_ico42 0x7f020090
+int drawable search_ico 0x7f02008b
+int drawable select_link_bible_ico 0x7f02008c
+int drawable selector_item_chapter 0x7f02008d
+int drawable setting_ico42 0x7f02008e
 int id ImageView01 0x7f050045
 int id ImageView02 0x7f050044
 int id ImageView03 0x7f050048
