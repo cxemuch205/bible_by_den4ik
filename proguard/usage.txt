@@ -5918,11 +5918,13 @@ ua.maker.gbible.structs.PlanStruct:
     12:15:public PlanStruct(java.lang.String,java.lang.String)
     17:21:public PlanStruct(java.lang.String,java.lang.String,java.lang.String)
 ua.maker.gbible.structs.PoemStruct:
-    19:22:public PoemStruct(java.lang.String,boolean)
-    24:28:public PoemStruct(java.lang.String,java.lang.String,int)
-    30:35:public PoemStruct(java.lang.String,java.lang.String,int,int)
-    86:87:public void setText(java.lang.String)
-    90:91:public void setChecked(boolean)
+    21:24:public PoemStruct(java.lang.String,boolean)
+    26:30:public PoemStruct(java.lang.String,java.lang.String,int)
+    32:37:public PoemStruct(java.lang.String,java.lang.String,int,int)
+    110:111:public ua.maker.gbible.structs.PoemStruct setText(java.lang.String)
+    115:116:public ua.maker.gbible.structs.PoemStruct setChecked(boolean)
+ua.maker.gbible.utils.ColorStruct:
+    10:13:public ColorStruct(java.lang.String,int)
 ua.maker.gbible.utils.DataBase:
     private static final java.lang.String TAG
     private static final int DB_VERSION
@@ -5968,11 +5970,13 @@ ua.maker.gbible.utils.UserDB:
     private static final java.lang.String TABLE_PLAN_DATA
     private static final java.lang.String TABLE_BOOKMARKS
     private static final java.lang.String TABLE_HISTORY
+    private static final java.lang.String TABLE_MARKER
     public static final java.lang.String FIELD_ID
     public static final java.lang.String FIELD_PLAN_ID
     public static final java.lang.String FIELD_NAME
     public static final java.lang.String FIELD_SUB_DESCRIPTION
     public static final java.lang.String FIELD_DATE
+    public static final java.lang.String FIELD_COLOR_HEX
     public static final java.lang.String FIELD_BOOK_ID
     public static final java.lang.String FIELD_BOOK_NAME
     public static final java.lang.String FIELD_TABLE_NAME
@@ -5986,10 +5990,11 @@ ua.maker.gbible.utils.UserDB:
     public static final java.lang.String FIELD_TYPE_DATA
     public static final java.lang.String FIELD_PATH_IMG
     private static final java.lang.String SQL_CREATE_TABLE_PLANS_LIST
+    private static final java.lang.String SQL_CREATE_TABLE_MARKER
     private static final java.lang.String SQL_CREATE_TABLE_PLAN_DATA
     private static final java.lang.String SQL_CREATE_TABLE_BOOKMARKS_DATA
     private static final java.lang.String SQL_CREATE_TABLE_HISTORY
-    229:248:public void insertBookMarks(java.util.List)
+    240:259:public void insertBookMarks(java.util.List)
 ua.maker.gbible.widget.setting.ColorPickerDialog:
     159:159:public boolean getHexValueEnabled()
 ua.maker.gbible.widget.setting.ColorPickerPanelView:

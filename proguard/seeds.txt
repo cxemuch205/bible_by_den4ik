@@ -4898,6 +4898,7 @@ ua.maker.gbible.R$drawable: int ico_bible_t1
 ua.maker.gbible.R$drawable: int ico_bible_usualy
 ua.maker.gbible.R$drawable: int ico_bible_v2
 ua.maker.gbible.R$drawable: int ico_compare_poem
+ua.maker.gbible.R$drawable: int ico_set_marker
 ua.maker.gbible.R$drawable: int ico_share_smal_v2
 ua.maker.gbible.R$drawable: int icon_app_bible_n
 ua.maker.gbible.R$drawable: int menu_button_background
@@ -5215,6 +5216,7 @@ ua.maker.gbible.R$string: int dialog_add_to_bookmarks
 ua.maker.gbible.R$string: int dialog_added_to_bookmarks
 ua.maker.gbible.R$string: int dialog_btn_copy_select_text
 ua.maker.gbible.R$string: int dialog_cancel
+ua.maker.gbible.R$string: int dialog_color_marker
 ua.maker.gbible.R$string: int dialog_color_picker
 ua.maker.gbible.R$string: int dialog_compare
 ua.maker.gbible.R$string: int dialog_copy_to_clicpboard
