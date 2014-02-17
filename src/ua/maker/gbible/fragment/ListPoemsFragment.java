@@ -26,6 +26,8 @@ import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import ua.maker.gbible.widget.setting.ColorPickerDialog;
+import ua.maker.gbible.widget.setting.ColorPickerDialog.OnColorChangedListener;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -139,6 +141,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	private AlertDialog dialogSelect = null;
 	private ProgressDialog pd = null;
 	private AlertDialog.Builder builder = null;
+	private ColorPickerDialog colorDialog;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -195,7 +198,8 @@ public class ListPoemsFragment extends SherlockFragment{
 				""+getString(R.string.dialog_add_item_to_plan),
 				""+getString(R.string.dialog_copy_to_clicpboard),
 				""+getString(R.string.dialog_share),
-				""+getString(R.string.dialog_compare)};
+				""+getString(R.string.dialog_compare),
+				""+getString(R.string.dialog_color_marker)};
 		
 		List<Integer> idPicture = new ArrayList<Integer>();
 		idPicture.add(R.drawable.add_bookmark_small);
@@ -203,6 +207,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		idPicture.add(R.drawable.copy_ico_small);
 		idPicture.add(R.drawable.ico_share_smal_v2);
 		idPicture.add(R.drawable.ico_compare_poem);
+		idPicture.add(R.drawable.ico_set_marker);
 		
 		ItemDialogAdapter adapterDialog = new ItemDialogAdapter(getSherlockActivity(), listActions, idPicture);
 		
@@ -224,7 +229,10 @@ public class ListPoemsFragment extends SherlockFragment{
 		
 		timer = new Timer();		
 
-		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
+		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems, dbUser);
+		colorDialog = new ColorPickerDialog(getSherlockActivity(), Color.GREEN);
+		colorDialog.setOnColorChangedListener(colorChangeListener);
+		colorDialog.setAlphaSliderVisible(true);
 	}
 
 	@Override
@@ -320,6 +328,27 @@ public class ListPoemsFragment extends SherlockFragment{
 			showInfoPopup();
 		}
 	}
+	
+	private OnColorChangedListener colorChangeListener = new OnColorChangedListener() {
+		
+		@Override
+		public void onColorChanged(int color, String colorHEX) {
+			PoemStruct item = listPoems.get((poemBM-1));
+			boolean isUpdate = false;
+			if(!(item.getColorHEX().length() > 0))
+			{
+				item.setPosColor(dbUser.insertMarker(bookId, chapterNumber, (poemBM-1), colorHEX));
+				item.setColorHEX(colorHEX);
+				Log.i(TAG, "Item color: " + item.getPosColor());
+			}else
+			{
+				isUpdate = true;
+				Log.i(TAG, "UPDATE = Item color: " + item.getPosColor());
+				dbUser.updateMarker(bookId, chapterNumber, (poemBM-1), colorHEX, item.getPosColor());
+			}
+			adapterListPoem.updateListView((poemBM-1), lvShowPoem, isUpdate);
+		}
+	};
 	
 	private OnClickListener clickChapterBtnListener = new OnClickListener() {
 		
@@ -453,7 +482,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	}
 	
 	private void updateList(){
-		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems);
+		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems, dbUser);
 		lvShowPoem.setAdapter(adapterListPoem);
 	}
 	
@@ -655,7 +684,8 @@ public class ListPoemsFragment extends SherlockFragment{
 					Tools.showToast(getSherlockActivity(), getString(R.string.toast_msg_no_plans));
 				}
 				break;
-			default:
+			case 5: //Set marker color
+				colorDialog.show();
 				break;
 			}			
 		}

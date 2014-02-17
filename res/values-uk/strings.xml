@@ -386,6 +386,7 @@
     <string name="dialog_title_select_text">Виділити текст</string>
     <string name="dialog_dtn_copy_all">Скопіювати все</string>
     <string name="dialog_btn_copy_select_text">Скопіювати диділине</string>
+    <string name="dialog_color_marker">Виділити коліром</string>
     
     <color name="color_selected_list_item">#22007241</color>
     <color name="color_no_bagr">#ffffff</color>

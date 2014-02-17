@@ -9,6 +9,8 @@ public class PoemStruct {
 	private int chapter = 1;
 	private int poem = 1;
 	private int poemTo = 0;
+	private String colorHEX = "";
+	private int posColor;
 	
 	public PoemStruct(){};
 	
@@ -34,28 +36,48 @@ public class PoemStruct {
 		this.poem = poem;
 	};
 	
+	public void setPosColor(int posColor) {
+		this.posColor = posColor;
+	}
+	
+	public int getPosColor() {
+		return posColor;
+	}
+	
+	public String getColorHEX() {
+		return colorHEX;
+	}
+	
+	public PoemStruct setColorHEX(String colorHEX) {
+		this.colorHEX = colorHEX;
+		return this;
+	}
+	
 	public int getPoemTo() {
 		return poemTo;
 	}
 	
-	public void setPoemTo(int poemTo) {
+	public PoemStruct setPoemTo(int poemTo) {
 		this.poemTo = poemTo;
+		return this;
 	}
 	
 	public int getBookId() {
 		return bookId;
 	}
 	
-	public void setBookId(int bookId) {
+	public PoemStruct setBookId(int bookId) {
 		this.bookId = bookId;
+		return this;
 	}
 	
 	public int getPoem() {
 		return poem;
 	}
 	
-	public void setPoem(int poem) {
+	public PoemStruct setPoem(int poem) {
 		this.poem = poem;
+		return this;
 	}
 	
 	public String getBookName() {
@@ -66,12 +88,14 @@ public class PoemStruct {
 		return chapter;
 	}
 	
-	public void setBookName(String bookName) {
+	public PoemStruct setBookName(String bookName) {
 		this.bookName = bookName;
+		return this;
 	}
 	
-	public void setChapter(int chapter) {
+	public PoemStruct setChapter(int chapter) {
 		this.chapter = chapter;
+		return this;
 	}
 	
 	public String getText() {
@@ -82,11 +106,13 @@ public class PoemStruct {
 		return checked;
 	}
 	
-	public void setText(String text) {
+	public PoemStruct setText(String text) {
 		this.text = text;
+		return this;
 	}
 	
-	public void setChecked(boolean checked) {
+	public PoemStruct setChecked(boolean checked) {
 		this.checked = checked;
+		return this;
 	}
 }

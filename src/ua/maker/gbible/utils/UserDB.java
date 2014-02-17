@@ -25,12 +25,14 @@ public class UserDB extends SQLiteOpenHelper{
 	private static final String TABLE_PLAN_DATA = "item_plan_data";
 	private static final String TABLE_BOOKMARKS = "bookmarks_data";
 	private static final String TABLE_HISTORY = "history_link";
+	private static final String TABLE_MARKER = "markars_on_poem";
 	
 	public static final String FIELD_ID = "_id";
 	public static final String FIELD_PLAN_ID = "id_plan";
 	public static final String FIELD_NAME = "name_plan";
 	public static final String FIELD_SUB_DESCRIPTION = "sub_description";
 	public static final String FIELD_DATE = "date_create";
+	public static final String FIELD_COLOR_HEX = "color_hex_marker";
 	
 	public static final String FIELD_BOOK_ID = "bookId";
 	public static final String FIELD_BOOK_NAME = "bookName";
@@ -51,6 +53,13 @@ public class UserDB extends SQLiteOpenHelper{
 			+ FIELD_NAME + " TEXT,"
 			+ FIELD_SUB_DESCRIPTION + " TEXT,"
 			+ FIELD_DATE + " TEXT);";
+	
+	private static final String SQL_CREATE_TABLE_MARKER = "CREATE TABLE " + TABLE_MARKER + " ("
+			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+			+ FIELD_COLOR_HEX + " TEXT,"
+			+ FIELD_BOOK_ID + " INTEGER,"
+			+ FIELD_CHAPTER + " INTEGER,"
+			+ FIELD_POEM + " INTEGER);";
 	
 	private static final String SQL_CREATE_TABLE_PLAN_DATA = "CREATE TABLE " + TABLE_PLAN_DATA + " ("
 			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -100,6 +109,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_TABLE_BOOKMARKS_DATA);
 		db.execSQL(SQL_CREATE_TABLE_PLAN_DATA);
 		db.execSQL(SQL_CREATE_TABLE_HISTORY);
+		db.execSQL(SQL_CREATE_TABLE_MARKER);
 	}
 
 	@Override
@@ -108,6 +118,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.delete(TABLE_BOOKMARKS, null, null);
 		db.delete(TABLE_PLAN_DATA, null, null);
 		db.delete(TABLE_HISTORY, null, null);
+		db.delete(TABLE_MARKER, null, null);
 		onCreate(db);
 	}
 	
@@ -454,5 +465,83 @@ public class UserDB extends SQLiteOpenHelper{
     	if(db.isOpen()){
     		db.delete(TABLE_HISTORY, null, null);
     	}
+    }
+    
+    public int insertMarker(int bookId, int chapter, int poem, String colorHEX){
+    	int row = 0;
+    	if(db.isOpen()){
+    		boolean first = true;
+    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_MARKER+"'", null);
+    		if(c.moveToFirst()){
+    			int bookIndex = c.getColumnIndex(FIELD_BOOK_ID);
+    			int chapterIndex = c.getColumnIndex(FIELD_CHAPTER);
+    			int poemIndex = c.getColumnIndex(FIELD_POEM);
+    			int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);    					
+    			do {
+    				int book = c.getInt(bookIndex);
+    				int cha = c.getInt(chapterIndex);
+    				int pm = c.getInt(poemIndex);
+    				String color = c.getString(colorIndex);
+    				if(book == bookId & cha == chapter & pm == poem & color.equals(colorHEX)){
+    					first = false;
+    					break;
+    				}
+    			} while (c.moveToNext());
+    		}
+    		if(first){
+    			ContentValues cv = new ContentValues();
+        		
+        		cv.put(FIELD_BOOK_ID, bookId);
+        		cv.put(FIELD_CHAPTER, chapter);
+        		cv.put(FIELD_POEM, poem);
+        		cv.put(FIELD_COLOR_HEX, colorHEX);
+        		
+        		row = (int)db.insert(TABLE_MARKER, null, cv);
+        		Log.i(TAG, " INSERT - Color row: " + row);
+    		}    		
+    	}
+    	return row;
+    }
+    
+    public UserDB updateMarker(int bookId, int chapter, int poem, String colorHEX, int pos){
+    	if(db.isOpen()){
+    		ContentValues cv = new ContentValues();
+    		
+    		cv.put(FIELD_BOOK_ID, bookId);
+    		cv.put(FIELD_CHAPTER, chapter);
+    		cv.put(FIELD_POEM, poem);
+    		cv.put(FIELD_COLOR_HEX, colorHEX);
+    		
+    		long posColor = db.update(TABLE_MARKER, cv, FIELD_ID + "=" + String.valueOf(pos), null);
+    		Log.i(TAG, "UPDATE Color pos: " + posColor);
+    	}
+    	return this;
+    }
+    
+    public ColorStruct getPoemMarkerColor(int bookId, int chapter, int poem){
+    	ColorStruct result = new ColorStruct();
+    	if(db.isOpen()){
+    		Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_MARKER+"'", null);
+    		if(c.moveToFirst()){
+    			int bookIndex = c.getColumnIndex(FIELD_BOOK_ID);
+    			int chapterIndex = c.getColumnIndex(FIELD_CHAPTER);
+    			int poemIndex = c.getColumnIndex(FIELD_POEM);
+    			int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
+    			int positionIndex = c.getColumnIndex(FIELD_ID);
+    			do {
+    				int book = c.getInt(bookIndex);
+    				int cha = c.getInt(chapterIndex);
+    				int pm = c.getInt(poemIndex);
+    				int position = c.getInt(positionIndex);
+    				if(book == bookId & cha == chapter & pm == poem){
+    					result.setHex(c.getString(colorIndex));
+    					result.setPosition(position);
+    					break;
+    				}
+    				
+    			} while (c.moveToNext());
+    		}
+    	}
+    	return result;
     }
 }

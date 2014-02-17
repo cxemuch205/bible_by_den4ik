@@ -1,9 +1,12 @@
 package ua.maker.gbible.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.structs.PoemStruct;
+import ua.maker.gbible.utils.ColorStruct;
+import ua.maker.gbible.utils.UserDB;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
@@ -22,11 +26,40 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 	private Context context = null;
 	private SharedPreferences defPref = null;
 	private boolean dayNight = false;
+	private UserDB userDB;
+	private List<View> listViews = new ArrayList<View>();
 
-	public ItemListPoemAdapter(Context context, List<PoemStruct> data) {
+	public ItemListPoemAdapter(Context context, List<PoemStruct> data, UserDB db) {
 		super(context, R.layout.item_list_poems, data);
 		this.listPoems = data;
 		this.context = context;
+		this.userDB = db;
+	}
+	
+	public boolean updateListView(int position, ListView listView, boolean isUpdate) {
+	    int first = listView.getFirstVisiblePosition();
+	    int last = listView.getLastVisiblePosition();
+	    if(position < first || position > last) {
+	        return false;
+	    }
+	    else {
+	        View convertView = listView.getChildAt(position - first);
+	        PoemStruct content = listPoems.get(position);
+	        if(isUpdate){
+	        	ColorStruct colorItem = userDB.getPoemMarkerColor(content.getBookId(), content.getChapter(), position);
+	        	content.setColorHEX(colorItem.getHex());
+	        	content.setPosColor(colorItem.getPosition());
+	        }
+			
+			if(content.getColorHEX().length() > 0){
+				convertView.setBackgroundColor(Color.parseColor(content.getColorHEX()));
+			}
+			else
+			{
+				convertView.setBackgroundColor(Color.parseColor("#00000000"));
+			}
+	        return true;
+	    }
 	}
 	
 	@Override
@@ -60,9 +93,22 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		}
 		
 		PoemStruct content = listPoems.get(position);
+		if(!(content.getColorHEX().length() > 0)){
+			ColorStruct colorItem = userDB.getPoemMarkerColor(content.getBookId(), content.getChapter(), position);
+			content.setColorHEX(colorItem.getHex());
+			content.setPosColor(colorItem.getPosition());
+		}
 		
 		if(content.isChecked()){
 			view.setBackgroundResource(R.color.color_selected_list_item);
+		}
+		
+		if(content.getColorHEX().length() > 0){
+			view.setBackgroundColor(Color.parseColor(content.getColorHEX()));
+		}
+		else
+		{
+			view.setBackgroundColor(Color.parseColor("#00000000"));
 		}
 		
 		if(dayNight){
@@ -88,6 +134,14 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 				holder.tvNumberPoem.setTextSize(15);
 			}
 		}
+		int k = 0;
+		for(int i = 0; i < listViews.size(); i++){
+			if(listViews.get(i) != view){
+				k++;
+			}
+		}
+		if(listViews.size() == 0 || k == listViews.size())
+			listViews.add(view);
 		
 		return view;
 	}

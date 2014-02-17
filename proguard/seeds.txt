@@ -3985,10 +3985,6 @@ com.actionbarsherlock.widget.ShareActionProvider: java.lang.String access$1(com.
 com.actionbarsherlock.widget.ShareActionProvider: com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener access$2(com.actionbarsherlock.widget.ShareActionProvider)
 com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener
 com.actionbarsherlock.widget.ShareActionProvider$OnShareTargetSelectedListener: boolean onShareTargetSelected(com.actionbarsherlock.widget.ShareActionProvider,android.content.Intent)
-com.applidium.headerlistview.HeaderListView: void setAdapter(com.applidium.headerlistview.SectionAdapter)
-com.applidium.headerlistview.HeaderListView: android.widget.ListView getListView()
-com.applidium.headerlistview.R$drawable: int scrollbar_handle_holo_dark
-com.applidium.headerlistview.R$drawable: int scrollbar_handle_holo_light
 com.bst.HwBeautify.BeautifyNative
 com.bst.HwBeautify.BeautifyNative: int nativeCBInitEngine()
 com.bst.HwBeautify.BeautifyNative: void nativeCBCloseEngine()
@@ -4230,6 +4226,24 @@ com.google.common.util.concurrent.CycleDetectingLockFactory$Policies: com.google
 com.google.common.util.concurrent.CycleDetectingLockFactory$Policies: com.google.common.util.concurrent.CycleDetectingLockFactory$Policies valueOf(java.lang.String)
 com.google.common.util.concurrent.Service$State: com.google.common.util.concurrent.Service$State[] values()
 com.google.common.util.concurrent.Service$State: com.google.common.util.concurrent.Service$State valueOf(java.lang.String)
+com.paypal.android.MEP.CheckoutButton: void setActive(boolean)
+com.paypal.android.MEP.PayPalActivity
+com.paypal.android.MEP.PayPalActivity: PayPalActivity()
+com.paypal.android.MEP.a.c$a: com.paypal.android.MEP.a.c$a[] values()
+com.paypal.android.MEP.a.c$a: com.paypal.android.MEP.a.c$a valueOf(java.lang.String)
+com.paypal.android.MEP.b.b$a: com.paypal.android.MEP.b.b$a[] values()
+com.paypal.android.MEP.b.b$a: com.paypal.android.MEP.b.b$a valueOf(java.lang.String)
+com.paypal.android.MEP.b.e$a: com.paypal.android.MEP.b.e$a[] values()
+com.paypal.android.MEP.b.e$a: com.paypal.android.MEP.b.e$a valueOf(java.lang.String)
+com.paypal.android.MEP.b.f$a: com.paypal.android.MEP.b.f$a[] values()
+com.paypal.android.MEP.b.f$a: com.paypal.android.MEP.b.f$a valueOf(java.lang.String)
+com.paypal.android.MEP.b.g$a: com.paypal.android.MEP.b.g$a[] values()
+com.paypal.android.MEP.b.g$a: com.paypal.android.MEP.b.g$a valueOf(java.lang.String)
+com.paypal.android.b.a$a: com.paypal.android.b.a$a[] values()
+com.paypal.android.b.a$a: com.paypal.android.b.a$a valueOf(java.lang.String)
+com.paypal.android.b.c: void setBackgroundDrawable(android.graphics.drawable.Drawable)
+com.paypal.android.c.h: com.paypal.android.c.h[] values()
+com.paypal.android.c.h: com.paypal.android.c.h valueOf(java.lang.String)
 com.samsung.samm.lib.engine.image.ImageEffectEngineJNI
 com.samsung.samm.lib.engine.image.ImageEffectEngineJNI: void setCheckSupportingModel(char[],int)
 com.samsung.samm.lib.engine.image.ImageEffectEngineJNI: void applyGray(int[],int[],int,int,int)
@@ -4887,15 +4901,15 @@ ua.maker.gbible.R$drawable: int ico_compare_poem
 ua.maker.gbible.R$drawable: int ico_share_smal_v2
 ua.maker.gbible.R$drawable: int icon_app_bible_n
 ua.maker.gbible.R$drawable: int menu_button_background
+ua.maker.gbible.R$drawable: int pay_pal_btn
 ua.maker.gbible.R$drawable: int plan_ico
 ua.maker.gbible.R$drawable: int plus
 ua.maker.gbible.R$drawable: int pointer_next
 ua.maker.gbible.R$drawable: int pointer_previous
 ua.maker.gbible.R$drawable: int qr_code_donate_info
-ua.maker.gbible.R$drawable: int scrollbar_handle_holo_dark
-ua.maker.gbible.R$drawable: int scrollbar_handle_holo_light
 ua.maker.gbible.R$drawable: int search_ico
 ua.maker.gbible.R$drawable: int select_link_bible_ico
+ua.maker.gbible.R$drawable: int selector_btn_pay_pal
 ua.maker.gbible.R$drawable: int selector_item_chapter
 ua.maker.gbible.R$drawable: int setting_ico42
 ua.maker.gbible.R$id: int ImageView01
@@ -4960,6 +4974,7 @@ ua.maker.gbible.R$id: int btn_book
 ua.maker.gbible.R$id: int btn_chapter
 ua.maker.gbible.R$id: int btn_copy_info_donate
 ua.maker.gbible.R$id: int btn_create_plan
+ua.maker.gbible.R$id: int btn_pay_pal_donating
 ua.maker.gbible.R$id: int btn_poem
 ua.maker.gbible.R$id: int btn_start_search
 ua.maker.gbible.R$id: int cb_quote
@@ -4969,6 +4984,7 @@ ua.maker.gbible.R$id: int disableHome
 ua.maker.gbible.R$id: int edit_query
 ua.maker.gbible.R$id: int et_comment_on_bookmark
 ua.maker.gbible.R$id: int et_description_add_plan
+ua.maker.gbible.R$id: int et_enter_price
 ua.maker.gbible.R$id: int et_link_poem_next
 ua.maker.gbible.R$id: int et_name_add_plan
 ua.maker.gbible.R$id: int et_search_text
@@ -5232,6 +5248,7 @@ ua.maker.gbible.R$string: int donate_title
 ua.maker.gbible.R$string: int ecclesiast_str
 ua.maker.gbible.R$string: int efesyanam_str
 ua.maker.gbible.R$string: int empty_et
+ua.maker.gbible.R$string: int enter_count
 ua.maker.gbible.R$string: int error_text_msg
 ua.maker.gbible.R$string: int esfir_str
 ua.maker.gbible.R$string: int evreyam_str
@@ -5275,18 +5292,6 @@ ua.maker.gbible.R$string: int mark_str
 ua.maker.gbible.R$string: int matfey_str
 ua.maker.gbible.R$string: int menu_title_add_point
 ua.maker.gbible.R$string: int michey_str
-ua.maker.gbible.R$string: int month_apr
-ua.maker.gbible.R$string: int month_aug
-ua.maker.gbible.R$string: int month_dec
-ua.maker.gbible.R$string: int month_feb
-ua.maker.gbible.R$string: int month_jan
-ua.maker.gbible.R$string: int month_jul
-ua.maker.gbible.R$string: int month_jun
-ua.maker.gbible.R$string: int month_mar
-ua.maker.gbible.R$string: int month_may
-ua.maker.gbible.R$string: int month_nov
-ua.maker.gbible.R$string: int month_okt
-ua.maker.gbible.R$string: int month_sep
 ua.maker.gbible.R$string: int msg_dialog_set_def_val_status_read
 ua.maker.gbible.R$string: int naum_str
 ua.maker.gbible.R$string: int neemia_str
@@ -5378,6 +5383,7 @@ ua.maker.gbible.R$string: int title_size_text_poem
 ua.maker.gbible.R$string: int title_smooth_scroll
 ua.maker.gbible.R$string: int title_use_vol_btn
 ua.maker.gbible.R$string: int titu_str
+ua.maker.gbible.R$string: int tnx_for_donate
 ua.maker.gbible.R$string: int toast_added_to_plan
 ua.maker.gbible.R$string: int toast_delete_plan_msg
 ua.maker.gbible.R$string: int toast_msg_no_plans

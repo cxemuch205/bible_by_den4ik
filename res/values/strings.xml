@@ -391,6 +391,7 @@
     <string name="dialog_title_select_text">Выделите текст:</string>
     <string name="dialog_dtn_copy_all">Копировать все</string>
     <string name="dialog_btn_copy_select_text">Копировать выделеное</string>
+    <string name="dialog_color_marker">Выделить цветом</string>
 
     <color name="color_selected_list_item">#22007241</color>
     <color name="color_no_bagr">#ffffff</color>

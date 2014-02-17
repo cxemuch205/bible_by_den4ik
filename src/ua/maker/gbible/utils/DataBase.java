@@ -212,10 +212,15 @@ public class DataBase extends SQLiteOpenHelper {
 			Log.d(TAG, "BaseOpen");
 			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_CHAPTER+", "+FIELD_CONTENT+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
+				int bookIndex = cursor.getColumnIndex(FIELD_BOOK_ID);
+				int cha = cursor.getColumnIndex(FIELD_CHAPTER);
+				int content = cursor.getColumnIndex(FIELD_CONTENT);
 				do{
-					if(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)) == bookId){
-						if(cursor.getInt(cursor.getColumnIndex(FIELD_CHAPTER)) == chapter){
-							poems.add(new PoemStruct(cursor.getString(cursor.getColumnIndex(FIELD_CONTENT))));						
+					if(cursor.getInt(bookIndex) == bookId){
+						if(cursor.getInt(cha) == chapter){
+							poems.add(new PoemStruct(cursor.getString(content))
+												.setBookId(bookId)
+												.setChapter(chapter));
 						}
 					}
 				}while(cursor.moveToNext());

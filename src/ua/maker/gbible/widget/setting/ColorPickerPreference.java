@@ -70,7 +70,7 @@ public class ColorPickerPreference
 
 	@Override
 	protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-		onColorChanged(restoreValue ? getPersistedInt(mValue) : (Integer) defaultValue);
+		onColorChanged(restoreValue ? getPersistedInt(mValue) : (Integer) defaultValue, "");
 	}
 
 	private void init(Context context, AttributeSet attrs) {
@@ -133,7 +133,7 @@ public class ColorPickerPreference
 	}
 
 	@Override
-	public void onColorChanged(int color) {
+	public void onColorChanged(int color, String colorHEX) {
 		if (isPersistent()) {
 			persistInt(color);
 		}

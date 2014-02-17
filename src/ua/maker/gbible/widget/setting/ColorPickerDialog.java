@@ -55,7 +55,7 @@ public class ColorPickerDialog
 	private OnColorChangedListener mListener;
 
 	public interface OnColorChangedListener {
-		public void onColorChanged(int color);
+		public void onColorChanged(int color, String colorHEX);
 	}
 	
 	public ColorPickerDialog(Context context, int initialColor) {
@@ -204,7 +204,12 @@ public class ColorPickerDialog
 	public void onClick(View v) {
 		if (v.getId() == R.id.new_color_panel) {
 			if (mListener != null) {
-				mListener.onColorChanged(mNewColor.getColor());
+				if (getAlphaSliderVisible()) {
+					mListener.onColorChanged(mNewColor.getColor(), ColorPickerPreference.convertToARGB(mNewColor.getColor()).toUpperCase(Locale.getDefault()));
+				} else {
+					mListener.onColorChanged(mNewColor.getColor(), ColorPickerPreference.convertToRGB(mNewColor.getColor()).toUpperCase(Locale.getDefault()));
+				}
+				
 			}
 		}
 		dismiss();
