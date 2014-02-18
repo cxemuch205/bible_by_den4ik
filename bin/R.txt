@@ -536,6 +536,7 @@ int layout read_for_every_day_layout 0x7f030036
 int layout sherlock_spinner_dropdown_item 0x7f030037
 int layout sherlock_spinner_item 0x7f030038
 int layout show_info_layout 0x7f030039
+int layout splash_screen_layout 0x7f03003a
 int menu main 0x7f0d0000
 int menu menu_context_poem 0x7f0d0001
 int menu menu_history 0x7f0d0002

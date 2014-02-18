@@ -250,7 +250,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		
 		viewDialogCopy = inflater.inflate(R.layout.dialog_select_poem, null);
 		tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
-		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);		
+		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
 		
 		return view;
 	}
