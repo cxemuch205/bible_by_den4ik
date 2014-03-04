@@ -588,15 +588,21 @@ public class ListPoemsFragment extends SherlockFragment{
 	private void hideActionNav(){
 		click++;
 		if(click%2 == 0){
-			if(getSherlockActivity().getActionBar().isShowing()) 
-				getSherlockActivity().getActionBar().hide();
-			else
-				getSherlockActivity().getActionBar().show();
-			if(llMenuLink.getVisibility() == LinearLayout.VISIBLE) 
+			if(getSherlockActivity().getSupportActionBar().isShowing()){ 
+				getSherlockActivity().getSupportActionBar().hide();
 				llMenuLink.setVisibility(LinearLayout.GONE);
-			else
+			}
+			else{
 				llMenuLink.setVisibility(LinearLayout.VISIBLE);
+				getSherlockActivity().getSupportActionBar().show();
+			}
 			click = 0;
+		}
+		else{
+			if(!getSherlockActivity().getSupportActionBar().isShowing() & click == 0){
+				getSherlockActivity().getSupportActionBar().show();
+				llMenuLink.setVisibility(LinearLayout.VISIBLE);
+			}
 		}
 		timer.schedule(new TimerTask() {
 			

@@ -26,15 +26,23 @@
 			        android:layout_height="wrap_content"
 			        android:hint="@string/enter_count"
 			        android:layout_weight="1"/>
-			    <Button
-                	android:id="@+id/btn_pay_pal_donating"
-                	android:layout_width="match_parent"
-                	android:layout_height="wrap_content"
-                	android:layout_weight="1"
-                	android:layout_gravity="center_horizontal"
-                	android:layout_margin="8dp"
-                	android:padding="8dp"
-                	android:background="@drawable/selector_btn_pay_pal" />
+
+			    <LinearLayout
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:layout_margin="8dp"
+					android:padding="8dp" 
+			        android:orientation="vertical" >
+
+			        <Button
+			            android:id="@+id/btn_pay_pal_donating"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/selector_btn_pay_pal"/>
+
+			    </LinearLayout>
 			</LinearLayout>
 			
 			 <TextView

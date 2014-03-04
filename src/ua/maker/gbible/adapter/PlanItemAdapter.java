@@ -54,6 +54,7 @@ public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
 		ItemPlanStruct item = data.get(position);
 		switch (item.getDataType()) {
 		case PlanData.DATA_TEXT:
+			holder.tvTitle.setVisibility(TextView.VISIBLE);
 			holder.tvTitle.setText(""+item.getText());
 			holder.tvBoldTitle.setVisibility(TextView.GONE);
 			holder.tvMsgMedium.setVisibility(TextView.GONE);
@@ -63,6 +64,7 @@ public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
 			break;
 		case PlanData.DATA_TEXT_BOLD:
 			holder.tvTitle.setVisibility(TextView.GONE);
+			holder.tvBoldTitle.setVisibility(TextView.VISIBLE);
 			holder.tvBoldTitle.setText(""+item.getText());
 			holder.tvMsgMedium.setVisibility(TextView.GONE);
 			holder.tvMsgSmall.setVisibility(TextView.GONE);
@@ -71,6 +73,7 @@ public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
 			break;
 		case PlanData.DATA_LINK:
 			String toPoemShow = item.getToPoem()!=item.getPoem()?(" - "+item.getToPoem()):"";
+			holder.tvTitle.setVisibility(TextView.VISIBLE);
 			holder.tvTitle.setText(item.getBookName() + " "
 					+ item.getChapter() + ":"
 					+ item.getPoem()
@@ -83,17 +86,20 @@ public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
 			break;
 		case PlanData.DATA_LINK_WITH_TEXT:
 			String toPoemShowing = item.getToPoem()!=item.getPoem()?(" - "+item.getToPoem()):"";
+			holder.tvTitle.setVisibility(TextView.VISIBLE);
 			holder.tvTitle.setText(item.getBookName() + " "
 					+ item.getChapter() + ":"
 					+ item.getPoem()
 					+ toPoemShowing);
 			holder.tvBoldTitle.setVisibility(TextView.GONE);
 			if(item.getText().length()>=64){
+				holder.tvMsgSmall.setVisibility(TextView.VISIBLE);
 				holder.tvMsgSmall.setText(""+item.getText());
 				holder.tvMsgMedium.setVisibility(TextView.GONE);
 			}
 			else
 			{
+				holder.tvMsgMedium.setVisibility(TextView.VISIBLE);
 				holder.tvMsgMedium.setText(""+item.getText());
 				holder.tvMsgSmall.setVisibility(TextView.GONE);
 			}
@@ -106,15 +112,18 @@ public class PlanItemAdapter extends ArrayAdapter<ItemPlanStruct> {
 			holder.tvMsgMedium.setVisibility(TextView.GONE);
 			holder.tvMsgSmall.setVisibility(TextView.GONE);
 			holder.tvTitleForImg.setVisibility(TextView.GONE);
+			holder.ivShowImg.setVisibility(ImageView.VISIBLE);
 			Bitmap picture = BitmapFactory.decodeFile(item.getPathImg());
 			holder.ivShowImg.setImageBitmap(picture);
 			break;
 		case PlanData.DATA_TEXT_WITH_IMG:
+			holder.tvTitle.setVisibility(TextView.VISIBLE);
 			holder.tvTitle.setText(""+item.getText());
 			holder.tvBoldTitle.setVisibility(TextView.GONE);
 			holder.tvMsgMedium.setVisibility(TextView.GONE);
 			holder.tvMsgSmall.setVisibility(TextView.GONE);
 			holder.tvTitleForImg.setVisibility(TextView.GONE);
+			holder.ivShowImg.setVisibility(ImageView.VISIBLE);
 			Bitmap image = BitmapFactory.decodeFile(item.getPathImg());
 			holder.ivShowImg.setImageBitmap(image);
 			break;

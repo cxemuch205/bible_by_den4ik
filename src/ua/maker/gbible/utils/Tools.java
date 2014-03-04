@@ -269,6 +269,9 @@ public class Tools {
 				case 2:
 					translateName = DataBase.TABLE_NAME_UAT;
 					break;
+				case 3:
+					translateName = DataBase.TABLE_NAME_ENT;
+					break;
 			}
 		}
 		return translateName;
@@ -277,7 +280,7 @@ public class Tools {
 	public static String getTranslateWitchPreferences(String idTranslate, Context ctx){
 		String translateName = DataBase.TABLE_NAME_RST;
 
-		switch(Integer.parseInt(""+idTranslate)){
+		switch(Integer.parseInt(String.valueOf(idTranslate))){
 			case 0:
 				translateName = ctx.getString(R.string.is_rst_translate);
 				break;
@@ -286,6 +289,9 @@ public class Tools {
 				break;
 			case 2:
 				translateName = ctx.getString(R.string.is_ua_translate);
+				break;
+			case 3:
+				translateName = ctx.getString(R.string.is_en_translate);
 				break;
 		}
 		return translateName;

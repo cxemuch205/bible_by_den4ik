@@ -272,11 +272,13 @@
     		    <item >Російський Синодальний переклад</item>
     		    <item >Сучасний Російський переклад</item>
     		    <!-- item >Український переклад(скоро)</item-->
+        		<!-- item >King James Version(в будущем)</item -->
     		</string-array>
     		<string-array name="trnaslaters_names_id">
-    		    <item >0</item>
-    		    <item >1</item>
-    		    <item >2</item>
+        		<item>0</item>
+        		<item>1</item>
+        		<item>2</item>
+        		<item>3</item>
     		</string-array>
     	<string name="pref_mode_read">mode_read</string>
     		<string name="title_mode_read">Режим День/Ніч</string>
@@ -350,6 +352,7 @@
     <string name="is_rst_translate">РСП</string>
     <string name="is_mt_translate">СП</string>
     <string name="is_ua_translate">УП</string>
+    <string name="is_en_translate">KJV</string>
     
     <string name="dialog_title_clear_history">Очистити історію?</string>
     <string name="dialog_message_clear_history">Данні о відвіданних главах будуть стерті.</string>

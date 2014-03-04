@@ -117,9 +117,10 @@ public class UserDB extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.i(TAG, "onUpgrade()");
 		switch (oldVersion) {
-		case 1:
-		case 2:
+		case 1:{};
+		case 2:{
 			db.execSQL(SQL_CREATE_TABLE_MARKER);
+		};
 		case 3:
 		}
 	}
