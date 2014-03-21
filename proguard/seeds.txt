@@ -5163,12 +5163,18 @@ ua.maker.gbible.R$id: int iv_qr_share
 ua.maker.gbible.R$id: int iv_search
 ua.maker.gbible.R$id: int iv_select
 ua.maker.gbible.R$id: int iv_setting
+ua.maker.gbible.R$id: int last_color_1
+ua.maker.gbible.R$id: int last_color_2
+ua.maker.gbible.R$id: int last_color_3
+ua.maker.gbible.R$id: int last_color_4
+ua.maker.gbible.R$id: int last_color_5
 ua.maker.gbible.R$id: int listMode
 ua.maker.gbible.R$id: int ll_add_link_item
 ua.maker.gbible.R$id: int ll_add_text_item
 ua.maker.gbible.R$id: int ll_block_navi
 ua.maker.gbible.R$id: int ll_bookmarks
 ua.maker.gbible.R$id: int ll_bookmarks_right
+ua.maker.gbible.R$id: int ll_color_history
 ua.maker.gbible.R$id: int ll_history
 ua.maker.gbible.R$id: int ll_history_paige
 ua.maker.gbible.R$id: int ll_history_right
@@ -5294,6 +5300,7 @@ ua.maker.gbible.R$layout: int dialog_add_item_to_plan
 ua.maker.gbible.R$layout: int dialog_add_plan_settings
 ua.maker.gbible.R$layout: int dialog_add_to_bookmark
 ua.maker.gbible.R$layout: int dialog_color_picker
+ua.maker.gbible.R$layout: int dialog_color_picker_custom
 ua.maker.gbible.R$layout: int dialog_item_read_layout
 ua.maker.gbible.R$layout: int dialog_pref_speed_scroll
 ua.maker.gbible.R$layout: int dialog_pref_text_size
@@ -5508,6 +5515,7 @@ ua.maker.gbible.R$string: int save_image_title
 ua.maker.gbible.R$string: int saved_into_galary
 ua.maker.gbible.R$string: int saved_str
 ua.maker.gbible.R$string: int search_str
+ua.maker.gbible.R$string: int select_last_color
 ua.maker.gbible.R$string: int set_def_value_status_read
 ua.maker.gbible.R$string: int sofonia_str
 ua.maker.gbible.R$string: int str_sample_size_text

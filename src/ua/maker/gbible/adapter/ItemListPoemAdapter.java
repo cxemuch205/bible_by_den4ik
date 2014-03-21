@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.R;
+import ua.maker.gbible.structs.ColorStruct;
 import ua.maker.gbible.structs.PoemStruct;
-import ua.maker.gbible.utils.ColorStruct;
 import ua.maker.gbible.utils.UserDB;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.app.Activity;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible.structs.BookMarksStruct;
+import ua.maker.gbible.structs.ColorStruct;
 import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.structs.ItemPlanStruct;
 import ua.maker.gbible.structs.PlanStruct;
@@ -19,13 +20,14 @@ public class UserDB extends SQLiteOpenHelper{
 	private static final String TAG = "UserDB";
 	
 	private static final String DB_NAME = "user_data.db";
-	private static final int DB_VERSION = 3;
+	private static final int DB_VERSION = 4; //set 4 last ver 3
 	
 	private static final String TABLE_PLAN_LIST = "user_plan_list";
 	private static final String TABLE_PLAN_DATA = "item_plan_data";
 	private static final String TABLE_BOOKMARKS = "bookmarks_data";
 	private static final String TABLE_HISTORY = "history_link";
 	private static final String TABLE_MARKER = "markars_on_poem";
+	private static final String TABLE_COLOR_SELECT_HITORY = "color_select_history";
 	
 	public static final String FIELD_ID = "_id";
 	public static final String FIELD_PLAN_ID = "id_plan";
@@ -94,6 +96,10 @@ public class UserDB extends SQLiteOpenHelper{
 			+ FIELD_POEM + " INTEGER,"
 			+ FIELD_DATE + " TEXT);";
 	
+	private static final String SQL_COLOR_SELECT_HISTORY ="CREATE TABLE " + TABLE_COLOR_SELECT_HITORY + " ("
+			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+			+ FIELD_COLOR_HEX + " TEXT)";
+	
 	private Context context = null;
 	private SQLiteDatabase db = null;
 	
@@ -111,6 +117,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_TABLE_PLAN_DATA);
 		db.execSQL(SQL_CREATE_TABLE_HISTORY);
 		db.execSQL(SQL_CREATE_TABLE_MARKER);
+		db.execSQL(SQL_COLOR_SELECT_HISTORY);
 	}
 
 	@Override
@@ -121,7 +128,9 @@ public class UserDB extends SQLiteOpenHelper{
 		case 2:{
 			db.execSQL(SQL_CREATE_TABLE_MARKER);
 		};
-		case 3:
+		case 3:{
+			db.execSQL(SQL_COLOR_SELECT_HISTORY);
+		};
 		}
 	}
 	
@@ -552,4 +561,69 @@ public class UserDB extends SQLiteOpenHelper{
 		} catch (Exception e) {}    	
     	return result;
     }
+    
+    public void insertColorStruct(ColorStruct data){
+    	if(db.isOpen()){
+    		if(isUniqColorHEX(data)){
+    			inserCS(data);
+    		}
+    		else{
+    			if(data.getIdDB() != 0){
+    				deleteColorItemHistory(data);
+    				inserCS(data);
+    			}
+    		}
+    	}
+    }
+    
+    private void inserCS(ColorStruct data){
+    	ContentValues cv = new ContentValues();
+		cv.put(FIELD_COLOR_HEX, data.getHex());
+		db.insert(TABLE_COLOR_SELECT_HITORY, null, cv);
+    }
+
+	private void deleteColorItemHistory(ColorStruct data) {
+		if(db.isOpen()){
+			db.delete(TABLE_COLOR_SELECT_HITORY, FIELD_ID+"="+data.getIdDB(), null);
+		}
+	}
+
+	private boolean isUniqColorHEX(ColorStruct data) {
+		if(db.isOpen()){
+			Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_COLOR_SELECT_HITORY+"'", null);
+			if(c.moveToFirst()){
+				int idIndex = c.getColumnIndex(FIELD_ID);
+				int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
+				do {
+					int id = c.getInt(idIndex);
+					String color = c.getString(colorIndex);
+					if(color.equals(data.getHex())){
+						data.setIdDB(id);
+						return false;
+					}
+				} while (c.moveToNext());
+			}
+		}
+		return true;
+	}
+	
+	public List<ColorStruct> getListHistoryColorsSelect(){
+		List<ColorStruct> result = new ArrayList<ColorStruct>();
+		if(db.isOpen()){
+			Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_COLOR_SELECT_HITORY+"'", null);
+			if(c.moveToFirst()){
+				int idINdex = c.getColumnIndex(FIELD_ID);
+				int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
+				do {
+					int id = c.getInt(idINdex);
+					String color = c.getString(colorIndex);
+					ColorStruct item = new ColorStruct();
+					item.setHex(color);
+					item.setIdDB(id);
+					result.add(item);
+				} while (c.moveToNext());
+			}
+		}
+		return result;
+	}
 }

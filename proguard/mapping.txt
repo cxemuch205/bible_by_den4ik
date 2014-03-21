@@ -10338,8 +10338,8 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     android.app.AlertDialog dialogSelect -> R
     android.app.ProgressDialog pd -> S
     android.app.AlertDialog$Builder builder -> T
-    ua.maker.gbible.widget.setting.ColorPickerDialog colorDialog -> U
-    ua.maker.gbible.widget.setting.ColorPickerDialog$OnColorChangedListener colorChangeListener -> V
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog colorDialog -> U
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener colorChangeListener -> V
     android.view.View$OnClickListener clickChapterBtnListener -> W
     android.view.View$OnClickListener clickSelectBookListener -> X
     android.view.View$OnLongClickListener longClickOnTextViewListener -> Y
@@ -10406,7 +10406,7 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.r:
     int access$30(ua.maker.gbible.fragment.ListPoemsFragment) -> x
     java.util.List access$31(ua.maker.gbible.fragment.ListPoemsFragment) -> y
     android.content.DialogInterface$OnClickListener access$32(ua.maker.gbible.fragment.ListPoemsFragment) -> z
-    ua.maker.gbible.widget.setting.ColorPickerDialog access$33(ua.maker.gbible.fragment.ListPoemsFragment) -> A
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog access$33(ua.maker.gbible.fragment.ListPoemsFragment) -> A
     java.lang.String access$34(ua.maker.gbible.fragment.ListPoemsFragment) -> B
     android.widget.EditText access$35(ua.maker.gbible.fragment.ListPoemsFragment) -> C
     android.widget.EditText access$36(ua.maker.gbible.fragment.ListPoemsFragment) -> D
@@ -10811,7 +10811,9 @@ ua.maker.gbible.fragment.SelectBookFragment$6 -> ua.maker.gbible.b.bu:
 ua.maker.gbible.fragment.SelectBookFragment$7 -> ua.maker.gbible.b.bv:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.listeners.onDialogClickListener -> ua.maker.gbible.c.a:
+ua.maker.gbible.listeners.OnDefClickListener -> ua.maker.gbible.c.a:
+    void onClick(android.view.View) -> onClick
+ua.maker.gbible.listeners.onDialogClickListener -> ua.maker.gbible.c.b:
     void onClick(android.content.DialogInterface,int) -> onClick
 ua.maker.gbible.structs.BookMarksStruct -> ua.maker.gbible.d.a:
     java.lang.String tableName -> a
@@ -10839,7 +10841,17 @@ ua.maker.gbible.structs.BookMarksStruct -> ua.maker.gbible.d.a:
     java.lang.String getContent() -> g
     java.lang.String getComment() -> h
     java.lang.String getLinkNext() -> i
-ua.maker.gbible.structs.HistoryStruct -> ua.maker.gbible.d.b:
+ua.maker.gbible.structs.ColorStruct -> ua.maker.gbible.d.b:
+    java.lang.String hex -> a
+    int position -> b
+    int idDB -> c
+    void setHex(java.lang.String) -> a
+    void setPosition(int) -> a
+    java.lang.String getHex() -> a
+    int getPosition() -> b
+    int getIdDB() -> c
+    void setIdDB(int) -> b
+ua.maker.gbible.structs.HistoryStruct -> ua.maker.gbible.d.c:
     java.lang.String bookName -> a
     java.lang.String translate -> b
     java.lang.String dateCreate -> c
@@ -10857,7 +10869,7 @@ ua.maker.gbible.structs.HistoryStruct -> ua.maker.gbible.d.b:
     int getPoem() -> d
     java.lang.String getTranslate() -> e
     java.lang.String getDateCreated() -> f
-ua.maker.gbible.structs.ItemPlanStruct -> ua.maker.gbible.d.c:
+ua.maker.gbible.structs.ItemPlanStruct -> ua.maker.gbible.d.d:
     int id -> a
     int idItem -> b
     java.lang.String text -> c
@@ -10892,7 +10904,7 @@ ua.maker.gbible.structs.ItemPlanStruct -> ua.maker.gbible.d.c:
     java.lang.String getPathImg() -> i
     int getPoem() -> j
     java.lang.String getText() -> k
-ua.maker.gbible.structs.ItemReadDay -> ua.maker.gbible.d.d:
+ua.maker.gbible.structs.ItemReadDay -> ua.maker.gbible.d.e:
     int day -> a
     java.lang.String month -> b
     int year -> c
@@ -10917,7 +10929,7 @@ ua.maker.gbible.structs.ItemReadDay -> ua.maker.gbible.d.d:
     void setListPoemNew(java.util.List) -> a
     void setListPoemOld(java.util.List) -> b
     void setMonth(java.lang.String) -> c
-ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.e:
+ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.f:
     java.lang.String name -> a
     java.lang.String subDescription -> b
     java.lang.String date -> c
@@ -10930,7 +10942,7 @@ ua.maker.gbible.structs.PlanStruct -> ua.maker.gbible.d.e:
     java.lang.String getName() -> b
     java.lang.String getSubDescription() -> c
     int getId() -> d
-ua.maker.gbible.structs.PoemStruct -> ua.maker.gbible.d.f:
+ua.maker.gbible.structs.PoemStruct -> ua.maker.gbible.d.g:
     java.lang.String text -> a
     boolean checked -> b
     java.lang.String bookName -> c
@@ -10956,7 +10968,7 @@ ua.maker.gbible.structs.PoemStruct -> ua.maker.gbible.d.f:
     ua.maker.gbible.structs.PoemStruct setChapter(int) -> e
     java.lang.String getText() -> h
     boolean isChecked() -> i
-ua.maker.gbible.structs.SearchStruct -> ua.maker.gbible.d.g:
+ua.maker.gbible.structs.SearchStruct -> ua.maker.gbible.d.h:
     int idBook -> a
     java.lang.String bookName -> b
     int chapter -> c
@@ -10972,14 +10984,7 @@ ua.maker.gbible.structs.SearchStruct -> ua.maker.gbible.d.g:
     int getIdBook() -> c
     int getPoem() -> d
     java.lang.String getContent() -> e
-ua.maker.gbible.utils.ColorStruct -> ua.maker.gbible.e.a:
-    java.lang.String hex -> a
-    int position -> b
-    void setHex(java.lang.String) -> a
-    void setPosition(int) -> a
-    java.lang.String getHex() -> a
-    int getPosition() -> b
-ua.maker.gbible.utils.DataBase -> ua.maker.gbible.e.b:
+ua.maker.gbible.utils.DataBase -> ua.maker.gbible.e.a:
     java.lang.String[] TABLE_NAMES -> a
     android.database.sqlite.SQLiteDatabase db -> b
     android.content.Context mContext -> c
@@ -11006,7 +11011,7 @@ ua.maker.gbible.utils.DataBase -> ua.maker.gbible.e.b:
     void setDefaultStatusItemRead(int) -> a
     java.util.List getListReadForEveryDay() -> e
     java.util.List parseValueChapterBookIdString(java.lang.String,java.lang.String,java.lang.String) -> a
-ua.maker.gbible.utils.Tools -> ua.maker.gbible.e.c:
+ua.maker.gbible.utils.Tools -> ua.maker.gbible.e.b:
     android.widget.Toast toast -> a
     java.lang.String lastToastText -> b
     java.lang.String getBookNameByBookId(int,android.content.Context) -> a
@@ -11014,7 +11019,7 @@ ua.maker.gbible.utils.Tools -> ua.maker.gbible.e.c:
     java.lang.String getTranslateWitchPreferences(android.content.Context) -> a
     java.lang.String getTranslateWitchPreferences(java.lang.String,android.content.Context) -> a
     void hideKeyBoard(android.app.Activity) -> a
-ua.maker.gbible.utils.UserDB -> ua.maker.gbible.e.d:
+ua.maker.gbible.utils.UserDB -> ua.maker.gbible.e.c:
     android.content.Context context -> a
     android.database.sqlite.SQLiteDatabase db -> b
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
@@ -11036,7 +11041,12 @@ ua.maker.gbible.utils.UserDB -> ua.maker.gbible.e.d:
     void clearHistory() -> d
     int insertMarker(int,int,int,java.lang.String) -> a
     ua.maker.gbible.utils.UserDB updateMarker(int,int,int,java.lang.String,int) -> a
-    ua.maker.gbible.utils.ColorStruct getPoemMarkerColor(int,int,int) -> a
+    ua.maker.gbible.structs.ColorStruct getPoemMarkerColor(int,int,int) -> a
+    void insertColorStruct(ua.maker.gbible.structs.ColorStruct) -> a
+    void inserCS(ua.maker.gbible.structs.ColorStruct) -> b
+    void deleteColorItemHistory(ua.maker.gbible.structs.ColorStruct) -> c
+    boolean isUniqColorHEX(ua.maker.gbible.structs.ColorStruct) -> d
+    java.util.List getListHistoryColorsSelect() -> e
 ua.maker.gbible.widget.setting.AlphaPatternDrawable -> ua.maker.gbible.widget.setting.a:
     int mRectangleSize -> a
     android.graphics.Paint mPaint -> b
@@ -11108,7 +11118,55 @@ ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference$2 -> ua.maker.gbible.
 ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference$3 -> ua.maker.gbible.widget.setting.g:
     ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
-ua.maker.gbible.widget.setting.ColorPickerDialog -> ua.maker.gbible.widget.setting.h:
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog -> ua.maker.gbible.widget.setting.h:
+    ua.maker.gbible.widget.setting.ColorPickerView mColorPicker -> a
+    android.widget.LinearLayout llHistoryColor -> b
+    ua.maker.gbible.widget.setting.ColorPickerPanelView mOldColor -> c
+    ua.maker.gbible.widget.setting.ColorPickerPanelView mNewColor -> d
+    ua.maker.gbible.widget.setting.ColorPickerPanelView colorH1 -> e
+    ua.maker.gbible.widget.setting.ColorPickerPanelView colorH2 -> f
+    ua.maker.gbible.widget.setting.ColorPickerPanelView colorH3 -> g
+    ua.maker.gbible.widget.setting.ColorPickerPanelView colorH4 -> h
+    ua.maker.gbible.widget.setting.ColorPickerPanelView colorH5 -> i
+    java.util.List listColorHist -> j
+    ua.maker.gbible.utils.UserDB db -> k
+    android.widget.EditText mHexVal -> l
+    boolean mHexValueEnabled -> m
+    android.content.res.ColorStateList mHexDefaultTextColor -> n
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener mListener -> o
+    ua.maker.gbible.listeners.OnDefClickListener colorHistiryClickListener -> p
+    void init(int) -> b
+    void setUp(int) -> c
+    void sendColorToListenerWithHistory(int) -> d
+    void updateLastColorsPanel() -> c
+    void onColorChanged(int) -> a
+    void updateHexLengthFilter() -> d
+    void updateHexValue(int) -> e
+    void setAlphaSliderVisible(boolean) -> a
+    boolean getAlphaSliderVisible() -> a
+    void setOnColorChangedListener(ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener) -> a
+    int getColor() -> b
+    void onClick(android.view.View) -> onClick
+    android.os.Bundle onSaveInstanceState() -> onSaveInstanceState
+    void onRestoreInstanceState(android.os.Bundle) -> onRestoreInstanceState
+    ua.maker.gbible.widget.setting.ColorPickerPanelView access$0(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> a
+    void access$1(ua.maker.gbible.widget.setting.ColorPickerCustomDialog,int) -> a
+    ua.maker.gbible.widget.setting.ColorPickerPanelView access$2(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> b
+    ua.maker.gbible.widget.setting.ColorPickerPanelView access$3(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> c
+    ua.maker.gbible.widget.setting.ColorPickerPanelView access$4(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> d
+    ua.maker.gbible.widget.setting.ColorPickerPanelView access$5(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> e
+    android.widget.EditText access$6(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> f
+    ua.maker.gbible.widget.setting.ColorPickerView access$7(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> g
+    android.content.res.ColorStateList access$8(ua.maker.gbible.widget.setting.ColorPickerCustomDialog) -> h
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$1 -> ua.maker.gbible.widget.setting.i:
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog this$0 -> a
+    void onClick(android.view.View) -> onClick
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$2 -> ua.maker.gbible.widget.setting.j:
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog this$0 -> a
+    boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener -> ua.maker.gbible.widget.setting.k:
+    void onColorChanged(int,java.lang.String) -> a
+ua.maker.gbible.widget.setting.ColorPickerDialog -> ua.maker.gbible.widget.setting.l:
     ua.maker.gbible.widget.setting.ColorPickerView mColorPicker -> a
     ua.maker.gbible.widget.setting.ColorPickerPanelView mOldColor -> b
     ua.maker.gbible.widget.setting.ColorPickerPanelView mNewColor -> c
@@ -11132,10 +11190,10 @@ ua.maker.gbible.widget.setting.ColorPickerDialog -> ua.maker.gbible.widget.setti
     android.widget.EditText access$0(ua.maker.gbible.widget.setting.ColorPickerDialog) -> a
     ua.maker.gbible.widget.setting.ColorPickerView access$1(ua.maker.gbible.widget.setting.ColorPickerDialog) -> b
     android.content.res.ColorStateList access$2(ua.maker.gbible.widget.setting.ColorPickerDialog) -> c
-ua.maker.gbible.widget.setting.ColorPickerDialog$1 -> ua.maker.gbible.widget.setting.i:
+ua.maker.gbible.widget.setting.ColorPickerDialog$1 -> ua.maker.gbible.widget.setting.m:
     ua.maker.gbible.widget.setting.ColorPickerDialog this$0 -> a
     boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
-ua.maker.gbible.widget.setting.ColorPickerDialog$OnColorChangedListener -> ua.maker.gbible.widget.setting.j:
+ua.maker.gbible.widget.setting.ColorPickerDialog$OnColorChangedListener -> ua.maker.gbible.widget.setting.n:
     void onColorChanged(int,java.lang.String) -> a
 ua.maker.gbible.widget.setting.ColorPickerPanelView -> ua.maker.gbible.widget.setting.ColorPickerPanelView:
     float mDensity -> a
@@ -11181,7 +11239,7 @@ ua.maker.gbible.widget.setting.ColorPickerPreference$SavedState -> ua.maker.gbib
     android.os.Bundle dialogBundle -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-ua.maker.gbible.widget.setting.ColorPickerPreference$SavedState$1 -> ua.maker.gbible.widget.setting.k:
+ua.maker.gbible.widget.setting.ColorPickerPreference$SavedState$1 -> ua.maker.gbible.widget.setting.o:
     ua.maker.gbible.widget.setting.ColorPickerPreference$SavedState createFromParcel(android.os.Parcel) -> a
     ua.maker.gbible.widget.setting.ColorPickerPreference$SavedState[] newArray(int) -> a
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
@@ -11261,7 +11319,7 @@ ua.maker.gbible.widget.setting.ColorPickerView -> ua.maker.gbible.widget.setting
     void setAlphaSliderText(int) -> setAlphaSliderText
     void setAlphaSliderText(java.lang.String) -> setAlphaSliderText
     java.lang.String getAlphaSliderText() -> getAlphaSliderText
-ua.maker.gbible.widget.setting.ColorPickerView$OnColorChangedListener -> ua.maker.gbible.widget.setting.l:
+ua.maker.gbible.widget.setting.ColorPickerView$OnColorChangedListener -> ua.maker.gbible.widget.setting.p:
     void onColorChanged(int) -> a
 ua.maker.gbible.widget.setting.DonatePreferences -> ua.maker.gbible.widget.setting.DonatePreferences:
     void init() -> a

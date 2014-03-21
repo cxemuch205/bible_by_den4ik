@@ -308,6 +308,7 @@
     		<string name="dialogtitle_size_text_pem">Оберіть розмір (від 8 до 50):</string>
     		
     		<string name="press_color_to_apply">Натисніть для вібору</string>
+    		<string name="select_last_color">Оберіть з попередніх</string>
     	<string name="pref_pos_down_panel">position_control_panel</string>
     		<string name="title_pos_down_panel">Положення ПУ</string>
     		<string name="summary_pos_down_panel">Встановлення положення панели управління у горизонтальному положенні пристрою.</string>

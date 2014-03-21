@@ -318,6 +318,7 @@
     <string name="summary_size_text_poem">Устанавливает размер текста на странице со стихами.</string>
     <string name="dialogtitle_size_text_pem">Введите размер шрифта (от 10 до 32):</string>
     <string name="press_color_to_apply">Нажмите для выбора</string>
+    <string name="select_last_color">Выберите из предыдущих</string>
     <string name="pref_pos_down_panel">position_control_panel</string>
     <string name="title_pos_down_panel">Положение ПУ</string>
     <string name="summary_pos_down_panel">Установка положения панели управления в горизонтальной ориентации устройства.</string>

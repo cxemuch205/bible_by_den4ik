@@ -90,8 +90,22 @@
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:59
 # view land\res/layout-land/dialog_color_picker.xml #generated:74
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:109
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:116
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:124
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:132
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:140
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:68
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:83
 # view res/layout/dialog_color_picker.xml #generated:65
 # view res/layout/dialog_color_picker.xml #generated:80
+# view res/layout/dialog_color_picker_custom.xml #generated:111
+# view res/layout/dialog_color_picker_custom.xml #generated:118
+# view res/layout/dialog_color_picker_custom.xml #generated:126
+# view res/layout/dialog_color_picker_custom.xml #generated:134
+# view res/layout/dialog_color_picker_custom.xml #generated:142
+# view res/layout/dialog_color_picker_custom.xml #generated:66
+# view res/layout/dialog_color_picker_custom.xml #generated:81
 -keep class ua.maker.gbible.widget.setting.ColorPickerPanelView { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:46
@@ -100,7 +114,9 @@
 -keep class ua.maker.gbible.widget.setting.ColorPickerPreference { <init>(...); }
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:23
+# view land\res/layout-land/dialog_color_picker_custom.xml #generated:24
 # view res/layout/dialog_color_picker.xml #generated:23
+# view res/layout/dialog_color_picker_custom.xml #generated:24
 -keep class ua.maker.gbible.widget.setting.ColorPickerView { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:3

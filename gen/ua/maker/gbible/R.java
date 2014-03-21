@@ -1026,25 +1026,25 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050013;
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
-        public static final int action_add_to_bookmarks=0x7f0500ac;
-        public static final int action_bookmarks=0x7f0500a9;
-        public static final int action_cancel_drag_and_drop=0x7f0500b5;
-        public static final int action_clear_history=0x7f0500b0;
-        public static final int action_compare=0x7f0500af;
-        public static final int action_copy_to_clipboard=0x7f0500ad;
-        public static final int action_exit=0x7f0500b2;
-        public static final int action_history=0x7f0500aa;
-        public static final int action_read_for_every_day=0x7f0500b3;
-        public static final int action_search=0x7f0500a8;
-        public static final int action_select=0x7f0500a7;
-        public static final int action_setting=0x7f0500ab;
-        public static final int action_setting_app=0x7f0500b1;
-        public static final int action_share=0x7f0500ae;
+        public static final int action_add_to_bookmarks=0x7f0500b2;
+        public static final int action_bookmarks=0x7f0500af;
+        public static final int action_cancel_drag_and_drop=0x7f0500bb;
+        public static final int action_clear_history=0x7f0500b6;
+        public static final int action_compare=0x7f0500b5;
+        public static final int action_copy_to_clipboard=0x7f0500b3;
+        public static final int action_exit=0x7f0500b8;
+        public static final int action_history=0x7f0500b0;
+        public static final int action_read_for_every_day=0x7f0500b9;
+        public static final int action_search=0x7f0500ae;
+        public static final int action_select=0x7f0500ad;
+        public static final int action_setting=0x7f0500b1;
+        public static final int action_setting_app=0x7f0500b7;
+        public static final int action_share=0x7f0500b4;
         public static final int btn_book=0x7f050052;
         public static final int btn_chapter=0x7f050053;
-        public static final int btn_copy_info_donate=0x7f050083;
+        public static final int btn_copy_info_donate=0x7f050089;
         public static final int btn_create_plan=0x7f050059;
-        public static final int btn_pay_pal_donating=0x7f050082;
+        public static final int btn_pay_pal_donating=0x7f050088;
         public static final int btn_poem=0x7f050054;
         public static final int btn_start_search=0x7f05005c;
         public static final int cb_quote=0x7f05006d;
@@ -1054,7 +1054,7 @@ containing a value of this type.
         public static final int edit_query=0x7f050026;
         public static final int et_comment_on_bookmark=0x7f050074;
         public static final int et_description_add_plan=0x7f05006f;
-        public static final int et_enter_price=0x7f050081;
+        public static final int et_enter_price=0x7f050087;
         public static final int et_link_poem_next=0x7f050072;
         public static final int et_name_add_plan=0x7f05006e;
         public static final int et_search_text=0x7f05005b;
@@ -1063,26 +1063,32 @@ containing a value of this type.
         public static final int gv_show_chapters=0x7f050055;
         public static final int hex_val=0x7f050077;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f050085;
-        public static final int item_add_poin_plan=0x7f0500b4;
-        public static final int iv_action=0x7f05008c;
+        public static final int imageView1=0x7f05008b;
+        public static final int item_add_poin_plan=0x7f0500ba;
+        public static final int iv_action=0x7f050092;
         public static final int iv_bookmarks=0x7f05003e;
         public static final int iv_history=0x7f050040;
-        public static final int iv_img=0x7f050099;
-        public static final int iv_qr_share=0x7f050084;
+        public static final int iv_img=0x7f05009f;
+        public static final int iv_qr_share=0x7f05008a;
         public static final int iv_search=0x7f05003c;
         public static final int iv_select=0x7f05003a;
         public static final int iv_setting=0x7f050042;
+        public static final int last_color_1=0x7f05007b;
+        public static final int last_color_2=0x7f05007c;
+        public static final int last_color_3=0x7f05007d;
+        public static final int last_color_4=0x7f05007e;
+        public static final int last_color_5=0x7f05007f;
         public static final int listMode=0x7f050002;
         public static final int ll_add_link_item=0x7f050068;
         public static final int ll_add_text_item=0x7f050065;
         public static final int ll_block_navi=0x7f050038;
         public static final int ll_bookmarks=0x7f05003d;
         public static final int ll_bookmarks_right=0x7f05004c;
+        public static final int ll_color_history=0x7f05007a;
         public static final int ll_history=0x7f05003f;
         public static final int ll_history_paige=0x7f05004f;
         public static final int ll_history_right=0x7f05004d;
-        public static final int ll_img_text=0x7f050098;
+        public static final int ll_img_text=0x7f05009e;
         public static final int ll_left_control_panel=0x7f050043;
         public static final int ll_right_control_panel=0x7f050049;
         public static final int ll_search=0x7f05003b;
@@ -1092,9 +1098,9 @@ containing a value of this type.
         public static final int ll_setting=0x7f050041;
         public static final int ll_setting_right=0x7f05004e;
         public static final int lv_compare_poems=0x7f050036;
-        public static final int lv_links_poems=0x7f0500a4;
+        public static final int lv_links_poems=0x7f0500aa;
         public static final int lv_list_bookmarks=0x7f050032;
-        public static final int lv_list_links_read=0x7f05007a;
+        public static final int lv_list_links_read=0x7f050080;
         public static final int lv_list_plans=0x7f05005a;
         public static final int lv_plan_items=0x7f050058;
         public static final int lv_search_result=0x7f050060;
@@ -1108,8 +1114,8 @@ containing a value of this type.
         public static final int rb_link=0x7f050063;
         public static final int rb_text=0x7f050062;
         public static final int scrollView1=0x7f050064;
-        public static final int seekBar_set_speed_scroll_list_poem=0x7f05007c;
-        public static final int seekBar_text_size=0x7f05007f;
+        public static final int seekBar_set_speed_scroll_list_poem=0x7f050082;
+        public static final int seekBar_text_size=0x7f050085;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
@@ -1120,49 +1126,49 @@ containing a value of this type.
         public static final int spinner_poem=0x7f05006b;
         public static final int spinner_to_poem=0x7f05006c;
         public static final int tabMode=0x7f050003;
-        public static final int tb_status=0x7f05009f;
+        public static final int tb_status=0x7f0500a5;
         public static final int textView1=0x7f05005e;
         public static final int textView2=0x7f050073;
-        public static final int textView_selected_poem_to_copy=0x7f050080;
+        public static final int textView_selected_poem_to_copy=0x7f050086;
         public static final int text_hex_wrapper=0x7f050076;
-        public static final int tv_action=0x7f05008d;
-        public static final int tv_comment_bookmark_fragment=0x7f050088;
-        public static final int tv_compare_content_poem=0x7f05008b;
-        public static final int tv_content_poem_search=0x7f050093;
-        public static final int tv_current_value_speed_scroll=0x7f05007b;
-        public static final int tv_date_created=0x7f050090;
-        public static final int tv_day=0x7f05009e;
-        public static final int tv_for_img=0x7f05009a;
+        public static final int tv_action=0x7f050093;
+        public static final int tv_comment_bookmark_fragment=0x7f05008e;
+        public static final int tv_compare_content_poem=0x7f050091;
+        public static final int tv_content_poem_search=0x7f050099;
+        public static final int tv_current_value_speed_scroll=0x7f050081;
+        public static final int tv_date_created=0x7f050096;
+        public static final int tv_day=0x7f0500a4;
+        public static final int tv_for_img=0x7f0500a0;
         public static final int tv_info_bookmarks=0x7f050033;
         public static final int tv_info_empty_history=0x7f050050;
-        public static final int tv_link=0x7f050086;
+        public static final int tv_link=0x7f05008c;
         public static final int tv_link_dialog_bookmark=0x7f050071;
-        public static final int tv_link_h=0x7f05008f;
-        public static final int tv_link_poem_search=0x7f050092;
-        public static final int tv_list_new_testament=0x7f0500a1;
-        public static final int tv_list_old_testament=0x7f0500a0;
-        public static final int tv_medium_msg=0x7f050097;
-        public static final int tv_msg_alert=0x7f0500a5;
-        public static final int tv_msg_small=0x7f050096;
-        public static final int tv_number_chapter=0x7f050089;
-        public static final int tv_number_of_poem=0x7f050091;
-        public static final int tv_pl_date=0x7f05009d;
-        public static final int tv_pl_name=0x7f05009b;
-        public static final int tv_pl_sub_description=0x7f05009c;
-        public static final int tv_sample_size=0x7f05007e;
-        public static final int tv_sect_name=0x7f0500a3;
-        public static final int tv_section_name=0x7f0500a2;
+        public static final int tv_link_h=0x7f050095;
+        public static final int tv_link_poem_search=0x7f050098;
+        public static final int tv_list_new_testament=0x7f0500a7;
+        public static final int tv_list_old_testament=0x7f0500a6;
+        public static final int tv_medium_msg=0x7f05009d;
+        public static final int tv_msg_alert=0x7f0500ab;
+        public static final int tv_msg_small=0x7f05009c;
+        public static final int tv_number_chapter=0x7f05008f;
+        public static final int tv_number_of_poem=0x7f050097;
+        public static final int tv_pl_date=0x7f0500a3;
+        public static final int tv_pl_name=0x7f0500a1;
+        public static final int tv_pl_sub_description=0x7f0500a2;
+        public static final int tv_sample_size=0x7f050084;
+        public static final int tv_sect_name=0x7f0500a9;
+        public static final int tv_section_name=0x7f0500a8;
         public static final int tv_show_data_time=0x7f050070;
         public static final int tv_show_link=0x7f050034;
-        public static final int tv_smal_content=0x7f050087;
-        public static final int tv_text_size_dialog=0x7f05007d;
-        public static final int tv_title_bold_text=0x7f050095;
-        public static final int tv_title_text=0x7f050094;
-        public static final int tv_translate=0x7f05008e;
-        public static final int tv_translate_label=0x7f05008a;
+        public static final int tv_smal_content=0x7f05008d;
+        public static final int tv_text_size_dialog=0x7f050083;
+        public static final int tv_title_bold_text=0x7f05009b;
+        public static final int tv_title_text=0x7f05009a;
+        public static final int tv_translate=0x7f050094;
+        public static final int tv_translate_label=0x7f050090;
         public static final int useLogo=0x7f050004;
         public static final int view1=0x7f050035;
-        public static final int webviewActionView=0x7f0500a6;
+        public static final int webviewActionView=0x7f0500ac;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {
@@ -1208,29 +1214,30 @@ containing a value of this type.
         public static final int dialog_add_plan_settings=0x7f030021;
         public static final int dialog_add_to_bookmark=0x7f030022;
         public static final int dialog_color_picker=0x7f030023;
-        public static final int dialog_item_read_layout=0x7f030024;
-        public static final int dialog_pref_speed_scroll=0x7f030025;
-        public static final int dialog_pref_text_size=0x7f030026;
-        public static final int dialog_select_poem=0x7f030027;
-        public static final int donate_layout=0x7f030028;
-        public static final int empty_fragment=0x7f030029;
-        public static final int item_bookmarks=0x7f03002a;
-        public static final int item_chapter_layout=0x7f03002b;
-        public static final int item_compare_poem=0x7f03002c;
-        public static final int item_dialog_list=0x7f03002d;
-        public static final int item_list_history=0x7f03002e;
-        public static final int item_list_poems=0x7f03002f;
-        public static final int item_list_poems_search=0x7f030030;
-        public static final int item_plan_item_text=0x7f030031;
-        public static final int item_plans_list=0x7f030032;
-        public static final int item_read_day_layout=0x7f030033;
-        public static final int item_section_layout=0x7f030034;
-        public static final int preference_fragment=0x7f030035;
-        public static final int read_for_every_day_layout=0x7f030036;
-        public static final int sherlock_spinner_dropdown_item=0x7f030037;
-        public static final int sherlock_spinner_item=0x7f030038;
-        public static final int show_info_layout=0x7f030039;
-        public static final int splash_screen_layout=0x7f03003a;
+        public static final int dialog_color_picker_custom=0x7f030024;
+        public static final int dialog_item_read_layout=0x7f030025;
+        public static final int dialog_pref_speed_scroll=0x7f030026;
+        public static final int dialog_pref_text_size=0x7f030027;
+        public static final int dialog_select_poem=0x7f030028;
+        public static final int donate_layout=0x7f030029;
+        public static final int empty_fragment=0x7f03002a;
+        public static final int item_bookmarks=0x7f03002b;
+        public static final int item_chapter_layout=0x7f03002c;
+        public static final int item_compare_poem=0x7f03002d;
+        public static final int item_dialog_list=0x7f03002e;
+        public static final int item_list_history=0x7f03002f;
+        public static final int item_list_poems=0x7f030030;
+        public static final int item_list_poems_search=0x7f030031;
+        public static final int item_plan_item_text=0x7f030032;
+        public static final int item_plans_list=0x7f030033;
+        public static final int item_read_day_layout=0x7f030034;
+        public static final int item_section_layout=0x7f030035;
+        public static final int preference_fragment=0x7f030036;
+        public static final int read_for_every_day_layout=0x7f030037;
+        public static final int sherlock_spinner_dropdown_item=0x7f030038;
+        public static final int sherlock_spinner_item=0x7f030039;
+        public static final int show_info_layout=0x7f03003a;
+        public static final int splash_screen_layout=0x7f03003b;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1298,8 +1305,8 @@ containing a value of this type.
         public static final int action_search=0x7f0a0010;
         public static final int action_select=0x7f0a000f;
         public static final int action_setting=0x7f0a0013;
-        public static final int action_title_clear_history=0x7f0a00ac;
-        public static final int add_to_plan_this_link=0x7f0a00b6;
+        public static final int action_title_clear_history=0x7f0a00ad;
+        public static final int add_to_plan_this_link=0x7f0a00b7;
         public static final int aggey_str=0x7f0a0055;
         public static final int amos_str=0x7f0a004e;
         public static final int app_name=0x7f0a000e;
@@ -1307,7 +1314,7 @@ containing a value of this type.
         public static final int avvakum_str=0x7f0a0053;
         public static final int bitie_str=0x7f0a0024;
         public static final int bitie_str_small=0x7f0a0025;
-        public static final int bold_text=0x7f0a00dc;
+        public static final int bold_text=0x7f0a00dd;
         public static final int btn_empty_str=0x7f0a007a;
         public static final int btn_empty_str_small=0x7f0a007b;
         /**  ##################### 
@@ -1315,43 +1322,43 @@ containing a value of this type.
  ##################### 
  Donate activity 
          */
-        public static final int card_info_title=0x7f0a00e1;
+        public static final int card_info_title=0x7f0a00e2;
         public static final int category_base=0x7f0a0081;
         public static final int category_design=0x7f0a0092;
-        public static final int click_on_point_paste=0x7f0a00e0;
+        public static final int click_on_point_paste=0x7f0a00e1;
         public static final int closes_app=0x7f0a0015;
-        public static final int comments_str=0x7f0a00bb;
+        public static final int comments_str=0x7f0a00bc;
         public static final int compare_str=0x7f0a0076;
-        public static final int context_delete=0x7f0a00d5;
-        public static final int context_drag_and_drop=0x7f0a00df;
-        public static final int context_edit=0x7f0a00d4;
-        public static final int copy_to_clip_board_str=0x7f0a00e2;
-        public static final int copyed_poem=0x7f0a00c4;
-        public static final int create_plan_btn=0x7f0a00d3;
-        public static final int create_plane=0x7f0a00ce;
+        public static final int context_delete=0x7f0a00d6;
+        public static final int context_drag_and_drop=0x7f0a00e0;
+        public static final int context_edit=0x7f0a00d5;
+        public static final int copy_to_clip_board_str=0x7f0a00e3;
+        public static final int copyed_poem=0x7f0a00c5;
+        public static final int create_plan_btn=0x7f0a00d4;
+        public static final int create_plane=0x7f0a00cf;
         public static final int daniil_str=0x7f0a004b;
-        public static final int data_time=0x7f0a00d2;
-        public static final int deleted_bookmark=0x7f0a00b7;
+        public static final int data_time=0x7f0a00d3;
+        public static final int deleted_bookmark=0x7f0a00b8;
         public static final int deyania_str=0x7f0a005c;
-        public static final int dialog_add_item_to_plan=0x7f0a00c1;
-        public static final int dialog_add_to_bookmarks=0x7f0a00bd;
-        public static final int dialog_added_to_bookmarks=0x7f0a00c3;
-        public static final int dialog_btn_copy_select_text=0x7f0a00c9;
+        public static final int dialog_add_item_to_plan=0x7f0a00c2;
+        public static final int dialog_add_to_bookmarks=0x7f0a00be;
+        public static final int dialog_added_to_bookmarks=0x7f0a00c4;
+        public static final int dialog_btn_copy_select_text=0x7f0a00ca;
         public static final int dialog_cancel=0x7f0a0019;
-        public static final int dialog_color_marker=0x7f0a00ca;
+        public static final int dialog_color_marker=0x7f0a00cb;
         /**  ##################### 
  Color Picker 
  ##################### 
  Color Picker 
          */
-        public static final int dialog_color_picker=0x7f0a00ef;
-        public static final int dialog_compare=0x7f0a00c0;
-        public static final int dialog_copy_to_clicpboard=0x7f0a00be;
-        public static final int dialog_dtn_copy_all=0x7f0a00c8;
-        public static final int dialog_edit=0x7f0a00d8;
-        public static final int dialog_enter_name_plan=0x7f0a00d0;
-        public static final int dialog_enter_sub_description=0x7f0a00d1;
-        public static final int dialog_message_clear_history=0x7f0a00b3;
+        public static final int dialog_color_picker=0x7f0a00f0;
+        public static final int dialog_compare=0x7f0a00c1;
+        public static final int dialog_copy_to_clicpboard=0x7f0a00bf;
+        public static final int dialog_dtn_copy_all=0x7f0a00c9;
+        public static final int dialog_edit=0x7f0a00d9;
+        public static final int dialog_enter_name_plan=0x7f0a00d1;
+        public static final int dialog_enter_sub_description=0x7f0a00d2;
+        public static final int dialog_message_clear_history=0x7f0a00b4;
         public static final int dialog_ok=0x7f0a0017;
         public static final int dialog_pref_message_speed_smooth_scroll=0x7f0a008f;
         public static final int dialog_pref_title_speed_smooth_scroll=0x7f0a008e;
@@ -1360,21 +1367,21 @@ containing a value of this type.
  Preference string 
          */
         public static final int dialog_select_size_text=0x7f0a007c;
-        public static final int dialog_share=0x7f0a00bf;
-        public static final int dialog_start_search=0x7f0a00a9;
-        public static final int dialog_title_add_item_plan=0x7f0a00d9;
-        public static final int dialog_title_add_to_bookmark=0x7f0a00ba;
-        public static final int dialog_title_clear_history=0x7f0a00b2;
-        public static final int dialog_title_create_plan=0x7f0a00cf;
-        public static final int dialog_title_pos_down_panel=0x7f0a009b;
-        public static final int dialog_title_search=0x7f0a00aa;
-        public static final int dialog_title_select_text=0x7f0a00c7;
+        public static final int dialog_share=0x7f0a00c0;
+        public static final int dialog_start_search=0x7f0a00aa;
+        public static final int dialog_title_add_item_plan=0x7f0a00da;
+        public static final int dialog_title_add_to_bookmark=0x7f0a00bb;
+        public static final int dialog_title_clear_history=0x7f0a00b3;
+        public static final int dialog_title_create_plan=0x7f0a00d0;
+        public static final int dialog_title_pos_down_panel=0x7f0a009c;
+        public static final int dialog_title_search=0x7f0a00ab;
+        public static final int dialog_title_select_text=0x7f0a00c8;
         public static final int dialog_yes=0x7f0a0016;
         public static final int dialogtitle_def_trans=0x7f0a0085;
         public static final int dialogtitle_mode_read=0x7f0a0089;
-        public static final int dialogtitle_set_color_poem_list=0x7f0a009e;
+        public static final int dialogtitle_set_color_poem_list=0x7f0a009f;
         public static final int dialogtitle_size_text_pem=0x7f0a0096;
-        public static final int donate_info=0x7f0a00e3;
+        public static final int donate_info=0x7f0a00e4;
         public static final int donate_summary=0x7f0a0080;
         public static final int donate_title=0x7f0a007f;
         public static final int ecclesiast_str=0x7f0a0045;
@@ -1383,8 +1390,8 @@ containing a value of this type.
  ERROR 
          */
         public static final int empty_et=0x7f0a001e;
-        public static final int enter_count=0x7f0a00e7;
-        public static final int error_text_msg=0x7f0a00de;
+        public static final int enter_count=0x7f0a00e8;
+        public static final int error_text_msg=0x7f0a00df;
         public static final int esfir_str=0x7f0a0041;
         public static final int evreyam_str=0x7f0a0071;
         public static final int exit_question=0x7f0a0014;
@@ -1398,7 +1405,7 @@ containing a value of this type.
          */
         public static final int ga_trackingId=0x7f0a000d;
         public static final int galatam_str=0x7f0a0067;
-        public static final int hint_link_add=0x7f0a00bc;
+        public static final int hint_link_add=0x7f0a00bd;
         public static final int iakova_str=0x7f0a005d;
         public static final int ieremia_str=0x7f0a0048;
         public static final int iezekiil_str=0x7f0a004a;
@@ -1408,10 +1415,10 @@ containing a value of this type.
         public static final int ioil_str=0x7f0a004d;
         public static final int iona_str=0x7f0a0050;
         public static final int iov_str=0x7f0a0042;
-        public static final int is_en_translate=0x7f0a00b1;
-        public static final int is_mt_translate=0x7f0a00af;
-        public static final int is_rst_translate=0x7f0a00ae;
-        public static final int is_ua_translate=0x7f0a00b0;
+        public static final int is_en_translate=0x7f0a00b2;
+        public static final int is_mt_translate=0x7f0a00b0;
+        public static final int is_rst_translate=0x7f0a00af;
+        public static final int is_ua_translate=0x7f0a00b1;
         public static final int isaia_str=0x7f0a0047;
         public static final int ishod_str=0x7f0a0026;
         public static final int ishod_str_small=0x7f0a0027;
@@ -1420,15 +1427,15 @@ containing a value of this type.
  ##################### 
  List poems 
          */
-        public static final int it_is_chapter_last=0x7f0a00b8;
+        public static final int it_is_chapter_last=0x7f0a00b9;
         public static final int iudy_str=0x7f0a0063;
         public static final int kolosyanam_str=0x7f0a006a;
         public static final int levit_str=0x7f0a0028;
         public static final int levit_str_small=0x7f0a0029;
-        public static final int link_status_no_readed=0x7f0a00ea;
-        public static final int link_status_readed=0x7f0a00e9;
-        public static final int link_str=0x7f0a00db;
-        public static final int list_history_empty=0x7f0a00ad;
+        public static final int link_status_no_readed=0x7f0a00eb;
+        public static final int link_status_readed=0x7f0a00ea;
+        public static final int link_str=0x7f0a00dc;
+        public static final int list_history_empty=0x7f0a00ae;
         public static final int luka_str=0x7f0a005a;
         public static final int malahia_str=0x7f0a0057;
         public static final int mark_str=0x7f0a0059;
@@ -1438,19 +1445,19 @@ containing a value of this type.
  ##################### 
  Plan Detail fragment 
          */
-        public static final int menu_title_add_point=0x7f0a00d7;
+        public static final int menu_title_add_point=0x7f0a00d8;
         public static final int michey_str=0x7f0a0051;
-        public static final int msg_dialog_set_def_val_status_read=0x7f0a00ee;
+        public static final int msg_dialog_set_def_val_status_read=0x7f0a00ef;
         public static final int naum_str=0x7f0a0052;
         public static final int neemia_str=0x7f0a0040;
         public static final int new_testament=0x7f0a0023;
         public static final int next_chapter_symbol=0x7f0a0078;
-        public static final int no_founded_bookmarks=0x7f0a00b5;
+        public static final int no_founded_bookmarks=0x7f0a00b6;
         /**  Tools 
  Tools 
          */
-        public static final int no_select_book=0x7f0a00a6;
-        public static final int no_select_chapter=0x7f0a00a7;
+        public static final int no_select_book=0x7f0a00a7;
+        public static final int no_select_chapter=0x7f0a00a8;
         public static final int number_str=0x7f0a002a;
         public static final int number_str_small=0x7f0a002b;
         /**  Books 
@@ -1470,15 +1477,15 @@ containing a value of this type.
         public static final int otkrovenie_str=0x7f0a0072;
         public static final int pesni_pesney_str=0x7f0a0046;
         public static final int plach_ieremii_str=0x7f0a0049;
-        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c6;
-        public static final int popup_title_hint=0x7f0a00c5;
-        public static final int pref_backg_control_panel=0x7f0a00a3;
-        public static final int pref_background_poem=0x7f0a009c;
-        public static final int pref_color_text=0x7f0a00a0;
+        public static final int popup_msg_swipe_listen_chapter=0x7f0a00c7;
+        public static final int popup_title_hint=0x7f0a00c6;
+        public static final int pref_backg_control_panel=0x7f0a00a4;
+        public static final int pref_background_poem=0x7f0a009d;
+        public static final int pref_color_text=0x7f0a00a1;
         public static final int pref_default_translaters=0x7f0a0082;
         public static final int pref_message_select_use_btn_lov=0x7f0a007e;
         public static final int pref_mode_read=0x7f0a0086;
-        public static final int pref_pos_down_panel=0x7f0a0098;
+        public static final int pref_pos_down_panel=0x7f0a0099;
         public static final int pref_size_text_poem=0x7f0a0093;
         public static final int pref_smooth_duration=0x7f0a008d;
         public static final int pref_use_vol_up_down_btn=0x7f0a008a;
@@ -1489,8 +1496,8 @@ containing a value of this type.
         public static final int progress_dialog_message=0x7f0a001b;
         public static final int progress_dialog_title=0x7f0a001a;
         public static final int psaltir_str=0x7f0a0043;
-        public static final int quote_poem=0x7f0a00dd;
-        public static final int replay_click_btn=0x7f0a00b9;
+        public static final int quote_poem=0x7f0a00de;
+        public static final int replay_click_btn=0x7f0a00ba;
         public static final int rimlan_str=0x7f0a0064;
         public static final int ruf_str=0x7f0a0032;
         public static final int rus_modern_translate_str=0x7f0a0020;
@@ -1500,28 +1507,29 @@ containing a value of this type.
  Translates 
          */
         public static final int rus_translate_str=0x7f0a001f;
-        public static final int save_image_title=0x7f0a00e4;
-        public static final int saved_into_galary=0x7f0a00e5;
-        public static final int saved_str=0x7f0a00e6;
+        public static final int save_image_title=0x7f0a00e5;
+        public static final int saved_into_galary=0x7f0a00e6;
+        public static final int saved_str=0x7f0a00e7;
         /**  Search fragment 
  Search fragment 
          */
-        public static final int search_str=0x7f0a00a8;
-        public static final int set_def_value_status_read=0x7f0a00ec;
+        public static final int search_str=0x7f0a00a9;
+        public static final int select_last_color=0x7f0a0098;
+        public static final int set_def_value_status_read=0x7f0a00ed;
         public static final int sofonia_str=0x7f0a0054;
         public static final int str_sample_size_text=0x7f0a007d;
         public static final int sudii_str=0x7f0a0030;
         public static final int sudii_str_small=0x7f0a0031;
-        public static final int summary_background_on_poem_fragment=0x7f0a009f;
-        public static final int summary_control_panel_pref=0x7f0a00a5;
+        public static final int summary_background_on_poem_fragment=0x7f0a00a0;
+        public static final int summary_control_panel_pref=0x7f0a00a6;
         public static final int summary_def_trans=0x7f0a0084;
         public static final int summary_mode_read=0x7f0a0088;
-        public static final int summary_pos_down_panel=0x7f0a009a;
-        public static final int summary_select_text_color=0x7f0a00a2;
+        public static final int summary_pos_down_panel=0x7f0a009b;
+        public static final int summary_select_text_color=0x7f0a00a3;
         public static final int summary_size_text_poem=0x7f0a0095;
         public static final int summary_smooth_scroll=0x7f0a0091;
         public static final int summary_use_vol_btn=0x7f0a008c;
-        public static final int text_str=0x7f0a00da;
+        public static final int text_str=0x7f0a00db;
         public static final int three_carstw_str=0x7f0a0037;
         public static final int three_carstw_str_small=0x7f0a0038;
         public static final int three_ioanna_str=0x7f0a0062;
@@ -1530,19 +1538,19 @@ containing a value of this type.
  ##################### 
  PlanList fragment 
          */
-        public static final int title_activit_plan=0x7f0a00cb;
+        public static final int title_activit_plan=0x7f0a00cc;
         /**  ##################### 
  Bookmarks 
  ##################### 
  Bookmarks 
          */
-        public static final int title_activity_bookmarks=0x7f0a00b4;
+        public static final int title_activity_bookmarks=0x7f0a00b5;
         /**  ##################### 
  History Fragment 
  ##################### 
  History Fragment 
          */
-        public static final int title_activity_history=0x7f0a00ab;
+        public static final int title_activity_history=0x7f0a00ac;
         public static final int title_activity_list_chapters=0x7f0a0073;
         public static final int title_activity_list_compare_poems=0x7f0a0075;
         /**  ##################### 
@@ -1550,25 +1558,25 @@ containing a value of this type.
  ##################### 
  Read for every day activity 
          */
-        public static final int title_activity_read_for_every_day=0x7f0a00e8;
-        public static final int title_background_on_poem_fragment=0x7f0a009d;
-        public static final int title_color_text_dialog=0x7f0a00a1;
-        public static final int title_control_panel_pref=0x7f0a00a4;
+        public static final int title_activity_read_for_every_day=0x7f0a00e9;
+        public static final int title_background_on_poem_fragment=0x7f0a009e;
+        public static final int title_color_text_dialog=0x7f0a00a2;
+        public static final int title_control_panel_pref=0x7f0a00a5;
         public static final int title_def_trans=0x7f0a0083;
-        public static final int title_dialog_plans=0x7f0a00cc;
-        public static final int title_dialog_set_def_val_status_read=0x7f0a00ed;
+        public static final int title_dialog_plans=0x7f0a00cd;
+        public static final int title_dialog_set_def_val_status_read=0x7f0a00ee;
         public static final int title_list_poem=0x7f0a0074;
         public static final int title_mode_read=0x7f0a0087;
-        public static final int title_pos_down_panel=0x7f0a0099;
-        public static final int title_select_link=0x7f0a00eb;
+        public static final int title_pos_down_panel=0x7f0a009a;
+        public static final int title_select_link=0x7f0a00ec;
         public static final int title_size_text_poem=0x7f0a0094;
         public static final int title_smooth_scroll=0x7f0a0090;
         public static final int title_use_vol_btn=0x7f0a008b;
         public static final int titu_str=0x7f0a006f;
         public static final int tnx_for_donate=0x7f0a001d;
-        public static final int toast_added_to_plan=0x7f0a00c2;
-        public static final int toast_delete_plan_msg=0x7f0a00d6;
-        public static final int toast_msg_no_plans=0x7f0a00cd;
+        public static final int toast_added_to_plan=0x7f0a00c3;
+        public static final int toast_delete_plan_msg=0x7f0a00d7;
+        public static final int toast_msg_no_plans=0x7f0a00ce;
         public static final int two_carstw_str=0x7f0a0035;
         public static final int two_carstw_str_small=0x7f0a0036;
         public static final int two_fessalonikiycam_str=0x7f0a006c;

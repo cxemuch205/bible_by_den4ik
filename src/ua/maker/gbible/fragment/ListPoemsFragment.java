@@ -26,8 +26,8 @@ import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
-import ua.maker.gbible.widget.setting.ColorPickerDialog;
-import ua.maker.gbible.widget.setting.ColorPickerDialog.OnColorChangedListener;
+import ua.maker.gbible.widget.setting.ColorPickerCustomDialog;
+import ua.maker.gbible.widget.setting.ColorPickerCustomDialog.OnColorChangedListener;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -57,20 +57,20 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
-import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -141,7 +141,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	private AlertDialog dialogSelect = null;
 	private ProgressDialog pd = null;
 	private AlertDialog.Builder builder = null;
-	private ColorPickerDialog colorDialog;
+	private ColorPickerCustomDialog colorDialog;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -230,7 +230,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		timer = new Timer();		
 
 		adapterListPoem = new ItemListPoemAdapter(getSherlockActivity(), listPoems, dbUser);
-		colorDialog = new ColorPickerDialog(getSherlockActivity(), Color.GREEN);
+		colorDialog = new ColorPickerCustomDialog(getSherlockActivity(), Color.GREEN);
 		colorDialog.setOnColorChangedListener(colorChangeListener);
 		colorDialog.setAlphaSliderVisible(true);
 	}
