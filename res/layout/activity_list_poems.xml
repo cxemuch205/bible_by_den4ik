@@ -58,8 +58,8 @@
         android:id="@+id/lv_show_poems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="#11000000"
-        android:dividerHeight="0dp" >
+        android:divider="#00000000"
+        android:dividerHeight="1dp" >
 
     </ListView>
 

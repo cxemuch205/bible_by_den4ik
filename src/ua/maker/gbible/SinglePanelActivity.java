@@ -1,5 +1,6 @@
 package ua.maker.gbible;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import ua.maker.gbible.constant.App;
@@ -12,6 +13,7 @@ import ua.maker.gbible.fragment.SelectBookFragment;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -24,21 +26,15 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.WindowManager;
-import android.view.GestureDetector.OnDoubleTapListener;
-import android.view.MotionEvent;
-import android.view.GestureDetector.OnGestureListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
-public abstract class SinglePanelActivity extends BaseActivity {
+public abstract class SinglePanelActivity extends SherlockFragmentActivity {
 	
 	private static final String TAG = "SinglaPaneActivity";
 	
 	private Fragment fragment = null;
-	private GestureDetector gestureDetector = null;
 	
 	private LinearLayout btnSelect = null;
 	private LinearLayout btnSearch = null;
@@ -58,11 +54,13 @@ public abstract class SinglePanelActivity extends BaseActivity {
 	
 	private boolean dayNight = false;
 
+	@SuppressLint("InlinedApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_empty);
-    	getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
+    	Log.i(TAG, "onCreate()");
+    	getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
     	sp = getSharedPreferences(App.PREF_SEND_DATA, 0);
     	spDef = PreferenceManager.getDefaultSharedPreferences(SinglePanelActivity.this);
 		
@@ -72,15 +70,15 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		
 		if (savedInstanceState == null) {
     		fragment = onCreatePane();
-	    	    	
+    		
 	    	getSupportFragmentManager().
 	    		beginTransaction().
 	    	    add(R.id.flRoot, fragment, App.TAG_FRAGMENT_BOOKS).
 	    	    commit();
 	    }
-    	gestureDetector = new GestureDetector(SinglePanelActivity.this, gestureListener);
-    	gestureDetector.setOnDoubleTapListener(doubleTapListener);
-    	getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    	try {
+    		getWindow().addFlags(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+		} catch (Exception e) {}
     }
 	
     public void startFragment(Fragment fragment, String tag) {
@@ -92,73 +90,28 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		ft.commit();
 	}
     
-    private OnDoubleTapListener doubleTapListener = new OnDoubleTapListener() {
-		
-    	@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			Log.d(TAG, "onSingleTapConfirmed");
-			
-			return false;
-		}
-		
-		@Override
-		public boolean onDoubleTapEvent(MotionEvent e) {
-			Log.d(TAG, "onDoubleTapEvent");
-			return false;
-		}
-		
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			Log.d(TAG, "onDoubleTap");
-			if(getActionBar().isShowing()) 
-				getActionBar().hide();
-			else
-				getActionBar().show();
-			
-			return false;
-		}
-	};
+    @Override
+    protected void onPause() {
+    	super.onPause();
+    	Log.i(TAG, "onPause()");
+    }
     
-    private OnGestureListener gestureListener = new OnGestureListener() {
-		
-		@Override
-		public boolean onSingleTapUp(MotionEvent e) {
-			return false;
-		}
-		
-		@Override
-		public void onShowPress(MotionEvent e) {
-			
-		}
-		
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-				float distanceY) {
-			return false;
-		}
-		
-		@Override
-		public void onLongPress(MotionEvent e) {
-			
-		}
-		
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-				float velocityY) {
-			
-			return false;
-		}
-		
-		@Override
-		public boolean onDown(MotionEvent e) {
-			
-			return false;
-		}
-	};
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+    	super.onSaveInstanceState(outState);
+    	Log.i(TAG, "onSaveInstanceState()");
+    }
+    
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    	super.onRestoreInstanceState(savedInstanceState);
+    	Log.i(TAG, "onRestoreInstanceState()");
+    }
     
     @Override
     protected void onResume() {
     	super.onResume();
+    	Log.i(TAG, "onResume()");
     	
     	btnSelect = (LinearLayout)findViewById(R.id.ll_select_link);
     	btnSearch = (LinearLayout)findViewById(R.id.ll_search);
@@ -250,31 +203,21 @@ public abstract class SinglePanelActivity extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			Tools.hideKeyBoard(SinglePanelActivity.this);
-			StartSelectBook selectLinck = new StartSelectBook();
 			if(getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_POEMS) == null
 					|| 
 					getSupportFragmentManager()
-					.findFragmentByTag(App.TAG_FRAGMENT_POEMS).isVisible() == false)
-				selectLinck.execute();				
-		}
-	};
-	
-	class StartSelectBook extends AsyncTask<Void, Void, Void>{
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			
-			Editor editor = sp.edit();
-			editor.putBoolean(App.is_OPEN_SETTING, true);
-			editor.commit();
-			
-			getSupportFragmentManager().beginTransaction()
-			.replace(R.id.flRoot, (getSupportFragmentManager()
-					.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)?
-							getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS).commit();
-			return null;
+					.findFragmentByTag(App.TAG_FRAGMENT_POEMS).isVisible() == false){
+				Editor editor = sp.edit();
+				editor.putBoolean(App.is_OPEN_SETTING, true);
+				editor.commit();
+				
+				getSupportFragmentManager().beginTransaction()
+				.replace(R.id.flRoot, (getSupportFragmentManager()
+						.findFragmentByTag(App.TAG_FRAGMENT_BOOKS) != null)?
+								getSupportFragmentManager()
+								.findFragmentByTag(App.TAG_FRAGMENT_BOOKS):SelectBookFragment.getInstance(), App.TAG_FRAGMENT_BOOKS).commit();
+			}				
 		}
 	};
 	
@@ -287,7 +230,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 				.replace(R.id.flRoot, (getSupportFragmentManager()
 						.findFragmentByTag(App.TAG_FRAGMENT_SEARCH) != null)?
 								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_SEARCH):new SearchFragment(), App.TAG_FRAGMENT_SEARCH).commit();
+								.findFragmentByTag(App.TAG_FRAGMENT_SEARCH):SearchFragment.getInstance(), App.TAG_FRAGMENT_SEARCH).commit();
 		}
 	};
 	
@@ -300,7 +243,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 			.replace(R.id.flRoot, (getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_BOOKMARKS) != null)?
 							getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_BOOKMARKS):new BookmarksFragment(), App.TAG_FRAGMENT_BOOKMARKS).commit();
+							.findFragmentByTag(App.TAG_FRAGMENT_BOOKMARKS):BookmarksFragment.getInstance(), App.TAG_FRAGMENT_BOOKMARKS).commit();
 		}
 	};
 	
@@ -313,7 +256,7 @@ public abstract class SinglePanelActivity extends BaseActivity {
 			.replace(R.id.flRoot, (getSupportFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_HISTORY) != null)?
 							getSupportFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_HISTORY):new HistoryFragment(), App.TAG_FRAGMENT_HISTORY).commit();
+							.findFragmentByTag(App.TAG_FRAGMENT_HISTORY):HistoryFragment.getInstance(), App.TAG_FRAGMENT_HISTORY).commit();
 		}
 	};
 	
@@ -366,12 +309,14 @@ public abstract class SinglePanelActivity extends BaseActivity {
     @Override
     protected void onStart() {
     	super.onStart();
+    	Log.i(TAG, "onStart()");
     	EasyTracker.getInstance().activityStart(this);
     }
     
     @Override
     protected void onStop() {
     	super.onStop();
+    	Log.i(TAG, "onStop()");
     	EasyTracker.getInstance().activityStop(this);
     }
         

@@ -1,6 +1,8 @@
 package ua.maker.gbible.fragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ReadForEveryDayActivity;
@@ -9,14 +11,17 @@ import ua.maker.gbible.constant.App;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,38 +48,35 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	private View view = null;
 	private ListView lvShowBooks = null;
+	private List<String> listBooks;
 	private ArrayAdapter<String> adapter = null;
 	
 	private DataBase dataBase = null;
+	private LoadBooksTask loadBooksTask;
 	
 	private Button btnBook = null;
 	private Button btnChapter = null;
 	private Button btnPoem = null;
 	
 	private SharedPreferences sp = null, defPref = null;
+	private ProgressDialog pd;
 	
 	private int positionTop = 0;
 	private int positionClicked = 0;
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.activity_select_book, null);
-		lvShowBooks = (ListView)view.findViewById(R.id.lv_show_books);
-		
-		btnBook = (Button)view.findViewById(R.id.btn_book);
-		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
-		btnPoem = (Button)view.findViewById(R.id.btn_poem);
-		if(!getSherlockActivity().getActionBar().isShowing())
-			getSherlockActivity().getActionBar().show();
-		
-		Log.d(TAG, "Start activity create");
-		return view;
+	private static SelectBookFragment instance;
+	
+	public static SelectBookFragment getInstance(){
+		if(instance == null){
+			instance = new SelectBookFragment();
+		}
+		return instance;
 	}
 	
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		Log.i(TAG, "onAttach()");
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
@@ -85,22 +87,78 @@ public class SelectBookFragment extends SherlockFragment {
 		} catch (IOException e) {}
 		dataBase.openDataBase();
 		
-		btnBook.setOnClickListener(clickTestamentListener);
+		listBooks = new ArrayList<String>();
+		adapter = new ArrayAdapter<String>(getSherlockActivity(), 
+				android.R.layout.simple_list_item_1,
+				listBooks);
 		
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+		if(instance.getId() == 0){
+			instance = this;
+		}
+	}
+	
+	private class LoadBooksTask extends AsyncTask<Void, Void, List<String>>{
 
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			Log.i(TAG, "LoadBooksTask - onPreExecute()");
+			pd = ProgressDialog.show(getSherlockActivity(), 
+					getString(R.string.progress_dialog_title), 
+					getString(R.string.progress_dialog_message));
+		}
+		
+		@Override
+		protected List<String> doInBackground(Void... params) {
+			return dataBase.getBooks(DataBase.TABLE_NAME_RST);
+		}
+		
+		@Override
+		protected void onPostExecute(List<String> result) {
+			super.onPostExecute(result);
+			try {
+				if(pd.isShowing()) pd.dismiss();
+				listBooks.clear();
+				listBooks.addAll(result);
+				adapter.notifyDataSetChanged();
+			} catch (Exception e) {}
+		}
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		Log.i(TAG, "onCreateView()");
 		if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
-//			Fragment fragmetnPoem = getFragmentManager().findFragmentByTag(App.TAG_FRAGMENT_POEMS);
-//			getFragmentManager().beginTransaction().show(fragmetnPoem);
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();
-		}		
+		}
 		
+		view = inflater.inflate(R.layout.activity_select_book, null);
+		lvShowBooks = (ListView)view.findViewById(R.id.lv_show_books);
+		
+		btnBook = (Button)view.findViewById(R.id.btn_book);
+		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
+		btnPoem = (Button)view.findViewById(R.id.btn_poem);
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
+		
+		Log.d(TAG, "Start activity create");
+		return view;
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		Log.i(TAG, "onActivityCreated()");
+		
+		btnBook.setOnClickListener(clickTestamentListener);		
 		btnChapter.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -108,7 +166,7 @@ public class SelectBookFragment extends SherlockFragment {
 				if(sp.contains(App.BOOK_ID)){
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
-					ft.replace(R.id.flRoot, new ListChaptersFragment(), App.TAG_FRAGMENT_CHAPTERS);
+					ft.replace(R.id.flRoot, ListChaptersFragment.getInstance(), App.TAG_FRAGMENT_CHAPTERS);
 					ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 					ft.addToBackStack(null);
 					ft.commit();
@@ -125,7 +183,7 @@ public class SelectBookFragment extends SherlockFragment {
 				if(sp.contains(App.BOOK_ID) && sp.contains(App.CHAPTER)){
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
-					ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+					ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 					ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 					ft.addToBackStack(null);
 					ft.commit();
@@ -135,9 +193,6 @@ public class SelectBookFragment extends SherlockFragment {
 			}
 		});
 
-		adapter = new ArrayAdapter<String>(getSherlockActivity(), 
-				android.R.layout.simple_list_item_1,
-				dataBase.getBooks(DataBase.TABLE_NAME_RST));
 		lvShowBooks.setAdapter(adapter);
 		lvShowBooks.setOnItemClickListener(new OnItemClickListener() {
 
@@ -153,7 +208,7 @@ public class SelectBookFragment extends SherlockFragment {
 				editor.commit();
 				FragmentTransaction ft = getFragmentManager().
 						 beginTransaction();
-				ft.replace(R.id.flRoot, new ListChaptersFragment(), App.TAG_FRAGMENT_CHAPTERS);
+				ft.replace(R.id.flRoot, ListChaptersFragment.getInstance(), App.TAG_FRAGMENT_CHAPTERS);
 				ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 				ft.addToBackStack(null);
 				ft.commit();
@@ -169,6 +224,30 @@ public class SelectBookFragment extends SherlockFragment {
 		
 		if(isFirstStartBookSelect){
 			showDialogSelectTranslate();
+		} else {
+			int verCode = 1;
+			try {
+				verCode = getSherlockActivity().getPackageManager().getPackageInfo(getSherlockActivity().getPackageName(), 0).versionCode;
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+			if(verCode > sp.getInt(App.PREF_APP_UPDATE, 0)){
+				ListPoemsFragment.startActivityUpdates(getSherlockActivity(), sp, verCode);
+			}
+		}
+		updateList();
+	}
+	
+	private void updateList(){
+		if(listBooks.size() == 0){
+			if(loadBooksTask == null){
+				loadBooksTask = new LoadBooksTask();
+				loadBooksTask.execute();
+			} else {
+				loadBooksTask.cancel(false);
+				loadBooksTask = new LoadBooksTask();
+				loadBooksTask.execute();
+			}
 		}
 	}
 	
@@ -257,7 +336,7 @@ public class SelectBookFragment extends SherlockFragment {
 		if(isReadActivity){
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();

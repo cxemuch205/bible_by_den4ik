@@ -6,6 +6,8 @@ public class App {
 	public static final String PREF_APP = "application_preferences";
 	public static final String PREF_SEND_DATA = "pref_send_data";
 	public static final String PREF_DATA_BASE_VER = "data_base_current_version";
+	public static final String PREF_APP_UPDATE = "app_is_update";
+	public static final String is_SEARCH_REQUEST = "is_search_request";
 	public static final String BOOK_ID = "book_id";
 	public static final String CHAPTER = "chapter";
 	public static final String IS_ITEM_READ = "is_item_read";

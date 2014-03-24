@@ -57,13 +57,19 @@ public class DonateActivity extends SherlockActivity {
 		btnPayOnPayPal.setOnClickListener(clickPayPalDonateListener);
 		btnCopyToClipBoard.setOnClickListener(clickBtnCopyListener);
 		ivQr.setOnClickListener(clickIVShareListener);
-		
-		pp = PayPal.getInstance();
-		if(pp == null){
-			pp = PayPal.initWithAppID(DonateActivity.this, App.PAY_PAL_KEY_LIVE, PayPal.ENV_LIVE);
-			pp.setLanguage(Locale.ROOT.getLanguage());
-			pp.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
-			pp.setShippingEnabled(true);
+	}
+	
+	private void updatePayPal(){
+		if(Tools.checkConnection(DonateActivity.this)){
+			pp = PayPal.getInstance();
+			if(pp == null){
+				pp = PayPal.initWithAppID(DonateActivity.this, App.PAY_PAL_KEY_LIVE, PayPal.ENV_LIVE);
+				pp.setLanguage(Locale.ROOT.getLanguage());
+				pp.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
+				pp.setShippingEnabled(true);
+			}
+		} else {
+			Tools.showToast(DonateActivity.this, getString(R.string.no_connections));
 		}
 	}
 	
@@ -72,14 +78,19 @@ public class DonateActivity extends SherlockActivity {
 		@Override
 		public void onClick(View v) {
 			String count = etMoney.getText().toString();
+			updatePayPal();
 			if(count.length() > 0){
-				PayPalPayment payment = new PayPalPayment();
-				payment.setCurrencyType(Currency.getInstance(Locale.US));
-				payment.setRecipient(App.MY_EMAIL);
-				payment.setSubtotal(new BigDecimal(Double.parseDouble(count)));
-				payment.setPaymentType(PayPal.PAY_TYPE_SIMPLE);
-				startActivityForResult(PayPal.getInstance().checkout(payment, DonateActivity.this), 105);
-			}else{
+				if(Tools.checkConnection(DonateActivity.this)){
+					PayPalPayment payment = new PayPalPayment();
+					payment.setCurrencyType(Currency.getInstance(Locale.US));
+					payment.setRecipient(App.MY_EMAIL);
+					payment.setSubtotal(new BigDecimal(Double.parseDouble(count)));
+					payment.setPaymentType(PayPal.PAY_TYPE_SIMPLE);
+					startActivityForResult(PayPal.getInstance().checkout(payment, DonateActivity.this), 105);
+				} else {
+					Tools.showToast(DonateActivity.this, getString(R.string.no_connections));					
+				}
+			} else {
 				etMoney.setError(getString(R.string.enter_count));
 			}
 		}

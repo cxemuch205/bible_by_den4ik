@@ -1,8 +1,12 @@
 package ua.maker.gbible.utils;
 
+import ua.maker.gbible.R;
+import ua.maker.gbible.constant.BooksId;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
-import ua.maker.gbible.R;
-import ua.maker.gbible.constant.BooksId;
 
 public class Tools {
 	
@@ -313,5 +315,22 @@ public class Tools {
 	    		imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
 	    	}
 		}
+	}
+	
+	public static boolean checkConnection(Context ctx) {
+	    try {
+	        ConnectivityManager nInfo = (ConnectivityManager) ctx.getSystemService(
+	            Context.CONNECTIVITY_SERVICE);
+	        nInfo.getActiveNetworkInfo().isConnectedOrConnecting();
+	        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+	        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+	        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    } catch (Exception e) {
+	        return false;
+	    }
 	}
 }

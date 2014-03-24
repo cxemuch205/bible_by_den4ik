@@ -10,6 +10,7 @@ import ua.maker.gbible.adapter.ItemListSearchAdapter;
 import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.SearchStruct;
 import ua.maker.gbible.utils.DataBase;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,6 +67,29 @@ public class SearchFragment extends SherlockFragment {
 	
 	private SharedPreferences pref = null;
 	
+	private static SearchFragment instance;
+	
+	public static SearchFragment getInstance(){
+		if(instance == null){
+			instance = new SearchFragment();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+		db = new DataBase(getSherlockActivity());
+		try {
+			db.createDataBase();
+		} catch (IOException e) {e.printStackTrace();}
+		
+		db.openDataBase();
+		searchResult = new ArrayList<SearchStruct>();
+		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -77,9 +101,8 @@ public class SearchFragment extends SherlockFragment {
 		spinnerBookTo = (Spinner)view.findViewById(R.id.spinner_book_to);
 		lvResultSearch = (ListView)view.findViewById(R.id.lv_search_result);
 		
-		pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		if(!getSherlockActivity().getActionBar().isShowing())
-			getSherlockActivity().getActionBar().show();
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
 		
 		return view;
 	}
@@ -90,21 +113,14 @@ public class SearchFragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.search_str));
-		db = new DataBase(getSherlockActivity());
-		try {
-			db.createDataBase();
-		} catch (IOException e) {e.printStackTrace();}
 		
-		db.openDataBase();
-		searchResult = new ArrayList<SearchStruct>();
-		adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
 		updateListResult();
 		
 		if(pref.contains(App.SEARCH_REQUEST)){
 			requestDB = pref.getString(App.SEARCH_REQUEST, "");
 			etSearchText.setHint(requestDB);
 		}
-		
+		searchResult.clear();
 		searchResult.addAll(db.getSearchResult());
 		updateListResult();
 		
@@ -143,11 +159,12 @@ public class SearchFragment extends SherlockFragment {
 			editor.putInt(App.BOOK_ID, searchResult.get((int)id).getIdBook());
 			editor.putInt(App.CHAPTER, searchResult.get((int)id).getChapter());
 			editor.putInt(App.POEM_SET_FOCUS, searchResult.get((int)id).getPoem()-1);
+			editor.putBoolean(App.is_SEARCH_REQUEST, true);
 			editor.commit();
 			
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();
@@ -222,8 +239,6 @@ public class SearchFragment extends SherlockFragment {
 	private void startSearch(String request){
 		requestDB = "";
 		requestDB = request;
-		Log.d(TAG, "START - SEARCH");
-		searchResult.clear();
 		
 		searchTask = new SearchTast();
 		searchTask.execute();
@@ -245,7 +260,8 @@ public class SearchFragment extends SherlockFragment {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);			
+			Log.d(TAG, "IdBookStart: "+idBookStart+" | idBookEnd: "+idBookEnd);
+			searchResult.clear();
 			searchResult.addAll(db.searchInDataBase(requestDB, idBookStart, idBookEnd));
 			return null;
 		}

@@ -81,6 +81,9 @@ public class PlansListFragment extends SherlockFragment {
 		adapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
 		lvPlans.setAdapter(adapter);
 		
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
+		
 		return view;
 	}
 	

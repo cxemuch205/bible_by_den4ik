@@ -22,6 +22,7 @@
     
     <!-- ERROR -->
     <string name="empty_et">Поле для пошуку не заповнене!</string>
+    <string name="no_connections">Немає з\'єднання!</string>
     <!-- ############ -->
     
     <!-- Translates -->
@@ -448,5 +449,10 @@
     
     <!-- Color Picker -->
     <string name="dialog_color_picker">Вибір кольору</string>
-    		
+    
+    <!-- Instruction & Updates Info Activity -->
+    <string name="title_activity_instruction_update">Інструкції &amp; Оновлення</string>
+    <string name="title_section_updates">Оновлення</string>
+    <string name="title_section_instractions">Інструкції</string>
+    <string name="summary_instr_updt_activity">Опис останніх оновлень, а також опис деяких функцій та можливостей.</string>
 </resources>

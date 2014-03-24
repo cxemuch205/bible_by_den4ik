@@ -1,65 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <ua.maker.gbible.widget.setting.DonatePreferences 
-        android:title="@string/donate_title"
-        android:summary="@string/donate_summary"/>
-    <PreferenceCategory android:title="@string/category_base">
-        <ListPreference 
-            android:key="@string/pref_default_translaters"
-            android:title="@string/title_def_trans"
-            android:summary="@string/summary_def_trans"
+
+    <ua.maker.gbible.widget.setting.DonatePreferences
+        android:summary="@string/donate_summary"
+        android:title="@string/donate_title" />
+
+    <PreferenceCategory android:title="@string/category_base" >
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialogtitle_def_trans"
             android:entries="@array/trnaslaters_names"
             android:entryValues="@array/trnaslaters_names_id"
+            android:key="@string/pref_default_translaters"
+            android:summary="@string/summary_def_trans"
+            android:title="@string/title_def_trans" />
+        <ListPreference
             android:defaultValue="0"
-            android:dialogTitle="@string/dialogtitle_def_trans"/>
-        <ListPreference 
-            android:key="@string/pref_mode_read"
-            android:title="@string/title_mode_read"
-            android:summary="@string/summary_mode_read"
+            android:dialogTitle="@string/dialogtitle_mode_read"
             android:entries="@array/mode_read_array"
             android:entryValues="@array/mode_read_array_id"
-            android:defaultValue="0"
-            android:dialogTitle="@string/dialogtitle_mode_read"/>
+            android:key="@string/pref_mode_read"
+            android:summary="@string/summary_mode_read"
+            android:title="@string/title_mode_read" />
+
         <CheckBoxPreference
+            android:defaultValue="false"
             android:key="@string/pref_use_vol_up_down_btn"
-            android:title="@string/title_use_vol_btn"
             android:summary="@string/summary_use_vol_btn"
-            android:defaultValue="false"/>
-         <ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference
+            android:title="@string/title_use_vol_btn" />
+
+        <ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference
             android:key="@string/pref_smooth_duration"
-            android:title="@string/title_smooth_scroll"
-            android:summary="@string/summary_smooth_scroll"/>
+            android:summary="@string/summary_smooth_scroll"
+            android:title="@string/title_smooth_scroll" />
+
+        <ua.maker.gbible.widget.setting.InstructionUpdatesPreferences
+            android:summary="@string/summary_instr_updt_activity"
+            android:title="@string/title_activity_instruction_update" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/category_design">
+    <PreferenceCategory android:title="@string/category_design" >
         <ua.maker.gbible.widget.setting.ChangeSizeTextPreference
             android:key="@string/pref_size_text_poem"
-            android:title="@string/title_size_text_poem"
-            android:summary="@string/summary_size_text_poem"/>
+            android:summary="@string/summary_size_text_poem"
+            android:title="@string/title_size_text_poem" />
+
         <ListPreference
-            android:key="@string/pref_pos_down_panel"
-            android:title="@string/title_pos_down_panel"
-            android:summary="@string/summary_pos_down_panel"
+            android:defaultValue="0"
+            android:dialogTitle="@string/dialog_title_pos_down_panel"
             android:entries="@array/select_pos_panel"
             android:entryValues="@array/select_pos_panel_id"
-            android:defaultValue="0"
-            android:dialogTitle="@string/dialog_title_pos_down_panel"/>
+            android:key="@string/pref_pos_down_panel"
+            android:summary="@string/summary_pos_down_panel"
+            android:title="@string/title_pos_down_panel" />
+
         <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
             android:key="@string/pref_backg_control_panel"
             android:persistent="true"
-			android:title="@string/title_control_panel_pref" 
-			android:summary="@string/summary_control_panel_pref"
-			android:defaultValue="@integer/COLOR_WHITE"/>
+            android:summary="@string/summary_control_panel_pref"
+            android:title="@string/title_control_panel_pref" />
         <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_WHITE"
             android:key="@string/pref_background_poem"
             android:persistent="true"
-			android:title="@string/title_background_on_poem_fragment" 
-			android:summary="@string/summary_background_on_poem_fragment"
-			android:defaultValue="@integer/COLOR_WHITE"/>
+            android:summary="@string/summary_background_on_poem_fragment"
+            android:title="@string/title_background_on_poem_fragment" />
         <ua.maker.gbible.widget.setting.ColorPickerPreference
+            android:defaultValue="@integer/COLOR_BLACK"
             android:key="@string/pref_color_text"
             android:persistent="true"
-			android:title="@string/title_color_text_dialog" 
-			android:summary="@string/summary_select_text_color"
-			android:defaultValue="@integer/COLOR_BLACK"/>
+            android:summary="@string/summary_select_text_color"
+            android:title="@string/title_color_text_dialog" />
     </PreferenceCategory>
+
 </PreferenceScreen>

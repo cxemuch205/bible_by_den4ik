@@ -2,6 +2,7 @@ package ua.maker.gbible.fragment;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,10 +15,12 @@ import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -45,6 +48,7 @@ public class ListChaptersFragment extends SherlockFragment {
 	private UserDB db = null;
 	
 	private int bookId = 0;
+	private int lastBookId = -1;
 	private String translate = "";
 	
 	private Button btnBook = null;
@@ -53,23 +57,26 @@ public class ListChaptersFragment extends SherlockFragment {
 	
 	private SharedPreferences sp = null;
 	private SharedPreferences spDef = null;
+	private List<Integer> listChapters;
+	private LoadChaptersTask loadTask;
+	private ItemChapterAdapter adapter;
 	
 	private ProgressDialog pd = null;
 	
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
 	
+	private static ListChaptersFragment instance;
+	
+	public static ListChaptersFragment getInstance(){
+		if(instance == null){
+			instance = new ListChaptersFragment();
+		}
+		return instance;
+	}
+	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.activity_list_chapters, null);
-		gvShowChapters = (GridView)view.findViewById(R.id.gv_show_chapters);
-
-		btnBook = (Button)view.findViewById(R.id.btn_book);
-		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
-		btnPoem = (Button)view.findViewById(R.id.btn_poem);
-		if(!getSherlockActivity().getActionBar().isShowing())
-			getSherlockActivity().getActionBar().show();
-		
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
 		db = new UserDB(getSherlockActivity());
 		dataBase = new DataBase(getSherlockActivity());
 		try {
@@ -80,10 +87,22 @@ public class ListChaptersFragment extends SherlockFragment {
 		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 		
-		pd = ProgressDialog.show(getSherlockActivity(), 
-				getString(R.string.progress_dialog_title), 
-				getString(R.string.progress_dialog_message));
-		
+		listChapters = new ArrayList<Integer>();
+		adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		view = inflater.inflate(R.layout.activity_list_chapters, null);
+		gvShowChapters = (GridView)view.findViewById(R.id.gv_show_chapters);
+		gvShowChapters.setAdapter(adapter);
+		btnBook = (Button)view.findViewById(R.id.btn_book);
+		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
+		btnPoem = (Button)view.findViewById(R.id.btn_poem);
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
+		updateChapters();
 		return view;
 	}
 	
@@ -114,11 +133,49 @@ public class ListChaptersFragment extends SherlockFragment {
 			}
 		});
 		
-		List<Integer> listChapters = dataBase.getChapters(DataBase.TABLE_NAME_RST, bookId);
-		ItemChapterAdapter adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
-		gvShowChapters.setAdapter(adapter);
-		if(pd.isShowing()) pd.cancel();
+		updateChapters();
 		gvShowChapters.setOnItemClickListener(listenerItemGriatView);
+	}
+	
+	private void updateChapters(){
+		if(bookId != lastBookId){
+			if(loadTask == null){
+				loadTask = new LoadChaptersTask();
+				loadTask.execute();
+			} else {
+				loadTask.cancel(false);
+				loadTask = new LoadChaptersTask();
+				loadTask.execute();
+			}
+		}
+	}
+	
+	private class LoadChaptersTask extends AsyncTask<Void, Void, List<Integer>>{
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			if(pd == null || !pd.isShowing())
+				pd = ProgressDialog.show(getSherlockActivity(), 
+					getString(R.string.progress_dialog_title), 
+					getString(R.string.progress_dialog_message));
+		}
+		
+		@Override
+		protected List<Integer> doInBackground(Void... params) {
+			return dataBase.getChapters(DataBase.TABLE_NAME_RST, bookId);
+		}
+		
+		@Override
+		protected void onPostExecute(List<Integer> result) {
+			super.onPostExecute(result);
+			lastBookId = bookId;
+			listChapters.clear();
+			listChapters.addAll(result);
+			adapter.notifyDataSetChanged();
+			if(pd.isShowing()) pd.dismiss();
+		}
+		
 	}
 	
 	private OnClickListener clickSelectBookListener = new OnClickListener() {
@@ -136,7 +193,7 @@ public class ListChaptersFragment extends SherlockFragment {
 			
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new SelectBookFragment(), App.TAG_FRAGMENT_BOOKS);
+			ft.replace(R.id.flRoot, SelectBookFragment.getInstance(), App.TAG_FRAGMENT_BOOKS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();
@@ -169,7 +226,7 @@ public class ListChaptersFragment extends SherlockFragment {
 			
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();
@@ -187,7 +244,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		if(isReadActivity){
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();

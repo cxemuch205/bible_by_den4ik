@@ -28,12 +28,15 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 	private boolean dayNight = false;
 	private UserDB userDB;
 	private List<View> listViews = new ArrayList<View>();
+	private SharedPreferences prefs;
 
 	public ItemListPoemAdapter(Context context, List<PoemStruct> data, UserDB db) {
 		super(context, R.layout.item_list_poems, data);
 		this.listPoems = data;
 		this.context = context;
 		this.userDB = db;
+		prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		defPref = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 	
 	public boolean updateListView(int position, ListView listView, boolean isUpdate) {
@@ -67,7 +70,6 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		View view = convertView;
 		AdapterHolder holder = null;
 		
-		defPref = PreferenceManager.getDefaultSharedPreferences(context);
 		dayNight = (defPref.getString(context.getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
 		String color = ""+defPref.getInt(context.getString(R.string.pref_color_text), context.getResources().getInteger(R.integer.COLOR_BLACK));
 		
@@ -86,7 +88,6 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 			holder = (AdapterHolder)view.getTag();
 		}
 		
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		int size = 14;
 		if(prefs.contains(context.getString(R.string.pref_size_text_poem))){
 			size = prefs.getInt(context.getString(R.string.pref_size_text_poem), 15);

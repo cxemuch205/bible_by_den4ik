@@ -104,6 +104,10 @@ public class PlanDetailFragment extends SherlockFragment {
 		Log.d(TAG, "onCreateView()");
 		view = inflater.inflate(R.layout.activity_plan_detail, null);
 		lvPlanItems = (ListView)view.findViewById(R.id.lv_plan_items);
+		
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
+		
 		return view;
 	}
 	
@@ -450,7 +454,7 @@ public class PlanDetailFragment extends SherlockFragment {
 					
 					FragmentTransaction ft = getFragmentManager().
 							 beginTransaction();
-					ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+					ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 					ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 					ft.addToBackStack(null);
 					ft.commit();

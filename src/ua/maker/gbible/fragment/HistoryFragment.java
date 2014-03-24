@@ -2,7 +2,6 @@ package ua.maker.gbible.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListHistoryAdapter;
@@ -10,6 +9,7 @@ import ua.maker.gbible.constant.App;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.UserDB;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -48,6 +47,15 @@ public class HistoryFragment extends SherlockFragment {
 	private ItemListHistoryAdapter adapter = null;
 	private List<HistoryStruct> listHistory = null;
 	
+	private static HistoryFragment instance;
+	
+	public static HistoryFragment getInstance(){
+		if(instance == null){
+			instance = new HistoryFragment();
+		}
+		return instance;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -58,8 +66,8 @@ public class HistoryFragment extends SherlockFragment {
 		
 		db = new UserDB(getSherlockActivity());		
 		listHistory = new ArrayList<HistoryStruct>();
-		if(!getSherlockActivity().getActionBar().isShowing())
-			getSherlockActivity().getActionBar().show();
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
 		
 		return view;
 	}
@@ -115,7 +123,7 @@ public class HistoryFragment extends SherlockFragment {
 
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();

@@ -16,6 +16,8 @@ import ua.maker.gbible.structs.ItemPlanStruct;
 import ua.maker.gbible.structs.PlanStruct;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.Context;
@@ -47,6 +49,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class BookmarksFragment extends SherlockFragment {
 	
 	private static final String TAG = "BookmarksFragment";
@@ -71,16 +74,35 @@ public class BookmarksFragment extends SherlockFragment {
 	private UserDB db = null;
 	private int selectItem = 0;
 	
+	private static BookmarksFragment instance;
+	
+	public static BookmarksFragment getInstance(){
+		if(instance == null){
+			instance = new BookmarksFragment();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		db = new UserDB(getSherlockActivity());
+		listPlans = new ArrayList<PlanStruct>();
+		listBookmarks = new ArrayList<BookMarksStruct>();
+		adapter = new ItemListBookmarksAdapter(getSherlockActivity(), listBookmarks);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.d(TAG, "onCreateView()");
 		view = inflater.inflate(R.layout.activity_bookmarks, null);
 		lvBookmarks = (ListView)view.findViewById(R.id.lv_list_bookmarks);
+		lvBookmarks.setAdapter(adapter);
 		tvInfo = (TextView)view.findViewById(R.id.tv_info_bookmarks);
-		listBookmarks = new ArrayList<BookMarksStruct>();
-		if(!getSherlockActivity().getActionBar().isShowing())
-			getSherlockActivity().getActionBar().show();
+		
+		if(!getSherlockActivity().getSupportActionBar().isShowing())
+			getSherlockActivity().getSupportActionBar().show();
 		return view;
 	}
 	
@@ -97,19 +119,10 @@ public class BookmarksFragment extends SherlockFragment {
 		tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
 		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
 		
-		db = new UserDB(getSherlockActivity());
-		listPlans = new ArrayList<PlanStruct>();
 		listPlans = db.getPlansList();
 		
-		listBookmarks = db.getBookMarks();
-		if(listBookmarks == null || listBookmarks.size()<1){
-			tvInfo.setVisibility(TextView.VISIBLE);
-			tvInfo.setText(getString(R.string.no_founded_bookmarks));
-		}
-		else
-		{
-			tvInfo.setVisibility(TextView.GONE);
-		}
+		listBookmarks.clear();
+		listBookmarks.addAll(db.getBookMarks());
 		
 		updateListView();
 		
@@ -118,8 +131,12 @@ public class BookmarksFragment extends SherlockFragment {
 	}
 	
 	private void updateListView(){
-		adapter = new ItemListBookmarksAdapter(getSherlockActivity(), listBookmarks);
-		lvBookmarks.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+		if(listBookmarks.size() == 0){
+			tvInfo.setVisibility(TextView.VISIBLE);
+		} else {
+			tvInfo.setVisibility(TextView.GONE);
+		}
 	}
 	
 	private OnItemClickListener itemClickListener = new OnItemClickListener() {
@@ -136,7 +153,7 @@ public class BookmarksFragment extends SherlockFragment {
 			
 			FragmentTransaction ft = getFragmentManager().
 					 beginTransaction();
-			ft.replace(R.id.flRoot, new ListPoemsFragment(), App.TAG_FRAGMENT_POEMS);
+			ft.replace(R.id.flRoot, ListPoemsFragment.getInstence(), App.TAG_FRAGMENT_POEMS);
 			ft.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
 			ft.addToBackStack(null);
 			ft.commit();
@@ -155,7 +172,8 @@ public class BookmarksFragment extends SherlockFragment {
 	
 	public void onResume() {
 		super.onResume();
-		listBookmarks = db.getBookMarks();
+		listBookmarks.clear();
+		listBookmarks.addAll(db.getBookMarks());
 		updateListView();
 	};
 	

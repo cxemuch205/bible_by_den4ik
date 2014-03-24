@@ -1,3 +1,6 @@
+# view res/layout/activity_instruction_update.xml #generated:1
+-keep class android.support.v4.view.ViewPager { <init>(...); }
+
 # view res/layout/abs__screen_action_bar.xml #generated:44
 # view res/layout/abs__screen_action_bar_overlay.xml #generated:27
 # view res/layout/abs__screen_simple.xml #generated:32
@@ -58,34 +61,37 @@
 # view res/layout/abs__search_view.xml #generated:84
 -keep class com.actionbarsherlock.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:84
 -keep class com.paypal.android.MEP.PayPalActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:43
+# view AndroidManifest.xml #generated:42
 -keep class ua.maker.gbible.activity.ComparePoemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:54
+# view AndroidManifest.xml #generated:53
 -keep class ua.maker.gbible.activity.DonateActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:35
+# view AndroidManifest.xml #generated:89
+-keep class ua.maker.gbible.activity.InstructionUpdateActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:34
 -keep class ua.maker.gbible.activity.ListChaptersActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:39
+# view AndroidManifest.xml #generated:38
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:81
+# view AndroidManifest.xml #generated:80
 -keep class ua.maker.gbible.activity.ReadForEveryDayActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:48
+# view AndroidManifest.xml #generated:47
 -keep class ua.maker.gbible.activity.SettingActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:23
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:34
+# view res/xml/preference_bible.xml #generated:42
 -keep class ua.maker.gbible.widget.setting.ChangeSizeTextPreference { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:28
+# view res/xml/preference_bible.xml #generated:32
 -keep class ua.maker.gbible.widget.setting.ChangeSpeedSmoothPreference { <init>(...); }
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:59
@@ -108,9 +114,9 @@
 # view res/layout/dialog_color_picker_custom.xml #generated:81
 -keep class ua.maker.gbible.widget.setting.ColorPickerPanelView { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:46
-# view res/xml/preference_bible.xml #generated:52
-# view res/xml/preference_bible.xml #generated:58
+# view res/xml/preference_bible.xml #generated:56
+# view res/xml/preference_bible.xml #generated:62
+# view res/xml/preference_bible.xml #generated:68
 -keep class ua.maker.gbible.widget.setting.ColorPickerPreference { <init>(...); }
 
 # view land\res/layout-land/dialog_color_picker.xml #generated:23
@@ -119,6 +125,9 @@
 # view res/layout/dialog_color_picker_custom.xml #generated:24
 -keep class ua.maker.gbible.widget.setting.ColorPickerView { <init>(...); }
 
-# view res/xml/preference_bible.xml #generated:3
+# view res/xml/preference_bible.xml #generated:4
 -keep class ua.maker.gbible.widget.setting.DonatePreferences { <init>(...); }
+
+# view res/xml/preference_bible.xml #generated:37
+-keep class ua.maker.gbible.widget.setting.InstructionUpdatesPreferences { <init>(...); }
 

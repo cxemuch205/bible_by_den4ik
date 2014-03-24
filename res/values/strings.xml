@@ -20,6 +20,7 @@
 
     <!-- ERROR -->
     <string name="empty_et">Поле для поиска не заполенно!</string>
+    <string name="no_connections">Нет соединения!</string>
     <!-- ############ -->
 
 
@@ -417,6 +418,7 @@
     <string name="toast_delete_plan_msg">План %s удален!</string>
     <!-- ##################### -->
 
+
     <!-- Plan Detail fragment -->
     <string name="menu_title_add_point">Добавить</string>
     <string name="dialog_edit">Изменить</string>
@@ -430,6 +432,7 @@
     <string name="click_on_point_paste">Тап для вставки</string>
     <!-- ##################### -->
 
+
     <!-- Donate activity -->
     <string name="card_info_title">Реквизиты для пожертвований</string>
     <string name="copy_to_clip_board_str">Копировать в буфер</string>
@@ -439,7 +442,8 @@
     <string name="saved_str">Сохранено!</string>
     <string name="enter_count">Введите сумму в USD</string>
     <!-- ##################### -->
-    
+
+
     <!-- Read for every day activity -->
     <string name="title_activity_read_for_every_day">Чтение на каждый день</string>
     <string name="link_status_readed">Прочтено</string>
@@ -450,7 +454,14 @@
     <string name="msg_dialog_set_def_val_status_read">Статус прочтения дней будет установлен как "не прочитано".</string>
     <!-- ##################### -->
 
+
     <!-- Color Picker -->
     <string name="dialog_color_picker">Выбор цвета</string>
+    
+    <!-- Instruction & Updates Info Activity -->
+    <string name="title_activity_instruction_update">Инструкции &amp; Обновления</string>
+    <string name="title_section_updates">Обновления</string>
+    <string name="title_section_instractions">Инструкции</string>
+    <string name="summary_instr_updt_activity">писание последних обновлений, а также описание некоторих функций и возможностей.</string>
 
 </resources>
