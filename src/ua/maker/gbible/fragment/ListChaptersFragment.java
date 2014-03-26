@@ -138,7 +138,7 @@ public class ListChaptersFragment extends SherlockFragment {
 	}
 	
 	private void updateChapters(){
-		if(bookId != lastBookId){
+		if(bookId != lastBookId | listChapters.size() == 0 | lastBookId == -1){
 			if(loadTask == null){
 				loadTask = new LoadChaptersTask();
 				loadTask.execute();

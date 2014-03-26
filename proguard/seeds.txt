@@ -316,6 +316,9 @@ android.support.v4.view.PagerTitleStrip: void setNonPrimaryAlpha(float)
 android.support.v4.view.PagerTitleStrip: void setTextColor(int)
 android.support.v4.view.PagerTitleStrip: void setGravity(int)
 android.support.v4.view.PagerTitleStrip: int getMinHeight()
+android.support.v4.view.ViewPager
+android.support.v4.view.ViewPager: ViewPager(android.content.Context)
+android.support.v4.view.ViewPager: ViewPager(android.content.Context,android.util.AttributeSet)
 android.support.v4.view.ViewPager: void setScrollState(int)
 android.support.v4.view.ViewPager: void setAdapter(android.support.v4.view.PagerAdapter)
 android.support.v4.view.ViewPager: android.support.v4.view.PagerAdapter getAdapter()
@@ -4777,7 +4780,6 @@ com.samsung.spensdk.SCanvasView: java.util.LinkedList getTextInfos()
 com.samsung.spensdk.SCanvasView: com.samsung.sdraw.TextSettingInfo getTextSettingInfo()
 com.samsung.spensdk.SCanvasView: void setPenSettingInfo(com.samsung.sdraw.PenSettingInfo)
 com.samsung.spensdk.SCanvasView: void setTextSettingInfo(com.samsung.sdraw.TextSettingInfo)
-ua.maker.gbible.BaseActivity: BaseActivity()
 ua.maker.gbible.R$array: int array_books
 ua.maker.gbible.R$array: int array_books_id
 ua.maker.gbible.R$array: int mode_read_array
@@ -5201,9 +5203,11 @@ ua.maker.gbible.R$id: int menu_select_link
 ua.maker.gbible.R$id: int new_color_panel
 ua.maker.gbible.R$id: int normal
 ua.maker.gbible.R$id: int old_color_panel
+ua.maker.gbible.R$id: int pager
 ua.maker.gbible.R$id: int rb_link
 ua.maker.gbible.R$id: int rb_text
 ua.maker.gbible.R$id: int scrollView1
+ua.maker.gbible.R$id: int section_label
 ua.maker.gbible.R$id: int seekBar_set_speed_scroll_list_poem
 ua.maker.gbible.R$id: int seekBar_text_size
 ua.maker.gbible.R$id: int showCustom
@@ -5260,6 +5264,8 @@ ua.maker.gbible.R$id: int useLogo
 ua.maker.gbible.R$id: int view1
 ua.maker.gbible.R$id: int webviewActionView
 ua.maker.gbible.R$id: int wrap_content
+ua.maker.gbible.R$id: int wv_instr_info
+ua.maker.gbible.R$id: int wv_update_info
 ua.maker.gbible.R$integer: int COLOR_BLACK
 ua.maker.gbible.R$integer: int COLOR_GREEN
 ua.maker.gbible.R$integer: int COLOR_WHITE
@@ -5289,6 +5295,7 @@ ua.maker.gbible.R$layout: int activity_bookmarks
 ua.maker.gbible.R$layout: int activity_compare_poems
 ua.maker.gbible.R$layout: int activity_empty
 ua.maker.gbible.R$layout: int activity_history
+ua.maker.gbible.R$layout: int activity_instruction_update
 ua.maker.gbible.R$layout: int activity_list_chapters
 ua.maker.gbible.R$layout: int activity_list_poems
 ua.maker.gbible.R$layout: int activity_plan_detail
@@ -5307,6 +5314,8 @@ ua.maker.gbible.R$layout: int dialog_pref_text_size
 ua.maker.gbible.R$layout: int dialog_select_poem
 ua.maker.gbible.R$layout: int donate_layout
 ua.maker.gbible.R$layout: int empty_fragment
+ua.maker.gbible.R$layout: int fragment_instruction_update_dummy
+ua.maker.gbible.R$layout: int instruction_info_fragment_layout
 ua.maker.gbible.R$layout: int item_bookmarks
 ua.maker.gbible.R$layout: int item_chapter_layout
 ua.maker.gbible.R$layout: int item_compare_poem
@@ -5324,6 +5333,7 @@ ua.maker.gbible.R$layout: int sherlock_spinner_dropdown_item
 ua.maker.gbible.R$layout: int sherlock_spinner_item
 ua.maker.gbible.R$layout: int show_info_layout
 ua.maker.gbible.R$layout: int splash_screen_layout
+ua.maker.gbible.R$layout: int update_info_fragment_layout
 ua.maker.gbible.R$menu: int main
 ua.maker.gbible.R$menu: int menu_context_poem
 ua.maker.gbible.R$menu: int menu_history
@@ -5467,6 +5477,7 @@ ua.maker.gbible.R$string: int naum_str
 ua.maker.gbible.R$string: int neemia_str
 ua.maker.gbible.R$string: int new_testament
 ua.maker.gbible.R$string: int next_chapter_symbol
+ua.maker.gbible.R$string: int no_connections
 ua.maker.gbible.R$string: int no_founded_bookmarks
 ua.maker.gbible.R$string: int no_select_book
 ua.maker.gbible.R$string: int no_select_chapter
@@ -5524,6 +5535,7 @@ ua.maker.gbible.R$string: int sudii_str_small
 ua.maker.gbible.R$string: int summary_background_on_poem_fragment
 ua.maker.gbible.R$string: int summary_control_panel_pref
 ua.maker.gbible.R$string: int summary_def_trans
+ua.maker.gbible.R$string: int summary_instr_updt_activity
 ua.maker.gbible.R$string: int summary_mode_read
 ua.maker.gbible.R$string: int summary_pos_down_panel
 ua.maker.gbible.R$string: int summary_select_text_color
@@ -5537,6 +5549,7 @@ ua.maker.gbible.R$string: int three_ioanna_str
 ua.maker.gbible.R$string: int title_activit_plan
 ua.maker.gbible.R$string: int title_activity_bookmarks
 ua.maker.gbible.R$string: int title_activity_history
+ua.maker.gbible.R$string: int title_activity_instruction_update
 ua.maker.gbible.R$string: int title_activity_list_chapters
 ua.maker.gbible.R$string: int title_activity_list_compare_poems
 ua.maker.gbible.R$string: int title_activity_read_for_every_day
@@ -5549,6 +5562,8 @@ ua.maker.gbible.R$string: int title_dialog_set_def_val_status_read
 ua.maker.gbible.R$string: int title_list_poem
 ua.maker.gbible.R$string: int title_mode_read
 ua.maker.gbible.R$string: int title_pos_down_panel
+ua.maker.gbible.R$string: int title_section_instractions
+ua.maker.gbible.R$string: int title_section_updates
 ua.maker.gbible.R$string: int title_select_link
 ua.maker.gbible.R$string: int title_size_text_poem
 ua.maker.gbible.R$string: int title_smooth_scroll
@@ -5822,6 +5837,8 @@ ua.maker.gbible.activity.ComparePoemActivity
 ua.maker.gbible.activity.ComparePoemActivity: ComparePoemActivity()
 ua.maker.gbible.activity.DonateActivity
 ua.maker.gbible.activity.DonateActivity: DonateActivity()
+ua.maker.gbible.activity.InstructionUpdateActivity
+ua.maker.gbible.activity.InstructionUpdateActivity: InstructionUpdateActivity()
 ua.maker.gbible.activity.ReadForEveryDayActivity
 ua.maker.gbible.activity.ReadForEveryDayActivity: ReadForEveryDayActivity()
 ua.maker.gbible.activity.SettingActivity
@@ -5873,3 +5890,7 @@ ua.maker.gbible.widget.setting.DonatePreferences
 ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context)
 ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context,android.util.AttributeSet)
 ua.maker.gbible.widget.setting.DonatePreferences: DonatePreferences(android.content.Context,android.util.AttributeSet,int)
+ua.maker.gbible.widget.setting.InstructionUpdatesPreferences
+ua.maker.gbible.widget.setting.InstructionUpdatesPreferences: InstructionUpdatesPreferences(android.content.Context)
+ua.maker.gbible.widget.setting.InstructionUpdatesPreferences: InstructionUpdatesPreferences(android.content.Context,android.util.AttributeSet)
+ua.maker.gbible.widget.setting.InstructionUpdatesPreferences: InstructionUpdatesPreferences(android.content.Context,android.util.AttributeSet,int)
