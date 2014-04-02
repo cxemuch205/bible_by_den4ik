@@ -38,13 +38,13 @@ public class UpdatesInfoFragment extends SherlockFragment {
 			Bundle savedInstanceState) {
 		llRoot = inflater.inflate(R.layout.update_info_fragment_layout, null);
 		wvInfo = (WebView)llRoot.findViewById(R.id.wv_update_info);
+		wvInfo.getSettings().setUseWideViewPort(true);
 		return llRoot;
 	}
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);		
-		
 		wvInfo.loadUrl("file:///android_asset/info_updates.html");
 	}
 

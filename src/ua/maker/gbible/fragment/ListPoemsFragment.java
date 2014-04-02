@@ -184,8 +184,9 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 		chapterLast = -1;
 		bookIdLast = -1;
-		
-		getSherlockActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		try {
+			getSherlockActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		} catch (Exception e) {}		
 		
 		listPoems = new ArrayList<PoemStruct>();
 		listPlans = new ArrayList<PlanStruct>();
