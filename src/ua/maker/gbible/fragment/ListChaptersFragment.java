@@ -89,6 +89,8 @@ public class ListChaptersFragment extends SherlockFragment {
 		
 		listChapters = new ArrayList<Integer>();
 		adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
+		pd = new ProgressDialog(getSherlockActivity());
+		pd.setMessage(getString(R.string.progress_dialog_message));
 	}
 	
 	@Override
@@ -155,10 +157,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			if(pd == null || !pd.isShowing())
-				pd = ProgressDialog.show(getSherlockActivity(), 
-					getString(R.string.progress_dialog_title), 
-					getString(R.string.progress_dialog_message));
+			if(pd != null) pd.show();
 		}
 		
 		@Override

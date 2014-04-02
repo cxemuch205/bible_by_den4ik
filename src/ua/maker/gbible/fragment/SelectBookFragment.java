@@ -78,8 +78,6 @@ public class SelectBookFragment extends SherlockFragment {
 		super.onAttach(activity);
 		Log.i(TAG, "onAttach()");
 		setHasOptionsMenu(true);
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
 		dataBase = new DataBase(getSherlockActivity());
 		
 		try {
@@ -97,6 +95,8 @@ public class SelectBookFragment extends SherlockFragment {
 		if(instance.getId() == 0){
 			instance = this;
 		}
+		pd = new ProgressDialog(getSherlockActivity());
+		pd.setMessage(getString(R.string.progress_dialog_message));
 	}
 	
 	private class LoadBooksTask extends AsyncTask<Void, Void, List<String>>{
@@ -105,9 +105,7 @@ public class SelectBookFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			Log.i(TAG, "LoadBooksTask - onPreExecute()");
-			pd = ProgressDialog.show(getSherlockActivity(), 
-					getString(R.string.progress_dialog_title), 
-					getString(R.string.progress_dialog_message));
+			if(pd != null) pd.show();
 		}
 		
 		@Override
@@ -119,7 +117,7 @@ public class SelectBookFragment extends SherlockFragment {
 		protected void onPostExecute(List<String> result) {
 			super.onPostExecute(result);
 			try {
-				if(pd.isShowing()) pd.dismiss();
+				if(pd != null & pd.isShowing()) pd.dismiss();
 				listBooks.clear();
 				listBooks.addAll(result);
 				adapter.notifyDataSetChanged();
@@ -148,7 +146,8 @@ public class SelectBookFragment extends SherlockFragment {
 		btnPoem = (Button)view.findViewById(R.id.btn_poem);
 		if(!getSherlockActivity().getSupportActionBar().isShowing())
 			getSherlockActivity().getSupportActionBar().show();
-		
+		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
 		Log.d(TAG, "Start activity create");
 		return view;
 	}

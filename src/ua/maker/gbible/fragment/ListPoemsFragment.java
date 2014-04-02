@@ -158,10 +158,8 @@ public class ListPoemsFragment extends SherlockFragment{
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		Log.i(TAG, "onAttach()");
-		pd = ProgressDialog.show(getSherlockActivity(), 
-				getString(R.string.progress_dialog_title), 
-				getString(R.string.progress_dialog_download_chapter));
-		pd.dismiss();
+		pd = new ProgressDialog(getSherlockActivity());		
+		pd.setMessage(getString(R.string.progress_dialog_download_chapter));
 		
 		dataBase = new DataBase(getSherlockActivity());
 		dbUser = new UserDB(getSherlockActivity());
@@ -216,10 +214,6 @@ public class ListPoemsFragment extends SherlockFragment{
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.setCancelable(true);
 		
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(""
-				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
-				+ chapterNumber);
 		listPlans = dbUser.getPlansList();	
 		
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
@@ -337,6 +331,10 @@ public class ListPoemsFragment extends SherlockFragment{
 		if(firstStart){
 			showInfoPopup();
 		}
+		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+		getSherlockActivity().getActionBar().setTitle(""
+				+ Tools.getBookNameByBookId(bookId, getSherlockActivity()) + " " 
+				+ chapterNumber);
 	}
 	
 	public static void startActivityUpdates(Context ctx, SharedPreferences preferences, int newVerCode){
