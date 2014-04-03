@@ -10705,12 +10705,11 @@ ua.maker.gbible.fragment.ListChaptersFragment -> ua.maker.gbible.b.o:
     java.lang.String access$2(ua.maker.gbible.fragment.ListChaptersFragment) -> b
     ua.maker.gbible.utils.UserDB access$3(ua.maker.gbible.fragment.ListChaptersFragment) -> c
     android.app.ProgressDialog access$4(ua.maker.gbible.fragment.ListChaptersFragment) -> d
-    void access$5(ua.maker.gbible.fragment.ListChaptersFragment,android.app.ProgressDialog) -> a
-    ua.maker.gbible.utils.DataBase access$6(ua.maker.gbible.fragment.ListChaptersFragment) -> e
-    void access$7(ua.maker.gbible.fragment.ListChaptersFragment,int) -> a
-    java.util.List access$8(ua.maker.gbible.fragment.ListChaptersFragment) -> f
-    ua.maker.gbible.adapter.ItemChapterAdapter access$9(ua.maker.gbible.fragment.ListChaptersFragment) -> g
-    android.content.SharedPreferences access$10(ua.maker.gbible.fragment.ListChaptersFragment) -> h
+    ua.maker.gbible.utils.DataBase access$5(ua.maker.gbible.fragment.ListChaptersFragment) -> e
+    void access$6(ua.maker.gbible.fragment.ListChaptersFragment,int) -> a
+    java.util.List access$7(ua.maker.gbible.fragment.ListChaptersFragment) -> f
+    ua.maker.gbible.adapter.ItemChapterAdapter access$8(ua.maker.gbible.fragment.ListChaptersFragment) -> g
+    android.content.SharedPreferences access$9(ua.maker.gbible.fragment.ListChaptersFragment) -> h
 ua.maker.gbible.fragment.ListChaptersFragment$1 -> ua.maker.gbible.b.p:
     ua.maker.gbible.fragment.ListChaptersFragment this$0 -> a
     void onClick(android.view.View) -> onClick
@@ -11231,14 +11230,13 @@ ua.maker.gbible.fragment.SelectBookFragment -> ua.maker.gbible.b.bp:
     android.widget.Button access$1(ua.maker.gbible.fragment.SelectBookFragment) -> b
     android.widget.ListView access$2(ua.maker.gbible.fragment.SelectBookFragment) -> c
     void access$3(ua.maker.gbible.fragment.SelectBookFragment,int) -> a
-    void access$4(ua.maker.gbible.fragment.SelectBookFragment,android.app.ProgressDialog) -> a
-    ua.maker.gbible.utils.DataBase access$5(ua.maker.gbible.fragment.SelectBookFragment) -> d
-    android.app.ProgressDialog access$6(ua.maker.gbible.fragment.SelectBookFragment) -> e
-    java.util.List access$7(ua.maker.gbible.fragment.SelectBookFragment) -> f
-    android.widget.ArrayAdapter access$8(ua.maker.gbible.fragment.SelectBookFragment) -> g
-    android.content.SharedPreferences access$9(ua.maker.gbible.fragment.SelectBookFragment) -> h
-    void access$10(ua.maker.gbible.fragment.SelectBookFragment,int) -> b
-    android.content.SharedPreferences access$11(ua.maker.gbible.fragment.SelectBookFragment) -> i
+    android.app.ProgressDialog access$4(ua.maker.gbible.fragment.SelectBookFragment) -> d
+    ua.maker.gbible.utils.DataBase access$5(ua.maker.gbible.fragment.SelectBookFragment) -> e
+    java.util.List access$6(ua.maker.gbible.fragment.SelectBookFragment) -> f
+    android.widget.ArrayAdapter access$7(ua.maker.gbible.fragment.SelectBookFragment) -> g
+    android.content.SharedPreferences access$8(ua.maker.gbible.fragment.SelectBookFragment) -> h
+    void access$9(ua.maker.gbible.fragment.SelectBookFragment,int) -> b
+    android.content.SharedPreferences access$10(ua.maker.gbible.fragment.SelectBookFragment) -> i
 ua.maker.gbible.fragment.SelectBookFragment$1 -> ua.maker.gbible.b.bq:
     ua.maker.gbible.fragment.SelectBookFragment this$0 -> a
     void onClick(android.view.View) -> onClick

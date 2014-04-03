@@ -124,8 +124,8 @@ android.support.v4.app.FragmentPagerAdapter:
 android.support.v4.app.FragmentStatePagerAdapter
 android.support.v4.app.FragmentTabHost:
     private android.widget.FrameLayout mRealTabContent
-    130:132:public FragmentTabHost(android.content.Context)
-    135:137:public FragmentTabHost(android.content.Context,android.util.AttributeSet)
+    52:132:public FragmentTabHost(android.content.Context)
+    52:137:public FragmentTabHost(android.content.Context,android.util.AttributeSet)
     140:146:private void initFragmentTabHost(android.content.Context,android.util.AttributeSet)
     151:174:private void ensureHierarchy(android.content.Context)
     188:193:public void setup(android.content.Context,android.support.v4.app.FragmentManager)
@@ -234,7 +234,7 @@ android.support.v4.content.IntentCompatHoneycomb
 android.support.v4.content.IntentCompatIcsMr1
 android.support.v4.content.Loader:
     android.content.Context mContext
-    91:93:public Loader(android.content.Context)
+    38:93:public Loader(android.content.Context)
     103:106:public void deliverResult(java.lang.Object)
     112:112:public android.content.Context getContext()
     119:119:public int getId()
@@ -1208,7 +1208,7 @@ android.support.v4.widget.DrawerLayout:
     private static final float TOUCH_SLOP_SENSITIVITY
     217:218:public DrawerLayout(android.content.Context)
     221:222:public DrawerLayout(android.content.Context,android.util.AttributeSet)
-    225:249:public DrawerLayout(android.content.Context,android.util.AttributeSet,int)
+    135:249:public DrawerLayout(android.content.Context,android.util.AttributeSet,int)
     265:275:public void setDrawerShadow(android.graphics.drawable.Drawable,int)
     285:286:public void setDrawerShadow(int,int)
     394:400:public void setDrawerLockMode(int,android.view.View)
@@ -1225,7 +1225,7 @@ android.support.v4.widget.DrawerLayout$LayoutParams:
     1509:1511:public DrawerLayout$LayoutParams(int,int,int)
 android.support.v4.widget.DrawerLayout$SimpleDrawerListener
 android.support.v4.widget.DrawerLayout$ViewDragCallback:
-    1333:1335:public DrawerLayout$ViewDragCallback(android.support.v4.widget.DrawerLayout,int)
+    1327:1335:public DrawerLayout$ViewDragCallback(android.support.v4.widget.DrawerLayout,int)
     1338:1339:public void setDragger(android.support.v4.widget.ViewDragHelper)
     1418:1440:private void peekDrawer()
     1323:1323:static synthetic void access$000(android.support.v4.widget.DrawerLayout$ViewDragCallback)
@@ -1336,7 +1336,7 @@ android.support.v4.widget.SlidingPaneLayout:
     private static final int MIN_FLING_VELOCITY
     244:245:public SlidingPaneLayout(android.content.Context)
     248:249:public SlidingPaneLayout(android.content.Context,android.util.AttributeSet)
-    252:267:public SlidingPaneLayout(android.content.Context,android.util.AttributeSet,int)
+    107:267:public SlidingPaneLayout(android.content.Context,android.util.AttributeSet,int)
     328:331:void dispatchOnPanelSlide(android.view.View)
     334:338:void dispatchOnPanelOpened(android.view.View)
     341:345:void dispatchOnPanelClosed(android.view.View)
@@ -1355,8 +1355,8 @@ android.support.v4.widget.SlidingPaneLayout:
 android.support.v4.widget.SlidingPaneLayout$AccessibilityDelegate
 android.support.v4.widget.SlidingPaneLayout$DragHelperCallback
 android.support.v4.widget.SlidingPaneLayout$LayoutParams:
-    1277:1278:public SlidingPaneLayout$LayoutParams(int,int)
-    1289:1291:public SlidingPaneLayout$LayoutParams(android.support.v4.widget.SlidingPaneLayout$LayoutParams)
+    1257:1278:public SlidingPaneLayout$LayoutParams(int,int)
+    1257:1291:public SlidingPaneLayout$LayoutParams(android.support.v4.widget.SlidingPaneLayout$LayoutParams)
 android.support.v4.widget.SlidingPaneLayout$PanelSlideListener:
     public abstract void onPanelSlide(android.view.View,float)
     public abstract void onPanelOpened(android.view.View)
@@ -1381,7 +1381,7 @@ android.support.v4.widget.ViewDragHelper:
     private static final int MAX_SETTLE_DURATION
     347:347:public static android.support.v4.widget.ViewDragHelper create(android.view.ViewGroup,android.support.v4.widget.ViewDragHelper$Callback)
     360:362:public static android.support.v4.widget.ViewDragHelper create(android.view.ViewGroup,float,android.support.v4.widget.ViewDragHelper$Callback)
-    373:392:private ViewDragHelper(android.content.Context,android.view.ViewGroup,android.support.v4.widget.ViewDragHelper$Callback)
+    115:392:private ViewDragHelper(android.content.Context,android.view.ViewGroup,android.support.v4.widget.ViewDragHelper$Callback)
     401:402:public void setMinVelocity(float)
     412:412:public float getMinVelocity()
     437:438:public void setEdgeTrackingEnabled(int)
@@ -1423,10 +1423,10 @@ com.actionbarsherlock.widget.ActivityChooserModel:
     private static final float DEFAULT_HISTORICAL_RECORD_WEIGHT
     private static final java.lang.String HISTORY_FILE_EXTENSION
     private static final int INVALID_INDEX
-    387:387:public android.content.Intent getIntent()
+    387:388:public android.content.Intent getIntent()
     599:606:public void setActivitySorter(com.actionbarsherlock.widget.ActivityChooserModel$ActivitySorter)
     638:646:public void setHistoryMaxSize(int)
-    654:654:public int getHistoryMaxSize()
+    654:655:public int getHistoryMaxSize()
 com.actionbarsherlock.widget.ActivityChooserModel$DefaultSorter:
     private static final float WEIGHT_DECAY_COEFFICIENT
 com.actionbarsherlock.widget.ActivityChooserView:
@@ -1766,7 +1766,7 @@ com.google.analytics.tracking.android.FutureApis:
     17:18:private FutureApis()
 com.google.analytics.tracking.android.GAServiceManager:
     private static final int MSG_KEY
-    84:89:GAServiceManager(android.content.Context,com.google.analytics.tracking.android.AnalyticsThread,com.google.analytics.tracking.android.AnalyticsStore,boolean)
+    44:89:GAServiceManager(android.content.Context,com.google.analytics.tracking.android.AnalyticsThread,com.google.analytics.tracking.android.AnalyticsStore,boolean)
     147:147:com.google.analytics.tracking.android.AnalyticsStoreStateListener getListener()
 com.google.analytics.tracking.android.GAServiceProxy:
     private static final int MAX_TRIES
@@ -1782,7 +1782,7 @@ com.google.analytics.tracking.android.GAThread:
     private static final int SAMPLE_RATE_MULTIPLIER
     private static final int SAMPLE_RATE_MODULO
     static final java.lang.String API_VERSION
-    84:92:GAThread(android.content.Context,com.google.analytics.tracking.android.ServiceProxy)
+    49:92:GAThread(android.content.Context,com.google.analytics.tracking.android.ServiceProxy)
     275:300:public void setAppOptOut(boolean)
     547:549:void close()
     553:553:boolean isDisabled()
@@ -4631,7 +4631,7 @@ com.google.common.eventbus.DeadEvent:
 com.google.common.eventbus.EventBus:
     private final com.google.common.eventbus.HandlerFindingStrategy finder
     173:174:public EventBus()
-    182:184:public EventBus(java.lang.String)
+    116:184:public EventBus(java.lang.String)
     195:196:public void register(java.lang.Object)
     205:216:public void unregister(java.lang.Object)
     329:329:java.util.Set newHandlerSet()
@@ -5271,7 +5271,7 @@ com.samsung.sdraw.AbstractModeContext:
     private android.graphics.Rect m
     public com.bst.HwBeautify.BeautifyManager sCBManager
     protected com.samsung.sdraw.cy g
-    39:39:AbstractModeContext()
+    39:114:AbstractModeContext()
     117:123:public boolean initializeContext(android.app.Activity)
     127:162:public void serializeContext(boolean)
     165:189:private void a(java.io.File)
@@ -5412,7 +5412,7 @@ com.samsung.sdraw.AbstractSprite:
     protected final int j
     protected java.lang.String k
     protected java.lang.String l
-    66:69:public AbstractSprite()
+    52:69:public AbstractSprite()
     public abstract void dispose()
     78:79:public void deselect()
     83:83:public boolean isSelected()
@@ -5497,7 +5497,7 @@ com.samsung.sdraw.EventBusManager:
     com.samsung.sdraw.CanvasView a
     com.samsung.sdraw.AbstractSettingView b
     private int d
-    25:28:public EventBusManager()
+    25:815:public EventBusManager()
     35:36:public void setCanvasView(com.samsung.sdraw.CanvasView)
     39:40:public void setSettingView(com.samsung.sdraw.AbstractSettingView)
     68:74:public void onObjectInserted(com.samsung.sdraw.ObjectInfo,boolean,boolean,boolean)
@@ -5753,7 +5753,7 @@ com.samsung.sdraw.Setting:
     private boolean at
     private boolean au
     private boolean av
-    200:271:public Setting(android.content.Context)
+    156:926:public Setting(android.content.Context)
     274:286:private void a(android.content.Context)
     289:290:public void setCanvasRect(android.graphics.Rect)
     293:293:public android.graphics.Rect getCanvasRect()
@@ -5911,7 +5911,7 @@ com.samsung.sdraw.StrokeSprite:
     private boolean Z
     final java.util.concurrent.Semaphore s
     private boolean aa
-    31:31:StrokeSprite()
+    31:962:StrokeSprite()
     182:182:boolean i()
     189:189:com.samsung.sdraw.da j()
     193:193:public com.samsung.sdraw.StrokeSprite$Type getType()
@@ -6073,7 +6073,7 @@ com.samsung.sdraw.cs:
     protected boolean w
     java.util.concurrent.atomic.AtomicLong x
     android.graphics.Rect y
-    11:11:cs()
+    11:24:cs()
     29:29:public boolean u()
     33:34:public void d(boolean)
     37:37:public android.graphics.Region v()
@@ -6129,9 +6129,9 @@ com.samsung.sdraw.do:
     public float e
     public float f
     public float g
-    46:49:public do(float,float,float)
+    18:49:public do(float,float,float)
     52:64:public do(com.samsung.sdraw.do)
-    66:78:public do(java.nio.ByteBuffer)
+    18:78:public do(java.nio.ByteBuffer)
     91:94:private void b(float,float,float)
     97:98:public void a(float,float,float)
     105:124:public void a(float,float,float,boolean)
@@ -6147,7 +6147,7 @@ com.samsung.sdraw.h
 com.samsung.sdraw.i
 com.samsung.sdraw.j:
     private android.graphics.Paint i
-    88:90:public j(android.content.Context)
+    39:90:public j(android.content.Context)
     98:106:private void d()
     109:110:public void a(int)
     349:359:private void d(int)
@@ -6491,24 +6491,24 @@ ua.maker.gbible.fragment.SelectBookFragment:
 ua.maker.gbible.fragment.UpdatesInfoFragment:
     private static final java.lang.String TAG
 ua.maker.gbible.structs.BookMarksStruct:
-    18:33:public BookMarksStruct(java.lang.String,java.lang.String,java.lang.String,int,int,int,int)
+    5:33:public BookMarksStruct(java.lang.String,java.lang.String,java.lang.String,int,int,int,int)
     61:62:public void setBookName(java.lang.String)
     81:82:public void setId(int)
 ua.maker.gbible.structs.ColorStruct:
-    15:18:public ColorStruct(java.lang.String,int)
+    5:18:public ColorStruct(java.lang.String,int)
 ua.maker.gbible.structs.HistoryStruct:
     32:33:public void setBookName(java.lang.String)
 ua.maker.gbible.structs.ItemPlanStruct:
-    24:28:public ItemPlanStruct(int,java.lang.String)
-    30:35:public ItemPlanStruct(int,java.lang.String,android.graphics.Bitmap)
-    37:45:public ItemPlanStruct(int,java.lang.String,int,int,int,java.lang.String)
-    47:54:public ItemPlanStruct(int,java.lang.String,int,int,int)
-    56:64:public ItemPlanStruct(int,java.lang.String,int,int,int,int)
-    66:70:public ItemPlanStruct(int,android.graphics.Bitmap)
+    8:28:public ItemPlanStruct(int,java.lang.String)
+    8:35:public ItemPlanStruct(int,java.lang.String,android.graphics.Bitmap)
+    8:45:public ItemPlanStruct(int,java.lang.String,int,int,int,java.lang.String)
+    8:54:public ItemPlanStruct(int,java.lang.String,int,int,int)
+    8:64:public ItemPlanStruct(int,java.lang.String,int,int,int,int)
+    8:70:public ItemPlanStruct(int,android.graphics.Bitmap)
     117:118:public void setImgBitMap(android.graphics.Bitmap)
     149:149:public android.graphics.Bitmap getImgBitMap()
 ua.maker.gbible.structs.ItemReadDay:
-    20:26:public ItemReadDay(int,java.lang.String,int,java.util.List,java.util.List)
+    7:26:public ItemReadDay(int,java.lang.String,int,java.util.List,java.util.List)
     45:45:public int getSection()
     49:50:public void setSection(int)
     53:53:public int getRow()
@@ -6516,12 +6516,12 @@ ua.maker.gbible.structs.ItemReadDay:
     85:85:public int getYear()
     105:106:public void setYear(int)
 ua.maker.gbible.structs.PlanStruct:
-    12:15:public PlanStruct(java.lang.String,java.lang.String)
-    17:21:public PlanStruct(java.lang.String,java.lang.String,java.lang.String)
+    5:15:public PlanStruct(java.lang.String,java.lang.String)
+    5:21:public PlanStruct(java.lang.String,java.lang.String,java.lang.String)
 ua.maker.gbible.structs.PoemStruct:
-    21:24:public PoemStruct(java.lang.String,boolean)
-    26:30:public PoemStruct(java.lang.String,java.lang.String,int)
-    32:37:public PoemStruct(java.lang.String,java.lang.String,int,int)
+    5:24:public PoemStruct(java.lang.String,boolean)
+    5:30:public PoemStruct(java.lang.String,java.lang.String,int)
+    5:37:public PoemStruct(java.lang.String,java.lang.String,int,int)
     110:111:public ua.maker.gbible.structs.PoemStruct setText(java.lang.String)
     115:116:public ua.maker.gbible.structs.PoemStruct setChecked(boolean)
 ua.maker.gbible.utils.DataBase:
