@@ -213,9 +213,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		builder.setAdapter(adapterDialog, dialogItemClickListener);
 		dialog = builder.create();
 		dialog.setCanceledOnTouchOutside(true);
-		dialog.setCancelable(true);
-		
-		listPlans = dbUser.getPlansList();	
+		dialog.setCancelable(true);	
 		
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
 		if(defPref.contains(getString(R.string.pref_default_translaters))){
@@ -248,8 +246,7 @@ public class ListPoemsFragment extends SherlockFragment{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
+			Bundle savedInstanceState) {		
 		Log.i(TAG, "Start onCreateView");		
 		view = inflater.inflate(R.layout.activity_list_poems, null);
 		lvShowPoem = (ListView)view.findViewById(R.id.lv_show_poems);
@@ -263,6 +260,8 @@ public class ListPoemsFragment extends SherlockFragment{
 		tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
 		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
 		
+		listPlans.clear();
+		listPlans.addAll(dbUser.getPlansList());
 		lvShowPoem.setAdapter(adapterListPoem);
 		
 		return view;

@@ -28,7 +28,7 @@ import android.util.Log;
 public class DataBase extends SQLiteOpenHelper {
 	
 	private static final String TAG = "DataBase";	
-	private static final int DB_VERSION = 2;	
+	private static final int DB_VERSION = 3;	
 	@SuppressLint("SdCardPath")
 	private static final String DB_PATH = "/data/data/ua.maker.gbible/databases/";
 	private static final String DB_NAME = "bible_android.db";

@@ -54,11 +54,14 @@ android.support.v4.app.BackStackRecord:
     357:360:public java.lang.CharSequence getBreadCrumbShortTitle()
     384:385:public android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment)
     421:421:public android.support.v4.app.FragmentTransaction replace(int,android.support.v4.app.Fragment)
+    425:430:public android.support.v4.app.FragmentTransaction replace(int,android.support.v4.app.Fragment,java.lang.String)
     443:448:public android.support.v4.app.FragmentTransaction hide(android.support.v4.app.Fragment)
     452:457:public android.support.v4.app.FragmentTransaction show(android.support.v4.app.Fragment)
     479:479:public android.support.v4.app.FragmentTransaction setCustomAnimations(int,int)
     484:488:public android.support.v4.app.FragmentTransaction setCustomAnimations(int,int,int,int)
+    492:493:public android.support.v4.app.FragmentTransaction setTransition(int)
     497:498:public android.support.v4.app.FragmentTransaction setTransitionStyle(int)
+    502:508:public android.support.v4.app.FragmentTransaction addToBackStack(java.lang.String)
     512:512:public boolean isAddToBackStackAllowed()
     525:527:public android.support.v4.app.FragmentTransaction setBreadCrumbTitle(int)
     531:533:public android.support.v4.app.FragmentTransaction setBreadCrumbTitle(java.lang.CharSequence)
@@ -118,9 +121,7 @@ android.support.v4.app.FragmentManagerImpl:
     588:596:public android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment)
 android.support.v4.app.FragmentManagerImpl$2
 android.support.v4.app.FragmentManagerImpl$3
-android.support.v4.app.FragmentPagerAdapter:
-    private static final java.lang.String TAG
-    private static final boolean DEBUG
+android.support.v4.app.FragmentPagerAdapter
 android.support.v4.app.FragmentStatePagerAdapter
 android.support.v4.app.FragmentTabHost:
     private android.widget.FrameLayout mRealTabContent
@@ -145,11 +146,14 @@ android.support.v4.app.FragmentTransaction:
     public static final int TRANSIT_FRAGMENT_FADE
     public abstract android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment)
     public abstract android.support.v4.app.FragmentTransaction replace(int,android.support.v4.app.Fragment)
+    public abstract android.support.v4.app.FragmentTransaction replace(int,android.support.v4.app.Fragment,java.lang.String)
     public abstract android.support.v4.app.FragmentTransaction hide(android.support.v4.app.Fragment)
     public abstract android.support.v4.app.FragmentTransaction show(android.support.v4.app.Fragment)
     public abstract android.support.v4.app.FragmentTransaction setCustomAnimations(int,int)
     public abstract android.support.v4.app.FragmentTransaction setCustomAnimations(int,int,int,int)
+    public abstract android.support.v4.app.FragmentTransaction setTransition(int)
     public abstract android.support.v4.app.FragmentTransaction setTransitionStyle(int)
+    public abstract android.support.v4.app.FragmentTransaction addToBackStack(java.lang.String)
     public abstract boolean isAddToBackStackAllowed()
     public abstract android.support.v4.app.FragmentTransaction setBreadCrumbTitle(int)
     public abstract android.support.v4.app.FragmentTransaction setBreadCrumbTitle(java.lang.CharSequence)
@@ -480,7 +484,9 @@ android.support.v4.view.MotionEventCompatEclair:
 android.support.v4.view.PagerAdapter:
     public static final int POSITION_UNCHANGED
     public static final int POSITION_NONE
+    78:79:public PagerAdapter()
     276:277:public void notifyDataSetChanged()
+    307:307:public java.lang.CharSequence getPageTitle(int)
 android.support.v4.view.PagerTabStrip
 android.support.v4.view.PagerTabStrip$1
 android.support.v4.view.PagerTabStrip$2
@@ -689,6 +695,7 @@ android.support.v4.view.ViewPager:
     2299:2320:public void endFakeDrag()
     2330:2368:public void fakeDragBy(float)
     2380:2380:public boolean isFakeDragging()
+android.support.v4.view.ViewPager$SimpleOnPageChangeListener
 android.support.v4.view.ViewParentCompat
 android.support.v4.view.ViewParentCompat$ViewParentCompatICSImpl
 android.support.v4.view.ViewParentCompat$ViewParentCompatImpl
@@ -1660,9 +1667,7 @@ com.dropbox.sync.android.NativeThreads
 com.dropbox.sync.android.NativeThreads$1
 com.dropbox.sync.android.NativeThreads$2
 com.dropbox.sync.android.NativeValue
-com.google.ads.AdRequest:
-    public static final java.lang.String VERSION
-    public static final java.lang.String LOGTAG
+com.google.ads.AdRequest
 com.google.ads.AdRequest$ErrorCode
 com.google.ads.AdRequest$Gender
 com.google.ads.AdSize
@@ -1691,248 +1696,90 @@ com.google.ads.mediation.customevent.CustomEventInterstitial
 com.google.ads.mediation.customevent.CustomEventInterstitialListener
 com.google.ads.mediation.customevent.CustomEventListener
 com.google.ads.mediation.customevent.CustomEventServerParameters
-com.google.analytics.tracking.android.AdHitIdGenerator:
-    24:26:AdHitIdGenerator(boolean)
-com.google.analytics.tracking.android.AdMobInfo:
-    47:47:java.util.Map getJoinIds()
-    58:59:void setAdHitId(int)
-    62:62:int getAdHitId()
+com.google.analytics.tracking.android.AdHitIdGenerator
+com.google.analytics.tracking.android.AdMobInfo
 com.google.analytics.tracking.android.AdMobInfo$AdMobKey
+com.google.analytics.tracking.android.AnalyticsClient
 com.google.analytics.tracking.android.AnalyticsConstants
-com.google.analytics.tracking.android.AnalyticsGmsCoreClient:
-    public static final int BIND_FAILED
-    public static final int REMOTE_EXECUTION_FAILED
-    private static final java.lang.String SERVICE_DESCRIPTOR
-    static final java.lang.String SERVICE_ACTION
-    private static final int BIND_ADJUST_WITH_ACTIVITY
-    public static final java.lang.String KEY_APP_PACKAGE_NAME
-com.google.analytics.tracking.android.AnalyticsStore:
-    public abstract void setDispatch(boolean)
-    public abstract void close()
-com.google.analytics.tracking.android.AnalyticsThread:
-    public abstract void setAppOptOut(boolean)
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$AnalyticsServiceConnection
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectedListener
+com.google.analytics.tracking.android.AnalyticsGmsCoreClient$OnConnectionFailedListener
+com.google.analytics.tracking.android.AnalyticsStore
+com.google.analytics.tracking.android.AnalyticsStoreStateListener
+com.google.analytics.tracking.android.AnalyticsThread
+com.google.analytics.tracking.android.AnalyticsThread$ClientIdCallback
 com.google.analytics.tracking.android.CampaignTrackingReceiver
 com.google.analytics.tracking.android.CampaignTrackingService
-com.google.analytics.tracking.android.EasyTracker:
-    static final int NUM_MILLISECONDS_TO_WAIT_FOR_OPEN_ACTIVITY
-    125:129:public static com.google.analytics.tracking.android.Tracker getTracker()
-    291:292:void setUncaughtExceptionHandler(java.lang.Thread$UncaughtExceptionHandler)
-    400:403:public void dispatch()
-    437:438:static void clearTracker()
-    442:443:void setClock(com.google.analytics.tracking.android.Clock)
-    447:447:int getActivitiesActive()
-com.google.analytics.tracking.android.EasyTracker$NoopTracker:
-    private java.lang.String mAppId
-    private java.lang.String mAppInstallerId
-    private boolean mIsUseSecure
-    private com.google.analytics.tracking.android.ExceptionParser mExceptionParser
-    478:478:public void setAppScreen(java.lang.String)
-    482:482:public void sendView()
-    490:490:public void sendEvent(java.lang.String,java.lang.String,java.lang.String,java.lang.Long)
-    494:494:public void sendTransaction(com.google.analytics.tracking.android.Transaction)
-    502:502:public void sendException(java.lang.String,java.lang.Throwable,boolean)
-    507:507:public void sendTiming(java.lang.String,long,java.lang.String,java.lang.String)
-    511:511:public void sendSocial(java.lang.String,java.lang.String,java.lang.String)
-    515:515:public void close()
-    519:519:public void send(java.lang.String,java.util.Map)
-    523:523:public java.lang.String get(java.lang.String)
-    528:528:public void set(java.lang.String,java.lang.String)
-    532:532:public java.lang.String getTrackingId()
-    542:542:public boolean isAnonymizeIpEnabled()
-    552:552:public double getSampleRate()
-    557:558:public void setUseSecure(boolean)
-    562:562:public boolean isUseSecure()
-    567:567:public void setReferrer(java.lang.String)
-    571:571:public void setCampaign(java.lang.String)
-    575:576:public void setAppId(java.lang.String)
-    580:580:public java.lang.String getAppId()
-    585:586:public void setAppInstallerId(java.lang.String)
-    590:590:public java.lang.String getAppInstallerId()
-    595:596:public void setExceptionParser(com.google.analytics.tracking.android.ExceptionParser)
-    600:600:public com.google.analytics.tracking.android.ExceptionParser getExceptionParser()
-    606:606:public java.util.Map constructEvent(java.lang.String,java.lang.String,java.lang.String,java.lang.Long)
-    611:611:public java.util.Map constructTransaction(com.google.analytics.tracking.android.Transaction)
-    623:623:public java.util.Map constructRawException(java.lang.String,java.lang.Throwable,boolean)
-    629:629:public java.util.Map constructTiming(java.lang.String,long,java.lang.String,java.lang.String)
-    634:634:public java.util.Map constructSocial(java.lang.String,java.lang.String,java.lang.String)
-    639:639:public void setCustomDimension(int,java.lang.String)
-    643:643:public void setCustomMetric(int,java.lang.Long)
-    648:648:public void setCustomDimensionsAndMetrics(java.util.Map,java.util.Map)
-com.google.analytics.tracking.android.ExceptionReporter:
-    static final java.lang.String DEFAULT_DESCRIPTION
-    64:64:public com.google.analytics.tracking.android.ExceptionParser getExceptionParser()
-    68:69:public void setExceptionParser(com.google.analytics.tracking.android.ExceptionParser)
-com.google.analytics.tracking.android.FutureApis:
-    17:18:private FutureApis()
-com.google.analytics.tracking.android.GAServiceManager:
-    private static final int MSG_KEY
-    44:89:GAServiceManager(android.content.Context,com.google.analytics.tracking.android.AnalyticsThread,com.google.analytics.tracking.android.AnalyticsStore,boolean)
-    147:147:com.google.analytics.tracking.android.AnalyticsStoreStateListener getListener()
-com.google.analytics.tracking.android.GAServiceProxy:
-    private static final int MAX_TRIES
-    private static final long SERVICE_CONNECTION_TIMEOUT
-    private static final long RECONNECT_WAIT_TIME
-    private static final long FAILED_CONNECT_WAIT_TIME
-    89:90:void setClock(com.google.analytics.tracking.android.Clock)
-    170:175:void createService(com.google.analytics.tracking.android.AnalyticsClient)
-    182:183:public void setIdleTimeout(long)
-com.google.analytics.tracking.android.GAThread:
-    private static final java.lang.String CLIENT_VERSION
-    private static final int MAX_SAMPLE_RATE
-    private static final int SAMPLE_RATE_MULTIPLIER
-    private static final int SAMPLE_RATE_MODULO
-    static final java.lang.String API_VERSION
-    49:92:GAThread(android.content.Context,com.google.analytics.tracking.android.ServiceProxy)
-    275:300:public void setAppOptOut(boolean)
-    547:549:void close()
-    553:553:boolean isDisabled()
-    36:36:static synthetic android.content.Context access$1100(com.google.analytics.tracking.android.GAThread)
-    36:36:static synthetic boolean access$102(com.google.analytics.tracking.android.GAThread,boolean)
+com.google.analytics.tracking.android.Clock
+com.google.analytics.tracking.android.Dispatcher
+com.google.analytics.tracking.android.EasyTracker
+com.google.analytics.tracking.android.EasyTracker$1
+com.google.analytics.tracking.android.EasyTracker$NoopTracker
+com.google.analytics.tracking.android.EasyTracker$NotInForegroundTimerTask
+com.google.analytics.tracking.android.ExceptionParser
+com.google.analytics.tracking.android.ExceptionReporter
+com.google.analytics.tracking.android.FutureApis
+com.google.analytics.tracking.android.GANetworkReceiver
+com.google.analytics.tracking.android.GAServiceManager
+com.google.analytics.tracking.android.GAServiceManager$1
+com.google.analytics.tracking.android.GAServiceManager$2
+com.google.analytics.tracking.android.GAServiceProxy
+com.google.analytics.tracking.android.GAServiceProxy$1
+com.google.analytics.tracking.android.GAServiceProxy$2
+com.google.analytics.tracking.android.GAServiceProxy$3
+com.google.analytics.tracking.android.GAServiceProxy$ConnectState
+com.google.analytics.tracking.android.GAServiceProxy$DisconnectCheckTask
+com.google.analytics.tracking.android.GAServiceProxy$FailedConnectTask
+com.google.analytics.tracking.android.GAServiceProxy$HitParams
+com.google.analytics.tracking.android.GAServiceProxy$ReconnectTask
+com.google.analytics.tracking.android.GAThread
+com.google.analytics.tracking.android.GAThread$1
+com.google.analytics.tracking.android.GAThread$2
 com.google.analytics.tracking.android.GAThread$3
-com.google.analytics.tracking.android.GAUsage:
-    private static final java.lang.String BASE_64_CHARS
-    100:100:static com.google.analytics.tracking.android.GAUsage getPrivateInstance()
-com.google.analytics.tracking.android.GoogleAnalytics:
-    105:107:static com.google.analytics.tracking.android.GoogleAnalytics getInstance()
-    119:125:static com.google.analytics.tracking.android.GoogleAnalytics getNewInstance(android.content.Context,com.google.analytics.tracking.android.AnalyticsThread)
-    133:136:static void clearInstance()
-    154:155:public boolean isDebugEnabled()
-    189:192:public com.google.analytics.tracking.android.Tracker getDefaultTracker()
-    199:203:public void setDefaultTracker(com.google.analytics.tracking.android.Tracker)
-    207:213:public void closeTracker(com.google.analytics.tracking.android.Tracker)
-    240:240:void close()
-    246:246:java.lang.String getTrackingIdForAds()
-    253:256:java.lang.String getClientIdForAds()
-    276:279:public void setAppOptOut(boolean)
-    283:283:java.lang.Boolean getAppOptOut()
-    297:303:public void requestAppOptOut(com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback)
-com.google.analytics.tracking.android.HitBuilder:
-    15:15:HitBuilder()
-com.google.analytics.tracking.android.Log:
-    static final java.lang.String LOG_TAG
-    22:23:private Log()
-    87:90:public static int eDebug(java.lang.String)
-com.google.analytics.tracking.android.MetaModel$MetaInfo:
-    102:102:java.lang.String getUrlParam()
-com.google.analytics.tracking.android.MetaModelInitializer:
-    29:30:private MetaModelInitializer()
+com.google.analytics.tracking.android.GAThread$4
+com.google.analytics.tracking.android.GAThread$5
+com.google.analytics.tracking.android.GAUsage
+com.google.analytics.tracking.android.GAUsage$Field
+com.google.analytics.tracking.android.GoogleAnalytics
+com.google.analytics.tracking.android.GoogleAnalytics$1
+com.google.analytics.tracking.android.GoogleAnalytics$2
+com.google.analytics.tracking.android.GoogleAnalytics$AppOptOutCallback
+com.google.analytics.tracking.android.Hit
+com.google.analytics.tracking.android.HitBuilder
+com.google.analytics.tracking.android.HttpClientFactory
+com.google.analytics.tracking.android.Log
+com.google.analytics.tracking.android.MetaModel
+com.google.analytics.tracking.android.MetaModel$Formatter
+com.google.analytics.tracking.android.MetaModel$MetaInfo
+com.google.analytics.tracking.android.MetaModelInitializer
+com.google.analytics.tracking.android.MetaModelInitializer$1
+com.google.analytics.tracking.android.MetaModelInitializer$2
 com.google.analytics.tracking.android.ModelFields
 com.google.analytics.tracking.android.NoopDispatcher
-com.google.analytics.tracking.android.ParameterLoader:
-    public abstract boolean isBooleanKeyPresent(java.lang.String)
-com.google.analytics.tracking.android.ParameterLoaderImpl:
-    78:78:public boolean isBooleanKeyPresent(java.lang.String)
-com.google.analytics.tracking.android.PersistentAnalyticsStore:
-    static final java.lang.String BACKEND_LIBRARY_VERSION
-    static final java.lang.String HIT_ID
-    static final java.lang.String HIT_STRING
-    static final java.lang.String HIT_TIME
-    static final java.lang.String HIT_URL
-    static final java.lang.String HIT_APP_ID
-    static final java.lang.String HITS_TABLE
-    private static final java.lang.String DATABASE_FILENAME
-    128:129:public void setClock(com.google.analytics.tracking.android.Clock)
-    133:133:public com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper getDbHelper()
-    152:155:public void setDispatch(boolean)
-    159:160:void setDispatcher(com.google.analytics.tracking.android.Dispatcher)
-    401:402:void setLastDeleteStaleHitsTime(long)
-    511:516:public void close()
-    520:520:com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper getHelper()
-com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper:
-    553:553:boolean isBadDatabase()
-    557:558:void setBadDatabase(boolean)
-com.google.analytics.tracking.android.ServiceProxy:
-    public abstract void clearHits()
-com.google.analytics.tracking.android.SimpleNetworkDispatcher:
-    private static final java.lang.String USER_AGENT_TEMPLATE
-com.google.analytics.tracking.android.Tracker:
-    private volatile com.google.analytics.tracking.android.ExceptionParser mExceptionParser
-    static final long TIME_PER_TOKEN_MILLIS
-    static final long MAX_TOKENS
-    148:151:public void setAppScreen(java.lang.String)
-    158:159:public void trackView()
-    164:170:public void sendView()
-    177:178:public void trackView(java.lang.String)
-    200:201:public void trackEvent(java.lang.String,java.lang.String,java.lang.String,java.lang.Long)
-    213:218:public void sendEvent(java.lang.String,java.lang.String,java.lang.String,java.lang.Long)
-    225:226:public void trackTransaction(com.google.analytics.tracking.android.Transaction)
-    232:241:public void sendTransaction(com.google.analytics.tracking.android.Transaction)
-    248:249:public void trackException(java.lang.String,boolean)
-    271:272:public void trackException(java.lang.String,java.lang.Throwable,boolean)
-    284:303:public void sendException(java.lang.String,java.lang.Throwable,boolean)
-    310:311:public void trackTiming(java.lang.String,long,java.lang.String,java.lang.String)
-    322:328:public void sendTiming(java.lang.String,long,java.lang.String,java.lang.String)
-    335:336:public void trackSocial(java.lang.String,java.lang.String,java.lang.String)
-    345:350:public void sendSocial(java.lang.String,java.lang.String,java.lang.String)
-    356:358:public void close()
-    369:372:public void send(java.lang.String,java.util.Map)
-    393:394:public java.lang.String get(java.lang.String)
-    402:404:public void set(java.lang.String,java.lang.String)
-    410:411:public java.lang.String getTrackingId()
-    433:434:public boolean isAnonymizeIpEnabled()
-    463:464:public double getSampleRate()
-    474:476:public void setUseSecure(boolean)
-    482:483:public boolean isUseSecure()
-    493:495:public void setReferrer(java.lang.String)
-    523:525:public void setCampaign(java.lang.String)
-    535:537:public void setAppId(java.lang.String)
-    540:541:public java.lang.String getAppId()
-    551:553:public void setAppInstallerId(java.lang.String)
-    556:557:public java.lang.String getAppInstallerId()
-    564:566:public void setExceptionParser(com.google.analytics.tracking.android.ExceptionParser)
-    572:573:public com.google.analytics.tracking.android.ExceptionParser getExceptionParser()
-    583:588:public void setCustomDimension(int,java.lang.String)
-    598:607:public void setCustomMetric(int,java.lang.Long)
-    618:628:public void setCustomDimensionsAndMetrics(java.util.Map,java.util.Map)
-    636:645:public java.util.Map constructEvent(java.lang.String,java.lang.String,java.lang.String,java.lang.Long)
-    649:649:private static java.lang.String microsToCurrencyString(long)
-    657:667:public java.util.Map constructTransaction(com.google.analytics.tracking.android.Transaction)
-    671:681:private java.util.Map constructItem(com.google.analytics.tracking.android.Transaction$Item,com.google.analytics.tracking.android.Transaction)
-    703:715:public java.util.Map constructRawException(java.lang.String,java.lang.Throwable,boolean)
-    723:730:public java.util.Map constructTiming(java.lang.String,long,java.lang.String,java.lang.String)
-    737:743:public java.util.Map constructSocial(java.lang.String,java.lang.String,java.lang.String)
-    748:749:void setLastTrackTime(long)
-    753:754:void setTokens(long)
-    787:788:public void setThrottlingEnabled(boolean)
-com.google.analytics.tracking.android.Tracker$SimpleModel:
-    807:811:public synchronized java.lang.String get(java.lang.String)
-com.google.analytics.tracking.android.TrackerHandler:
-    public abstract void closeTracker(com.google.analytics.tracking.android.Tracker)
+com.google.analytics.tracking.android.ParameterLoader
+com.google.analytics.tracking.android.ParameterLoaderImpl
+com.google.analytics.tracking.android.PersistentAnalyticsStore
+com.google.analytics.tracking.android.PersistentAnalyticsStore$1
+com.google.analytics.tracking.android.PersistentAnalyticsStore$2
+com.google.analytics.tracking.android.PersistentAnalyticsStore$AnalyticsDatabaseHelper
+com.google.analytics.tracking.android.ServiceManager
+com.google.analytics.tracking.android.ServiceProxy
+com.google.analytics.tracking.android.SimpleNetworkDispatcher
+com.google.analytics.tracking.android.StandardExceptionParser
+com.google.analytics.tracking.android.Tracker
+com.google.analytics.tracking.android.Tracker$1
+com.google.analytics.tracking.android.Tracker$SimpleModel
+com.google.analytics.tracking.android.TrackerHandler
 com.google.analytics.tracking.android.Transaction
 com.google.analytics.tracking.android.Transaction$1
 com.google.analytics.tracking.android.Transaction$Builder
 com.google.analytics.tracking.android.Transaction$Item
 com.google.analytics.tracking.android.Transaction$Item$Builder
-com.google.analytics.tracking.android.Utils:
-    18:18:Utils()
-    51:57:public static long safeParseLong(java.lang.String)
-    153:159:static java.lang.String hexEncode(byte[])
-    182:182:static java.lang.String getSlottedModelField(java.lang.String,int)
+com.google.analytics.tracking.android.Utils
 com.google.android.gms.ads.AdActivity
 com.google.android.gms.ads.AdListener
-com.google.android.gms.ads.AdRequest:
-    public static final int ERROR_CODE_INTERNAL_ERROR
-    public static final int ERROR_CODE_INVALID_REQUEST
-    public static final int ERROR_CODE_NETWORK_ERROR
-    public static final int ERROR_CODE_NO_FILL
-    public static final int GENDER_UNKNOWN
-    public static final int GENDER_MALE
-    public static final int GENDER_FEMALE
-    private final java.util.Date d
-    private final int dI
-    private final java.util.Set f
-    private final java.util.Map dJ
-    private final int dK
-    private final java.util.Set dL
-    private AdRequest(com.google.android.gms.ads.AdRequest$Builder)
-    public java.util.Date getBirthday()
-    public int getGender()
-    public java.util.Set getKeywords()
-    public com.google.android.gms.ads.mediation.NetworkExtras getNetworkExtras(java.lang.Class)
-    public boolean isTestDevice(android.content.Context)
-    java.util.Map v()
-    public int w()
-    synthetic AdRequest(com.google.android.gms.ads.AdRequest$Builder,com.google.android.gms.ads.AdRequest$1)
+com.google.android.gms.ads.AdRequest
 com.google.android.gms.ads.AdRequest$1
 com.google.android.gms.ads.AdRequest$Builder
 com.google.android.gms.ads.AdSize
@@ -1948,14 +1795,13 @@ com.google.android.gms.analytics.internal.Command:
     public static final java.lang.String APPEND_VERSION
     public static final java.lang.String APPEND_QUEUE_TIME
     public static final java.lang.String APPEND_CACHE_BUSTER
-com.google.android.gms.analytics.internal.IAnalyticsService$Stub:
-    private static final java.lang.String DESCRIPTOR
-    static final int TRANSACTION_sendHit
-    static final int TRANSACTION_clearHits
-    17:19:public IAnalyticsService$Stub()
-    37:37:public android.os.IBinder asBinder()
-com.google.android.gms.analytics.internal.IAnalyticsService$Stub$Proxy:
-    87:87:public java.lang.String getInterfaceDescriptor()
+    36:40:public Command(java.lang.String,java.lang.String,java.lang.String)
+    43:43:public java.lang.String getId()
+    47:47:public java.lang.String getUrlParam()
+    51:51:public java.lang.String getValue()
+com.google.android.gms.analytics.internal.IAnalyticsService
+com.google.android.gms.analytics.internal.IAnalyticsService$Stub
+com.google.android.gms.analytics.internal.IAnalyticsService$Stub$Proxy
 com.google.android.gms.appstate.AppState
 com.google.android.gms.appstate.AppStateBuffer
 com.google.android.gms.appstate.AppStateClient
@@ -2356,15 +2202,7 @@ com.google.android.gms.internal.ci$a
 com.google.android.gms.internal.cj
 com.google.android.gms.internal.ck
 com.google.android.gms.internal.cl
-com.google.android.gms.internal.cm:
-    public static int a(android.content.Context,int)
-    public static int a(android.util.DisplayMetrics,int)
-    public static void a(android.view.ViewGroup,com.google.android.gms.internal.x,java.lang.String)
-    public static void b(android.view.ViewGroup,com.google.android.gms.internal.x,java.lang.String)
-    private static void a(android.view.ViewGroup,com.google.android.gms.internal.x,java.lang.String,int,int)
-    public static java.lang.String l(android.content.Context)
-    public static boolean aq()
-    public static boolean ar()
+com.google.android.gms.internal.cm
 com.google.android.gms.internal.cn:
     public static void a(java.lang.String,java.lang.Throwable)
     public static void n(java.lang.String)
@@ -5061,11 +4899,17 @@ com.paypal.android.MEP.PayPal:
     public static final int LOGIN_VIA_EMAIL_EBAY_USER
     public static final int AUTH_SETTING_DISABLED
     public static final int AUTH_SETTING_ENABLED
+    public static com.paypal.android.MEP.PayPal initWithAppID(android.content.Context,java.lang.String,int)
+    public final void deinitialize()
+    public final void setLanguage(java.lang.String)
     public final boolean isLibraryInitialized()
     public final void shutdown()
     public final com.paypal.android.MEP.CheckoutButton getCheckoutButton(android.content.Context,int,int)
+    public final android.content.Intent checkout(com.paypal.android.MEP.PayPalPayment,android.content.Context,com.paypal.android.MEP.PaymentAdjuster,com.paypal.android.MEP.PayPalResultDelegate)
     public final android.content.Intent checkout(com.paypal.android.MEP.PayPalPayment,android.content.Context,com.paypal.android.MEP.PayPalResultDelegate)
     public final android.content.Intent checkout(com.paypal.android.MEP.PayPalPayment,android.content.Context,com.paypal.android.MEP.PaymentAdjuster)
+    public final android.content.Intent checkout(com.paypal.android.MEP.PayPalPayment,android.content.Context)
+    public final android.content.Intent checkout(com.paypal.android.MEP.PayPalAdvancedPayment,android.content.Context,com.paypal.android.MEP.PaymentAdjuster,com.paypal.android.MEP.PayPalResultDelegate)
     public final android.content.Intent checkout(com.paypal.android.MEP.PayPalAdvancedPayment,android.content.Context,com.paypal.android.MEP.PayPalResultDelegate)
     public final android.content.Intent checkout(com.paypal.android.MEP.PayPalAdvancedPayment,android.content.Context,com.paypal.android.MEP.PaymentAdjuster)
     public final android.content.Intent checkout(com.paypal.android.MEP.PayPalAdvancedPayment,android.content.Context)
@@ -5073,6 +4917,8 @@ com.paypal.android.MEP.PayPal:
     public final android.content.Intent preapprove(com.paypal.android.MEP.PayPalPreapproval,android.content.Context)
     public final java.lang.String getFlowContext()
     public final void setPreapprovalKey(java.lang.String)
+    public final void setFeesPayer(int)
+    public final void setShippingEnabled(boolean)
     public final void setDynamicAmountCalculationEnabled(boolean)
     public final java.lang.String getAccountName()
     public final java.lang.String getDeviceReferenceToken()
@@ -5105,8 +4951,11 @@ com.paypal.android.MEP.PayPalActivity:
     public final com.paypal.android.MEP.MEPAmounts AdjustAmounts(com.paypal.android.MEP.MEPAddress,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.paypal.android.MEP.PayPalAdvancedPayment:
     private static final long serialVersionUID
+    public void setCurrencyType(java.lang.String)
     public void setCurrencyType(java.util.Currency)
     public void setReceivers(java.util.ArrayList)
+    public void setIpnUrl(java.lang.String)
+    public void setMemo(java.lang.String)
     public java.math.BigDecimal getTotalSubtotal()
     public void setMerchantName(java.lang.String)
 com.paypal.android.MEP.PayPalInvoiceData:
@@ -5123,18 +4972,7 @@ com.paypal.android.MEP.PayPalInvoiceItem:
     public void setTotalPrice(java.math.BigDecimal)
     public void setUnitPrice(java.math.BigDecimal)
     public void setQuantity(int)
-com.paypal.android.MEP.PayPalPayment:
-    private static final long serialVersionUID
-    public PayPalPayment(java.lang.String,java.util.Currency,int,com.paypal.android.MEP.PayPalInvoiceData,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
-    public java.lang.String getDescription()
-    public void setCurrencyType(java.lang.String)
-    public void setInvoiceData(com.paypal.android.MEP.PayPalInvoiceData)
-    public void setPaymentSubtype(int)
-    public void setDescription(java.lang.String)
-    public void setCustomID(java.lang.String)
-    public void setMerchantName(java.lang.String)
-    public void setIpnUrl(java.lang.String)
-    public void setMemo(java.lang.String)
+com.paypal.android.MEP.PayPalPayment
 com.paypal.android.MEP.PayPalPreapproval:
     public static final int PERIOD_DAILY
     public static final int PERIOD_WEEKLY
@@ -5169,6 +5007,15 @@ com.paypal.android.MEP.PayPalPreapproval:
     public void setType(int)
 com.paypal.android.MEP.PayPalReceiverDetails:
     private static final long serialVersionUID
+    public void setRecipient(java.lang.String)
+    public void setSubtotal(java.math.BigDecimal)
+    public void setInvoiceData(com.paypal.android.MEP.PayPalInvoiceData)
+    public void setPaymentType(int)
+    public void setPaymentSubtype(int)
+    public void setDescription(java.lang.String)
+    public void setCustomID(java.lang.String)
+    public void setMerchantName(java.lang.String)
+    public void setIsPrimary(boolean)
 com.paypal.android.MEP.PaymentAdjuster:
     public abstract com.paypal.android.MEP.MEPAmounts adjustAmount(com.paypal.android.MEP.MEPAddress,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 com.paypal.android.c.a:
@@ -5180,9 +5027,18 @@ com.paypal.android.c.a.i:
 com.paypal.android.c.b:
     private static final long serialVersionUID
 com.paypal.android.c.e:
-    public static void b()
-com.paypal.android.c.g:
+    public e()
+    private byte[] b(java.lang.String)
+    public static byte[] a(java.lang.String)
     public static void a()
+    public static void b()
+com.paypal.android.c.f:
+    public static void e()
+com.paypal.android.c.g:
+    public static boolean b(java.lang.String)
+    public static void c(java.lang.String)
+    public static void a()
+    private static boolean g(java.lang.String)
 com.paypal.android.c.k:
     public static java.lang.String b()
 com.samsung.samm.common.SAMMFileInfo
@@ -6424,186 +6280,16 @@ org.ccil.cowan.tagsoup.jaxp.SAX1ParserAdapter$AttributesWrapper
 org.ccil.cowan.tagsoup.jaxp.SAX1ParserAdapter$DocHandlerWrapper
 org.ccil.cowan.tagsoup.jaxp.SAXFactoryImpl
 org.ccil.cowan.tagsoup.jaxp.SAXParserImpl
-ua.maker.gbible.BuildConfig
-ua.maker.gbible.R
-ua.maker.gbible.R$array
-ua.maker.gbible.R$attr
-ua.maker.gbible.R$bool
-ua.maker.gbible.R$color
-ua.maker.gbible.R$dimen
-ua.maker.gbible.R$drawable
-ua.maker.gbible.R$id
-ua.maker.gbible.R$integer
-ua.maker.gbible.R$layout
-ua.maker.gbible.R$menu
-ua.maker.gbible.R$string
-ua.maker.gbible.R$style
-ua.maker.gbible.R$styleable
-ua.maker.gbible.R$xml
-ua.maker.gbible.SinglePanelActivity:
-    private static final java.lang.String TAG
-    85:91:public void startFragment(android.support.v4.app.Fragment,java.lang.String)
-ua.maker.gbible.activity.DonateActivity:
-    public static final java.lang.String TAG
-ua.maker.gbible.activity.ReadForEveryDayActivity:
-    private static final java.lang.String TAG
-    private static final int ACTION_SET_DEF_ITEMS_READ
-ua.maker.gbible.activity.SettingActivity:
-    private static final java.lang.String TAG
-ua.maker.gbible.activity.StartActivity:
-    private static final java.lang.String TAG
-ua.maker.gbible.adapter.ItemDialogAdapter:
-    private static final java.lang.String TAG
-ua.maker.gbible.adapter.ItemLinksWithHeadersAdapter:
-    private static final java.lang.String TAG
-ua.maker.gbible.constant.App
-ua.maker.gbible.constant.BooksId
-ua.maker.gbible.constant.PlanData
-ua.maker.gbible.fragment.BookmarksFragment:
-    private static final java.lang.String TAG
-    private static final int BTN_COMPARE_POEM
-    private static final int BTN_ADD_TO_PLAN
-    private static final int BTN_DELETE
-    private static final int BTN_COPY
-    private static final int BTN_SHARE
-ua.maker.gbible.fragment.EmptyFragment
-ua.maker.gbible.fragment.HistoryFragment:
-    private static final java.lang.String TAG
-ua.maker.gbible.fragment.InstructionInfoFragment:
-    private static final java.lang.String TAG
-ua.maker.gbible.fragment.ListPoemsFragment:
-    private static final java.lang.String TAG
-    private static final int CLEAR_CLICK_DELAYED
-    private static final int SMOOTH_DURATION
-ua.maker.gbible.fragment.PlanDetailFragment:
-    private static final java.lang.String TAG
-    private static final int BTN_DRAP_AND_DROP
-    private static final int BTN_EDIT
-    private static final int BTN_DELETE
-ua.maker.gbible.fragment.PlansListFragment:
-    private static final java.lang.String TAG
-    private static final int CMB_EDIT
-    private static final int CMB_DELETE
-ua.maker.gbible.fragment.SearchFragment:
-    private static final java.lang.String TAG
-ua.maker.gbible.fragment.SelectBookFragment:
-    private static final java.lang.String TAG
-ua.maker.gbible.fragment.UpdatesInfoFragment:
-    private static final java.lang.String TAG
-ua.maker.gbible.structs.BookMarksStruct:
-    5:33:public BookMarksStruct(java.lang.String,java.lang.String,java.lang.String,int,int,int,int)
-    61:62:public void setBookName(java.lang.String)
-    81:82:public void setId(int)
-ua.maker.gbible.structs.ColorStruct:
-    5:18:public ColorStruct(java.lang.String,int)
-ua.maker.gbible.structs.HistoryStruct:
-    32:33:public void setBookName(java.lang.String)
-ua.maker.gbible.structs.ItemPlanStruct:
-    8:28:public ItemPlanStruct(int,java.lang.String)
-    8:35:public ItemPlanStruct(int,java.lang.String,android.graphics.Bitmap)
-    8:45:public ItemPlanStruct(int,java.lang.String,int,int,int,java.lang.String)
-    8:54:public ItemPlanStruct(int,java.lang.String,int,int,int)
-    8:64:public ItemPlanStruct(int,java.lang.String,int,int,int,int)
-    8:70:public ItemPlanStruct(int,android.graphics.Bitmap)
-    117:118:public void setImgBitMap(android.graphics.Bitmap)
-    149:149:public android.graphics.Bitmap getImgBitMap()
-ua.maker.gbible.structs.ItemReadDay:
-    7:26:public ItemReadDay(int,java.lang.String,int,java.util.List,java.util.List)
-    45:45:public int getSection()
-    49:50:public void setSection(int)
-    53:53:public int getRow()
-    57:58:public void setRow(int)
-    85:85:public int getYear()
-    105:106:public void setYear(int)
-ua.maker.gbible.structs.PlanStruct:
-    5:15:public PlanStruct(java.lang.String,java.lang.String)
-    5:21:public PlanStruct(java.lang.String,java.lang.String,java.lang.String)
-ua.maker.gbible.structs.PoemStruct:
-    5:24:public PoemStruct(java.lang.String,boolean)
-    5:30:public PoemStruct(java.lang.String,java.lang.String,int)
-    5:37:public PoemStruct(java.lang.String,java.lang.String,int,int)
-    110:111:public ua.maker.gbible.structs.PoemStruct setText(java.lang.String)
-    115:116:public ua.maker.gbible.structs.PoemStruct setChecked(boolean)
-ua.maker.gbible.utils.DataBase:
-    private static final java.lang.String TAG
-    private static final int DB_VERSION
-    private static final java.lang.String DB_PATH
-    private static final java.lang.String DB_NAME
-    public static final java.lang.String TABLE_NAME_RST
-    public static final java.lang.String TABLE_NAME_MT
-    public static final java.lang.String TABLE_NAME_UAT
-    public static final java.lang.String TABLE_NAME_ENT
-    public static final int TRANSLATE_RST_ID
-    public static final int TRANSLATE_MT_ID
-    public static final int TRANSLATE_UA_ID
-    public static final int TRANSLATE_EN_ID
-    public static final java.lang.String TABLE_SEARCH_RESULT
-    public static final java.lang.String TABLE_READ_FOR_EVERY_DAY
-    public static final java.lang.String FIELD_BOOK_ID
-    public static final java.lang.String FIELD_TRANSLATE
-    public static final java.lang.String FIELD_BOOK_NAME
-    public static final java.lang.String FIELD_TABLE_NAME
-    public static final java.lang.String FIELD_CHAPTER
-    public static final java.lang.String FIELD_POEM
-    public static final java.lang.String FIELD_CONTENT
-    public static final java.lang.String KEY_ROWID
-    public static final java.lang.String FIELD_MONTH
-    public static final java.lang.String FIELD_DAY
-    public static final java.lang.String FIELD_BOOK_NAME_OLD_T
-    public static final java.lang.String FIELD_BOOK_NAME_NEW_T
-    public static final java.lang.String FIELD_CHAPTERS_OLD_T
-    public static final java.lang.String FIELD_CHAPTERS_NEW_T
-    public static final java.lang.String FIELD_BOOK_ID_NEW_T
-    public static final java.lang.String FIELD_BOOK_ID_OLD_T
-    public static final java.lang.String FIELD_STATUS_READED
-    160:160:public android.database.sqlite.SQLiteDatabase getDb()
-ua.maker.gbible.utils.Tools:
-    18:18:public Tools()
-    250:255:public static java.lang.String getWebColor(java.lang.String)
-    303:308:public static void showKeyBoard(android.app.Activity)
-ua.maker.gbible.utils.UserDB:
-    private static final java.lang.String TAG
-    private static final java.lang.String DB_NAME
-    private static final int DB_VERSION
-    private static final java.lang.String TABLE_PLAN_LIST
-    private static final java.lang.String TABLE_PLAN_DATA
-    private static final java.lang.String TABLE_BOOKMARKS
-    private static final java.lang.String TABLE_HISTORY
-    private static final java.lang.String TABLE_MARKER
-    private static final java.lang.String TABLE_COLOR_SELECT_HITORY
-    public static final java.lang.String FIELD_ID
-    public static final java.lang.String FIELD_PLAN_ID
-    public static final java.lang.String FIELD_NAME
-    public static final java.lang.String FIELD_SUB_DESCRIPTION
-    public static final java.lang.String FIELD_DATE
-    public static final java.lang.String FIELD_COLOR_HEX
-    public static final java.lang.String FIELD_BOOK_ID
-    public static final java.lang.String FIELD_BOOK_NAME
-    public static final java.lang.String FIELD_TABLE_NAME
-    public static final java.lang.String FIELD_CHAPTER
-    public static final java.lang.String FIELD_POEM
-    public static final java.lang.String FIELD_TO_POEM
-    public static final java.lang.String FIELD_CONTENT
-    public static final java.lang.String FIELD_TRANSLATE
-    public static final java.lang.String FIELD_COMMENT_BOOKMARK
-    public static final java.lang.String FIELD_NEXT_LINK
-    public static final java.lang.String FIELD_TYPE_DATA
-    public static final java.lang.String FIELD_PATH_IMG
-    private static final java.lang.String SQL_CREATE_TABLE_PLANS_LIST
-    private static final java.lang.String SQL_CREATE_TABLE_MARKER
-    private static final java.lang.String SQL_CREATE_TABLE_PLAN_DATA
-    private static final java.lang.String SQL_CREATE_TABLE_BOOKMARKS_DATA
-    private static final java.lang.String SQL_CREATE_TABLE_HISTORY
-    private static final java.lang.String SQL_COLOR_SELECT_HISTORY
-    252:271:public void insertBookMarks(java.util.List)
-ua.maker.gbible.widget.setting.ColorPickerCustomDialog:
-    283:290:public void setHexValueEnabled(boolean)
-    293:293:public boolean getHexValueEnabled()
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$1
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$2
+ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener
 ua.maker.gbible.widget.setting.ColorPickerDialog:
     159:159:public boolean getHexValueEnabled()
 ua.maker.gbible.widget.setting.ColorPickerPanelView:
     private static final float BORDER_WIDTH_PX
 ua.maker.gbible.widget.setting.ColorPickerPreference:
+    170:171:public void setAlphaSliderEnabled(boolean)
     174:175:public void setHexValueEnabled(boolean)
 ua.maker.gbible.widget.setting.ColorPickerView:
     private static final int PANEL_SAT_VAL
