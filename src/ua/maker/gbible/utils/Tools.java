@@ -227,6 +227,203 @@ public class Tools {
 		return name;
 	}
 	
+	public static int getBookIdByName(String name, Context ctx){		
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;}
+		if(name.equals(ctx.getString(R.string.ishod_str))){
+			return BooksId.ISHOD_ID;}
+		if(name.equals(ctx.getString(R.string.levit_str))){
+			return BooksId.LEVIT_ID;}
+		if(name.equals(ctx.getString(R.string.number_str))){
+			return BooksId.NUMBER_ID;}
+		if(name.equals(ctx.getString(R.string.vtorozakonie_str))){
+			return BooksId.VTOROZ_ID;}
+		if(name.equals(ctx.getString(R.string.iisus_navin_str))){
+			return BooksId.IISUS_NAVIN_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		if(name.equals(ctx.getString(R.string.bitie_str))){
+			return BooksId.BITIE_ID;
+		}
+		return 0;
+	}
+	
 	public static void showToast(Context context, String text) {
 		
 		if (text != null && text.equals(lastToastText)) {

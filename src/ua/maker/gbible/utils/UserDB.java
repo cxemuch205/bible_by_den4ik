@@ -3,13 +3,16 @@ package ua.maker.gbible.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.maker.gbible.constant.App;
 import ua.maker.gbible.structs.BookMarksStruct;
 import ua.maker.gbible.structs.ColorStruct;
 import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.structs.ItemPlanStruct;
+import ua.maker.gbible.structs.ItemReadDay;
 import ua.maker.gbible.structs.PlanStruct;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -20,7 +23,7 @@ public class UserDB extends SQLiteOpenHelper{
 	private static final String TAG = "UserDB";
 	
 	private static final String DB_NAME = "user_data.db";
-	private static final int DB_VERSION = 4; //set 4 last ver 3
+	private static final int DB_VERSION = 5; //set 5 last ver 4
 	
 	private static final String TABLE_PLAN_LIST = "user_plan_list";
 	private static final String TABLE_PLAN_DATA = "item_plan_data";
@@ -100,13 +103,19 @@ public class UserDB extends SQLiteOpenHelper{
 			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 			+ FIELD_COLOR_HEX + " TEXT)";
 	
+	private static final String SQL_STATUS_READED = "CREATE TABLE " + DataBase.TABLE_READ_FOR_EVERY_DAY + " ("
+			+ FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+			+ DataBase.FIELD_STATUS_READED + " TEXT);";
+	
 	private Context context = null;
 	private SQLiteDatabase db = null;
+	private SharedPreferences pref;
 	
 	public UserDB(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 		this.context = context;
 		db = getWritableDatabase();
+		pref = context.getSharedPreferences(App.PREF_APP, 0);
 	}
 
 	@Override
@@ -118,6 +127,7 @@ public class UserDB extends SQLiteOpenHelper{
 		db.execSQL(SQL_CREATE_TABLE_HISTORY);
 		db.execSQL(SQL_CREATE_TABLE_MARKER);
 		db.execSQL(SQL_COLOR_SELECT_HISTORY);
+		db.execSQL(SQL_STATUS_READED);
 	}
 
 	@Override
@@ -130,6 +140,9 @@ public class UserDB extends SQLiteOpenHelper{
 		};
 		case 3:{
 			db.execSQL(SQL_COLOR_SELECT_HISTORY);
+		};
+		case 4:{
+			db.execSQL(SQL_STATUS_READED);
 		};
 		}
 	}
@@ -625,5 +638,50 @@ public class UserDB extends SQLiteOpenHelper{
 			}
 		}
 		return result;
+	}
+	
+	public void insertStatusesReaded(List<ItemReadDay> data){
+		if(db.isOpen()){
+			for(int i = 0; i < data.size(); i++){
+				ContentValues cv = new ContentValues();
+				
+				cv.put(DataBase.FIELD_STATUS_READED, data.get(i).isStatusReaded());
+				
+				db.insert(DataBase.TABLE_READ_FOR_EVERY_DAY, null, cv);
+			}
+		}
+	}
+	
+	public List<ItemReadDay> getStatusReaded(List<ItemReadDay> data){
+		if(!pref.contains("inser_list_status")){
+			insertStatusesReaded(data);
+			pref.edit().putBoolean("inser_list_status", true).commit();
+		}
+		if(db.isOpen()){
+			Cursor c = db.rawQuery("SELECT * FROM '"+DataBase.TABLE_READ_FOR_EVERY_DAY+"'", null);
+			if(c.moveToFirst()){
+				int indexStatus = c.getColumnIndex(DataBase.FIELD_STATUS_READED);
+				int i = 0;
+				do {
+					boolean status = Boolean.parseBoolean(c.getString(indexStatus));
+					data.get(i).setStatus(status);
+					i++;
+				} while (c.moveToNext());
+			}
+		}
+		
+		return data;
+	}
+	
+	public int setStatusReadedByPosition(int index, boolean status){
+		if(db.isOpen()){
+    		ContentValues values = new ContentValues();
+			
+			values.put(DataBase.FIELD_STATUS_READED, String.valueOf(status));
+			int idUpdateRow = db.update(DataBase.TABLE_READ_FOR_EVERY_DAY, values, FIELD_ID + " = " + (index+1), null);
+			Log.d(TAG, "ROW Update: " + idUpdateRow);
+			return idUpdateRow;
+    	}else
+    		return -1;
 	}
 }

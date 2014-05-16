@@ -2,7 +2,7 @@ package ua.maker.gbible.structs;
 
 public class PoemStruct {
 	
-	private String text = "";
+	private String content = "";
 	private boolean checked = false;
 	private String bookName = "";
 	private int bookId = 1;
@@ -11,26 +11,27 @@ public class PoemStruct {
 	private int poemTo = 0;
 	private String colorHEX = "";
 	private int posColor;
+	private String translateSource = "";
 	
 	public PoemStruct(){};
 	
 	public PoemStruct(String text){
-		this.text = text;
+		this.content = text;
 	};
 	
 	public PoemStruct(String text, boolean checked){
-		this.text = text;
+		this.content = text;
 		this.checked = checked;
 	};
 	
 	public PoemStruct(String content, String bookName, int chapter){
-		this.text = content;
+		this.content = content;
 		this.bookName = bookName;
 		this.chapter = chapter;
 	};
 	
 	public PoemStruct(String content, String bookName, int chapter, int poem){
-		this.text = content;
+		this.content = content;
 		this.bookName = bookName;
 		this.chapter = chapter;
 		this.poem = poem;
@@ -98,21 +99,29 @@ public class PoemStruct {
 		return this;
 	}
 	
-	public String getText() {
-		return text;
+	public String getContent() {
+		return content;
 	}
 	
 	public boolean isChecked() {
 		return checked;
 	}
 	
-	public PoemStruct setText(String text) {
-		this.text = text;
+	public PoemStruct setContent(String text) {
+		this.content = text;
 		return this;
 	}
 	
 	public PoemStruct setChecked(boolean checked) {
 		this.checked = checked;
 		return this;
+	}
+
+	public String getTranslateSource() {
+		return translateSource;
+	}
+
+	public void setTranslateSource(String translateSource) {
+		this.translateSource = translateSource;
 	}
 }

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ua.maker.gbible"
     android:installLocation="auto"
-    android:versionCode="18"
-    android:versionName="1.5.0.3" >
+    android:versionCode="19"
+    android:versionName="1.5.0.5" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -90,6 +90,12 @@
             android:name="ua.maker.gbible.activity.InstructionUpdateActivity"
             android:label="@string/title_activity_instruction_update" >
         </activity>
+        <provider 
+            android:name="ua.maker.gbible.utils.BibleContentProvider"
+            android:authorities="ua.maker.gbible.provider.BibleContent"/>
+        <provider 
+            android:name="ua.maker.gbible.utils.ReadEDContentProvider"
+            android:authorities="ua.maker.gbible.provider.RfEDContent"/>
     </application>
 
 </manifest>

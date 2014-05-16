@@ -21,6 +21,8 @@ public class UpdatesInfoFragment extends SherlockFragment {
 	
 	private static UpdatesInfoFragment instance;
 	
+	private UpdatesInfoFragment(){};
+	
 	public static UpdatesInfoFragment getInstance(){
 		if(instance == null){
 			instance = new UpdatesInfoFragment();
@@ -31,6 +33,7 @@ public class UpdatesInfoFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		setRetainInstance(true);
 	}
 	
 	@Override

@@ -115,7 +115,7 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		if(dayNight){
 			holder.tvContentPoem.setTextColor(Color.WHITE);
 			holder.tvNumberPoem.setTextColor(Color.WHITE);
-			holder.tvContentPoem.setText(content.getText());
+			holder.tvContentPoem.setText(content.getContent());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));
 			holder.tvNumberPoem.setTextSize(size-1);
@@ -124,7 +124,7 @@ public class ItemListPoemAdapter extends ArrayAdapter<PoemStruct> {
 		{
 			holder.tvContentPoem.setTextColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
 			holder.tvNumberPoem.setTextColor(Color.parseColor(ColorPickerPreference.convertToARGB(Integer.valueOf(String.valueOf(color)))));
-			holder.tvContentPoem.setText(content.getText());
+			holder.tvContentPoem.setText(content.getContent());
 			holder.tvContentPoem.setTextSize(size);
 			holder.tvNumberPoem.setText(""+(position+1));
 			if(size <=18){

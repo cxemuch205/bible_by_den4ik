@@ -70,6 +70,7 @@ public class DataBase extends SQLiteOpenHelper {
 												  *"en_t"*/};
 	
 	private SQLiteDatabase db = null;
+	private UserDB dbUser;
 	private final Context mContext;
 	
 	private SharedPreferences pref = null;
@@ -78,6 +79,7 @@ public class DataBase extends SQLiteOpenHelper {
 		super(context, DB_NAME, null, DB_VERSION);
 		mContext = context;
 		pref = context.getSharedPreferences(App.PREF_APP, 0);
+		dbUser = new UserDB(context);
 	}
 
 	public void createDataBase() throws IOException{
@@ -166,6 +168,30 @@ public class DataBase extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 	
+	public Cursor getCursor(String table, String[] columns, String selection, 
+			String[] selectionArgs, String groupBy, String having, String orderBy){
+		return db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
+	}
+	
+	public Cursor getBooksCursor(){
+		return db.rawQuery("SELECT "+FIELD_BOOK_ID+" FROM '"+Tools.getTranslateWitchPreferences(mContext)+"'", null);
+	}
+	
+	public Cursor getChapterCursors(String bookId){
+		return db.query(Tools.getTranslateWitchPreferences(mContext), 
+				new String []{FIELD_BOOK_ID, FIELD_POEM}, DataBase.FIELD_BOOK_ID + " = " + bookId, null, null, null, null);
+	}
+	
+	public Cursor getContentChapters(String bookId, String chapter){
+		return db.query(Tools.getTranslateWitchPreferences(mContext), 
+				new String []{FIELD_BOOK_ID, FIELD_CHAPTER, FIELD_CONTENT}, 
+				FIELD_BOOK_ID + " = " + bookId + " AND " + FIELD_CHAPTER + " = " + chapter, null, null, null, null);
+	}
+	
+	public Cursor getReadEDCursor(){
+		return db.rawQuery("SELECT * FROM '"+TABLE_READ_FOR_EVERY_DAY+"'", null);
+	}
+	
 	public List<String> getBooks(String tableName){
 		Log.d(TAG, "Start getting books");
 		List<String> books = new ArrayList<String>();
@@ -173,10 +199,11 @@ public class DataBase extends SQLiteOpenHelper {
 		if(db.isOpen()){
 			Cursor cursor = db.rawQuery("SELECT "+FIELD_BOOK_ID+" FROM '"+tableName+"'", null);
 			if(cursor.moveToFirst()){
+				int indexBookId = cursor.getColumnIndex(FIELD_BOOK_ID);
 				do{
-					if(j != cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID))){
-						books.add(Tools.getBookNameByBookId(cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID)), mContext));
-						j = cursor.getInt(cursor.getColumnIndex(FIELD_BOOK_ID));
+					if(j != cursor.getInt(indexBookId)){
+						books.add(Tools.getBookNameByBookId(cursor.getInt(indexBookId), mContext));
+						j = cursor.getInt(indexBookId);
 					}
 				}while(cursor.moveToNext());
 			}
@@ -191,9 +218,11 @@ public class DataBase extends SQLiteOpenHelper {
 		if(db.isOpen()){
 			Cursor c = db.rawQuery("SELECT "+FIELD_BOOK_ID+", "+FIELD_POEM+" FROM '"+tableName+"'", null);
 			if(c.moveToFirst()){
+				int indexBookId = c.getColumnIndex(FIELD_BOOK_ID);
+				int indexPoemId = c.getColumnIndex(FIELD_POEM);
 				do{
-					if(c.getInt(c.getColumnIndex(FIELD_BOOK_ID)) == bookId)
-						if(c.getInt(c.getColumnIndex(FIELD_POEM)) == 1){
+					if(c.getInt(indexBookId) == bookId)
+						if(c.getInt(indexPoemId) == 1){
 							chapters.add(count);
 							count++;
 						}
@@ -230,21 +259,25 @@ public class DataBase extends SQLiteOpenHelper {
     	return poems;
     }
 	
-	public List<HashMap<String, String>> getPoemCompare(int bookId, int chapter, int poem){
-		List<HashMap<String, String>> poems = new ArrayList<HashMap<String, String>>();
+	public List<PoemStruct> getPoemCompare(int bookId, int chapter, int poem){
+		List<PoemStruct> poems = new ArrayList<PoemStruct>();
 		Log.d(TAG, "Starting get poem in all translated");
 		if(db.isOpen()){
 			for(int i = 0; i < TABLE_NAMES.length; i++){
 				Cursor c = db.rawQuery("SELECT * FROM '"+TABLE_NAMES[i]+"'", null);
 				if(c.moveToFirst()){
+					int indexBookId = c.getColumnIndex(FIELD_BOOK_ID);
+					int indexChapter = c.getColumnIndex(FIELD_CHAPTER);
+					int indexPoemId = c.getColumnIndex(FIELD_POEM);
+					int content = c.getColumnIndex(FIELD_CONTENT);
 					do{
-						if(c.getInt(c.getColumnIndex(FIELD_BOOK_ID)) == bookId)
-							if(c.getInt(c.getColumnIndex(FIELD_CHAPTER)) == chapter)
-								if(c.getInt(c.getColumnIndex(FIELD_POEM)) == poem){
-									HashMap<String, String> hs = new HashMap<String, String>();
-									hs.put(App.POEM, c.getString(c.getColumnIndex(FIELD_CONTENT)));
-									hs.put(App.TRANSLATE_LABEL, TABLE_NAMES[i]);
-									poems.add(hs);
+						if(c.getInt(indexBookId) == bookId)
+							if(c.getInt(indexChapter) == chapter)
+								if(c.getInt(indexPoemId) == poem){
+									PoemStruct pm = new PoemStruct();
+									pm.setContent(c.getString(content));
+									pm.setTranslateSource(TABLE_NAMES[i]);
+									poems.add(pm);
 								}									
 					}while(c.moveToNext());
 				}
@@ -402,14 +435,8 @@ public class DataBase extends SQLiteOpenHelper {
     	return result;
     }
     
-    public void setStatusItemReadForEveryDay(int index, boolean status){
-    	if(db.isOpen()){
-    		ContentValues values = new ContentValues();
-			
-			values.put(FIELD_STATUS_READED, String.valueOf(status));
-			int idUpdateRow = db.update(TABLE_READ_FOR_EVERY_DAY, values, KEY_ROWID + " = " + (index+1), null);
-			Log.d(TAG, "ROW Update: " + idUpdateRow);
-    	}
+    public int setStatusItemReadForEveryDay(int index, boolean status){
+    	return dbUser.setStatusReadedByPosition(index, status);
     }
     
     public void setDefaultStatusItemRead(int countItems){
@@ -463,6 +490,9 @@ public class DataBase extends SQLiteOpenHelper {
 					
 				} while (c.moveToNext());
     		}
+    		
+    		result = dbUser.getStatusReaded(result);
+    		
     	}
     	
     	return result;

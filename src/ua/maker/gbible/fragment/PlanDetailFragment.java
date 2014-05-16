@@ -14,11 +14,14 @@ import ua.maker.gbible.structs.PlanStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,6 +47,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class PlanDetailFragment extends SherlockFragment {
 	
 	private static final String TAG = "PlanDetailFragment";
@@ -71,6 +75,7 @@ public class PlanDetailFragment extends SherlockFragment {
 	
 	private boolean pasteItem = false;
 	private boolean isEdit = false;
+	private boolean check = false;
 	
 	private MenuItem itemCancel = null;
 	
@@ -98,12 +103,100 @@ public class PlanDetailFragment extends SherlockFragment {
 	private List<Integer> listPoem = null;
 	private List<Integer> listToPoem = null;
 	
+	private static PlanDetailFragment instance;
+	
+	private PlanDetailFragment(){};
+	
+	public static PlanDetailFragment getInstance() {
+		if(instance == null){
+			instance = new PlanDetailFragment();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		setRetainInstance(true);
+		setHasOptionsMenu(true);
+		if(db == null){
+			db = new UserDB(getSherlockActivity());
+			listItemsPlan = new ArrayList<ItemPlanStruct>();
+			pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			adapter = new PlanItemAdapter(getSherlockActivity(), listItemsPlan);
+			dbBible = new DataBase(getSherlockActivity());
+			
+			try {
+				dbBible.createDataBase();
+			} catch (IOException e) {e.printStackTrace();}
+			
+			dbBible.openDataBase();
+			
+			listBooks = new ArrayList<String>();
+			listChapter = new ArrayList<Integer>();
+			listPoem = new ArrayList<Integer>();
+			listToPoem = new ArrayList<Integer>();
+			String[] books = getResources().getStringArray(R.array.array_books);
+			for(int i = 0; i < books.length; i++){
+				listBooks.add(""+books[i]);
+			}		 
+			
+			adapterBooks = new ArrayAdapter<String>(getSherlockActivity(), android.R.layout.simple_list_item_1, listBooks);
+			adapterChapters = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listChapter);
+			adapterPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listPoem);
+			adapterToPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listToPoem);
+			
+			adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			adapterChapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			adapterPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			adapterToPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+			builder.setTitle(getString(R.string.dialog_title_add_item_plan));
+			
+			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			View viewDialog = inflater.inflate(R.layout.dialog_add_item_to_plan, null);
+			
+			rbIsText = (RadioButton)viewDialog.findViewById(R.id.rb_text);
+			rbIsLink = (RadioButton)viewDialog.findViewById(R.id.rb_link);
+			
+			llText = (LinearLayout)viewDialog.findViewById(R.id.ll_add_text_item);
+			etTextItem = (EditText)viewDialog.findViewById(R.id.et_text_to_new_item_plan);
+			cbBoldText = (CheckBox)viewDialog.findViewById(R.id.cb_set_text_bold);
+			cbQuotePoem = (CheckBox)viewDialog.findViewById(R.id.cb_quote);
+			
+			llLink = (LinearLayout)viewDialog.findViewById(R.id.ll_add_link_item);
+			spinnerBooks = (Spinner)viewDialog.findViewById(R.id.spinner_books);
+			spinnerChapter = (Spinner)viewDialog.findViewById(R.id.spinner_chapter);
+			spinnerPoem = (Spinner)viewDialog.findViewById(R.id.spinner_poem);
+			spinnerToPoem = (Spinner)viewDialog.findViewById(R.id.spinner_to_poem);
+			
+			spinnerBooks.setAdapter(adapterBooks);
+			spinnerChapter.setAdapter(adapterChapters);
+			spinnerPoem.setAdapter(adapterPoem);
+			spinnerToPoem.setAdapter(adapterToPoem);
+			
+			builder.setView(viewDialog);
+			builder.setPositiveButton(getString(R.string.menu_title_add_point), clickAddListener);
+			builder.setNegativeButton(getString(R.string.dialog_cancel), clickCancelListener);
+			
+			dialog = builder.create();
+			
+			rbIsText.setOnCheckedChangeListener(checkedIsTextChangeListener);
+			rbIsLink.setOnCheckedChangeListener(checkedIsLinkChangeListener);
+			spinnerBooks.setOnItemSelectedListener(itemSpinnerBooksSelectedListener);
+			spinnerChapter.setOnItemSelectedListener(itemSpinnerChaptersSelectedListener);
+			spinnerPoem.setOnItemSelectedListener(itemSpinnerPoemSelectedListener);
+		}		
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		Log.d(TAG, "onCreateView()");
 		view = inflater.inflate(R.layout.activity_plan_detail, null);
 		lvPlanItems = (ListView)view.findViewById(R.id.lv_plan_items);
+		lvPlanItems.setAdapter(adapter);
 		
 		if(!getSherlockActivity().getSupportActionBar().isShowing())
 			getSherlockActivity().getSupportActionBar().show();
@@ -114,86 +207,18 @@ public class PlanDetailFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		setHasOptionsMenu(true);
-		db = new UserDB(getSherlockActivity());
-		listItemsPlan = new ArrayList<ItemPlanStruct>();
-		pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		adapter = new PlanItemAdapter(getSherlockActivity(), listItemsPlan);
-		dbBible = new DataBase(getSherlockActivity());
-		registerForContextMenu(lvPlanItems);
-		
-		try {
-			dbBible.createDataBase();
-		} catch (IOException e) {e.printStackTrace();}
-		
-		dbBible.openDataBase();
+		registerForContextMenu(lvPlanItems);		
 		
 		planId = pref.getInt(App.PLAN_ID, 1);
 		Log.d(TAG, "planid: " + planId);
 		
-		plan = db.getPlanById(planId);
-		
-		listBooks = new ArrayList<String>();
-		listChapter = new ArrayList<Integer>();
-		listPoem = new ArrayList<Integer>();
-		listToPoem = new ArrayList<Integer>();
-		String[] books = getResources().getStringArray(R.array.array_books);
-		for(int i = 0; i < books.length; i++){
-			listBooks.add(""+books[i]);
-		}		 
-		
-		adapterBooks = new ArrayAdapter<String>(getSherlockActivity(), android.R.layout.simple_list_item_1, listBooks);
-		adapterChapters = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listChapter);
-		adapterPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listPoem);
-		adapterToPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listToPoem);
-		
-		adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		adapterChapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		adapterPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		adapterToPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		plan = db.getPlanById(planId);		
 		
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activit_plan)+": "+plan.getName());
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		lvPlanItems.setOnItemClickListener(itemClickListener);
 		lvPlanItems.setOnItemLongClickListener(itemLongClickListener);
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
-		builder.setTitle(getString(R.string.dialog_title_add_item_plan));
-		
-		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
-		View viewDialog = inflater.inflate(R.layout.dialog_add_item_to_plan, null);
-		
-		rbIsText = (RadioButton)viewDialog.findViewById(R.id.rb_text);
-		rbIsLink = (RadioButton)viewDialog.findViewById(R.id.rb_link);
-		
-		llText = (LinearLayout)viewDialog.findViewById(R.id.ll_add_text_item);
-		etTextItem = (EditText)viewDialog.findViewById(R.id.et_text_to_new_item_plan);
-		cbBoldText = (CheckBox)viewDialog.findViewById(R.id.cb_set_text_bold);
-		cbQuotePoem = (CheckBox)viewDialog.findViewById(R.id.cb_quote);
-		
-		llLink = (LinearLayout)viewDialog.findViewById(R.id.ll_add_link_item);
-		spinnerBooks = (Spinner)viewDialog.findViewById(R.id.spinner_books);
-		spinnerChapter = (Spinner)viewDialog.findViewById(R.id.spinner_chapter);
-		spinnerPoem = (Spinner)viewDialog.findViewById(R.id.spinner_poem);
-		spinnerToPoem = (Spinner)viewDialog.findViewById(R.id.spinner_to_poem);
-		
-		spinnerBooks.setAdapter(adapterBooks);
-		spinnerChapter.setAdapter(adapterChapters);
-		spinnerPoem.setAdapter(adapterPoem);
-		spinnerToPoem.setAdapter(adapterToPoem);
-		
-		builder.setView(viewDialog);
-		builder.setPositiveButton(getString(R.string.menu_title_add_point), clickAddListener);
-		builder.setNegativeButton(getString(R.string.dialog_cancel), clickCancelListener);
-		
-		dialog = builder.create();
-		
-		rbIsText.setOnCheckedChangeListener(checkedIsTextChangeListener);
-		rbIsLink.setOnCheckedChangeListener(checkedIsLinkChangeListener);
-		spinnerBooks.setOnItemSelectedListener(itemSpinnerBooksSelectedListener);
-		spinnerChapter.setOnItemSelectedListener(itemSpinnerChaptersSelectedListener);
-		spinnerPoem.setOnItemSelectedListener(itemSpinnerPoemSelectedListener);
 	}
 	
 	@Override
@@ -201,13 +226,13 @@ public class PlanDetailFragment extends SherlockFragment {
 		super.onStart();
 		Log.d(TAG, "onStart() - getItem - planId:" + plan.getId());
 		EasyTracker.getInstance().activityStart(getSherlockActivity());
-		listItemsPlan = db.getItemsPlanById(plan.getId());
+		listItemsPlan.clear();
+		listItemsPlan.addAll(db.getItemsPlanById(plan.getId()));
 		updateList();
 	}
 	
 	private void updateList(){
-		adapter = new PlanItemAdapter(getSherlockActivity(), listItemsPlan);
-		lvPlanItems.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
 	}
 	
 	private OnItemSelectedListener itemSpinnerBooksSelectedListener = new OnItemSelectedListener() {
@@ -233,8 +258,8 @@ public class PlanDetailFragment extends SherlockFragment {
 			Log.d(TAG, "Geting listPoems");
 			listPoem.clear();
 			numberOfPoem = dbBible.getNumberOfPoemInChapter(
-					(spinnerBooks.getSelectedItemPosition()+1), 
-					(spinnerChapter.getSelectedItemPosition()+1), 
+					Tools.getBookIdByName(listBooks.get(spinnerBooks.getSelectedItemPosition()), getSherlockActivity()), 
+					listChapter.get(spinnerChapter.getSelectedItemPosition()), 
 					Tools.getTranslateWitchPreferences(getSherlockActivity()));
 			for(int i = 1; i <= numberOfPoem; i++)
 				listPoem.add(i);
@@ -253,10 +278,11 @@ public class PlanDetailFragment extends SherlockFragment {
 			listToPoem.clear();
 			for(int i = (spinnerPoem.getSelectedItemPosition()+1); i <= numberOfPoem; i++)
 				listToPoem.add(i);
-			if(isEdit){
+			if(isEdit & !check){
 				spinnerChapter.setSelection(backUpItem.getChapter()-1);
 				spinnerPoem.setSelection(backUpItem.getPoem()-1);
 				spinnerToPoem.setSelection(backUpItem.getToPoem()-1);
+				check = true;
 			}
 			adapterToPoem.notifyDataSetChanged();
 		}
@@ -308,7 +334,7 @@ public class PlanDetailFragment extends SherlockFragment {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			Log.d(TAG, "Dialog OK");
-			if(isEdit){				
+			if(isEdit){
 				switch (backUpItem.getDataType()) {
 				case PlanData.DATA_TEXT:
 					backUpItem.setText(""+etTextItem.getText().toString());
@@ -330,9 +356,9 @@ public class PlanDetailFragment extends SherlockFragment {
 				case PlanData.DATA_LINK:
 				case PlanData.DATA_LINK_WITH_TEXT:
 					int bookId = spinnerBooks.getSelectedItemPosition()+1;
-					int chapter = spinnerChapter.getSelectedItemPosition()+1;
-					int poem = spinnerPoem.getSelectedItemPosition()+1;
-					int toPoem = spinnerToPoem.getSelectedItemPosition()+1;
+					int chapter = listChapter.get(spinnerChapter.getSelectedItemPosition());
+					int poem = listPoem.get(spinnerPoem.getSelectedItemPosition());
+					int toPoem = listToPoem.get(spinnerToPoem.getSelectedItemPosition());
 					backUpItem.setBookId(bookId);
 					backUpItem.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
 					backUpItem.setChapter(chapter);
@@ -381,9 +407,9 @@ public class PlanDetailFragment extends SherlockFragment {
 				if(rbIsLink.isChecked()){
 					Log.d(TAG, "New item plan is Link");
 					int bookId = spinnerBooks.getSelectedItemPosition()+1;
-					int chapter = spinnerChapter.getSelectedItemPosition()+1;
-					int poem = spinnerPoem.getSelectedItemPosition()+1;
-					int toPoem = spinnerToPoem.getSelectedItemPosition()+1;
+					int chapter = listChapter.get(spinnerChapter.getSelectedItemPosition());
+					int poem = listPoem.get(spinnerPoem.getSelectedItemPosition());
+					int toPoem = listToPoem.get(spinnerToPoem.getSelectedItemPosition());
 					itemPlan.setBookId(bookId);
 					itemPlan.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
 					itemPlan.setChapter(chapter);
@@ -429,11 +455,19 @@ public class PlanDetailFragment extends SherlockFragment {
 			if(pasteItem){
 				List<ItemPlanStruct> backupList = new ArrayList<ItemPlanStruct>();
 				for(int i = 0; i < listItemsPlan.size(); i++){
-					if(i == position){
-						backupList.add(listItemsPlan.get(posStartItemDrag));
+					if(posStartItemDrag > position){
+						if(i == position){
+							backupList.add(listItemsPlan.get(posStartItemDrag));
+						}
+						if(i != posStartItemDrag)
+							backupList.add(listItemsPlan.get(i));
+					} else {
+						if(i != posStartItemDrag)
+							backupList.add(listItemsPlan.get(i));
+						if(i == position){
+							backupList.add(listItemsPlan.get(posStartItemDrag));
+						}
 					}
-					if(i!= posStartItemDrag)
-						backupList.add(listItemsPlan.get(i));
 				}
 				listItemsPlan.clear();
 				listItemsPlan.addAll(backupList);
@@ -497,8 +531,8 @@ public class PlanDetailFragment extends SherlockFragment {
 			Tools.showToast(getSherlockActivity(), getString(R.string.click_on_point_paste));
 			return true;
 		case BTN_EDIT:
-			isEdit = true;
-			ItemPlanStruct itemSelectOfPlan = listItemsPlan.get(itemSelected);
+			isEdit = true; check = false;
+			final ItemPlanStruct itemSelectOfPlan = listItemsPlan.get(itemSelected);
 			backUpItem = itemSelectOfPlan;
 			try {
 				dialog.getButton(DialogInterface.BUTTON_POSITIVE).setText(getString(R.string.dialog_edit));
@@ -527,7 +561,6 @@ public class PlanDetailFragment extends SherlockFragment {
 				spinnerBooks.setSelection(itemSelectOfPlan.getBookId()-1);
 				spinnerChapter.setSelection(itemSelectOfPlan.getChapter()-1);
 				spinnerPoem.setSelection(itemSelectOfPlan.getPoem()-1);
-				spinnerToPoem.setSelection(itemSelectOfPlan.getToPoem()-1);
 				
 				cbQuotePoem.setChecked(false);
 				dialog.show();
@@ -538,7 +571,6 @@ public class PlanDetailFragment extends SherlockFragment {
 				spinnerBooks.setSelection(itemSelectOfPlan.getBookId()-1);
 				spinnerChapter.setSelection(itemSelectOfPlan.getChapter()-1);
 				spinnerPoem.setSelection(itemSelectOfPlan.getPoem()-1);
-				spinnerToPoem.setSelection(itemSelectOfPlan.getToPoem()-1);
 				
 				cbQuotePoem.setChecked(true);
 				dialog.show();
@@ -575,7 +607,7 @@ public class PlanDetailFragment extends SherlockFragment {
 			.replace(R.id.flRoot, (getFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
 							getFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlansListFragment(), App.TAG_FRAGMENT_PLAN).commit();
+							.findFragmentByTag(App.TAG_FRAGMENT_PLAN):PlansListFragment.getInstence(), App.TAG_FRAGMENT_PLAN).commit();
 			break;
 		case R.id.item_add_poin_plan:
 			try {
@@ -586,6 +618,10 @@ public class PlanDetailFragment extends SherlockFragment {
 			cbQuotePoem.setChecked(false);
 			rbIsLink.setEnabled(true);
 			rbIsText.setEnabled(true);
+			spinnerBooks.setSelection(0);
+			spinnerChapter.setSelection(0);
+			spinnerPoem.setSelection(0);
+			spinnerToPoem.setSelection(0);
 			dialog.show();			
 			break;
 		case R.id.action_cancel_drag_and_drop:

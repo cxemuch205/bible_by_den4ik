@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ReadForEveryDayActivity;
 import ua.maker.gbible.activity.SettingActivity;
@@ -15,6 +14,7 @@ import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -33,13 +33,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class ListChaptersFragment extends SherlockFragment {
 	
 	private View view = null;
@@ -67,6 +67,8 @@ public class ListChaptersFragment extends SherlockFragment {
 	
 	private static ListChaptersFragment instance;
 	
+	private ListChaptersFragment(){};
+	
 	public static ListChaptersFragment getInstance(){
 		if(instance == null){
 			instance = new ListChaptersFragment();
@@ -77,20 +79,23 @@ public class ListChaptersFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		db = new UserDB(getSherlockActivity());
-		dataBase = new DataBase(getSherlockActivity());
-		try {
-			dataBase.createDataBase();
-		} catch (IOException e) {}
-		dataBase.openDataBase();
+		setRetainInstance(true);
+		if(db == null){
+			db = new UserDB(getSherlockActivity());
+			dataBase = new DataBase(getSherlockActivity());
+			try {
+				dataBase.createDataBase();
+			} catch (IOException e) {}
+			dataBase.openDataBase();
 
-		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-		
-		listChapters = new ArrayList<Integer>();
-		adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
-		pd = new ProgressDialog(getSherlockActivity());
-		pd.setMessage(getString(R.string.progress_dialog_message));
+			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+			
+			listChapters = new ArrayList<Integer>();
+			adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
+			pd = new ProgressDialog(getSherlockActivity());
+			pd.setMessage(getString(R.string.progress_dialog_message));
+		}		
 	}
 	
 	@Override
@@ -134,8 +139,11 @@ public class ListChaptersFragment extends SherlockFragment {
 					Tools.showToast(getSherlockActivity(), getString(R.string.no_select_chapter));
 			}
 		});
+		if(listChapters.size() == 0 | lastBookId != bookId)
+			updateChapters();
+		else
+			adapter.notifyDataSetChanged();
 		
-		updateChapters();
 		gvShowChapters.setOnItemClickListener(listenerItemGriatView);
 	}
 	

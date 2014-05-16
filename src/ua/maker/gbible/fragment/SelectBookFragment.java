@@ -3,7 +3,6 @@ package ua.maker.gbible.fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ReadForEveryDayActivity;
 import ua.maker.gbible.activity.SettingActivity;
@@ -11,6 +10,7 @@ import ua.maker.gbible.constant.App;
 import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -35,13 +35,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
-
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class SelectBookFragment extends SherlockFragment {
 	
 	private static final String TAG = "StartFragment";
@@ -66,6 +66,8 @@ public class SelectBookFragment extends SherlockFragment {
 	
 	private static SelectBookFragment instance;
 	
+	private SelectBookFragment(){};
+	
 	public static SelectBookFragment getInstance(){
 		if(instance == null){
 			instance = new SelectBookFragment();
@@ -78,25 +80,28 @@ public class SelectBookFragment extends SherlockFragment {
 		super.onAttach(activity);
 		Log.i(TAG, "onAttach()");
 		setHasOptionsMenu(true);
-		dataBase = new DataBase(getSherlockActivity());
-		
-		try {
-			dataBase.createDataBase();
-		} catch (IOException e) {}
-		dataBase.openDataBase();
-		
-		listBooks = new ArrayList<String>();
-		adapter = new ArrayAdapter<String>(getSherlockActivity(), 
-				android.R.layout.simple_list_item_1,
-				listBooks);
-		
-		sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-		defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
-		if(instance.getId() == 0){
-			instance = this;
-		}
-		pd = new ProgressDialog(getSherlockActivity());
-		pd.setMessage(getString(R.string.progress_dialog_message));
+		setRetainInstance(true);
+		if(dataBase == null){
+			dataBase = new DataBase(getSherlockActivity());
+			
+			try {
+				dataBase.createDataBase();
+			} catch (IOException e) {}
+			dataBase.openDataBase();
+			
+			listBooks = new ArrayList<String>();
+			adapter = new ArrayAdapter<String>(getSherlockActivity(), 
+					android.R.layout.simple_list_item_1,
+					listBooks);
+			
+			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+			if(instance.getId() == 0){
+				instance = this;
+			}
+			pd = new ProgressDialog(getSherlockActivity());
+			pd.setMessage(getString(R.string.progress_dialog_message));
+		}		
 	}
 	
 	private class LoadBooksTask extends AsyncTask<Void, Void, List<String>>{
@@ -234,7 +239,8 @@ public class SelectBookFragment extends SherlockFragment {
 				ListPoemsFragment.startActivityUpdates(getSherlockActivity(), sp, verCode);
 			}
 		}
-		updateList();
+		if(listBooks.size() == 0)
+			updateList();
 	}
 	
 	private void updateList(){

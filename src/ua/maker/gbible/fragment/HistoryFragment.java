@@ -2,6 +2,7 @@ package ua.maker.gbible.fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListHistoryAdapter;
@@ -10,6 +11,7 @@ import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.structs.HistoryStruct;
 import ua.maker.gbible.utils.UserDB;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,12 +29,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class HistoryFragment extends SherlockFragment {
 	
 	private static final String TAG = "HistoryFragment";
@@ -49,11 +53,25 @@ public class HistoryFragment extends SherlockFragment {
 	
 	private static HistoryFragment instance;
 	
+	private HistoryFragment(){};
+	
 	public static HistoryFragment getInstance(){
 		if(instance == null){
 			instance = new HistoryFragment();
 		}
 		return instance;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		setHasOptionsMenu(true);
+		setRetainInstance(true);
+		if(db == null){
+			db = new UserDB(getSherlockActivity());		
+			listHistory = new ArrayList<HistoryStruct>();
+			adapter = new ItemListHistoryAdapter(activity, listHistory);
+		}		
 	}
 	
 	@Override
@@ -63,9 +81,9 @@ public class HistoryFragment extends SherlockFragment {
 		lvListShowHistoryItem = (ListView)view.findViewById(R.id.lv_show_history);
 		tvShowInfoEmpty = (TextView)view.findViewById(R.id.tv_info_empty_history);
 		llPaige = (LinearLayout)view.findViewById(R.id.ll_history_paige);
+		lvListShowHistoryItem.setAdapter(adapter);
 		
-		db = new UserDB(getSherlockActivity());		
-		listHistory = new ArrayList<HistoryStruct>();
+		
 		if(!getSherlockActivity().getSupportActionBar().isShowing())
 			getSherlockActivity().getSupportActionBar().show();
 		
@@ -75,7 +93,6 @@ public class HistoryFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		setHasOptionsMenu(true);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_history));
 		Log.d(TAG, "onActivityCreated()");
@@ -87,14 +104,14 @@ public class HistoryFragment extends SherlockFragment {
 	}
 	
 	private void getLIstHistory(){
-		listHistory = db.getHistory();
+		listHistory.clear();
+		listHistory.addAll(db.getHistory());
 		updateListHistory();
 	}
 
 	private void updateListHistory() {
 		Log.d(TAG, "Start - updateListHistory");
-		adapter = new ItemListHistoryAdapter(getSherlockActivity(), listHistory);
-		lvListShowHistoryItem.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
 		
 		if(listHistory.size()<1){
 			lvListShowHistoryItem.setVisibility(ListView.GONE);

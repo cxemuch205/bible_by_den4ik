@@ -88,6 +88,12 @@
 # view AndroidManifest.xml #generated:23
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
+# view AndroidManifest.xml #generated:93
+-keep class ua.maker.gbible.utils.BibleContentProvider { <init>(...); }
+
+# view AndroidManifest.xml #generated:96
+-keep class ua.maker.gbible.utils.ReadEDContentProvider { <init>(...); }
+
 # view res/xml/preference_bible.xml #generated:42
 -keep class ua.maker.gbible.widget.setting.ChangeSizeTextPreference { <init>(...); }
 

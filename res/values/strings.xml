@@ -28,6 +28,7 @@
     <string name="rus_translate_str">Русский Синодальный перевод</string>
     <string name="rus_modern_translate_str">Современный Русский перевод</string>
     <string name="ua_translate_str">Украинский перевод</string>
+    <string name="eng_translate_str">King James Version</string>
 
     <!-- Books -->
     <string name="old_testament">Ветхий Завет</string>

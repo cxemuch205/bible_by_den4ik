@@ -5,6 +5,7 @@ import java.util.List;
 
 import ua.maker.gbible.R;
 import ua.maker.gbible.constant.App;
+import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import android.app.Activity;
 import android.content.Context;
@@ -20,17 +21,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class ItemListComparePoemsAdapter extends
-		ArrayAdapter<HashMap<String, String>> {
+		ArrayAdapter<PoemStruct> {
 	
-	private int layoutResId = 0;
 	private Context context = null;
-	private List<HashMap<String, String>> listComparePoems = null;
+	private List<PoemStruct> listComparePoems = null;
 
-	public ItemListComparePoemsAdapter(Context context, int textViewResourceId,
-			List<HashMap<String, String>> objects) {
-		super(context, textViewResourceId, objects);
+	public ItemListComparePoemsAdapter(Context context,	List<PoemStruct> objects) {
+		super(context, R.layout.item_compare_poem, objects);
 		this.context = context;
-		layoutResId = textViewResourceId;
 		listComparePoems = objects;
 	}
 	
@@ -41,7 +39,7 @@ public class ItemListComparePoemsAdapter extends
 		
 		if(row == null){
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-			row = inflater.inflate(layoutResId, parent, false);
+			row = inflater.inflate(R.layout.item_compare_poem, null);
 			
 			holder = new AdapterHolder();
 			holder.tvLabelTranslate = (TextView)row.findViewById(R.id.tv_translate_label);
@@ -49,21 +47,20 @@ public class ItemListComparePoemsAdapter extends
 			
 			row.setTag(holder);
 		}
-		else
-		{
+		else{
 			holder = (AdapterHolder)row.getTag();
 		}
 		
-		HashMap<String,String> content = listComparePoems.get(position);
+		PoemStruct content = listComparePoems.get(position);
 		
-		if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_RST)){
+		if(content.getTranslateSource().equals(DataBase.TABLE_NAME_RST)){
 			String nameT = context.getString(R.string.rus_translate_str);
 			Spannable nameTranslate = new SpannableString(nameT);
 			nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			holder.tvLabelTranslate.setText(nameTranslate);
 		}
 		else
-			if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_MT))
+			if(content.getTranslateSource().equals(DataBase.TABLE_NAME_MT))
 			{
 				String nameT = context.getString(R.string.rus_modern_translate_str);
 				Spannable nameTranslate = new SpannableString(nameT);
@@ -71,14 +68,20 @@ public class ItemListComparePoemsAdapter extends
 				holder.tvLabelTranslate.setText(nameTranslate);
 			}
 			else
-				if(content.get(App.TRANSLATE_LABEL).equals(DataBase.TABLE_NAME_UAT))
+				if(content.getTranslateSource().equals(DataBase.TABLE_NAME_UAT))
 				{
 					String nameT = context.getString(R.string.ua_translate_str);
 					Spannable nameTranslate = new SpannableString(nameT);
 					nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 					holder.tvLabelTranslate.setText(nameTranslate);
 				}
-		holder.tvContent.setText(content.get(App.POEM));
+				else if(content.getTranslateSource().equals(DataBase.TABLE_NAME_ENT)){
+					String nameT = context.getString(R.string.eng_translate_str);
+					Spannable nameTranslate = new SpannableString(nameT);
+					nameTranslate.setSpan(new ForegroundColorSpan(Color.RED), 0, nameT.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+					holder.tvLabelTranslate.setText(nameTranslate);
+				}
+		holder.tvContent.setText(content.getContent());
 		return row;
 	}
 	
@@ -86,5 +89,4 @@ public class ItemListComparePoemsAdapter extends
 		TextView tvLabelTranslate;
 		TextView tvContent;
 	}
-
 }

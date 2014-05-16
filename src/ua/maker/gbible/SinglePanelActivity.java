@@ -20,7 +20,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -270,7 +269,7 @@ public abstract class SinglePanelActivity extends SherlockFragmentActivity {
 				.replace(R.id.flRoot, (getSupportFragmentManager()
 						.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL) != null)?
 								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL):new PlanDetailFragment(), App.TAG_FRAGMENT_PLAN_DETAIL).commit();
+								.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL): PlanDetailFragment.getInstance(), App.TAG_FRAGMENT_PLAN_DETAIL).commit();
 			}
 			else
 			{
@@ -278,7 +277,7 @@ public abstract class SinglePanelActivity extends SherlockFragmentActivity {
 				.replace(R.id.flRoot, (getSupportFragmentManager()
 						.findFragmentByTag(App.TAG_FRAGMENT_PLAN) != null)?
 								getSupportFragmentManager()
-								.findFragmentByTag(App.TAG_FRAGMENT_PLAN):new PlansListFragment(), App.TAG_FRAGMENT_PLAN).commit();
+								.findFragmentByTag(App.TAG_FRAGMENT_PLAN): PlansListFragment.getInstence(), App.TAG_FRAGMENT_PLAN).commit();
 			}
 		}
 	};

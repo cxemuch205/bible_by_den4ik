@@ -1,6 +1,7 @@
 package ua.maker.gbible.activity;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,9 +16,10 @@ import ua.maker.gbible.structs.PoemStruct;
 import ua.maker.gbible.utils.DataBase;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -30,6 +32,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class ReadForEveryDayActivity extends SherlockActivity{
@@ -41,6 +44,8 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 	private ItemLinksWithHeadersAdapter adapter = null;
 	
 	private List<ItemReadDay> listLinks = null;
+	private WeakReference<LoadDataTask> asyncTaskLoadWeakRef;
+	private static SimpleDateFormat dataFormatDay = new SimpleDateFormat("D");
 	private TextView tvSectionName = null;
 	private DataBase db = null;
 	private AlertDialog.Builder builderDialogSetDef = null, builderItemDialog;
@@ -50,11 +55,14 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 	private ItemDialogReadAdapter adapterDialog = null;
 	private List<PoemStruct> listItemsReadDialog = null;
 	private int posClick = 0;
+	private int firstItemPosition = 0;
+	private boolean loadLinks = false;
 	private SharedPreferences pref = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.read_for_every_day_layout);
 		setSupportProgressBarIndeterminate(true);
 		getSupportActionBar().setHomeButtonEnabled(true);
@@ -74,13 +82,9 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		listLinks = new ArrayList<ItemReadDay>();
 		listItemsReadDialog = new ArrayList<PoemStruct>();
 		
-		listLinks.addAll(db.getListReadForEveryDay());
+		startLoadData();
 		
-		SimpleDateFormat dataFormatDay = new SimpleDateFormat("D");
-		String dayS = dataFormatDay.format(new Date());
-		int day = Integer.parseInt(dayS);
-		
-		adapter = new ItemLinksWithHeadersAdapter(ReadForEveryDayActivity.this, listLinks, db, pref, day);
+		adapter = new ItemLinksWithHeadersAdapter(ReadForEveryDayActivity.this, listLinks, db, pref, getCurrentDayNumber());
 		adapterDialog = new ItemDialogReadAdapter(ReadForEveryDayActivity.this, listItemsReadDialog);
 		
 		lvListLinks.setAdapter(adapter);
@@ -101,14 +105,63 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		builderItemDialog.setNegativeButton(R.string.dialog_cancel, clickCancelItemListDialogListener);
 		builderItemDialog.setView(dialogView);
 		dialogItemRead = builderItemDialog.create();
+		setSelectedItemForRead(getCurrentDayNumber());
+	}
+	
+	private int getCurrentDayNumber(){
+		String dayS = dataFormatDay.format(new Date());
+		return Integer.parseInt(dayS);
+	}
+	
+	private void setSelectedItemForRead(int day){
 		if(pref.contains(App.LAST_ITEM_SELECT)){
 			posClick = pref.getInt(App.LAST_ITEM_SELECT, 0);
-			setLastReadedItemToFocus();
 		}
 		else
 		{
 			posClick = day-1;
 		}
+		setLastReadedItemToFocus();
+	}
+	
+	private void startLoadData(){
+		LoadDataTask task = new LoadDataTask(ReadForEveryDayActivity.this);
+		this.asyncTaskLoadWeakRef = new WeakReference<ReadForEveryDayActivity.LoadDataTask>(task);
+		task.execute();
+	}
+	
+	private static class LoadDataTask extends AsyncTask<Void, Void, List<ItemReadDay>>{
+		
+		private WeakReference<ReadForEveryDayActivity> activityWeak;
+		
+		public LoadDataTask(ReadForEveryDayActivity activity){
+			this.activityWeak = new WeakReference<ReadForEveryDayActivity>(activity);
+			activityWeak.get().setSupportProgressBarIndeterminateVisibility(true);
+		}
+		
+		@Override
+		protected List<ItemReadDay> doInBackground(Void... params) {
+			List<ItemReadDay> result;
+			
+			result = activityWeak.get().db.getListReadForEveryDay();
+			
+			return result;
+		}
+		
+		@Override
+		protected void onPostExecute(List<ItemReadDay> result) {
+			super.onPostExecute(result);
+			if(this.activityWeak.get() != null){
+				activityWeak.get().listLinks.addAll(result);
+				activityWeak.get().tvSectionName.setText(
+						String.valueOf(result.get(activityWeak.get().firstItemPosition).getMonth()));
+				activityWeak.get().adapter.notifyDataSetChanged();
+				activityWeak.get().loadLinks = true;
+				activityWeak.get().setSelectedItemForRead(
+						activityWeak.get().getCurrentDayNumber());
+				activityWeak.get().setSupportProgressBarIndeterminateVisibility(false);
+			}
+		}		
 	}
 	
 	private void setLastReadedItemToFocus(){
@@ -196,7 +249,9 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		@Override
 		public void onScroll(AbsListView view, int firstVisibleItem,
 				int visibleItemCount, int totalItemCount) {
-			tvSectionName.setText(String.valueOf(listLinks.get(firstVisibleItem).getMonth()));
+			firstItemPosition = firstVisibleItem;
+			if(loadLinks)
+				tvSectionName.setText(String.valueOf(listLinks.get(firstVisibleItem).getMonth()));
 		}
 	};
 	

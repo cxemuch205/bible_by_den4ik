@@ -76,6 +76,8 @@ public class BookmarksFragment extends SherlockFragment {
 	
 	private static BookmarksFragment instance;
 	
+	private BookmarksFragment(){};
+	
 	public static BookmarksFragment getInstance(){
 		if(instance == null){
 			instance = new BookmarksFragment();
@@ -86,10 +88,18 @@ public class BookmarksFragment extends SherlockFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		db = new UserDB(getSherlockActivity());
-		listPlans = new ArrayList<PlanStruct>();
-		listBookmarks = new ArrayList<BookMarksStruct>();
-		adapter = new ItemListBookmarksAdapter(getSherlockActivity(), listBookmarks);
+		setRetainInstance(true);
+		if(db == null){
+			db = new UserDB(getSherlockActivity());
+			listPlans = new ArrayList<PlanStruct>();
+			listBookmarks = new ArrayList<BookMarksStruct>();
+			adapter = new ItemListBookmarksAdapter(getSherlockActivity(), listBookmarks);
+			
+			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			viewDialogCopy = inflater.inflate(R.layout.dialog_select_poem, null);
+			tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
+			tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
+		}		
 	}
 	
 	@Override
@@ -114,12 +124,7 @@ public class BookmarksFragment extends SherlockFragment {
 		registerForContextMenu(lvBookmarks);
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 		
-		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
-		viewDialogCopy = inflater.inflate(R.layout.dialog_select_poem, null);
-		tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
-		tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
-		
-		listPlans = db.getPlansList();
+		listPlans.addAll(db.getPlansList());
 		
 		listBookmarks.clear();
 		listBookmarks.addAll(db.getBookMarks());

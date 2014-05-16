@@ -14,6 +14,7 @@ import ua.maker.gbible.structs.PlanStruct;
 import ua.maker.gbible.utils.Tools;
 import ua.maker.gbible.utils.UserDB;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,6 +43,7 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
+@SuppressLint("ValidFragment")
 public class PlansListFragment extends SherlockFragment {
 	
 	private static final String TAG = "PlanFragment";
@@ -70,6 +72,54 @@ public class PlansListFragment extends SherlockFragment {
 	
 	private int itemSelect = 0;
 	
+	private static PlansListFragment instance;
+	
+	private PlansListFragment(){};
+	
+	public static PlansListFragment getInstence() {
+		if(instance == null){
+			instance = new PlansListFragment();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		setRetainInstance(true);
+		setHasOptionsMenu(true);
+		if(db == null){
+			db = new UserDB(getSherlockActivity());
+			
+			listPlans = new ArrayList<PlanStruct>();
+			adapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+			builder.setTitle(getString(R.string.dialog_title_create_plan));
+			
+			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			View viewDialog = inflater.inflate(R.layout.dialog_add_plan_settings, null);
+			
+			etName = (EditText)viewDialog.findViewById(R.id.et_name_add_plan);
+			etSubDescription = (EditText)viewDialog.findViewById(R.id.et_description_add_plan);
+			tvShowDataTime = (TextView)viewDialog.findViewById(R.id.tv_show_data_time);
+			etName.addTextChangedListener(textChangeNameListener);
+			
+			builder.setView(viewDialog);
+			builder.setPositiveButton(getString(R.string.create_plan_btn), clickDialogOkListener);
+			builder.setNegativeButton(getString(R.string.dialog_cancel), new onDialogClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			
+			dialog = builder.create();
+			pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+		}		
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -77,8 +127,6 @@ public class PlansListFragment extends SherlockFragment {
 		view = inflater.inflate(R.layout.activity_plan_layout, null);
 		btnCreatePlan = (Button)view.findViewById(R.id.btn_create_plan);
 		lvPlans = (ListView)view.findViewById(R.id.lv_list_plans);
-		listPlans = new ArrayList<PlanStruct>();
-		adapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
 		lvPlans.setAdapter(adapter);
 		
 		if(!getSherlockActivity().getSupportActionBar().isShowing())
@@ -90,40 +138,17 @@ public class PlansListFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		setHasOptionsMenu(true);
-		db = new UserDB(getSherlockActivity());
 		registerForContextMenu(lvPlans);
+		
 		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activit_plan));
-		pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		
 		btnCreatePlan.setOnClickListener(clickAddNewPlanListener);
 		lvPlans.setOnItemClickListener(itemClickListener);
 		lvPlans.setOnItemLongClickListener(itemLongClickListener);
 		
+		listPlans.clear();
 		listPlans.addAll(db.getPlansList());
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
-		builder.setTitle(getString(R.string.dialog_title_create_plan));
-		
-		LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
-		View viewDialog = inflater.inflate(R.layout.dialog_add_plan_settings, null);
-		
-		etName = (EditText)viewDialog.findViewById(R.id.et_name_add_plan);
-		etSubDescription = (EditText)viewDialog.findViewById(R.id.et_description_add_plan);
-		tvShowDataTime = (TextView)viewDialog.findViewById(R.id.tv_show_data_time);
-		etName.addTextChangedListener(textChangeNameListener);
-		
-		builder.setView(viewDialog);
-		builder.setPositiveButton(getString(R.string.create_plan_btn), clickDialogOkListener);
-		builder.setNegativeButton(getString(R.string.dialog_cancel), new onDialogClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		});
-		
-		dialog = builder.create();
 		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
 	}
 	
@@ -195,14 +220,12 @@ public class PlansListFragment extends SherlockFragment {
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			itemSelect = position;
-			Log.d(TAG, "ItemClick: " + position);
 			pref.edit().putInt(App.PLAN_ID, listPlans.get(position).getId()).commit();
-			Log.d(TAG, "Intent plan id: " + listPlans.get(position).getId());
 			getFragmentManager().beginTransaction()
 			.replace(R.id.flRoot, (getFragmentManager()
 					.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL) != null)?
 							getFragmentManager()
-							.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL):new PlanDetailFragment(), App.TAG_FRAGMENT_PLAN_DETAIL).commit();
+							.findFragmentByTag(App.TAG_FRAGMENT_PLAN_DETAIL): PlanDetailFragment.getInstance(), App.TAG_FRAGMENT_PLAN_DETAIL).commit();
 		}
 	};
 	
@@ -210,11 +233,9 @@ public class PlansListFragment extends SherlockFragment {
 		
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			if(etName.getText().toString().length() == 0){
+			if(etName.getText().toString().length() == 0) {
 				btnDialogOK.setVisibility(Button.GONE);
-			}
-			else
-			{
+			} else {
 				btnDialogOK.setVisibility(Button.VISIBLE);
 			}
 		}
@@ -226,9 +247,8 @@ public class PlansListFragment extends SherlockFragment {
 		public void afterTextChanged(Editable s) {}
 	};
 	
-	private void updateListPlans(){
-		adapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
-		lvPlans.setAdapter(adapter);
+	private void updateListPlans() {
+		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
