@@ -1,6 +1,9 @@
 package ua.maker.gbible.structs;
 
-public class PoemStruct {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class PoemStruct implements Parcelable{
 	
 	private String content = "";
 	private boolean checked = false;
@@ -18,6 +21,18 @@ public class PoemStruct {
 	public PoemStruct(String text){
 		this.content = text;
 	};
+	
+	public PoemStruct(Parcel p){
+		this.content = p.readString();
+		this.bookName = p.readString();
+		this.bookId = p.readInt();
+		this.chapter = p.readInt();
+		this.poem = p.readInt();
+		this.poemTo = p.readInt();
+		this.colorHEX = p.readString();
+		this.posColor = p.readInt();
+		this.translateSource = p.readString();
+	}
 	
 	public PoemStruct(String text, boolean checked){
 		this.content = text;
@@ -123,5 +138,23 @@ public class PoemStruct {
 
 	public void setTranslateSource(String translateSource) {
 		this.translateSource = translateSource;
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(content);
+		dest.writeString(bookName);
+		dest.writeInt(bookId);
+		dest.writeInt(chapter);
+		dest.writeInt(poem);
+		dest.writeInt(poemTo);
+		dest.writeString(colorHEX);
+		dest.writeInt(posColor);
+		dest.writeString(translateSource);
 	}
 }

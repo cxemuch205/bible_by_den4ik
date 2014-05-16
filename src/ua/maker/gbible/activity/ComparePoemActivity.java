@@ -28,7 +28,7 @@ public class ComparePoemActivity extends SherlockActivity {
 	private TextView tvShowLink = null;
 	private ListView lvCompare = null;
 	private DataBase db = null;
-	private List<PoemStruct> listPoem;
+	private ArrayList<PoemStruct> listPoem;
 	private WeakReference<LoadComparedPoemsTask> taskWeakRef;
 	private ItemListComparePoemsAdapter adapter;
 	
@@ -39,11 +39,18 @@ public class ComparePoemActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_compare_poems);
+		Log.i(TAG, "onCreate()");
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
 		tvShowLink = (TextView)findViewById(R.id.tv_show_link);
 		lvCompare = (ListView)findViewById(R.id.lv_compare_poems);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(listPoem == null) 
+			listPoem = new ArrayList<PoemStruct>();
 		
-		listPoem = new ArrayList<PoemStruct>();
 		adapter = new ItemListComparePoemsAdapter(
 				ComparePoemActivity.this,
 				listPoem);
@@ -69,9 +76,11 @@ public class ComparePoemActivity extends SherlockActivity {
 	}
 	
 	private void loadDataCompared(){
-		LoadComparedPoemsTask task = new LoadComparedPoemsTask(ComparePoemActivity.this);
-		this.taskWeakRef = new WeakReference<ComparePoemActivity.LoadComparedPoemsTask>(task);
-		task.execute(new Integer[]{bookId, chapter, poem});
+		if(listPoem.size() == 0){
+			LoadComparedPoemsTask task = new LoadComparedPoemsTask(ComparePoemActivity.this);
+			this.taskWeakRef = new WeakReference<ComparePoemActivity.LoadComparedPoemsTask>(task);
+			task.execute(new Integer[]{bookId, chapter, poem});
+		}
 	}
 	
 	private static class LoadComparedPoemsTask extends AsyncTask<Integer, Void, List<PoemStruct>>{
@@ -103,6 +112,19 @@ public class ComparePoemActivity extends SherlockActivity {
 			}
 		}
 		
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putParcelableArrayList(App.POEM, listPoem);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		Log.i(TAG, "onRestore()");
+		listPoem = savedInstanceState.getParcelableArrayList(App.POEM);
 	}
 
     @Override
