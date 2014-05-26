@@ -21,7 +21,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -240,56 +239,67 @@ public class PlanDetailFragment extends SherlockFragment {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View v, int position,
 				long id) {
-			Log.d(TAG, "Get chapter in book: " + (position+1));
-			listChapter.clear();
-			listChapter.addAll(dbBible.getChapters(Tools.getTranslateWitchPreferences(getSherlockActivity()), (position+1)));
-			adapterChapters.notifyDataSetChanged();
-		}
-
-		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {}
-	};
-
-	private OnItemSelectedListener itemSpinnerChaptersSelectedListener = new OnItemSelectedListener() {
-
-		@Override
-		public void onItemSelected(AdapterView<?> parent, View v, int position,
-				long id) {
-			Log.d(TAG, "Geting listPoems");
-			listPoem.clear();
-			numberOfPoem = dbBible.getNumberOfPoemInChapter(
-					Tools.getBookIdByName(listBooks.get(spinnerBooks.getSelectedItemPosition()), getSherlockActivity()), 
-					listChapter.get(spinnerChapter.getSelectedItemPosition()), 
-					Tools.getTranslateWitchPreferences(getSherlockActivity()));
-			for(int i = 1; i <= numberOfPoem; i++)
-				listPoem.add(i);
-			adapterPoem.notifyDataSetChanged();
+			updateListChapters(position);
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {}
 	};
 	
-	private OnItemSelectedListener itemSpinnerPoemSelectedListener = new OnItemSelectedListener() {
+	private void updateListChapters(int position){
+		listChapter.clear();
+		listChapter.addAll(dbBible.getChapters(Tools.getTranslateWitchPreferences(getSherlockActivity()), (position+1)));
+		adapterChapters.notifyDataSetChanged();
+	}
+
+	private OnItemSelectedListener itemSpinnerChaptersSelectedListener = new OnItemSelectedListener() {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View v, int position,
 				long id) {
-			listToPoem.clear();
-			for(int i = (spinnerPoem.getSelectedItemPosition()+1); i <= numberOfPoem; i++)
-				listToPoem.add(i);
-			if(isEdit & !check){
-				spinnerChapter.setSelection(backUpItem.getChapter()-1);
-				spinnerPoem.setSelection(backUpItem.getPoem()-1);
-				spinnerToPoem.setSelection(backUpItem.getToPoem()-1);
-				check = true;
-			}
-			adapterToPoem.notifyDataSetChanged();
+			updateListPoem();
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {}
 	};
+	
+	private void updateListPoem(){
+		listPoem.clear();
+		
+		numberOfPoem = dbBible.getNumberOfPoemInChapter(
+				Tools.getBookIdByName(listBooks.get(spinnerBooks.getSelectedItemPosition()), getSherlockActivity()), 
+				listChapter.get(spinnerChapter.getSelectedItemPosition()), 
+				Tools.getTranslateWitchPreferences(getSherlockActivity()));
+		for(int i = 1; i <= numberOfPoem; i++)
+			listPoem.add(i);
+		adapterPoem.notifyDataSetChanged();
+	}
+	
+	private OnItemSelectedListener itemSpinnerPoemSelectedListener = new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View v, int position,
+				long id) {
+			updateListToPoem();
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {}
+	};
+	
+	private void updateListToPoem(){
+		listToPoem.clear();
+		for(int i = (spinnerPoem.getSelectedItemPosition()+1); i <= numberOfPoem; i++)
+			listToPoem.add(i);
+		if(isEdit & !check){
+			spinnerChapter.setSelection(backUpItem.getChapter()-1);
+			spinnerPoem.setSelection(backUpItem.getPoem()-1);
+			spinnerToPoem.setSelection(backUpItem.getToPoem()-1);
+			check = true;
+		}
+		adapterToPoem.notifyDataSetChanged();
+	}
 	
 	private OnCheckedChangeListener checkedIsTextChangeListener = new OnCheckedChangeListener() {
 		

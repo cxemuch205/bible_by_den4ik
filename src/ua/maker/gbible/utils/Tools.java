@@ -239,187 +239,171 @@ public class Tools {
 		if(name.equals(ctx.getString(R.string.vtorozakonie_str))){
 			return BooksId.VTOROZ_ID;}
 		if(name.equals(ctx.getString(R.string.iisus_navin_str))){
-			return BooksId.IISUS_NAVIN_ID;
+			return BooksId.IISUS_NAVIN_ID;}
+		if(name.equals(ctx.getString(R.string.sudii_str))){
+			return BooksId.SUDII_ID;}
+		if(name.equals(ctx.getString(R.string.ruf_str))){
+			return BooksId.RUTH_ID;}
+		if(name.equals(ctx.getString(R.string.one_carstw_str))){
+			return BooksId.ONE_CARSTV_ID;}
+		if(name.equals(ctx.getString(R.string.two_carstw_str))){
+			return BooksId.TWO_CARSTV_ID;}
+		if(name.equals(ctx.getString(R.string.three_carstw_str))){
+			return BooksId.THREE_CARSTV_ID;}
+		if(name.equals(ctx.getString(R.string.four_carstw_str))){
+			return BooksId.FOUR_CARSTV_ID;}
+		if(name.equals(ctx.getString(R.string.one_paralipamenon_str))){
+			return BooksId.ONE_PARALIPAM_ID;}
+		if(name.equals(ctx.getString(R.string.two_paralipamenon_str))){
+			return BooksId.TWO_PARALIPAM_ID;}
+		if(name.equals(ctx.getString(R.string.ezdra_str))){
+			return BooksId.EZDRA_ID;}
+		if(name.equals(ctx.getString(R.string.neemia_str))){
+			return BooksId.NEEMIA_ID;}
+		if(name.equals(ctx.getString(R.string.esfir_str))){
+			return BooksId.ESFIR_ID;}
+		if(name.equals(ctx.getString(R.string.iov_str))){
+			return BooksId.IOV_ID;}
+		if(name.equals(ctx.getString(R.string.psaltir_str))){
+			return BooksId.PSALTIR_ID;}
+		if(name.equals(ctx.getString(R.string.pritchi_str))){
+			return BooksId.PRITCHI_ID;}
+		if(name.equals(ctx.getString(R.string.ecclesiast_str))){
+			return BooksId.ECCL_ID;}
+		if(name.equals(ctx.getString(R.string.pesni_pesney_str))){
+			return BooksId.PESNI_PESNEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.isaia_str))){
+			return BooksId.ISAIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.ieremia_str))){
+			return BooksId.IEREMIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.plach_ieremii_str))){
+			return BooksId.PLACH_IEREM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.iezekiil_str))){
+			return BooksId.IZEKIIL_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.daniil_str))){
+			return BooksId.DANIIL_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.osia_str))){
+			return BooksId.OSIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.ioil_str))){
+			return BooksId.IOIL_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.amos_str))){
+			return BooksId.AMOS_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.avdiy_str))){
+			return BooksId.AVDIY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.iona_str))){
+			return BooksId.IONA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.michey_str))){
+			return BooksId.MICHEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.naum_str))){
+			return BooksId.NAUM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.avvakum_str))){
+			return BooksId.AVVAKUM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.sofonia_str))){
+			return BooksId.SOFONIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.aggey_str))){
+			return BooksId.AGGEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.zaharia_str))){
+			return BooksId.ZAHARIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.malahia_str))){
+			return BooksId.MALAKHIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.matfey_str))){
+			return BooksId.MATFEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.mark_str))){
+			return BooksId.MARK_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.luka_str))){
+			return BooksId.LUKA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.ioanna_str))){
+			return BooksId.IOANNA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.deyania_str))){
+			return BooksId.DEYANIA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.iakova_str))){
+			return BooksId.IAKOVA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.one_petra_str))){
+			return BooksId.ONE_PETRA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.two_petra_str))){
+			return BooksId.TWO_PETRA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.one_ioanna_str))){
+			return BooksId.ONE_IOANNA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.two_ioanna_str))){
+			return BooksId.TWO_IOANNA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.three_ioanna_str))){
+			return BooksId.THREE_IOANNA_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.iudy_str))){
+			return BooksId.IUDY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.rimlan_str))){
+			return BooksId.RIMLAN_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.one_korinfyanam_str))){
+			return BooksId.ONE_KORINHANAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.two_korinfyanam_str))){
+			return BooksId.TWO_KORINHANAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.galatam_str))){
+			return BooksId.GALATAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.efesyanam_str))){
+			return BooksId.EFESANAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.filipiycam_str))){
+			return BooksId.FILIPIYCAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.kolosyanam_str))){
+			return BooksId.KOLOSYANAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.one_fessalonikiycam_str))){
+			return BooksId.ONE_FESOLONIKIYCAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.two_fessalonikiycam_str))){
+			return BooksId.TWO_FESOLONIKIYCAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.one_timofeu_str))){
+			return BooksId.ONE_TIMOFEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.two_timofeu_str))){
+			return BooksId.TWO_TIMOFEY_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.titu_str))){
+			return BooksId.TITU_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.filimonu_str))){
+			return BooksId.FILIMONU_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.evreyam_str))){
+			return BooksId.EVREYAM_ID;
 		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
-		}
-		if(name.equals(ctx.getString(R.string.bitie_str))){
-			return BooksId.BITIE_ID;
+		if(name.equals(ctx.getString(R.string.otkrovenie_str))){
+			return BooksId.OTKROVENIE_ID;
 		}
 		return 0;
 	}

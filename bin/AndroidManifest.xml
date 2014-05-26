@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ua.maker.gbible"
     android:installLocation="auto"
-    android:versionCode="19"
+    android:versionCode="20"
     android:versionName="1.5.0.5" >
 
     <uses-sdk
