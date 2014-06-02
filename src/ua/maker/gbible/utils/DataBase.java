@@ -441,10 +441,8 @@ public class DataBase extends SQLiteOpenHelper {
     
     public void setDefaultStatusItemRead(int countItems){
     	if(db.isOpen()){
-    		ContentValues v = new ContentValues();
-    		v.put(FIELD_STATUS_READED, String.valueOf(false));
     		for(int i = 0; i < countItems; i++){
-    			db.update(TABLE_READ_FOR_EVERY_DAY, v, KEY_ROWID + " = " + (i+1), null);
+    			dbUser.setStatusReadedByPosition(i, false);
     		}
     	}
     }

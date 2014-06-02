@@ -262,6 +262,7 @@ public class SearchFragment extends SherlockFragment {
 			pd = ProgressDialog.show(getSherlockActivity(), 
 					getString(R.string.dialog_title_search)+" "+requestDB, 
 					getString(R.string.dialog_start_search));
+			pd.setCanceledOnTouchOutside(false);
 		};
 
 		@Override

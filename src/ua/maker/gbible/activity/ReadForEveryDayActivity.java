@@ -19,8 +19,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -54,6 +56,7 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 	private ListView lvDialogItems = null;
 	private ItemDialogReadAdapter adapterDialog = null;
 	private List<PoemStruct> listItemsReadDialog = null;
+	private MenuItem itemReset;
 	private int posClick = 0;
 	private int firstItemPosition = 0;
 	private boolean loadLinks = false;
@@ -160,6 +163,8 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 				activityWeak.get().setSelectedItemForRead(
 						activityWeak.get().getCurrentDayNumber());
 				activityWeak.get().setSupportProgressBarIndeterminateVisibility(false);
+				if(activityWeak.get().itemReset != null)
+					activityWeak.get().itemReset.setVisible(true);
 			}
 		}		
 	}
@@ -188,13 +193,11 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-			setSupportProgressBarIndeterminateVisibility(true);
 			Thread thread = new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
 					db.setDefaultStatusItemRead(listLinks.size());
-					setSupportProgressBarIndeterminateVisibility(false);
 				}
 			});
 			thread.start();
@@ -202,6 +205,7 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 				listLinks.get(i).setStatus(false);
 			}
 			adapter.notifyDataSetChanged();
+			pref.edit().remove(App.LAST_ITEM_SELECT).commit();
 			dialog.dismiss();
 		}
 	};
@@ -260,6 +264,8 @@ public class ReadForEveryDayActivity extends SherlockActivity{
 		menu.add(Menu.NONE, ACTION_SET_DEF_ITEMS_READ, Menu.NONE, getString(R.string.set_def_value_status_read))
 				.setIcon(android.R.drawable.ic_menu_close_clear_cancel)
 				.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM|MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		itemReset = menu.findItem(ACTION_SET_DEF_ITEMS_READ);
+		itemReset.setVisible(false);
 		return super.onCreateOptionsMenu(menu);
 	};
 	

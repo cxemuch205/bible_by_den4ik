@@ -95,6 +95,7 @@ public class ListChaptersFragment extends SherlockFragment {
 			adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
 			pd = new ProgressDialog(getSherlockActivity());
 			pd.setMessage(getString(R.string.progress_dialog_message));
+			pd.setCanceledOnTouchOutside(false);
 		}		
 	}
 	
