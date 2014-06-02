@@ -1,6 +1,7 @@
 package ua.maker.gbible.fragment;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +46,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
@@ -104,6 +106,7 @@ public class ListPoemsFragment extends SherlockFragment{
 	private AlertDialog dialog = null;
 	private List<PoemStruct> listPoems = null;
 	private List<PlanStruct> listPlans = null;
+	private WeakReference<ChangeChapterAsyncTask> taskWeakRef;
 	private ItemListPoemAdapter adapterListPoem = null;
 	private WebView webviewActionView = null;
 	private Timer timer = null;
@@ -144,7 +147,6 @@ public class ListPoemsFragment extends SherlockFragment{
 	private ProgressDialog pd = null;
 	private AlertDialog.Builder builder = null;
 	private ColorPickerCustomDialog colorDialog;
-	private ChangeChapterAsyncTask changechapterTask;
 	
 	private static ListPoemsFragment instance;
 	
@@ -194,7 +196,6 @@ public class ListPoemsFragment extends SherlockFragment{
 			bookId = sp.getInt(App.BOOK_ID, 1);
 			chapterNumber = sp.getInt(App.CHAPTER, 1);
 		}
-		bookIdLast = -1;
 		try {
 			getSherlockActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		} catch (Exception e) {}		
@@ -329,11 +330,17 @@ public class ListPoemsFragment extends SherlockFragment{
 		btnBook.setOnClickListener(clickSelectBookListener);		
 		btnChapter.setOnClickListener(clickChapterBtnListener);
 
-		bolGetingContent = true;
-		if(listPoems.size() == 0 | chapterLast != chapterNumber)
-			changeChapter(chapterNumber);
-		else
-			updateList();
+//		bolGetingContent = true;
+//		if(!nameTranslate.equals(Tools.getTranslateWitchPreferences(getSherlockActivity()))
+//				|| listPoems.size() == 0
+//				|| bookIdLast != bookId
+//				|| chapterLast != chapterNumber){
+//			nameTranslate = Tools.getTranslateWitchPreferences(getSherlockActivity());
+//			chapterLast = 0;
+//			changeChapter(chapterNumber);
+//		}
+//		else
+//			updateList();
 		
 		lvShowPoem.setSmoothScrollbarEnabled(true);
 		lvShowPoem.setOnScrollListener(scrollChangeListener);		
@@ -599,7 +606,6 @@ public class ListPoemsFragment extends SherlockFragment{
 	
 	private void selectPrefPoem(int posSelecting){
 		lvShowPoem.setSelection(posSelecting);
-		//lvShowPoem.smoothScrollToPosition(posSelecting);
 	}
 	
 	private OnScrollListener scrollChangeListener = new OnScrollListener() {
@@ -908,17 +914,22 @@ public class ListPoemsFragment extends SherlockFragment{
 			Tools.showToast(getSherlockActivity(), getString(R.string.it_is_chapter_last));
 		}
 	}
+	
+	private ChangeChapterAsyncTask changechapterTask;
+	
+	private boolean isAsyncTaskPendingOrRunning() {
+	    return this.taskWeakRef != null &&
+	          this.taskWeakRef.get() != null && 
+	          !this.taskWeakRef.get().getStatus().equals(Status.FINISHED);
+	}
 
 	public void changeChapter(int count){
 		Log.d(TAG, "bolGetingContent: " + bolGetingContent);
 		if(bolGetingContent & (chapterNumber != chapterLast | bookId != bookIdLast)){
 			Log.i(TAG, "changeChapter: " + chapterNumber);
-			if(changechapterTask == null){
-				changechapterTask = new ChangeChapterAsyncTask();
-				changechapterTask.execute();
-			} else {
-				changechapterTask.cancel(false);
-				changechapterTask = new ChangeChapterAsyncTask();
+			if(!isAsyncTaskPendingOrRunning()){
+				changechapterTask = new ChangeChapterAsyncTask(ListPoemsFragment.this);
+				taskWeakRef = new WeakReference<ListPoemsFragment.ChangeChapterAsyncTask>(changechapterTask);
 				changechapterTask.execute();
 			}
 		} else {
@@ -926,25 +937,31 @@ public class ListPoemsFragment extends SherlockFragment{
 		}
 	}
 	
-	class ChangeChapterAsyncTask extends AsyncTask<Void, Void, List<PoemStruct>>{
+	private static class ChangeChapterAsyncTask extends AsyncTask<Void, Void, List<PoemStruct>>{
+		
+		private WeakReference<ListPoemsFragment> fragWeakRef;
+		
+		public ChangeChapterAsyncTask(ListPoemsFragment fragment){
+			fragWeakRef = new WeakReference<ListPoemsFragment>(fragment);
+		}
 		
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			bolGetingContent = false;
-			pd.show();
-			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			fragWeakRef.get().bolGetingContent = false;
+			fragWeakRef.get().pd.show();
+			fragWeakRef.get().sp = fragWeakRef.get().getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 		}
 		
 		@Override
 		protected List<PoemStruct> doInBackground(Void... params) {
 			Log.d(TAG, "ChangeChapterAsyncTask()");			
-			Editor editor = sp.edit();
-			editor.putInt(App.BOOK_ID, bookId);
-			editor.putInt(App.CHAPTER, chapterNumber);
+			Editor editor = fragWeakRef.get().sp.edit();
+			editor.putInt(App.BOOK_ID, fragWeakRef.get().bookId);
+			editor.putInt(App.CHAPTER, fragWeakRef.get().chapterNumber);
 			editor.commit();
-			List<PoemStruct> result = dataBase.getPoemsInChapter(bookId, chapterNumber, nameTranslate);
-			maxChapter = dataBase.getNumberOfChapterInBook(bookId, nameTranslate);
+			List<PoemStruct> result = fragWeakRef.get().dataBase.getPoemsInChapter(fragWeakRef.get().bookId, fragWeakRef.get().chapterNumber, fragWeakRef.get().nameTranslate);
+			fragWeakRef.get().maxChapter = fragWeakRef.get().dataBase.getNumberOfChapterInBook(fragWeakRef.get().bookId, fragWeakRef.get().nameTranslate);
 			return result;
 		}
 		
@@ -953,35 +970,35 @@ public class ListPoemsFragment extends SherlockFragment{
 			super.onPostExecute(result);
 			Log.d(TAG, "ChangeChapterAsyncTask() - END");
 			try {
-				listPoems.clear();
-				listPoems.addAll(result);
+				fragWeakRef.get().listPoems.clear();
+				fragWeakRef.get().listPoems.addAll(result);
 				startFunc();
 			} catch (Exception e) {}
 		}
 
 		private void startFunc() {
-			if(pd != null && pd.isShowing()) pd.dismiss();
-			if(getSherlockActivity().getActionBar().isShowing() == false){
-				Toast infoChapter = Toast.makeText(getSherlockActivity(), 
-						getSherlockActivity().getString(R.string.title_activity_list_chapters)+": " 
-								+ chapterNumber, Toast.LENGTH_SHORT);
+			if(fragWeakRef.get().pd != null && fragWeakRef.get().pd.isShowing()) fragWeakRef.get().pd.dismiss();
+			if(fragWeakRef.get().getSherlockActivity().getActionBar().isShowing() == false){
+				Toast infoChapter = Toast.makeText(fragWeakRef.get().getSherlockActivity(), 
+						fragWeakRef.get().getSherlockActivity().getString(R.string.title_activity_list_chapters)+": " 
+								+ fragWeakRef.get().chapterNumber, Toast.LENGTH_SHORT);
 				infoChapter.setGravity(Gravity.TOP | Gravity.RIGHT, 0, 0);
 				infoChapter.getView().setBackgroundColor(Color.parseColor("#a62f00"));
 				infoChapter.show();
 			}
-			getSherlockActivity().getActionBar().setTitle(""+
-					Tools.getBookNameByBookId(bookId, 
-							getSherlockActivity()) + " " + chapterNumber);
-			btnChapter.setText(""+chapterNumber);
-			updateList();
-			if(chapterLast == -1 | sp.getBoolean(App.is_SEARCH_REQUEST, false)){
-				selectPrefPoem(sp.getInt(App.POEM_SET_FOCUS, 0));
-				sp.edit().putBoolean(App.is_SEARCH_REQUEST, false).commit();
+			fragWeakRef.get().getSherlockActivity().getActionBar().setTitle(""+
+					Tools.getBookNameByBookId(fragWeakRef.get().bookId, 
+							fragWeakRef.get().getSherlockActivity()) + " " + fragWeakRef.get().chapterNumber);
+			fragWeakRef.get().btnChapter.setText(""+fragWeakRef.get().chapterNumber);
+			fragWeakRef.get().updateList();
+			if(fragWeakRef.get().chapterLast == -1 | fragWeakRef.get().sp.getBoolean(App.is_SEARCH_REQUEST, false)){
+				fragWeakRef.get().selectPrefPoem(fragWeakRef.get().sp.getInt(App.POEM_SET_FOCUS, 0));
+				fragWeakRef.get().sp.edit().putBoolean(App.is_SEARCH_REQUEST, false).commit();
 			} else {
-				selectPrefPoem(0);
+				fragWeakRef.get().selectPrefPoem(0);
 			}
-			chapterLast = chapterNumber;
-			bookIdLast = bookId;
+			fragWeakRef.get().chapterLast = fragWeakRef.get().chapterNumber;
+			fragWeakRef.get().bookIdLast = fragWeakRef.get().bookId;
 		}		
 	};
 	
@@ -991,16 +1008,20 @@ public class ListPoemsFragment extends SherlockFragment{
 		Log.i(TAG, "onResume()");
 
 		bolGetingContent = true;
-		if(!nameTranslate.equals(Tools.getTranslateWitchPreferences(getSherlockActivity()))
-				|| bookIdLast != bookId
-				|| chapterLast != chapterNumber
-				|| listPoems.size() == 0){
+		if(listPoems.size() == 0){
+			changeChapter(chapterNumber);
+		}
+		else if(!nameTranslate.equals(Tools.getTranslateWitchPreferences(getSherlockActivity()))){
 			nameTranslate = Tools.getTranslateWitchPreferences(getSherlockActivity());
 			chapterLast = 0;
 			changeChapter(chapterNumber);
-		}
-		else
+		} else if(bookIdLast != bookId){
+			changeChapter(chapterNumber);
+		} else if(chapterLast != chapterNumber){
+			changeChapter(chapterNumber);
+		} else {
 			updateList();
+		}
 		
 		dayNight = (defPref.getString(getString(R.string.pref_mode_read), "0").equals("0"))?false:true;
 		if(dayNight){
