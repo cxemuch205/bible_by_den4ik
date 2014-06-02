@@ -165,6 +165,7 @@ public class ListPoemsFragment extends SherlockFragment{
 		if(pd == null){
 			pd = new ProgressDialog(getSherlockActivity());		
 			pd.setMessage(getString(R.string.progress_dialog_download_chapter));
+			pd.setCanceledOnTouchOutside(false);
 		}
 		
 		if(dataBase == null){
@@ -990,8 +991,14 @@ public class ListPoemsFragment extends SherlockFragment{
 		Log.i(TAG, "onResume()");
 
 		bolGetingContent = true;
-		if(listPoems.size() == 0 | chapterLast != chapterNumber)
+		if(!nameTranslate.equals(Tools.getTranslateWitchPreferences(getSherlockActivity()))
+				|| bookIdLast != bookId
+				|| chapterLast != chapterNumber
+				|| listPoems.size() == 0){
+			nameTranslate = Tools.getTranslateWitchPreferences(getSherlockActivity());
+			chapterLast = 0;
 			changeChapter(chapterNumber);
+		}
 		else
 			updateList();
 		
