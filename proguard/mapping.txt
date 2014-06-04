@@ -10416,16 +10416,17 @@ ua.maker.gbible.activity.ReadForEveryDayActivity -> ua.maker.gbible.activity.Rea
     android.widget.ListView lvDialogItems -> l
     ua.maker.gbible.adapter.ItemDialogReadAdapter adapterDialog -> m
     java.util.List listItemsReadDialog -> n
-    int posClick -> o
-    int firstItemPosition -> p
-    boolean loadLinks -> q
-    android.content.SharedPreferences pref -> r
-    android.widget.AdapterView$OnItemClickListener itemReadClickInDialogListener -> s
-    android.content.DialogInterface$OnClickListener clickOkClearDialogListener -> t
-    android.content.DialogInterface$OnClickListener clickCancelClearDialogListener -> u
-    android.content.DialogInterface$OnClickListener clickCancelItemListDialogListener -> v
-    android.widget.AdapterView$OnItemClickListener itemClickListener -> w
-    android.widget.AbsListView$OnScrollListener scrollListViewListener -> x
+    com.actionbarsherlock.view.MenuItem itemReset -> o
+    int posClick -> p
+    int firstItemPosition -> q
+    boolean loadLinks -> r
+    android.content.SharedPreferences pref -> s
+    android.widget.AdapterView$OnItemClickListener itemReadClickInDialogListener -> t
+    android.content.DialogInterface$OnClickListener clickOkClearDialogListener -> u
+    android.content.DialogInterface$OnClickListener clickCancelClearDialogListener -> v
+    android.content.DialogInterface$OnClickListener clickCancelItemListDialogListener -> w
+    android.widget.AdapterView$OnItemClickListener itemClickListener -> x
+    android.widget.AbsListView$OnScrollListener scrollListViewListener -> y
     void onCreate(android.os.Bundle) -> onCreate
     int getCurrentDayNumber() -> a
     void setSelectedItemForRead(int) -> a
@@ -10452,6 +10453,7 @@ ua.maker.gbible.activity.ReadForEveryDayActivity -> ua.maker.gbible.activity.Rea
     void access$13(ua.maker.gbible.activity.ReadForEveryDayActivity,boolean) -> a
     int access$14(ua.maker.gbible.activity.ReadForEveryDayActivity) -> l
     void access$15(ua.maker.gbible.activity.ReadForEveryDayActivity,int) -> c
+    com.actionbarsherlock.view.MenuItem access$16(ua.maker.gbible.activity.ReadForEveryDayActivity) -> m
 ua.maker.gbible.activity.ReadForEveryDayActivity$1 -> ua.maker.gbible.activity.i:
     ua.maker.gbible.activity.ReadForEveryDayActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
@@ -10771,42 +10773,42 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.t:
     android.app.AlertDialog dialog -> j
     java.util.List listPoems -> k
     java.util.List listPlans -> l
-    ua.maker.gbible.adapter.ItemListPoemAdapter adapterListPoem -> m
-    android.webkit.WebView webviewActionView -> n
-    java.util.Timer timer -> o
-    int bookId -> p
-    int bookIdLast -> q
-    int chapterNumber -> r
-    int poemPos -> s
-    int maxChapter -> t
-    int click -> u
-    int chapterLast -> v
-    java.lang.String translateId -> w
-    int posPoemForCompare -> x
-    int visibleItemCount -> y
-    java.lang.String nameTranslate -> z
-    android.widget.Button btnBook -> A
-    android.widget.Button btnChapter -> B
-    android.widget.Button btnPoem -> C
-    android.widget.EditText etNextLink -> D
-    android.widget.EditText etComments -> E
-    android.content.SharedPreferences sp -> F
-    android.content.SharedPreferences defPref -> G
-    android.content.SharedPreferences prefApp -> H
-    boolean dayNight -> I
-    boolean useVolBtn -> J
-    boolean firstStart -> K
-    boolean bolGetingContent -> L
-    int speedScroolList -> M
-    int poemBM -> N
-    int chapterBM -> O
-    java.lang.String contentBM -> P
-    android.view.View viewDialogCopy -> Q
-    android.app.AlertDialog dialogSelect -> R
-    android.app.ProgressDialog pd -> S
-    android.app.AlertDialog$Builder builder -> T
-    ua.maker.gbible.widget.setting.ColorPickerCustomDialog colorDialog -> U
-    ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask changechapterTask -> V
+    java.lang.ref.WeakReference taskWeakRef -> m
+    ua.maker.gbible.adapter.ItemListPoemAdapter adapterListPoem -> n
+    android.webkit.WebView webviewActionView -> o
+    java.util.Timer timer -> p
+    int bookId -> q
+    int bookIdLast -> r
+    int chapterNumber -> s
+    int poemPos -> t
+    int maxChapter -> u
+    int click -> v
+    int chapterLast -> w
+    java.lang.String translateId -> x
+    int posPoemForCompare -> y
+    int visibleItemCount -> z
+    java.lang.String nameTranslate -> A
+    android.widget.Button btnBook -> B
+    android.widget.Button btnChapter -> C
+    android.widget.Button btnPoem -> D
+    android.widget.EditText etNextLink -> E
+    android.widget.EditText etComments -> F
+    android.content.SharedPreferences sp -> G
+    android.content.SharedPreferences defPref -> H
+    android.content.SharedPreferences prefApp -> I
+    boolean dayNight -> J
+    boolean useVolBtn -> K
+    boolean firstStart -> L
+    boolean bolGetingContent -> M
+    int speedScroolList -> N
+    int poemBM -> O
+    int chapterBM -> P
+    java.lang.String contentBM -> Q
+    android.view.View viewDialogCopy -> R
+    android.app.AlertDialog dialogSelect -> S
+    android.app.ProgressDialog pd -> T
+    android.app.AlertDialog$Builder builder -> U
+    ua.maker.gbible.widget.setting.ColorPickerCustomDialog colorDialog -> V
     ua.maker.gbible.fragment.ListPoemsFragment instance -> W
     ua.maker.gbible.widget.setting.ColorPickerCustomDialog$OnColorChangedListener colorChangeListener -> X
     android.view.View$OnClickListener clickChapterBtnListener -> Y
@@ -10825,6 +10827,7 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.t:
     android.content.DialogInterface$OnClickListener clickCopyAllListener -> aj
     android.content.DialogInterface$OnClickListener clickCancelCopyListener -> ak
     android.widget.AdapterView$OnItemLongClickListener itemLongClickListener -> al
+    ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask changechapterTask -> am
     ua.maker.gbible.fragment.ListPoemsFragment getInstence() -> a
     void onAttach(android.app.Activity) -> onAttach
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
@@ -10840,6 +10843,7 @@ ua.maker.gbible.fragment.ListPoemsFragment -> ua.maker.gbible.b.t:
     boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem) -> onOptionsItemSelected
     void toPreviousChapter() -> e
     void toNextChapter() -> f
+    boolean isAsyncTaskPendingOrRunning() -> g
     void changeChapter(int) -> a
     void onResume() -> onResume
     void onPause() -> onPause
@@ -10962,7 +10966,7 @@ ua.maker.gbible.fragment.ListPoemsFragment$ActionModeCallback -> ua.maker.gbible
     boolean onActionItemClicked(android.view.ActionMode,android.view.MenuItem) -> onActionItemClicked
     void onDestroyActionMode(android.view.ActionMode) -> onDestroyActionMode
 ua.maker.gbible.fragment.ListPoemsFragment$ChangeChapterAsyncTask -> ua.maker.gbible.b.ao:
-    ua.maker.gbible.fragment.ListPoemsFragment this$0 -> a
+    java.lang.ref.WeakReference fragWeakRef -> a
     void onPreExecute() -> onPreExecute
     java.util.List doInBackground(java.lang.Void[]) -> a
     void onPostExecute(java.util.List) -> a
