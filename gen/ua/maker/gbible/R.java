@@ -805,9 +805,6 @@ containing a value of this type.
         /**  Whether action menu items should obey the "withText" showAsAction
     flag. This may be set to false for situations where space is
     extremely limited. 
- Whether action menu items should obey the "withText" showAsAction.
-         This may be set to false for situations where space is
-         extremely limited. 
          */
         public static final int abc_config_allowActionMenuItemTextWithIcon=0x7f070004;
         public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f070003;
@@ -834,20 +831,13 @@ containing a value of this type.
     public static final class dimen {
         /**  Default height of an action bar. 
  Default height of an action bar. 
- Default height of an action bar. 
- Default height of an action bar. 
- Default height of an action bar. 
          */
         public static final int abc_action_bar_default_height=0x7f090002;
         /**  Vertical padding around action bar icons. 
  Vertical padding around action bar icons. 
- Vertical padding around action bar icons. 
- Vertical padding around action bar icons. 
- Vertical padding around action bar icons. 
          */
         public static final int abc_action_bar_icon_vertical_padding=0x7f090003;
         /**  Size of the indeterminate Progress Bar 
- Size of the indeterminate Progress Bar 
          */
         public static final int abc_action_bar_progress_bar_size=0x7f09000a;
         /**  Maximum height for a stacked tab bar as part of an action bar 
@@ -860,41 +850,26 @@ containing a value of this type.
         public static final int abc_action_bar_stacked_tab_max_width=0x7f090001;
         /**  Bottom margin for action bar subtitles 
  Bottom margin for action bar subtitles 
- Bottom margin for action bar subtitles 
- Bottom margin for action bar subtitles 
- Bottom margin for action bar subtitles 
          */
         public static final int abc_action_bar_subtitle_bottom_margin=0x7f090007;
         /**  Text size for action bar subtitles 
- Text size for action bar subtitles 
- Text size for action bar subtitles 
- Text size for action bar subtitles 
  Text size for action bar subtitles 
          */
         public static final int abc_action_bar_subtitle_text_size=0x7f090005;
         /**  Top margin for action bar subtitles 
  Top margin for action bar subtitles 
- Top margin for action bar subtitles 
- Top margin for action bar subtitles 
- Top margin for action bar subtitles 
          */
         public static final int abc_action_bar_subtitle_top_margin=0x7f090006;
         /**  Text size for action bar titles 
  Text size for action bar titles 
- Text size for action bar titles 
- Text size for action bar titles 
- Text size for action bar titles 
          */
         public static final int abc_action_bar_title_text_size=0x7f090004;
         /**  Minimum width for an action button in the menu area of an action bar 
- Minimum width for an action button in the menu area of an action bar 
- Minimum width for an action button in the menu area of an action bar 
          */
         public static final int abc_action_button_min_width=0x7f090008;
         /**  The maximum width we would prefer dialogs to be.  0 if there is no
     maximum (let them grow as large as the screen).  Actual values are
     specified for -large and -xlarge configurations. 
- see comment in values/config.xml 
  see comment in values/config.xml 
          */
         public static final int abc_config_prefDialogWidth=0x7f090000;
@@ -910,9 +885,6 @@ containing a value of this type.
          */
         public static final int abc_search_view_preferred_width=0x7f09000d;
         /**  Minimum width of the search view text entry area. 
- Minimum width of the search view text entry area. 
- Minimum width of the search view text entry area. 
- Minimum width of the search view text entry area. 
          */
         public static final int abc_search_view_text_min_width=0x7f09000c;
         /**  Default screen margins, per the Android Design guidelines. 
@@ -1274,21 +1246,6 @@ containing a value of this type.
          an action bar/action mode. This will be used to determine how many
          showAsAction="ifRoom" items can fit. "always" items can override this. 
  The maximum number of action buttons that should be permitted within
-     an action bar/action mode. This will be used to determine how many
-     showAsAction="ifRoom" items can fit. "always" items can override this. 
- The maximum number of action buttons that should be permitted within
-         an action bar/action mode. This will be used to determine how many
-         showAsAction="ifRoom" items can fit. "always" items can override this. 
- The maximum number of action buttons that should be permitted within
-         an action bar/action mode. This will be used to determine how many
-         showAsAction="ifRoom" items can fit. "always" items can override this. 
- The maximum number of action buttons that should be permitted within
-         an action bar/action mode. This will be used to determine how many
-         showAsAction="ifRoom" items can fit. "always" items can override this. 
- The maximum number of action buttons that should be permitted within
-         an action bar/action mode. This will be used to determine how many
-         showAsAction="ifRoom" items can fit. "always" items can override this. 
- The maximum number of action buttons that should be permitted within
          an action bar/action mode. This will be used to determine how many
          showAsAction="ifRoom" items can fit. "always" items can override this. 
          */
@@ -1373,45 +1330,18 @@ containing a value of this type.
         public static final int menu_plan_detail=0x7f0e0005;
     }
     public static final class string {
-        /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
-         */
         public static final int abc_action_bar_home_description=0x7f0b0001;
-        /**  Content description for the action bar "up" affordance. [CHAR LIMIT=NONE] 
-         */
         public static final int abc_action_bar_up_description=0x7f0b0002;
-        /**  Content description for the action menu overflow button. [CHAR LIMIT=NONE] 
-         */
         public static final int abc_action_menu_overflow_description=0x7f0b0003;
-        /**  Label for the "Done" button on the far left of action mode toolbars. 
-         */
         public static final int abc_action_mode_done=0x7f0b0000;
-        /**  Title for a button to expand the list of activities in ActivityChooserView [CHAR LIMIT=25] 
-         */
         public static final int abc_activity_chooser_view_see_all=0x7f0b000a;
-        /**  ActivityChooserView - accessibility support 
- Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] 
-         */
         public static final int abc_activitychooserview_choose_application=0x7f0b0009;
-        /**  SearchView accessibility description for clear button [CHAR LIMIT=NONE] 
-         */
         public static final int abc_searchview_description_clear=0x7f0b0006;
-        /**  SearchView accessibility description for search text field [CHAR LIMIT=NONE] 
-         */
         public static final int abc_searchview_description_query=0x7f0b0005;
-        /**  SearchView accessibility description for search button [CHAR LIMIT=NONE] 
-         */
         public static final int abc_searchview_description_search=0x7f0b0004;
-        /**  SearchView accessibility description for submit button [CHAR LIMIT=NONE] 
-         */
         public static final int abc_searchview_description_submit=0x7f0b0007;
-        /**  SearchView accessibility description for voice button [CHAR LIMIT=NONE] 
-         */
         public static final int abc_searchview_description_voice=0x7f0b0008;
-        /**  Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
-         */
         public static final int abc_shareactionprovider_share_with=0x7f0b000c;
-        /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
-         */
         public static final int abc_shareactionprovider_share_with_application=0x7f0b000b;
         public static final int action_bookmarks=0x7f0b0011;
         public static final int action_history=0x7f0b0012;
