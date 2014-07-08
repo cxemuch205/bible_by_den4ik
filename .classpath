@@ -16,7 +16,6 @@
 	<classpathentry kind="lib" path="libs/libspen23.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/actionbarsherlock/bin/actionbarsherlock.jar"/>
 	<classpathentry kind="lib" path="libs/libGoogleAnalyticsV2.jar"/>
 	<classpathentry kind="lib" path="libs/PayPal_MPL.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>

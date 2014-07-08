@@ -21,33 +21,34 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.CheckBox;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class PlanDetailFragment extends SherlockFragment {
+public class PlanDetailFragment extends Fragment {
 	
 	private static final String TAG = "PlanDetailFragment";
 	
@@ -119,11 +120,11 @@ public class PlanDetailFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		if(db == null){
-			db = new UserDB(getSherlockActivity());
+			db = new UserDB(activity);
 			listItemsPlan = new ArrayList<ItemPlanStruct>();
-			pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-			adapter = new PlanItemAdapter(getSherlockActivity(), listItemsPlan);
-			dbBible = new DataBase(getSherlockActivity());
+			pref = activity.getSharedPreferences(App.PREF_SEND_DATA, 0);
+			adapter = new PlanItemAdapter(activity, listItemsPlan);
+			dbBible = new DataBase(activity);
 			
 			try {
 				dbBible.createDataBase();
@@ -140,20 +141,20 @@ public class PlanDetailFragment extends SherlockFragment {
 				listBooks.add(""+books[i]);
 			}		 
 			
-			adapterBooks = new ArrayAdapter<String>(getSherlockActivity(), android.R.layout.simple_list_item_1, listBooks);
-			adapterChapters = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listChapter);
-			adapterPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listPoem);
-			adapterToPoem = new ArrayAdapter<Integer>(getSherlockActivity(), android.R.layout.simple_list_item_1, listToPoem);
+			adapterBooks = new ArrayAdapter<String>(activity, android.R.layout.simple_list_item_1, listBooks);
+			adapterChapters = new ArrayAdapter<Integer>(activity, android.R.layout.simple_list_item_1, listChapter);
+			adapterPoem = new ArrayAdapter<Integer>(activity, android.R.layout.simple_list_item_1, listPoem);
+			adapterToPoem = new ArrayAdapter<Integer>(activity, android.R.layout.simple_list_item_1, listToPoem);
 			
 			adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			adapterChapters.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			adapterPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			adapterToPoem.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			
-			AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 			builder.setTitle(getString(R.string.dialog_title_add_item_plan));
 			
-			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			LayoutInflater inflater = activity.getLayoutInflater();
 			View viewDialog = inflater.inflate(R.layout.dialog_add_item_to_plan, null);
 			
 			rbIsText = (RadioButton)viewDialog.findViewById(R.id.rb_text);
@@ -197,8 +198,8 @@ public class PlanDetailFragment extends SherlockFragment {
 		lvPlanItems = (ListView)view.findViewById(R.id.lv_plan_items);
 		lvPlanItems.setAdapter(adapter);
 		
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		
 		return view;
 	}
@@ -213,8 +214,8 @@ public class PlanDetailFragment extends SherlockFragment {
 		
 		plan = db.getPlanById(planId);		
 		
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activit_plan)+": "+plan.getName());
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activit_plan)+": "+plan.getName());
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		lvPlanItems.setOnItemClickListener(itemClickListener);
 		lvPlanItems.setOnItemLongClickListener(itemLongClickListener);
@@ -224,7 +225,7 @@ public class PlanDetailFragment extends SherlockFragment {
 	public void onStart() {
 		super.onStart();
 		Log.d(TAG, "onStart() - getItem - planId:" + plan.getId());
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 		listItemsPlan.clear();
 		listItemsPlan.addAll(db.getItemsPlanById(plan.getId()));
 		updateList();
@@ -248,7 +249,7 @@ public class PlanDetailFragment extends SherlockFragment {
 	
 	private void updateListChapters(int position){
 		listChapter.clear();
-		listChapter.addAll(dbBible.getChapters(Tools.getTranslateWitchPreferences(getSherlockActivity()), (position+1)));
+		listChapter.addAll(dbBible.getChapters(Tools.getTranslateWitchPreferences(getActivity()), (position+1)));
 		adapterChapters.notifyDataSetChanged();
 	}
 
@@ -268,9 +269,9 @@ public class PlanDetailFragment extends SherlockFragment {
 		listPoem.clear();
 		
 		numberOfPoem = dbBible.getNumberOfPoemInChapter(
-				Tools.getBookIdByName(listBooks.get(spinnerBooks.getSelectedItemPosition()), getSherlockActivity()), 
+				Tools.getBookIdByName(listBooks.get(spinnerBooks.getSelectedItemPosition()), getActivity()), 
 				listChapter.get(spinnerChapter.getSelectedItemPosition()), 
-				Tools.getTranslateWitchPreferences(getSherlockActivity()));
+				Tools.getTranslateWitchPreferences(getActivity()));
 		for(int i = 1; i <= numberOfPoem; i++)
 			listPoem.add(i);
 		adapterPoem.notifyDataSetChanged();
@@ -370,14 +371,14 @@ public class PlanDetailFragment extends SherlockFragment {
 					int poem = listPoem.get(spinnerPoem.getSelectedItemPosition());
 					int toPoem = listToPoem.get(spinnerToPoem.getSelectedItemPosition());
 					backUpItem.setBookId(bookId);
-					backUpItem.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
+					backUpItem.setBookName(Tools.getBookNameByBookId(bookId, getActivity()));
 					backUpItem.setChapter(chapter);
 					backUpItem.setPoem(poem);
 					backUpItem.setToPoem(toPoem);
-					backUpItem.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
+					backUpItem.setTranslate(Tools.getTranslateWitchPreferences(getActivity()));
 					backUpItem.setDataType(PlanData.DATA_LINK);
 					if(cbQuotePoem.isChecked()){
-						backUpItem.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
+						backUpItem.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getActivity())));
 						backUpItem.setDataType(PlanData.DATA_LINK_WITH_TEXT);
 					}
 					listItemsPlan.remove(itemSelected);
@@ -421,14 +422,14 @@ public class PlanDetailFragment extends SherlockFragment {
 					int poem = listPoem.get(spinnerPoem.getSelectedItemPosition());
 					int toPoem = listToPoem.get(spinnerToPoem.getSelectedItemPosition());
 					itemPlan.setBookId(bookId);
-					itemPlan.setBookName(Tools.getBookNameByBookId(bookId, getSherlockActivity()));
+					itemPlan.setBookName(Tools.getBookNameByBookId(bookId, getActivity()));
 					itemPlan.setChapter(chapter);
 					itemPlan.setPoem(poem);
 					itemPlan.setToPoem(toPoem);
-					itemPlan.setTranslate(Tools.getTranslateWitchPreferences(getSherlockActivity()));
+					itemPlan.setTranslate(Tools.getTranslateWitchPreferences(getActivity()));
 					itemPlan.setDataType(PlanData.DATA_LINK);
 					if(cbQuotePoem.isChecked()){
-						itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getSherlockActivity())));
+						itemPlan.setText(dbBible.getPoem(bookId, chapter, poem, Tools.getTranslateWitchPreferences(getActivity())));
 						itemPlan.setDataType(PlanData.DATA_LINK_WITH_TEXT);
 					}
 					listItemsPlan.add(itemPlan);
@@ -538,7 +539,7 @@ public class PlanDetailFragment extends SherlockFragment {
 			posStartItemDrag = itemSelected;
 			pasteItem = true;
 			itemCancel.setVisible(true);
-			Tools.showToast(getSherlockActivity(), getString(R.string.click_on_point_paste));
+			Tools.showToast(getActivity(), getString(R.string.click_on_point_paste));
 			return true;
 		case BTN_EDIT:
 			isEdit = true; check = false;
@@ -646,6 +647,6 @@ public class PlanDetailFragment extends SherlockFragment {
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }

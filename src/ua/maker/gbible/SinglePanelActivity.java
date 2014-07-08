@@ -1,6 +1,5 @@
 package ua.maker.gbible;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import ua.maker.gbible.constant.App;
@@ -24,12 +23,13 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
-public abstract class SinglePanelActivity extends SherlockFragmentActivity {
+public abstract class SinglePanelActivity extends ActionBarActivity {
 	
 	private static final String TAG = "SinglaPaneActivity";
 	
@@ -53,7 +53,6 @@ public abstract class SinglePanelActivity extends SherlockFragmentActivity {
 	
 	private boolean dayNight = false;
 
-	@SuppressLint("InlinedApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);

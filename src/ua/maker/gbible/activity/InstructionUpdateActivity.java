@@ -2,12 +2,6 @@ package ua.maker.gbible.activity;
 
 import java.util.Locale;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-
 import ua.maker.gbible.R;
 import ua.maker.gbible.fragment.InstructionInfoFragment;
 import ua.maker.gbible.fragment.UpdatesInfoFragment;
@@ -17,12 +11,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.Tab;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
-public class InstructionUpdateActivity extends SherlockFragmentActivity implements
+public class InstructionUpdateActivity extends ActionBarActivity implements
 		ActionBar.TabListener {
 
 	SectionsPagerAdapter mSectionsPagerAdapter;

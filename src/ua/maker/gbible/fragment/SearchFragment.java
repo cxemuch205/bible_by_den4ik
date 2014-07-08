@@ -3,6 +3,7 @@ package ua.maker.gbible.fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.SettingActivity;
 import ua.maker.gbible.adapter.ItemListSearchAdapter;
@@ -17,12 +18,18 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -35,15 +42,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class SearchFragment extends SherlockFragment {
+public class SearchFragment extends Fragment {
 
 	private static final String TAG = "SearchFragment";
 	
@@ -83,15 +86,15 @@ public class SearchFragment extends SherlockFragment {
 		super.onAttach(activity);
 		setRetainInstance(true);
 		if(db == null){
-			pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-			db = new DataBase(getSherlockActivity());
+			pref = getActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			db = new DataBase(getActivity());
 			try {
 				db.createDataBase();
 			} catch (IOException e) {e.printStackTrace();}
 			
 			db.openDataBase();
 			searchResult = new ArrayList<SearchStruct>();
-			adapter = new ItemListSearchAdapter(getSherlockActivity(), searchResult);
+			adapter = new ItemListSearchAdapter(getActivity(), searchResult);
 		}		
 	}
 	
@@ -107,8 +110,8 @@ public class SearchFragment extends SherlockFragment {
 		lvResultSearch = (ListView)view.findViewById(R.id.lv_search_result);
 		lvResultSearch.setAdapter(adapter);
 		
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		
 		return view;
 	}
@@ -117,8 +120,8 @@ public class SearchFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.search_str));
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.search_str));
 		
 		if(pref.contains(App.SEARCH_REQUEST)){
 			requestDB = pref.getString(App.SEARCH_REQUEST, "");
@@ -183,9 +186,9 @@ public class SearchFragment extends SherlockFragment {
 		public void onClick(View v) {
 			if(!etSearchText.getText().toString().equals("") || requestDB != ""){				
 				//hide keyboard
-				getSherlockActivity();
-				InputMethodManager imm = (InputMethodManager)getSherlockActivity()
-						.getSystemService(SherlockFragmentActivity.INPUT_METHOD_SERVICE); 
+				getActivity();
+				InputMethodManager imm = (InputMethodManager)getActivity()
+						.getSystemService(FragmentActivity.INPUT_METHOD_SERVICE); 
 				imm.hideSoftInputFromWindow(etSearchText.getWindowToken(), 0);
 				
 				pref.edit().putString(App.SEARCH_REQUEST, requestDB).commit();
@@ -259,7 +262,7 @@ public class SearchFragment extends SherlockFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			Log.d(TAG, "Search AsyncTask starting");
-			pd = ProgressDialog.show(getSherlockActivity(), 
+			pd = ProgressDialog.show(getActivity(), 
 					getString(R.string.dialog_title_search)+" "+requestDB, 
 					getString(R.string.dialog_start_search));
 			pd.setCanceledOnTouchOutside(false);
@@ -297,10 +300,10 @@ public class SearchFragment extends SherlockFragment {
 		
 		switch (item.getItemId()) {
 		case R.id.action_exit:
-			getSherlockActivity().finish();
+			getActivity().finish();
 			break;
 		case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 		default:
@@ -312,12 +315,12 @@ public class SearchFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }

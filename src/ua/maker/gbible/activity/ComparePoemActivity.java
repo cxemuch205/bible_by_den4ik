@@ -13,15 +13,16 @@ import ua.maker.gbible.utils.DataBase;
 import ua.maker.gbible.utils.Tools;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.Window;
 import com.google.analytics.tracking.android.EasyTracker;
 
-public class ComparePoemActivity extends SherlockActivity {
+public class ComparePoemActivity extends ActionBarActivity {
 	
 	public static final String TAG = "ComparePoemActivity";
 	
@@ -37,10 +38,12 @@ public class ComparePoemActivity extends SherlockActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+		supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_compare_poems);
 		Log.i(TAG, "onCreate()");
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
 		tvShowLink = (TextView)findViewById(R.id.tv_show_link);
 		lvCompare = (ListView)findViewById(R.id.lv_compare_poems);
 	}
@@ -125,6 +128,14 @@ public class ComparePoemActivity extends SherlockActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 		Log.i(TAG, "onRestore()");
 		listPoem = savedInstanceState.getParcelableArrayList(App.POEM);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() == android.R.id.home){
+			finish();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
     @Override

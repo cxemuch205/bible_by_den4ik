@@ -1,31 +1,30 @@
 package ua.maker.gbible.activity;
 
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
-import com.google.analytics.tracking.android.EasyTracker;
-
 import ua.maker.gbible.R;
+import ua.maker.gbible.fragment.SettingFragment;
 import ua.maker.gbible.widget.setting.ColorPickerPreference;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
-public class SettingActivity extends SherlockPreferenceActivity {
-	
-	private static final String TAG = "Setting Fragment";
-	
-	@SuppressWarnings("deprecation")
+import com.google.analytics.tracking.android.EasyTracker;
+
+public class SettingActivity extends ActionBarActivity {
+		
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.d(TAG, "Start onCreate");
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.layout_setting);
 		getSupportActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
-		addPreferencesFromResource(R.xml.preference_bible);
-		getListView().setBackgroundColor(Color.WHITE);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		((ColorPickerPreference)findPreference(getString(R.string.pref_background_poem))).setAlphaSliderEnabled(true);
-		((ColorPickerPreference)findPreference(getString(R.string.pref_backg_control_panel))).setAlphaSliderEnabled(true);
+		if(savedInstanceState == null){
+			getSupportFragmentManager().beginTransaction()
+				.add(R.id.fl_setting, SettingFragment.getInstance(), SettingFragment.TAG).commit();
+		}
 	}
 	
 	@Override

@@ -465,4 +465,11 @@
     <string name="title_section_instractions">Инструкции</string>
     <string name="summary_instr_updt_activity">писание последних обновлений, а также описание некоторих функций и возможностей.</string>
 
+    <!--  Strings for possible PreferenceActivity Back/Next buttons -->
+    <string name="back_button_label">Назад</string>
+    <string name="next_button_label">Далее</string>
+
+    <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
+    <string name="skip_button_label">Отмена</string>
+    
 </resources>

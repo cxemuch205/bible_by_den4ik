@@ -26,31 +26,32 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.ActionMode;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ActionMode.Callback;
+import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class BookmarksFragment extends SherlockFragment {
+public class BookmarksFragment extends Fragment {
 	
 	private static final String TAG = "BookmarksFragment";
 	
@@ -90,12 +91,12 @@ public class BookmarksFragment extends SherlockFragment {
 		super.onAttach(activity);
 		setRetainInstance(true);
 		if(db == null){
-			db = new UserDB(getSherlockActivity());
+			db = new UserDB(activity);
 			listPlans = new ArrayList<PlanStruct>();
 			listBookmarks = new ArrayList<BookMarksStruct>();
-			adapter = new ItemListBookmarksAdapter(getSherlockActivity(), listBookmarks);
+			adapter = new ItemListBookmarksAdapter(activity, listBookmarks);
 			
-			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			LayoutInflater inflater = activity.getLayoutInflater();
 			viewDialogCopy = inflater.inflate(R.layout.dialog_select_poem, null);
 			tvContentPoemToCopy = (TextView)viewDialogCopy.findViewById(R.id.textView_selected_poem_to_copy);
 			tvContentPoemToCopy.setOnLongClickListener(longClickOnTextViewListener);
@@ -111,8 +112,8 @@ public class BookmarksFragment extends SherlockFragment {
 		lvBookmarks.setAdapter(adapter);
 		tvInfo = (TextView)view.findViewById(R.id.tv_info_bookmarks);
 		
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		return view;
 	}
 	
@@ -120,9 +121,9 @@ public class BookmarksFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_bookmarks));
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_bookmarks));
 		registerForContextMenu(lvBookmarks);
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		
 		listPlans.addAll(db.getPlansList());
 		
@@ -149,7 +150,7 @@ public class BookmarksFragment extends SherlockFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			SharedPreferences sp = getActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 			Editor editor = sp.edit();
 			editor.putInt(App.BOOK_ID, listBookmarks.get((int)id).getBookId());
 			editor.putInt(App.CHAPTER, listBookmarks.get((int)id).getChapter());
@@ -203,10 +204,10 @@ public class BookmarksFragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
-	   		getSherlockActivity().finish();
+	   		getActivity().finish();
 	   		return true;
 	   	case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 	   	}
@@ -219,9 +220,9 @@ public class BookmarksFragment extends SherlockFragment {
 		switch (item.getItemId()) {
 		case BTN_ADD_TO_PLAN:
 			Log.d(TAG, "click item - add to plan");
-			ItemPlanListAdapter listPlanAdapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
+			ItemPlanListAdapter listPlanAdapter = new ItemPlanListAdapter(getActivity(), listPlans);
 			if(listPlans.size()>0){
-				AlertDialog.Builder builderPlanList = new AlertDialog.Builder(getSherlockActivity());
+				AlertDialog.Builder builderPlanList = new AlertDialog.Builder(getActivity());
 				builderPlanList.setTitle(getString(R.string.title_dialog_plans));
 				builderPlanList.setSingleChoiceItems(listPlanAdapter, -1, itemDialogListPlanListener);
 				builderPlanList.setNegativeButton(getString(R.string.dialog_cancel), new onDialogClickListener() {
@@ -232,17 +233,17 @@ public class BookmarksFragment extends SherlockFragment {
 			}
 			else
 			{
-				Tools.showToast(getSherlockActivity(), getString(R.string.toast_msg_no_plans));
+				Tools.showToast(getActivity(), getString(R.string.toast_msg_no_plans));
 			}
 			return true;
 		case BTN_DELETE:
 			db.deleteBookmark(listBookmarks.get(selectItem).getId());
 			listBookmarks.remove(selectItem);
 			updateListView();
-			Tools.showToast(getSherlockActivity(), getString(R.string.deleted_bookmark));
+			Tools.showToast(getActivity(), getString(R.string.deleted_bookmark));
 			return true;
 		case BTN_COMPARE_POEM:
-			Intent intentCompare = new Intent(getSherlockActivity(), ComparePoemActivity.class);
+			Intent intentCompare = new Intent(getActivity(), ComparePoemActivity.class);
 			intentCompare.putExtra(App.BOOK_ID, listBookmarks.get(selectItem).getBookId());
 			intentCompare.putExtra(App.CHAPTER, listBookmarks.get(selectItem).getChapter());
 			intentCompare.putExtra(App.POEM, listBookmarks.get(selectItem).getPoem());
@@ -251,10 +252,10 @@ public class BookmarksFragment extends SherlockFragment {
 			return true;
 		case BTN_COPY:
 			BookMarksStruct itemS = listBookmarks.get(selectItem);
-			AlertDialog.Builder builderSelect = new AlertDialog.Builder(getSherlockActivity());
+			AlertDialog.Builder builderSelect = new AlertDialog.Builder(getActivity());
 			builderSelect.setTitle(getString(R.string.dialog_title_select_text));
 			
-			StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(itemS.getBookId(), getSherlockActivity())
+			StringBuilder builderString = new StringBuilder("<p><b>"+Tools.getBookNameByBookId(itemS.getBookId(), getActivity())
 	        		+" "+itemS.getChapter()+":"+itemS.getPoem()+"</b></p>"
 	        		+"<p>"+itemS.getContent()+"</p>");
 			
@@ -271,10 +272,10 @@ public class BookmarksFragment extends SherlockFragment {
 			BookMarksStruct itemSS = listBookmarks.get(selectItem);
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("text/*");
-			intent.putExtra(Intent.EXTRA_TEXT, Tools.getBookNameByBookId(itemSS.getBookId(), getSherlockActivity())
+			intent.putExtra(Intent.EXTRA_TEXT, Tools.getBookNameByBookId(itemSS.getBookId(), getActivity())
         		+" "+itemSS.getChapter()+":"+itemSS.getPoem()+"\n"
         		+itemSS.getContent());
-			getSherlockActivity().startActivity(intent);
+			getActivity().startActivity(intent);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
@@ -329,14 +330,14 @@ public class BookmarksFragment extends SherlockFragment {
 			Log.d(TAG, "Select plan id: " + listPlans.get(which).getId());
 			planItem.setDataType(PlanData.DATA_LINK_WITH_TEXT);
 			planItem.setBookId(listBookmarks.get(selectItem).getBookId());
-			planItem.setBookName(Tools.getBookNameByBookId(listBookmarks.get(selectItem).getBookId(), getSherlockActivity()));
+			planItem.setBookName(Tools.getBookNameByBookId(listBookmarks.get(selectItem).getBookId(), getActivity()));
 			planItem.setChapter(listBookmarks.get(selectItem).getChapter());
 			planItem.setPoem(listBookmarks.get(selectItem).getPoem());
 			planItem.setToPoem(listBookmarks.get(selectItem).getPoem());
 			planItem.setText(listBookmarks.get(selectItem).getContent());
 			db.insertItemPlan(planItem);
 			
-			Tools.showToast(getSherlockActivity(), String.format(getString(R.string.toast_added_to_plan), namePlane));
+			Tools.showToast(getActivity(), String.format(getString(R.string.toast_added_to_plan), namePlane));
 			dialog.cancel();
 		}
 	};
@@ -346,7 +347,7 @@ public class BookmarksFragment extends SherlockFragment {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			BookMarksStruct item = listBookmarks.get(selectItem);
-			copyToClipBoard(Tools.getBookNameByBookId(item.getBookId(), getSherlockActivity())
+			copyToClipBoard(Tools.getBookNameByBookId(item.getBookId(), getActivity())
 	        		+" "+item.getChapter()+":"+item.getPoem()+"\n"
 	        		+item.getContent());
 			dialog.cancel();			
@@ -365,27 +366,27 @@ public class BookmarksFragment extends SherlockFragment {
 	private void copyToClipBoard(String textSetClip) {
 		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
 		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB){
-		     getSherlockActivity();
-			android.content.ClipboardManager clipboard =  (android.content.ClipboardManager) getSherlockActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
+			getActivity();
+			android.content.ClipboardManager clipboard =  (android.content.ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
 		        ClipData clip = ClipData.newPlainText(getString(R.string.app_name), textSetClip);
 		        clipboard.setPrimaryClip(clip); 
 		} else{
-		    getSherlockActivity();
-			android.text.ClipboardManager clipboard = (android.text.ClipboardManager)getSherlockActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
+			getActivity();
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE); 
 		    clipboard.setText(textSetClip);
 		}
-		 Tools.showToast(getSherlockActivity(), getString(R.string.copyed_poem));
+		 Tools.showToast(getActivity(), getString(R.string.copyed_poem));
 	}
 	
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }
