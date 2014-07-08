@@ -3,6 +3,7 @@ package ua.maker.gbible.utils;
 import ua.maker.gbible.R;
 import ua.maker.gbible.constant.BooksId;
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -513,5 +514,19 @@ public class Tools {
 	    } catch (Exception e) {
 	        return false;
 	    }
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void copyToClipBoard(Context ctx, String textSetClip) {
+		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB){
+			android.content.ClipboardManager clipboard =  (android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE); 
+		        ClipData clip = ClipData.newPlainText(ctx.getString(R.string.app_name), textSetClip);
+		        clipboard.setPrimaryClip(clip); 
+		} else{
+			android.text.ClipboardManager clipboard = (android.text.ClipboardManager)ctx.getSystemService(Context.CLIPBOARD_SERVICE); 
+		    clipboard.setText(textSetClip);
+		}
+		 Tools.showToast(ctx, ctx.getString(R.string.copyed_poem));
 	}
 }

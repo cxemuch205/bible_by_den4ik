@@ -6,7 +6,7 @@
     android:versionName="1.5.1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -42,19 +42,20 @@
         <activity
             android:name="ua.maker.gbible.activity.ComparePoemActivity"
             android:label="@string/title_activity_list_compare_poems"
-            android:parentActivityName="ua.maker.gbible.activity.ListPoemsActivity" >
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.SettingActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/action_setting"
-            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" >
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.DonateActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/donate_title"
-            android:parentActivityName="ua.maker.gbible.SinglePanelActivity" />
+            android:parentActivityName="ua.maker.gbible.SinglePanelActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
         <uses-library
             android:name="com.sec.android.app.multiwindow"
@@ -79,7 +80,8 @@
 
         <activity
             android:name="ua.maker.gbible.activity.ReadForEveryDayActivity"
-            android:label="@string/title_activity_read_for_every_day" >
+            android:label="@string/title_activity_read_for_every_day"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
         <activity
             android:name="com.paypal.android.MEP.PayPalActivity"
@@ -88,14 +90,16 @@
         </activity>
         <activity
             android:name="ua.maker.gbible.activity.InstructionUpdateActivity"
-            android:label="@string/title_activity_instruction_update" >
+            android:label="@string/title_activity_instruction_update"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
-        <provider 
+
+        <provider
             android:name="ua.maker.gbible.utils.BibleContentProvider"
-            android:authorities="ua.maker.gbible.provider.BibleContent"/>
-        <provider 
+            android:authorities="ua.maker.gbible.provider.BibleContent" />
+        <provider
             android:name="ua.maker.gbible.utils.ReadEDContentProvider"
-            android:authorities="ua.maker.gbible.provider.RfEDContent"/>
+            android:authorities="ua.maker.gbible.provider.RfEDContent" />
     </application>
 
 </manifest>

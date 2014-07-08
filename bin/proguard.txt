@@ -1,67 +1,54 @@
 # view res/layout/activity_instruction_update.xml #generated:1
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
-# view res/layout/abs__screen_action_bar.xml #generated:44
-# view res/layout/abs__screen_action_bar_overlay.xml #generated:27
-# view res/layout/abs__screen_simple.xml #generated:32
-# view res/layout/abs__screen_simple_overlay_action_mode.xml #generated:27
-# view xlarge\res/layout-xlarge/abs__screen_action_bar.xml #generated:44
-# view xlarge\res/layout-xlarge/abs__screen_action_bar_overlay.xml #generated:25
--keep class com.actionbarsherlock.internal.nineoldandroids.widget.NineFrameLayout { <init>(...); }
+# view res/layout/abc_action_menu_item_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ActionMenuItemView { <init>(...); }
 
-# view large\res/layout-large/abs__action_mode_close_item.xml #generated:17
-# view res/layout/abs__action_mode_close_item.xml #generated:17
--keep class com.actionbarsherlock.internal.nineoldandroids.widget.NineLinearLayout { <init>(...); }
+# view res/layout/abc_action_menu_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ActionMenuView { <init>(...); }
 
-# view res/layout/abs__action_menu_item_layout.xml #generated:17
--keep class com.actionbarsherlock.internal.view.menu.ActionMenuItemView { <init>(...); }
+# view res/layout/abc_expanded_menu_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ExpandedMenuView { <init>(...); }
 
-# view res/layout/abs__action_menu_layout.xml #generated:17
--keep class com.actionbarsherlock.internal.view.menu.ActionMenuView { <init>(...); }
+# view res/layout/abc_list_menu_item_layout.xml #generated:17
+# view res/layout/abc_popup_menu_item_layout.xml #generated:17
+-keep class android.support.v7.internal.view.menu.ListMenuItemView { <init>(...); }
 
-# view res/layout/abs__popup_menu_item_layout.xml #generated:17
--keep class com.actionbarsherlock.internal.view.menu.ListMenuItemView { <init>(...); }
+# view res/layout/abc_action_bar_decor_include.xml #generated:19
+# view res/layout/abc_action_bar_decor_include.xml #generated:47
+# view res/layout/abc_action_bar_decor_overlay.xml #generated:29
+# view res/layout/abc_action_bar_decor_overlay.xml #generated:52
+-keep class android.support.v7.internal.widget.ActionBarContainer { <init>(...); }
 
-# view res/layout/abs__screen_action_bar.xml #generated:27
-# view res/layout/abs__screen_action_bar.xml #generated:51
-# view res/layout/abs__screen_action_bar_overlay.xml #generated:30
-# view res/layout/abs__screen_action_bar_overlay.xml #generated:53
-# view xlarge\res/layout-xlarge/abs__screen_action_bar.xml #generated:27
-# view xlarge\res/layout-xlarge/abs__screen_action_bar_overlay.xml #generated:28
--keep class com.actionbarsherlock.internal.widget.ActionBarContainer { <init>(...); }
+# view res/layout/abc_action_bar_decor_include.xml #generated:31
+# view res/layout/abc_action_bar_decor_overlay.xml #generated:40
+# view res/layout/abc_action_mode_bar.xml #generated:19
+-keep class android.support.v7.internal.widget.ActionBarContextView { <init>(...); }
 
-# view res/layout/abs__action_mode_bar.xml #generated:19
-# view res/layout/abs__screen_action_bar.xml #generated:37
-# view res/layout/abs__screen_action_bar_overlay.xml #generated:41
-# view xlarge\res/layout-xlarge/abs__screen_action_bar.xml #generated:37
-# view xlarge\res/layout-xlarge/abs__screen_action_bar_overlay.xml #generated:38
--keep class com.actionbarsherlock.internal.widget.ActionBarContextView { <init>(...); }
+# view res/layout/abc_action_bar_decor_overlay.xml #generated:17
+-keep class android.support.v7.internal.widget.ActionBarOverlayLayout { <init>(...); }
 
-# view res/layout/abs__screen_action_bar.xml #generated:32
-# view res/layout/abs__screen_action_bar_overlay.xml #generated:36
-# view xlarge\res/layout-xlarge/abs__screen_action_bar.xml #generated:32
-# view xlarge\res/layout-xlarge/abs__screen_action_bar_overlay.xml #generated:33
--keep class com.actionbarsherlock.internal.widget.ActionBarView { <init>(...); }
+# view res/layout/abc_action_bar_decor_include.xml #generated:25
+# view res/layout/abc_action_bar_decor_overlay.xml #generated:35
+-keep class android.support.v7.internal.widget.ActionBarView { <init>(...); }
 
-# view res/layout/abs__action_bar_home.xml #generated:17
--keep class com.actionbarsherlock.internal.widget.ActionBarView$HomeView { <init>(...); }
+# view res/layout/abc_action_bar_home.xml #generated:17
+-keep class android.support.v7.internal.widget.ActionBarView$HomeView { <init>(...); }
 
-# view res/layout/abs__action_menu_item_layout.xml #generated:40
--keep class com.actionbarsherlock.internal.widget.CapitalizingButton { <init>(...); }
+# view res/layout/abc_action_bar_tabbar.xml #generated:17
+# view res/layout/abc_activity_chooser_view.xml #generated:19
+-keep class android.support.v7.internal.widget.LinearLayoutICS { <init>(...); }
 
-# view res/layout/abs__activity_chooser_view.xml #generated:19
--keep class com.actionbarsherlock.internal.widget.IcsLinearLayout { <init>(...); }
+# view v11\res/layout-v11/abc_action_bar_decor.xml #generated:17
+-keep class android.support.v7.internal.widget.NativeActionModeAwareLayout { <init>(...); }
 
-# view res/layout/abs__action_bar_tab.xml #generated:3
--keep class com.actionbarsherlock.internal.widget.ScrollingTabContainerView$TabView { <init>(...); }
+# view res/layout/abc_action_bar_tab.xml #generated:17
+-keep class android.support.v7.internal.widget.ScrollingTabContainerView$TabView { <init>(...); }
 
-# view res/layout/abs__action_bar_tab_bar_view.xml #generated:3
--keep class com.actionbarsherlock.internal.widget.TabsLinearLayout { <init>(...); }
+# view res/layout/abc_search_view.xml #generated:85
+-keep class android.support.v7.widget.SearchView$SearchAutoComplete { <init>(...); }
 
-# view res/layout/abs__search_view.xml #generated:84
--keep class com.actionbarsherlock.widget.SearchView$SearchAutoComplete { <init>(...); }
-
-# view AndroidManifest.xml #generated:84
+# view AndroidManifest.xml #generated:86
 -keep class com.paypal.android.MEP.PayPalActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:42
@@ -70,7 +57,7 @@
 # view AndroidManifest.xml #generated:53
 -keep class ua.maker.gbible.activity.DonateActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:89
+# view AndroidManifest.xml #generated:91
 -keep class ua.maker.gbible.activity.InstructionUpdateActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:34
@@ -79,7 +66,7 @@
 # view AndroidManifest.xml #generated:38
 -keep class ua.maker.gbible.activity.ListPoemsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:80
+# view AndroidManifest.xml #generated:81
 -keep class ua.maker.gbible.activity.ReadForEveryDayActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:47
@@ -88,10 +75,10 @@
 # view AndroidManifest.xml #generated:23
 -keep class ua.maker.gbible.activity.StartActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:93
+# view AndroidManifest.xml #generated:97
 -keep class ua.maker.gbible.utils.BibleContentProvider { <init>(...); }
 
-# view AndroidManifest.xml #generated:96
+# view AndroidManifest.xml #generated:100
 -keep class ua.maker.gbible.utils.ReadEDContentProvider { <init>(...); }
 
 # view res/xml/preference_bible.xml #generated:42

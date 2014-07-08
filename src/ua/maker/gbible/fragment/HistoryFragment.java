@@ -18,26 +18,27 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class HistoryFragment extends SherlockFragment {
+public class HistoryFragment extends Fragment {
 	
 	private static final String TAG = "HistoryFragment";
 	
@@ -68,7 +69,7 @@ public class HistoryFragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
 		if(db == null){
-			db = new UserDB(getSherlockActivity());		
+			db = new UserDB(activity);		
 			listHistory = new ArrayList<HistoryStruct>();
 			adapter = new ItemListHistoryAdapter(activity, listHistory);
 		}		
@@ -84,8 +85,8 @@ public class HistoryFragment extends SherlockFragment {
 		lvListShowHistoryItem.setAdapter(adapter);
 		
 		
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		
 		return view;
 	}
@@ -93,8 +94,8 @@ public class HistoryFragment extends SherlockFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_history));
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_history));
 		Log.d(TAG, "onActivityCreated()");
 		updateListHistory();
 		getLIstHistory();
@@ -131,7 +132,7 @@ public class HistoryFragment extends SherlockFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			SharedPreferences sp = getActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 			Editor editor = sp.edit();
 			editor.putInt(App.BOOK_ID, listHistory.get((int)id).getBookId());
 			editor.putInt(App.CHAPTER, listHistory.get((int)id).getChapter());
@@ -175,10 +176,10 @@ public class HistoryFragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
-	   		getSherlockActivity().finish();
+	   		getActivity().finish();
 	   		return true;
 	   	case R.id.action_clear_history:
-	   		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+	   		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	   		builder.setTitle(getString(R.string.dialog_title_clear_history));
 	   		builder.setMessage(getString(R.string.dialog_message_clear_history));
 	   		builder.setPositiveButton(getString(R.string.dialog_yes), dialogOkListener);
@@ -189,7 +190,7 @@ public class HistoryFragment extends SherlockFragment {
 	   		
 	   		return true;
 	   	case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 	   	}
@@ -199,12 +200,12 @@ public class HistoryFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }

@@ -4,15 +4,14 @@ import ua.maker.gbible.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-
 @SuppressLint("ValidFragment")
-public class UpdatesInfoFragment extends SherlockFragment {
+public class UpdatesInfoFragment extends Fragment {
 	
 	private static final String TAG = "";
 	

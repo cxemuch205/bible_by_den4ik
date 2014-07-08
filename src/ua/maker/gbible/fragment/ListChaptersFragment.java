@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ReadForEveryDayActivity;
 import ua.maker.gbible.activity.SettingActivity;
@@ -23,9 +24,14 @@ import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -33,14 +39,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class ListChaptersFragment extends SherlockFragment {
+public class ListChaptersFragment extends Fragment {
 	
 	private View view = null;
 	private GridView gvShowChapters = null;
@@ -81,19 +84,19 @@ public class ListChaptersFragment extends SherlockFragment {
 		super.onAttach(activity);
 		setRetainInstance(true);
 		if(db == null){
-			db = new UserDB(getSherlockActivity());
-			dataBase = new DataBase(getSherlockActivity());
+			db = new UserDB(activity);
+			dataBase = new DataBase(activity);
 			try {
 				dataBase.createDataBase();
 			} catch (IOException e) {}
 			dataBase.openDataBase();
 
-			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-			spDef = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+			sp = activity.getSharedPreferences(App.PREF_SEND_DATA, 0);
+			spDef = PreferenceManager.getDefaultSharedPreferences(activity);
 			
 			listChapters = new ArrayList<Integer>();
-			adapter = new ItemChapterAdapter(getSherlockActivity(), listChapters);
-			pd = new ProgressDialog(getSherlockActivity());
+			adapter = new ItemChapterAdapter(activity, listChapters);
+			pd = new ProgressDialog(activity);
 			pd.setMessage(getString(R.string.progress_dialog_message));
 			pd.setCanceledOnTouchOutside(false);
 		}		
@@ -108,8 +111,8 @@ public class ListChaptersFragment extends SherlockFragment {
 		btnBook = (Button)view.findViewById(R.id.btn_book);
 		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
 		btnPoem = (Button)view.findViewById(R.id.btn_poem);
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		updateChapters();
 		return view;
 	}
@@ -118,8 +121,8 @@ public class ListChaptersFragment extends SherlockFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activity_list_chapters));
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_list_chapters));
 		
 		translate = spDef.getString(getString(R.string.pref_default_translaters), "0");
 		
@@ -127,7 +130,7 @@ public class ListChaptersFragment extends SherlockFragment {
 
 		bookId = sp.getInt(App.BOOK_ID, 1);
 		Log.d("Getting Book_id", "id = " + bookId);
-		String bookName = ""+Tools.getBookNameByBookId(bookId, getSherlockActivity());
+		String bookName = ""+Tools.getBookNameByBookId(bookId, getActivity());
 		btnBook.setTextSize(16);
 		btnBook.setText(bookName);
 		btnBook.setOnClickListener(clickSelectBookListener);
@@ -137,7 +140,7 @@ public class ListChaptersFragment extends SherlockFragment {
 			@Override
 			public void onClick(View v) {
 				if(!sp.contains(App.CHAPTER) && sp.contains(App.BOOK_ID))
-					Tools.showToast(getSherlockActivity(), getString(R.string.no_select_chapter));
+					Tools.showToast(getActivity(), getString(R.string.no_select_chapter));
 			}
 		});
 		if(listChapters.size() == 0 | lastBookId != bookId)
@@ -213,7 +216,7 @@ public class ListChaptersFragment extends SherlockFragment {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			SharedPreferences sp = getActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 			Editor editor = sp.edit();
 			editor.putInt(App.BOOK_ID, bookId);
 			editor.putInt(App.CHAPTER, position+1);
@@ -269,15 +272,15 @@ public class ListChaptersFragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
-	   		getSherlockActivity().finish();
+	   		getActivity().finish();
 	   		return true;
 	   	case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 	   	case R.id.action_read_for_every_day:
-			Intent startRead = new Intent(getSherlockActivity(), ReadForEveryDayActivity.class);
-			getSherlockActivity().startActivity(startRead);
+			Intent startRead = new Intent(getActivity(), ReadForEveryDayActivity.class);
+			getActivity().startActivity(startRead);
 			return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);
@@ -286,12 +289,12 @@ public class ListChaptersFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }

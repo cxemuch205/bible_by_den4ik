@@ -3,6 +3,7 @@ package ua.maker.gbible.fragment;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import ua.maker.gbible.R;
 import ua.maker.gbible.activity.ReadForEveryDayActivity;
 import ua.maker.gbible.activity.SettingActivity;
@@ -22,27 +23,29 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class SelectBookFragment extends SherlockFragment {
+public class SelectBookFragment extends Fragment {
 	
 	private static final String TAG = "StartFragment";
 	
@@ -82,7 +85,7 @@ public class SelectBookFragment extends SherlockFragment {
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
 		if(dataBase == null){
-			dataBase = new DataBase(getSherlockActivity());
+			dataBase = new DataBase(activity);
 			
 			try {
 				dataBase.createDataBase();
@@ -90,16 +93,16 @@ public class SelectBookFragment extends SherlockFragment {
 			dataBase.openDataBase();
 			
 			listBooks = new ArrayList<String>();
-			adapter = new ArrayAdapter<String>(getSherlockActivity(), 
+			adapter = new ArrayAdapter<String>(activity, 
 					android.R.layout.simple_list_item_1,
 					listBooks);
 			
-			sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
-			defPref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
+			sp = activity.getSharedPreferences(App.PREF_SEND_DATA, 0);
+			defPref = PreferenceManager.getDefaultSharedPreferences(activity);
 			if(instance.getId() == 0){
 				instance = this;
 			}
-			pd = new ProgressDialog(getSherlockActivity());
+			pd = new ProgressDialog(activity);
 			pd.setMessage(getString(R.string.progress_dialog_message));
 		}		
 	}
@@ -149,10 +152,10 @@ public class SelectBookFragment extends SherlockFragment {
 		btnBook = (Button)view.findViewById(R.id.btn_book);
 		btnChapter = (Button)view.findViewById(R.id.btn_chapter);
 		btnPoem = (Button)view.findViewById(R.id.btn_poem);
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.app_name));
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.app_name));
 		Log.d(TAG, "Start activity create");
 		return view;
 	}
@@ -176,7 +179,7 @@ public class SelectBookFragment extends SherlockFragment {
 					ft.commit();
 				}
 				else
-					Tools.showToast(getSherlockActivity(), getString(R.string.no_select_book));
+					Tools.showToast(getActivity(), getString(R.string.no_select_book));
 			}
 		});
 		
@@ -193,7 +196,7 @@ public class SelectBookFragment extends SherlockFragment {
 					ft.commit();
 				}
 				else
-					Tools.showToast(getSherlockActivity(), getString(R.string.no_select_book));
+					Tools.showToast(getActivity(), getString(R.string.no_select_book));
 			}
 		});
 
@@ -204,7 +207,7 @@ public class SelectBookFragment extends SherlockFragment {
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
 				sp.edit().putInt(App.BOOK_SET_FOCUS, position).commit();
-				SharedPreferences sp = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+				SharedPreferences sp = getActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
 				positionClicked = position;
 				sp.edit().putInt(App.BOOK_SET_FOCUS, position).commit();
 				Editor editor = sp.edit();
@@ -231,12 +234,12 @@ public class SelectBookFragment extends SherlockFragment {
 		} else {
 			int verCode = 1;
 			try {
-				verCode = getSherlockActivity().getPackageManager().getPackageInfo(getSherlockActivity().getPackageName(), 0).versionCode;
+				verCode = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionCode;
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
 			}
 			if(verCode > sp.getInt(App.PREF_APP_UPDATE, 0)){
-				ListPoemsFragment.startActivityUpdates(getSherlockActivity(), sp, verCode);
+				ListPoemsFragment.startActivityUpdates(getActivity(), sp, verCode);
 			}
 		}
 		if(listBooks.size() == 0)
@@ -259,7 +262,7 @@ public class SelectBookFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 		int pos = sp.getInt(App.BOOK_SET_FOCUS, 0);
 		selectPrefBook(pos);
 	}
@@ -267,13 +270,13 @@ public class SelectBookFragment extends SherlockFragment {
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 	
 	private void showDialogSelectTranslate() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.dialogtitle_def_trans);
-		String[] listTrnsl = getSherlockActivity().getResources().getStringArray(R.array.trnaslaters_names);
+		String[] listTrnsl = getActivity().getResources().getStringArray(R.array.trnaslaters_names);
 		builder.setSingleChoiceItems(listTrnsl, -1, new onDialogClickListener() {
 			
 			@Override
@@ -367,15 +370,15 @@ public class SelectBookFragment extends SherlockFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	   	switch(item.getItemId()){
 	   	case R.id.action_exit:
-	   		getSherlockActivity().finish();
+	   		getActivity().finish();
 	   		return true;
 	   	case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 	   	case R.id.action_read_for_every_day:
-			Intent startRead = new Intent(getSherlockActivity(), ReadForEveryDayActivity.class);
-			getSherlockActivity().startActivity(startRead);
+			Intent startRead = new Intent(getActivity(), ReadForEveryDayActivity.class);
+			getActivity().startActivity(startRead);
 			return true;
 	   	}
 	   	return super.onOptionsItemSelected(item);

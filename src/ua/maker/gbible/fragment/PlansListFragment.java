@@ -20,13 +20,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,14 +42,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 
 @SuppressLint("ValidFragment")
-public class PlansListFragment extends SherlockFragment {
+public class PlansListFragment extends Fragment {
 	
 	private static final String TAG = "PlanFragment";
 	
@@ -89,15 +90,15 @@ public class PlansListFragment extends SherlockFragment {
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		if(db == null){
-			db = new UserDB(getSherlockActivity());
+			db = new UserDB(activity);
 			
 			listPlans = new ArrayList<PlanStruct>();
-			adapter = new ItemPlanListAdapter(getSherlockActivity(), listPlans);
+			adapter = new ItemPlanListAdapter(activity, listPlans);
 			
-			AlertDialog.Builder builder = new AlertDialog.Builder(getSherlockActivity());
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 			builder.setTitle(getString(R.string.dialog_title_create_plan));
 			
-			LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
+			LayoutInflater inflater = activity.getLayoutInflater();
 			View viewDialog = inflater.inflate(R.layout.dialog_add_plan_settings, null);
 			
 			etName = (EditText)viewDialog.findViewById(R.id.et_name_add_plan);
@@ -116,7 +117,7 @@ public class PlansListFragment extends SherlockFragment {
 			});
 			
 			dialog = builder.create();
-			pref = getSherlockActivity().getSharedPreferences(App.PREF_SEND_DATA, 0);
+			pref = activity.getSharedPreferences(App.PREF_SEND_DATA, 0);
 		}		
 	}
 	
@@ -129,8 +130,8 @@ public class PlansListFragment extends SherlockFragment {
 		lvPlans = (ListView)view.findViewById(R.id.lv_list_plans);
 		lvPlans.setAdapter(adapter);
 		
-		if(!getSherlockActivity().getSupportActionBar().isShowing())
-			getSherlockActivity().getSupportActionBar().show();
+		if(!((ActionBarActivity)getActivity()).getSupportActionBar().isShowing())
+			((ActionBarActivity)getActivity()).getSupportActionBar().show();
 		
 		return view;
 	}
@@ -140,7 +141,7 @@ public class PlansListFragment extends SherlockFragment {
 		super.onActivityCreated(savedInstanceState);
 		registerForContextMenu(lvPlans);
 		
-		getSherlockActivity().getActionBar().setTitle(getString(R.string.title_activit_plan));
+		((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activit_plan));
 		
 		btnCreatePlan.setOnClickListener(clickAddNewPlanListener);
 		lvPlans.setOnItemClickListener(itemClickListener);
@@ -149,7 +150,7 @@ public class PlansListFragment extends SherlockFragment {
 		listPlans.clear();
 		listPlans.addAll(db.getPlansList());
 		
-		getSherlockActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
+		((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 	}
 	
 	private OnItemLongClickListener itemLongClickListener = new OnItemLongClickListener() {
@@ -284,7 +285,7 @@ public class PlansListFragment extends SherlockFragment {
 			return true;
 		case CMB_DELETE:
 			db.deletePlan(listPlans.get(itemSelect).getId());
-			Tools.showToast(getSherlockActivity(), 
+			Tools.showToast(getActivity(), 
 					String.format(getString(R.string.toast_delete_plan_msg), 
 							listPlans.get(itemSelect).getName()));
 			listPlans.remove(itemSelect);
@@ -300,10 +301,10 @@ public class PlansListFragment extends SherlockFragment {
 		
 		switch (item.getItemId()) {
 		case R.id.action_exit:
-	   		getSherlockActivity().finish();
+			getActivity().finish();
 	   		return true;
 	   	case R.id.action_setting_app:
-	   		Intent startSetting = new Intent(getSherlockActivity(), SettingActivity.class);
+	   		Intent startSetting = new Intent(getActivity(), SettingActivity.class);
 			startActivity(startSetting);
 	   		return true;
 		}
@@ -313,12 +314,12 @@ public class PlansListFragment extends SherlockFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		EasyTracker.getInstance().activityStart(getSherlockActivity());
+		EasyTracker.getInstance().activityStart(getActivity());
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		EasyTracker.getInstance().activityStop(getSherlockActivity());
+		EasyTracker.getInstance().activityStop(getActivity());
 	}
 }

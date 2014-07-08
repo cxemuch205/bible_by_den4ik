@@ -10,30 +10,27 @@ import ua.maker.gbible.listeners.onDialogClickListener;
 import ua.maker.gbible.utils.Tools;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.paypal.android.MEP.PayPal;
 import com.paypal.android.MEP.PayPalActivity;
 import com.paypal.android.MEP.PayPalPayment;
 
-public class DonateActivity extends SherlockActivity {
+public class DonateActivity extends ActionBarActivity {
 	
 	private Button btnCopyToClipBoard = null;
 	private Button btnPayOnPayPal;
@@ -47,6 +44,7 @@ public class DonateActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.donate_layout);
 		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.background_action_bar));
 		
 		btnCopyToClipBoard = (Button)findViewById(R.id.btn_copy_info_donate);
@@ -64,7 +62,7 @@ public class DonateActivity extends SherlockActivity {
 			pp = PayPal.getInstance();
 			if(pp == null){
 				pp = PayPal.initWithAppID(DonateActivity.this, App.PAY_PAL_KEY_LIVE, PayPal.ENV_LIVE);
-				pp.setLanguage(Locale.ROOT.getLanguage());
+				pp.setLanguage(Locale.getDefault().getLanguage());
 				pp.setFeesPayer(PayPal.FEEPAYER_EACHRECEIVER);
 				pp.setShippingEnabled(true);
 			}
@@ -100,7 +98,7 @@ public class DonateActivity extends SherlockActivity {
 		
 		@Override
 		public void onClick(View v) {
-			copyToClipBoard(getString(R.string.donate_info));
+			Tools.copyToClipBoard(DonateActivity.this, getString(R.string.donate_info));
 			Tools.showToast(DonateActivity.this, getString(R.string.copyed_poem));
 		}
 	};
@@ -140,20 +138,6 @@ public class DonateActivity extends SherlockActivity {
 		}
 	};
 	
-	@SuppressWarnings("deprecation")
-	private void copyToClipBoard(String textSetClip) {
-		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-		if (currentapiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB){
-			ClipboardManager clipboard =  (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE); 
-		        ClipData clip = ClipData.newPlainText(getString(R.string.app_name), textSetClip);
-		        clipboard.setPrimaryClip(clip); 
-		} else{
-			ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE); 
-		    clipboard.setText(textSetClip);
-		}
-		 Tools.showToast(DonateActivity.this, getString(R.string.copyed_poem));
-	}
-	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
@@ -185,7 +169,7 @@ public class DonateActivity extends SherlockActivity {
 		case Activity.RESULT_OK:
 			String payKey = intent.getStringExtra(PayPalActivity.EXTRA_PAY_KEY);
 			Log.i(TAG, "RESULT_OK: " + payKey);
-			Tools.showToast(getApplicationContext(), getString(R.string.tnx_for_donate));
+			Tools.showToast(DonateActivity.this, getString(R.string.tnx_for_donate));
 			break;
 		case Activity.RESULT_CANCELED:
 			Log.i(TAG, "RESULT_CANCELED");
@@ -197,7 +181,7 @@ public class DonateActivity extends SherlockActivity {
 			String errorMessage = intent
 					.getStringExtra(PayPalActivity.EXTRA_ERROR_MESSAGE);
 			Log.i(TAG, "RESULT_FAILURE: errId: "+errorID+" |ErrMsg: "+errorMessage);
-			Tools.showToast(getApplicationContext(), "ERROR - латеж не проведен!");
+			Tools.showToast(DonateActivity.this, "ERROR - латеж не проведен!");
 		}
 	};
 }
