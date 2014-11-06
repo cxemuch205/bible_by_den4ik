@@ -66,7 +66,7 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private void initAnimations() {
-        oaBottomToolbarIn = ObjectAnimator.ofFloat(llBottomToolBar, "translationX", ((displayMetrics.widthPixels / 2) * (-1)), 0);
+        oaBottomToolbarIn = ObjectAnimator.ofFloat(llBottomToolBar, "translationX", (displayMetrics.widthPixels * 2), 0);
         oaBottomToolbarIn.setDuration(DURATION_ANIM);
         oaBottomToolbarIn.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -81,7 +81,7 @@ public class BaseActivity extends ActionBarActivity {
                 btnOpenBottomMenu.setText(">");
             }
         });
-        oaBottomToolbarOut = ObjectAnimator.ofFloat(llBottomToolBar, "translationX", 0, ((displayMetrics.widthPixels / 2) * (-1)));
+        oaBottomToolbarOut = ObjectAnimator.ofFloat(llBottomToolBar, "translationX", 0, (displayMetrics.widthPixels * 2));
         oaBottomToolbarOut.setDuration(DURATION_ANIM);
         oaBottomToolbarOut.addListener(new AnimatorListenerAdapter() {
             @Override
