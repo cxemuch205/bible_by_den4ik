@@ -1,0 +1,17 @@
+<ul>
+      <li class="color main-color" style="background-color: #795548;">
+        <span class="name">Brown</span>
+        <span class="shade">500</span>
+        <span class="hex">#795548</span>
+      </li>
+      <li class="color dark" style="background-color: #efebe9;"><span class="shade expanded">50</span><span class="hex">#efebe9</span></li>
+      <li class="color dark" style="background-color: #d7ccc8;"><span class="shade">100</span><span class="hex">#d7ccc8</span></li>
+      <li class="color dark" style="background-color: #bcaaa4;"><span class="shade expanded">200</span><span class="hex">#bcaaa4</span></li>
+      <li class="color light-strong" style="background-color: #a1887f;"><span class="shade">300</span><span class="hex">#a1887f</span></li>
+      <li class="color light-strong" style="background-color: #8d6e63;"><span class="shade expanded">400</span><span class="hex">#8d6e63</span></li>
+      <li class="color" style="background-color: #795548;"><span class="shade">500</span><span class="hex">#795548</span></li>
+      <li class="color" style="background-color: #6d4c41;"><span class="shade expanded">600</span><span class="hex">#6d4c41</span></li>
+      <li class="color" style="background-color: #5d4037;"><span class="shade">700</span><span class="hex">#5d4037</span></li>
+      <li class="color" style="background-color: #4e342e;"><span class="shade expanded">800</span><span class="hex">#4e342e</span></li>
+      <li class="color" style="background-color: #3e2723;"><span class="shade expanded">900</span><span class="hex">#3e2723</span></li>
+    </ul>

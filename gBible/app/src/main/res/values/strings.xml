@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">gBible</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- COLORS -->
+    <color name="action_bar">#795548</color>
+    <color name="bottom_bar">#6D4C41</color>
+    <color name="btn_open_bottom">#A1887F</color>
+
+</resources>
