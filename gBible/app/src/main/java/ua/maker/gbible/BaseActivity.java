@@ -11,7 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import ua.maker.gbible.Constants.App;
 import ua.maker.gbible.Fragments.BaseFragment;
+import ua.maker.gbible.Fragments.BooksListFragment;
+import ua.maker.gbible.Fragments.ChapterListFragment;
+import ua.maker.gbible.Interfaces.OnCallBaseActivityAdapter;
 
 
 public class BaseActivity extends ActionBarActivity {
@@ -23,6 +27,7 @@ public class BaseActivity extends ActionBarActivity {
     private Button btnOpenBottomMenu;
     private LinearLayout llBottomToolBar;
     private DisplayMetrics displayMetrics;
+    private LinearLayout llBibleHome;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -55,6 +60,7 @@ public class BaseActivity extends ActionBarActivity {
     private void initUI() {
         btnOpenBottomMenu = (Button) findViewById(R.id.btn_show_menu_bottom);
         llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
+        llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
     }
 
     private void initTypefaces() {
@@ -63,6 +69,7 @@ public class BaseActivity extends ActionBarActivity {
 
     private void initListener() {
         btnOpenBottomMenu.setOnClickListener(clickOpenBottomToolBarListener);
+        llBibleHome.setOnClickListener(clickBibleHomeListener);
     }
 
     private void initAnimations() {
@@ -109,5 +116,38 @@ public class BaseActivity extends ActionBarActivity {
             oaBottomToolbarIn.start();
         else
             oaBottomToolbarOut.start();
+    }
+
+    private View.OnClickListener clickBibleHomeListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            attachReadContent();
+        }
+    };
+
+    private void attachReadContent() {
+        switch (GBApplication.homeBibleLevel) {
+            case App.BookHomeLevels.BOOK:
+                initFragments(BooksListFragment.getInstance(new OnCallBaseActivityAdapter() {
+                    @Override
+                    public void callShowHideBottomToolBar(boolean show) {
+                        super.callShowHideBottomToolBar(show);
+                        showHideBottomToolbar(show);
+                    }
+                }));
+                break;
+            case App.BookHomeLevels.CHAPTER:
+                initFragments(ChapterListFragment.getInstance(new OnCallBaseActivityAdapter() {
+                    @Override
+                    public void callShowHideBottomToolBar(boolean show) {
+                        super.callShowHideBottomToolBar(show);
+                        showHideBottomToolbar(show);
+                    }
+                }));
+                break;
+            case App.BookHomeLevels.POEM:
+
+                break;
+        }
     }
 }

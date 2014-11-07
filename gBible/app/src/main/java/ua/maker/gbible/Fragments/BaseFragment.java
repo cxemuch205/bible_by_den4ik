@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
  */
 public class BaseFragment extends android.support.v4.app.Fragment {
 
-    public static String TAG = BaseFragment.class.getClass().getSimpleName();
+    public static String TAG = BaseFragment.class.getSimpleName();
 
     @Override
     public void onAttach(Activity activity) {

@@ -38,7 +38,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/selector_bible_home"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_search"
@@ -46,7 +53,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/selector_search"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_bookmarks"
@@ -54,7 +68,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/selector_bookmarks"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_history"
@@ -62,7 +83,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/selector_history"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_plan"
@@ -70,7 +98,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                android:layout_weight="1" />
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/selector_plan"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button

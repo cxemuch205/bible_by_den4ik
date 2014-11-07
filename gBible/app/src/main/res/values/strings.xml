@@ -9,5 +9,6 @@
     <color name="action_bar">#795548</color>
     <color name="bottom_bar">#6D4C41</color>
     <color name="btn_open_bottom">#A1887F</color>
+    <integer name="device_type">0</integer>
 
 </resources>
