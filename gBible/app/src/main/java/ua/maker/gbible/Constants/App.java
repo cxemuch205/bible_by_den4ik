@@ -10,6 +10,8 @@ public class App {
         public static final String BOOK_ID = "book_id";
         public static final String CHAPTER_ID = "chapter_id";
         public static final String POEM = "poem";
+        public static final String HOME_BIBLE_LEVEL = "home_bible_level";
+        public static final String TOP_BOOK_ID = "top_book_id";
     }
 
     public interface BookHomeLevels {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Name"
+        android:id="@+id/tv_name"
+        android:singleLine="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/text_size_item_bible_link"
+        android:textColor="@color/text_color_item_bible_link" />
+</LinearLayout>
