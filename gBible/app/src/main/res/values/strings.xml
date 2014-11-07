@@ -11,11 +11,13 @@
     <color name="btn_open_bottom">#A1887F</color>
     <color name="text_color_item_bible_link">#3E2723</color>
     <color name="progress_load_color">#5D4037</color>
+    <color name="text_color_poem">#000000</color>
 
     <!-- INTEGERS -->
     <integer name="device_type">0</integer>
 
     <!-- DIMENS -->
     <dimen name="text_size_item_bible_link">16sp</dimen>
+    <dimen name="text_size_item_poem_id">14sp</dimen>
 
 </resources>

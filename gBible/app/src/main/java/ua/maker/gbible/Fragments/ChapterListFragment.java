@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import ua.maker.gbible.Constants.App;
 import ua.maker.gbible.GBApplication;
 import ua.maker.gbible.Helpers.ContentTools;
 import ua.maker.gbible.Helpers.Tools;
-import ua.maker.gbible.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible.Interfaces.OnCallBaseActivityListener;
 import ua.maker.gbible.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible.Interfaces.OnGetContentListener;
@@ -53,11 +51,16 @@ public class ChapterListFragment extends BaseFragment {
         gvData = (GridView) view.findViewById(R.id.gv_data);
         pb = (ProgressBar) view.findViewById(R.id.pb_load);
         Tools.initProgressBar(pb);
-
-        initData();
-        initListeners();
+        gvData.setNumColumns(6);
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+        initListeners();
     }
 
     private void initData() {
@@ -66,7 +69,7 @@ public class ChapterListFragment extends BaseFragment {
         }
 
         adapter.clear();
-        ContentTools.getListBooks(getActivity(), TAG, getListBooksAdapter);
+        ContentTools.getListChapters(getActivity(), TAG, getListBooksAdapter);
 
         if (gvData != null && gvData.getAdapter() == null) {
             gvData.setAdapter(adapter);
@@ -107,9 +110,9 @@ public class ChapterListFragment extends BaseFragment {
             if(callBaseActivityListener != null) {
                 BibleLink chapter = adapter.getItem(position);
                 GBApplication.getInstance().setChapterId(chapter.id);
-                //TODO: Make FragmentActivity with ViewPager, for reader Poems
-                //callBaseActivityListener.switchFragment(ChapterListFragment.TAG,
-                //        ChapterListFragment.getInstance(null));
+                GBApplication.getInstance().setCountChapters(adapter.getCount());
+                callBaseActivityListener.switchFragment(PagerPoemFragment.TAG,
+                        PagerPoemFragment.getInstance(callBaseActivityListener));
             }
             else
                 Log.e(TAG, "LISTENER CALL BASE ACTIVITY ## NULL");

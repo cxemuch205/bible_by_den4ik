@@ -25,7 +25,8 @@ public class GBApplication extends Application {
                       poem = 0,
                       homeBibleLevel = App.BookHomeLevels.BOOK,
                       deviceType,
-                      topBookId = 1;
+                      topBookId = 1,
+                      countChapters = 1;
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editorPref;
@@ -41,6 +42,7 @@ public class GBApplication extends Application {
         chapterId = pref.getInt(App.Pref.CHAPTER_ID, 0);
         poem = pref.getInt(App.Pref.POEM, 0);
         topBookId = pref.getInt(App.Pref.TOP_BOOK_ID, 1);
+        countChapters = pref.getInt(App.Pref.COUNT_CHAPTERS, 1);
     }
 
     public void setHomeBibleLevel(final int level) {
@@ -63,13 +65,33 @@ public class GBApplication extends Application {
         });
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-        editorPref.putInt(App.Pref.BOOK_ID, bookId).commit();
+    public void setBookId(final int bookId) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                instance.bookId = bookId;
+                editorPref.putInt(App.Pref.BOOK_ID, bookId).commit();
+            }
+        });
     }
 
-    public void setChapterId(int chapter) {
-        this.chapterId = chapter;
-        editorPref.putInt(App.Pref.CHAPTER_ID, chapter).commit();
+    public void setChapterId(final int chapter) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                instance.chapterId = chapter;
+                editorPref.putInt(App.Pref.CHAPTER_ID, chapter).commit();
+            }
+        });
+    }
+
+    public void setCountChapters(final int count) {
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                instance.countChapters = count;
+                editorPref.putInt(App.Pref.COUNT_CHAPTERS, count).commit();
+            }
+        });
     }
 }

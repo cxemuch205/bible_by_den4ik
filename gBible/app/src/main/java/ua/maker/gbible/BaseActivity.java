@@ -3,7 +3,6 @@ package ua.maker.gbible;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,6 +15,7 @@ import ua.maker.gbible.Constants.App;
 import ua.maker.gbible.Fragments.BaseFragment;
 import ua.maker.gbible.Fragments.BooksListFragment;
 import ua.maker.gbible.Fragments.ChapterListFragment;
+import ua.maker.gbible.Fragments.PagerPoemFragment;
 import ua.maker.gbible.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible.Interfaces.OnCallBaseActivityListener;
 
@@ -52,7 +52,7 @@ public class BaseActivity extends ActionBarActivity {
         if (fragment != null) {
             Log.d(TAG, "initFragments: " + fragment.TAG);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, fragment, fragment.TAG)
+                    .replace(R.id.container, fragment, fragment.TAG)
                     .commit();
         }
     }
@@ -138,7 +138,7 @@ public class BaseActivity extends ActionBarActivity {
                 initFragments(ChapterListFragment.getInstance(bibleLinkListener));
                 break;
             case App.BookHomeLevels.POEM:
-
+                initFragments(PagerPoemFragment.getInstance(bibleLinkListener));
                 break;
         }
     }

@@ -12,6 +12,7 @@ public class App {
         public static final String POEM = "poem";
         public static final String HOME_BIBLE_LEVEL = "home_bible_level";
         public static final String TOP_BOOK_ID = "top_book_id";
+        public static final String COUNT_CHAPTERS = "count_chapters";
     }
 
     public interface BookHomeLevels {
