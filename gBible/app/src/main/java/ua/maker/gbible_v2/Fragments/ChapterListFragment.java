@@ -1,5 +1,6 @@
 package ua.maker.gbible_v2.Fragments;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
@@ -10,7 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -69,7 +72,29 @@ public class ChapterListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chapter, null);
+        View rootView = inflater.inflate(R.layout.fragment_chapter, container, false);
+
+        /*rootView.addOnLayoutChangeListener(new View.OnLayoutChangeListener()
+        {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop,
+                                       int oldRight, int oldBottom)
+            {
+                v.removeOnLayoutChangeListener(this);
+                int cx = activity.getResources().getDisplayMetrics().widthPixels / 2;
+                int cy = activity.getResources().getDisplayMetrics().widthPixels / 2;
+
+                // get the hypothenuse so the radius is from one corner to the other
+                int radius = (int)Math.hypot(right, bottom);
+
+                Animator reveal = ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, radius);
+                reveal.setInterpolator(new DecelerateInterpolator(2f));
+                reveal.setDuration(1000);
+                reveal.start();
+            }
+        });*/
+
+        return rootView;
     }
 
     @Override
