@@ -1,9 +1,12 @@
 package ua.maker.gbible.Fragments;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
+import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
 
 import java.util.ArrayList;
 
@@ -27,7 +33,7 @@ import ua.maker.gbible.R;
 /**
  * Created by daniil on 11/7/14.
  */
-public class PoemListFragment extends BaseFragment {
+public class PoemListFragment extends Fragment {
 
     public static final String TAG = "PoemListFragment";
     private static PoemListFragment instance;
@@ -37,37 +43,100 @@ public class PoemListFragment extends BaseFragment {
         instance.setOnCallBaseActivityListener(adapter);
         return instance;
     }
+
+    public static PoemListFragment newInstance(OnCallBaseActivityListener activityListener, int chapter) {
+        PoemListFragment fragment = new PoemListFragment();
+        fragment.setOnCallBaseActivityListener(activityListener);
+        fragment.chapter = chapter;
+        return fragment;
+    }
+
     public OnCallBaseActivityListener callBaseActivityListener;
+
     public void setOnCallBaseActivityListener(OnCallBaseActivityListener listener) {
         this.callBaseActivityListener = listener;
     }
-
     private ListView lvData;
     private PoemAdapter adapter;
     private ProgressBar pb;
 
+    private Toolbar toolbar;
     boolean mScrolling = false;
-    private int lastFirstVisibleItemPosition = 0;
+    private int lastFirstVisibleItemPosition = 0, chapter = 1;
+    private ActionBarActivity activity;
+
+    private View headerView;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        setRetainInstance(false);
+        this.activity = (ActionBarActivity) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_poem_list, null);
-        lvData = (ListView) view.findViewById(R.id.lv_data);
-        pb = (ProgressBar) view.findViewById(R.id.pb_load);
-        Tools.initProgressBar(pb);
-
-        initListeners();
-
-        return view;
+        return inflater.inflate(R.layout.fragment_poem_list, null);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        initListData(getActivity(), GBApplication.chapterId);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        lvData = (ListView) view.findViewById(R.id.lv_data);
+        pb = (ProgressBar) view.findViewById(R.id.pb_load);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
+        initQRToolbar();
+        initToolbar();
+        Tools.initProgressBar(pb);
+
+        initListeners();
     }
 
-    public void initListData(Activity activity, int chapterId) {
+    private void initToolbar() {
+        toolbar.setNavigationIcon(R.drawable.icon_back_navigation);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callBaseActivityListener != null) {
+                    callBaseActivityListener.switchFragment(ChapterListFragment.TAG,
+                            ChapterListFragment.getInstance(callBaseActivityListener));
+                }
+            }
+        });
+    }
+
+    private void initQRToolbar() {
+        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+        int headerHeight2 = getActivity().getResources().getDimensionPixelSize(R.dimen.header_height2);
+
+        toolbar.setTitleTextColor(Color.WHITE);
+
+        headerView = new View(activity);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
+        headerView.setLayoutParams(headerParams);
+        lvData.addHeaderView(headerView);
+
+        lvData.setOnScrollListener(new QuickReturnListViewOnScrollListener
+                .Builder(QuickReturnViewType.HEADER)
+                .header(toolbar)
+                .minHeaderTranslation(-headerHeight)
+                .build());
+    }
+
+    private void setTitleActionBar(int chapter) {
+        toolbar.setTitle(GBApplication.bookName + " | "
+                + activity.getString(R.string.chapter) + " "
+                + chapter);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initListData(getActivity());
+        setTitleActionBar(chapter);
+    }
+
+    public void initListData(Activity activity) {
         if (adapter == null) {
             adapter = new PoemAdapter(activity, new ArrayList<Poem>());
         }
@@ -81,7 +150,7 @@ public class PoemListFragment extends BaseFragment {
     }
 
     private void initListeners() {
-        lvData.setOnScrollListener(scrollDataListener);
+        //lvData.setOnScrollListener(scrollDataListener);
     }
 
     private OnGetContentListener getContentChapterListener = new OnGetContentAdapter() {

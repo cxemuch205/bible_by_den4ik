@@ -1,6 +1,6 @@
 package ua.maker.gbible.Interfaces;
 
-import ua.maker.gbible.Fragments.BaseFragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by daniil on 11/6/14.
@@ -8,5 +8,5 @@ import ua.maker.gbible.Fragments.BaseFragment;
 public interface OnCallBaseActivityListener {
     void callShowHideBottomToolBar(boolean show);
 
-    void switchFragment(String tag, BaseFragment fragment);
+    void switchFragment(String tag, Fragment fragment);
 }

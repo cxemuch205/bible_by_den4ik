@@ -10,6 +10,7 @@ public class BibleLink implements Serializable {
     public String name; //Book - name, chapter - number
     public int id; //Book - id (number in book), chapter - number
     public int bookId;
+    public String info;
 
     public BibleLink() {
     }

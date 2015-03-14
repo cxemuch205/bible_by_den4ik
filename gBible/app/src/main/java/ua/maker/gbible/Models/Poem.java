@@ -8,17 +8,21 @@ import java.io.Serializable;
 public class Poem implements Serializable {
 
     public int bookId;
-    public int chapterId;
-    public int poemId;
+    public int chapterId;//from 0
+    public int chapter;  //from 1
+    public int poem;
+    public int poemTo;
     public String content;
+    public String translateName;
+    public String bookName;
 
     public Poem() {
     }
 
-    public Poem(int bookId, int chapterId, int poemId, String content) {
+    public Poem(int bookId, int chapterId, int poem, String content) {
         this.bookId = bookId;
         this.chapterId = chapterId;
-        this.poemId = poemId;
+        this.poem = poem;
         this.content = content;
     }
 }

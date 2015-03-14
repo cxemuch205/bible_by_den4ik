@@ -1,14 +1,22 @@
 package ua.maker.gbible.Fragments;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ProgressBar;
+
+import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
+import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
 
 import java.util.ArrayList;
 
@@ -22,38 +30,91 @@ import ua.maker.gbible.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible.Interfaces.OnGetContentListener;
 import ua.maker.gbible.Models.BibleLink;
 import ua.maker.gbible.R;
+import ua.maker.gbible.Views.HeaderGridView;
 
 /**
  * Created by daniil on 11/6/14.
  */
-public class ChapterListFragment extends BaseFragment {
+public class ChapterListFragment extends Fragment {
 
     public static String TAG = ChapterListFragment.class.getSimpleName();
+    private static final int NUMB_OF_COLUMNS = 6;
     private static ChapterListFragment instance;
+
     public static ChapterListFragment getInstance(OnCallBaseActivityListener adapter) {
         if(instance == null)
             instance = new ChapterListFragment();
         instance.setOnCallBaseActivityListener(adapter);
         return instance;
     }
+
     public OnCallBaseActivityListener callBaseActivityListener;
+
     public void setOnCallBaseActivityListener(OnCallBaseActivityListener listener) {
         this.callBaseActivityListener = listener;
     }
 
-    private GridView gvData;
+    private HeaderGridView gvData;
     private BibleLinkAdapter adapter;
     private ProgressBar pb;
+    private Toolbar toolbar;
+    private ActionBarActivity activity;
+    private View headerView;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        setRetainInstance(true);
+        this.activity = (ActionBarActivity) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chapter, null);
-        gvData = (GridView) view.findViewById(R.id.gv_data);
-        pb = (ProgressBar) view.findViewById(R.id.pb_load);
-        Tools.initProgressBar(pb);
-        gvData.setNumColumns(6);
+        return inflater.inflate(R.layout.fragment_chapter, null);
+    }
 
-        return view;
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        gvData = (HeaderGridView) view.findViewById(R.id.gv_data);
+        pb = (ProgressBar) view.findViewById(R.id.pb_load);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
+        Tools.initProgressBar(pb);
+        initQRToolbar();
+        initToolbar();
+        gvData.setNumColumns(NUMB_OF_COLUMNS);
+    }
+
+    private void initToolbar() {
+        toolbar.setNavigationIcon(R.drawable.icon_back_navigation);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callBaseActivityListener != null) {
+                    callBaseActivityListener.switchFragment(BooksListFragment.TAG,
+                            BooksListFragment.getInstance(callBaseActivityListener));
+                }
+            }
+        });
+    }
+
+    private void initQRToolbar() {
+        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+        int headerHeight2 = getActivity().getResources().getDimensionPixelSize(R.dimen.header_height2);
+
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitle(R.string.chose_chapter);
+
+        headerView = new View(activity);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
+        headerView.setLayoutParams(headerParams);
+        gvData.addHeaderView(headerView);
+
+        gvData.setOnScrollListener(new QuickReturnListViewOnScrollListener
+                .Builder(QuickReturnViewType.HEADER)
+                .header(toolbar)
+                .minHeaderTranslation(-headerHeight)
+                .build());
     }
 
     @Override
@@ -108,9 +169,9 @@ public class ChapterListFragment extends BaseFragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if(callBaseActivityListener != null) {
-                BibleLink chapter = adapter.getItem(position);
-                GBApplication.getInstance().setChapterId(chapter.id);
-                GBApplication.getInstance().setCountChapters(adapter.getCount());
+                BibleLink chapter = adapter.getItem(position - gvData.getNumColumns());
+                GBApplication.setChapterId(chapter.id);
+                GBApplication.setCountChapters(adapter.getCount());
                 callBaseActivityListener.switchFragment(PagerPoemFragment.TAG,
                         PagerPoemFragment.getInstance(callBaseActivityListener));
             }

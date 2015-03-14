@@ -3,6 +3,7 @@ package ua.maker.gbible;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import ua.maker.gbible.Constants.App;
-import ua.maker.gbible.Fragments.BaseFragment;
 import ua.maker.gbible.Fragments.BooksListFragment;
 import ua.maker.gbible.Fragments.ChapterListFragment;
 import ua.maker.gbible.Fragments.PagerPoemFragment;
@@ -44,15 +44,15 @@ public class BaseActivity extends ActionBarActivity {
         initListener();
 
         if (savedInstanceState == null) {
-            initFragments(null);
+            attachReadContent();
         }
     }
 
-    private void initFragments(BaseFragment fragment) {
+    private void initFragments(Fragment fragment, String tag) {
         if (fragment != null) {
-            Log.d(TAG, "initFragments: " + fragment.TAG);
+            Log.d(TAG, "initFragments: " + tag);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, fragment, fragment.TAG)
+                    .replace(R.id.container, fragment, tag)
                     .commit();
         }
     }
@@ -102,6 +102,7 @@ public class BaseActivity extends ActionBarActivity {
                 btnOpenBottomMenu.setText("<");
             }
         });
+        btnOpenBottomMenu.setAlpha(0.42f);
     }
 
     private View.OnClickListener clickOpenBottomToolBarListener = new View.OnClickListener() {
@@ -132,13 +133,13 @@ public class BaseActivity extends ActionBarActivity {
     private void attachReadContent() {
         switch (GBApplication.homeBibleLevel) {
             case App.BookHomeLevels.BOOK:
-                initFragments(BooksListFragment.getInstance(bibleLinkListener));
+                initFragments(BooksListFragment.getInstance(bibleLinkListener), BooksListFragment.TAG);
                 break;
             case App.BookHomeLevels.CHAPTER:
-                initFragments(ChapterListFragment.getInstance(bibleLinkListener));
+                initFragments(ChapterListFragment.getInstance(bibleLinkListener), ChapterListFragment.TAG);
                 break;
             case App.BookHomeLevels.POEM:
-                initFragments(PagerPoemFragment.getInstance(bibleLinkListener));
+                initFragments(PagerPoemFragment.getInstance(bibleLinkListener), PagerPoemFragment.TAG);
                 break;
         }
     }
@@ -151,9 +152,9 @@ public class BaseActivity extends ActionBarActivity {
         }
 
         @Override
-        public void switchFragment(String tag, BaseFragment fragment) {
+        public void switchFragment(String tag, Fragment fragment) {
             super.switchFragment(tag, fragment);
-            initFragments(fragment);
+            initFragments(fragment, tag);
         }
     };
 }

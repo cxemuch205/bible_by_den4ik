@@ -1,6 +1,6 @@
 package ua.maker.gbible.Interfaces;
 
-import ua.maker.gbible.Fragments.BaseFragment;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by daniil on 11/6/14.
@@ -12,7 +12,7 @@ public abstract class OnCallBaseActivityAdapter implements OnCallBaseActivityLis
     }
 
     @Override
-    public void switchFragment(String tag, BaseFragment fragment) {
+    public void switchFragment(String tag, Fragment fragment) {
 
     }
 }

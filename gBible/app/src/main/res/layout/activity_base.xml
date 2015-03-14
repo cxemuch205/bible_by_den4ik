@@ -110,7 +110,7 @@
         </LinearLayout>
 
         <Button
-            android:layout_width="52dp"
+            android:layout_width="32dp"
             android:layout_height="match_parent"
             android:text="&lt;"
             android:id="@+id/btn_show_menu_bottom"

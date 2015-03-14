@@ -38,6 +38,9 @@ public class BibleLinkAdapter extends ArrayAdapter<BibleLink> {
 
             holder = new ViewHolder();
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
+            holder.tvInfoText = (TextView) view.findViewById(R.id.tv_info_text);
+
+            initTypefaces(holder);
 
             view.setTag(holder);
         } else {
@@ -47,10 +50,22 @@ public class BibleLinkAdapter extends ArrayAdapter<BibleLink> {
         BibleLink item = data.get(position);
         holder.tvName.setText(item.name);
 
+        if (item.info != null) {
+            holder.tvInfoText.setVisibility(TextView.VISIBLE);
+            holder.tvInfoText.setText(item.info);
+        } else {
+            holder.tvInfoText.setVisibility(TextView.GONE);
+        }
+
         return view;
+    }
+
+    private void initTypefaces(ViewHolder holder) {
+
     }
 
     private static class ViewHolder {
         TextView tvName;
+        TextView tvInfoText;
     }
 }

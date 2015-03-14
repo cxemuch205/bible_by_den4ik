@@ -1,7 +1,12 @@
 package ua.maker.gbible.Fragments;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +15,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+
+import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
+import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
 
 import java.util.ArrayList;
 
@@ -27,17 +35,20 @@ import ua.maker.gbible.R;
 /**
  * Created by daniil on 11/6/14.
  */
-public class BooksListFragment extends BaseFragment {
+public class BooksListFragment extends Fragment {
 
     public static String TAG = BooksListFragment.class.getSimpleName();
     private static BooksListFragment instance;
+
     public static BooksListFragment getInstance(OnCallBaseActivityListener adapter) {
-        if(instance == null)
+        if (instance == null)
             instance = new BooksListFragment();
         instance.setOnCallBaseActivityListener(adapter);
         return instance;
     }
+
     public OnCallBaseActivityListener callBaseActivityListener;
+
     public void setOnCallBaseActivityListener(OnCallBaseActivityListener listener) {
         this.callBaseActivityListener = listener;
     }
@@ -45,21 +56,51 @@ public class BooksListFragment extends BaseFragment {
     private ListView lvData;
     private BibleLinkAdapter adapter;
     private ProgressBar pb;
+    private Toolbar toolbar;
 
     boolean mScrolling = false;
     private int lastFirstVisibleItemPosition = 0;
+    private ActionBarActivity activity;
+    private View headerView;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (ActionBarActivity) activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book_list, null);
         lvData = (ListView) view.findViewById(R.id.lv_data);
         pb = (ProgressBar) view.findViewById(R.id.pb_load);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
         Tools.initProgressBar(pb);
-
         initListData();
+        initToolbar();
+
         initListeners();
 
         return view;
+    }
+
+    private void initToolbar() {
+        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+        int headerHeight2 = getActivity().getResources().getDimensionPixelSize(R.dimen.header_height2);
+
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitle(R.string.chose_book);
+
+        headerView = new View(activity);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
+        headerView.setLayoutParams(headerParams);
+        lvData.addHeaderView(headerView);
+
+        lvData.setOnScrollListener(new QuickReturnListViewOnScrollListener
+                .Builder(QuickReturnViewType.HEADER)
+                .header(toolbar)
+                .minHeaderTranslation(-headerHeight)
+                .build());
     }
 
     private void initListData() {
@@ -77,7 +118,7 @@ public class BooksListFragment extends BaseFragment {
 
     private void initListeners() {
         lvData.setOnItemClickListener(clickOnBookItemListener);
-        lvData.setOnScrollListener(scrollDataListener);
+        //lvData.setOnScrollListener(scrollDataListener);
     }
 
     @Override
@@ -124,13 +165,13 @@ public class BooksListFragment extends BaseFragment {
     private AdapterView.OnItemClickListener clickOnBookItemListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if(callBaseActivityListener != null) {
-                BibleLink book = adapter.getItem(position);
-                GBApplication.getInstance().setBookId(book.id);
+            if (callBaseActivityListener != null) {
+                BibleLink book = adapter.getItem(position - lvData.getHeaderViewsCount());
+                GBApplication.setBookId(book.bookId);
+                GBApplication.setCurrentBookName(book.name);
                 callBaseActivityListener.switchFragment(ChapterListFragment.TAG,
                         ChapterListFragment.getInstance(callBaseActivityListener));
-            }
-            else
+            } else
                 Log.e(TAG, "LISTENER CALL BASE ACTIVITY ## NULL");
         }
     };
@@ -155,7 +196,7 @@ public class BooksListFragment extends BaseFragment {
                     && firstVisibleItem > lastFirstVisibleItemPosition
                     && callBaseActivityListener != null) {
                 callBaseActivityListener.callShowHideBottomToolBar(false);
-            } else if(callBaseActivityListener == null) {
+            } else if (callBaseActivityListener == null) {
                 Log.e(TAG, "CALL BASE ACTIVITY LISTENER ## NULL");
             }
         }
