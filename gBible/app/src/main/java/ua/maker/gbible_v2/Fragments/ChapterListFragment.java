@@ -59,7 +59,6 @@ public class ChapterListFragment extends Fragment {
     private ProgressBar pb;
     private Toolbar toolbar;
     private ActionBarActivity activity;
-    private View headerView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -105,7 +104,7 @@ public class ChapterListFragment extends Fragment {
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle(R.string.chose_chapter);
 
-        headerView = new View(activity);
+        View headerView = new View(activity);
         AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
         headerView.setLayoutParams(headerParams);
         gvData.addHeaderView(headerView);
