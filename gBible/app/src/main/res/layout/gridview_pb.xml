@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ua.maker.gbible.Views.HeaderGridView
+    <ua.maker.gbible_v2.Views.HeaderGridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/gv_data"
