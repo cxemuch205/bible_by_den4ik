@@ -110,4 +110,14 @@ public class GBApplication extends Application {
             }
         });
     }
+
+    public static void setPoem(final int poemT) {
+        poem = poemT;
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                instance.editorPref.putInt(App.Pref.POEM, poemT).apply();
+            }
+        });
+    }
 }

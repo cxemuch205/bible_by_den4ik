@@ -1,7 +1,6 @@
 package ua.maker.gbible.Models;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemReadDay {
 	

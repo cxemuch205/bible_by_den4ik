@@ -1,5 +1,13 @@
 package ua.maker.gbible.Models;
 
+import android.annotation.SuppressLint;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import ua.maker.gbible.GBApplication;
+import ua.maker.gbible.Helpers.Tools;
+
 public class History {
 	
 	private String bookName = "";
@@ -8,10 +16,21 @@ public class History {
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
-	
-	public History(){}
-	
-	public History(String dateCreate, String bookName, String translate, int bookId, int chapter, int poem){
+
+    @SuppressLint("SimpleDateFormat")
+    public static SimpleDateFormat
+            dateFormat = new SimpleDateFormat("dd/MMM/yyyy");
+
+    public History() {
+        bookName = GBApplication.bookName;
+        bookId = GBApplication.bookId;
+        chapter = GBApplication.chapterId + 1;
+        poem = GBApplication.poem;
+        translate = Tools.getTranslateWitchPreferences(GBApplication.getInstance());
+        dateCreate = dateFormat.format(new Date());
+    }
+
+    public History(String dateCreate, String bookName, String translate, int bookId, int chapter, int poem){
 		this.dateCreate = dateCreate;
 		this.bookId = bookId;
 		this.translate = translate;

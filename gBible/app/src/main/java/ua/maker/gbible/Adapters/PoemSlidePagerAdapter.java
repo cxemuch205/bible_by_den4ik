@@ -1,18 +1,15 @@
 package ua.maker.gbible.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
 import ua.maker.gbible.Fragments.PoemListFragment;
 import ua.maker.gbible.GBApplication;
 import ua.maker.gbible.Interfaces.OnCallBaseActivityListener;
-import ua.maker.gbible.R;
 
 /**
  * Created by daniil on 11/7/14.

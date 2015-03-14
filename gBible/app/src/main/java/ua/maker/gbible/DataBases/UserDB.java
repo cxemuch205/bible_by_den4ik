@@ -447,20 +447,38 @@ public class UserDB extends SQLiteOpenHelper{
     			+ " chapter " + historyItem.getChapter()
     			+ " poem " + historyItem.getPoem());
     	
-    	if(db.isOpen()){
-    		ContentValues values = new ContentValues();
-    		
-    		values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(historyItem.getBookId(), context));
-    		values.put(FIELD_BOOK_ID, historyItem.getBookId());
-    		values.put(FIELD_CHAPTER, historyItem.getChapter());
-    		values.put(FIELD_POEM, historyItem.getPoem());
-    		values.put(FIELD_TRANSLATE, historyItem.getTranslate());
-    		values.put(FIELD_DATE, historyItem.getDateCreated());
-    		
-    		db.insert(TABLE_HISTORY, null, values);
-    	}
+    	if(db.isOpen()) {
+            if (isNoLastHistory(historyItem)) {
+                ContentValues values = new ContentValues();
+
+                values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(historyItem.getBookId(), context));
+                values.put(FIELD_BOOK_ID, historyItem.getBookId());
+                values.put(FIELD_CHAPTER, historyItem.getChapter());
+                values.put(FIELD_POEM, historyItem.getPoem());
+                values.put(FIELD_TRANSLATE, historyItem.getTranslate());
+                values.put(FIELD_DATE, historyItem.getDateCreated());
+
+                db.insert(TABLE_HISTORY, null, values);
+            }
+        }
     }
-    
+
+    private boolean isNoLastHistory(History historyItem) {
+        if (db.isOpen()) {
+            Cursor c = db.rawQuery("SELECT "
+                    + FIELD_BOOK_ID
+                    + " FROM '" + TABLE_HISTORY + "'"
+                    + " WHERE "
+                    + FIELD_BOOK_ID + " = '" + historyItem.getBookId() + "' AND "
+                    + FIELD_CHAPTER + " = '" + historyItem.getChapter() + "' AND "
+                    + FIELD_DATE + " = '" + historyItem.getDateCreated() +"'", null);
+            if (c != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<History> getHistory(){
     	List<History> result = new ArrayList<History>();
     	

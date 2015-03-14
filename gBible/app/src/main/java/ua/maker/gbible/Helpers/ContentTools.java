@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import ua.maker.gbible.DataBases.BibleDB;
 import ua.maker.gbible.GBApplication;

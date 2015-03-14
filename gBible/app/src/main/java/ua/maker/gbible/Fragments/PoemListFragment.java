@@ -134,6 +134,7 @@ public class PoemListFragment extends Fragment {
         super.onResume();
         initListData(getActivity());
         setTitleActionBar(chapter);
+        lvData.setSelection(GBApplication.poem - 1);
     }
 
     public void initListData(Activity activity) {
@@ -168,6 +169,12 @@ public class PoemListFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        GBApplication.setPoem(adapter.getItem(lvData.getFirstVisiblePosition()).poem);
+    }
 
     private AbsListView.OnScrollListener scrollDataListener = new AbsListView.OnScrollListener() {
         @Override

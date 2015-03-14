@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 
 import ua.maker.gbible.Adapters.PoemSlidePagerAdapter;
 import ua.maker.gbible.Constants.App;
+import ua.maker.gbible.DataBases.UserDB;
 import ua.maker.gbible.GBApplication;
 import ua.maker.gbible.Interfaces.OnCallBaseActivityListener;
+import ua.maker.gbible.Models.History;
 import ua.maker.gbible.R;
 
 
@@ -41,11 +43,13 @@ public class PagerPoemFragment extends Fragment {
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
     private ActionBarActivity activity;
+    private UserDB userDB;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = (ActionBarActivity) activity;
+        userDB = new UserDB(activity);
     }
 
     @Override
@@ -67,11 +71,13 @@ public class PagerPoemFragment extends Fragment {
         Log.d(TAG, "onResume()");
         GBApplication.getInstance().setHomeBibleLevel(App.BookHomeLevels.POEM);
 
+        userDB.insertHistory(new History());
         viewPager.setCurrentItem(GBApplication.chapterId);
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             @Override
             public void onPageSelected(int position) {
@@ -79,7 +85,8 @@ public class PagerPoemFragment extends Fragment {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrollStateChanged(int state) {
+            }
         });
     }
 
