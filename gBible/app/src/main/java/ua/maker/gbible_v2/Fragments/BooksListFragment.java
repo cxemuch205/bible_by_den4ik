@@ -1,14 +1,18 @@
 package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,6 +26,7 @@ import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScro
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.BibleLinkAdapter;
+import ua.maker.gbible_v2.BaseActivity;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Helpers.ContentTools;
@@ -31,6 +36,7 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.R;
+import ua.maker.gbible_v2.SettingsActivity;
 
 /**
  * Created by daniil on 11/6/14.
@@ -60,13 +66,13 @@ public class BooksListFragment extends Fragment {
 
     boolean mScrolling = false;
     private int lastFirstVisibleItemPosition = 0;
-    private ActionBarActivity activity;
+    private AppCompatActivity activity;
     private View headerView;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.activity = (ActionBarActivity) activity;
+        this.activity = (AppCompatActivity) activity;
     }
 
     @Override
@@ -78,21 +84,29 @@ public class BooksListFragment extends Fragment {
         Tools.initProgressBar(pb);
         initListData();
         initToolbar();
+        initActionbar();
 
         initListeners();
 
         return view;
     }
 
+    private void initActionbar() {
+        toolbar.inflateMenu(R.menu.menu_base);
+        toolbar.setOnMenuItemClickListener(((BaseActivity) activity).getOptionMenuItemListener());
+    }
+
     private void initToolbar() {
         int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
-        int headerHeight2 = getActivity().getResources().getDimensionPixelSize(R.dimen.header_height2);
+        if (Build.VERSION.SDK_INT >= 16) {
+            headerHeight = toolbar.getMinimumHeight();
+        }
 
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle(R.string.chose_book);
 
         headerView = new View(activity);
-        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
         headerView.setLayoutParams(headerParams);
         lvData.addHeaderView(headerView);
 
@@ -141,7 +155,9 @@ public class BooksListFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        GBApplication.getInstance().setTopBookId(adapter.getItem(lvData.getFirstVisiblePosition()).id);
+        if (adapter != null && adapter.getCount() > 0) {
+            GBApplication.getInstance().setTopBookId(adapter.getItem(lvData.getFirstVisiblePosition()).id);
+        }
     }
 
     private OnGetContentListener getListBooksAdapter = new OnGetContentAdapter() {

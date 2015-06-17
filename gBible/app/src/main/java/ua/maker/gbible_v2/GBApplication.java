@@ -38,7 +38,7 @@ public class GBApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        new DropBoxTools();
+        new DropBoxTools(instance);
         deviceType = getResources().getInteger(R.integer.device_type);
         pref = getSharedPreferences(App.Pref.NAME, 0);
         editorPref = pref.edit();

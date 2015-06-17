@@ -18,7 +18,7 @@
         android:id="@+id/toolbar_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
+        android:minHeight="56dp"
         app:theme="@style/GBible.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 

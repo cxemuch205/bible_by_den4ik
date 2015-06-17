@@ -5,46 +5,49 @@ package ua.maker.gbible_v2.Constants;
  */
 public class App {
 
+    public static final int COLOR_SELECT = 0x998D6E63;
+
     public interface Pref {
-        public static final String NAME = "gbible_preference";
-        public static final String BOOK_ID = "book_id";
-        public static final String BOOK_NAME = "book_name";
-        public static final String CHAPTER_ID = "chapter_id";
-        public static final String POEM = "poem";
-        public static final String HOME_BIBLE_LEVEL = "home_bible_level";
-        public static final String TOP_BOOK_ID = "top_book_id";
-        public static final String COUNT_CHAPTERS = "count_chapters";
-        public static final String POEM_TEXT_SIZE = "poem_text_size";
-        public static final String DATA_BASE_VER = "data_base_bible_ver";
+        String NAME = "gbible_preference";
+        String BOOK_ID = "book_id";
+        String BOOK_NAME = "book_name";
+        String CHAPTER_ID = "chapter_id";
+        String POEM = "poem";
+        String HOME_BIBLE_LEVEL = "home_bible_level";
+        String TOP_BOOK_ID = "top_book_id";
+        String COUNT_CHAPTERS = "count_chapters";
+        String POEM_TEXT_SIZE = "poem_text_size";
+        String DATA_BASE_VER = "data_base_bible_ver";
+        String SYNC_WITH_DBX = "sync_with_dbx";
     }
 
     public interface BookHomeLevels {
-        public static final int BOOK = 0;
-        public static final int CHAPTER = 1;
-        public static final int POEM = 2;
+        int BOOK = 0;
+        int CHAPTER = 1;
+        int POEM = 2;
     }
 
     public interface DeviceType{
-        public static final int PHONE = 0;
-        public static final int TABLET_7 = 1;
-        public static final int TABLET_10 = 2;
+        int PHONE = 0;
+        int TABLET_7 = 1;
+        int TABLET_10 = 2;
     }
 
     public interface DropBox {
-        public static final String API_KEY = "f45xeahjql4ntdk";
-        public static final String API_SECRET = "1lsj4rpcz26kebr";
+        String API_KEY = "zjzwnaytw9d55tc";//"f45xeahjql4ntdk";
+        String API_SECRET = "yde5d3o2aosg8ul";//"1lsj4rpcz26kebr";
     }
 
     public interface PlanDataType{
-        public static final int TEXT = 0;
-        public static final int TEXT_BOLD = 1;
-        public static final int LINK = 2;
-        public static final int LINK_WITH_TEXT = 3;
-        public static final int IMG = 4;
-        public static final int TEXT_WITH_IMG = 5;
+        int TEXT = 0;
+        int TEXT_BOLD = 1;
+        int LINK = 2;
+        int LINK_WITH_TEXT = 3;
+        int IMG = 4;
+        int TEXT_WITH_IMG = 5;
     }
 
     public interface KeysConfig{
-        public static final String BOOKS = "books_list";
+        String BOOKS = "books_list";
     }
 }

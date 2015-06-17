@@ -1,17 +1,26 @@
 package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -21,6 +30,8 @@ import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScro
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.PoemAdapter;
+import ua.maker.gbible_v2.BaseActivity;
+import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.Tools;
@@ -29,6 +40,7 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
+import ua.maker.gbible_v2.SettingsActivity;
 
 /**
  * Created by daniil on 11/7/14.
@@ -37,8 +49,9 @@ public class PoemListFragment extends Fragment {
 
     public static final String TAG = "PoemListFragment";
     private static PoemListFragment instance;
+
     public static PoemListFragment getInstance(OnCallBaseActivityListener adapter) {
-        if(instance == null)
+        if (instance == null)
             instance = new PoemListFragment();
         instance.setOnCallBaseActivityListener(adapter);
         return instance;
@@ -56,6 +69,7 @@ public class PoemListFragment extends Fragment {
     public void setOnCallBaseActivityListener(OnCallBaseActivityListener listener) {
         this.callBaseActivityListener = listener;
     }
+
     private ListView lvData;
     private PoemAdapter adapter;
     private ProgressBar pb;
@@ -63,7 +77,9 @@ public class PoemListFragment extends Fragment {
     private Toolbar toolbar;
     boolean mScrolling = false;
     private int lastFirstVisibleItemPosition = 0, chapter = 1;
-    private ActionBarActivity activity;
+    private AppCompatActivity activity;
+    private ActionMode actionMode;
+    private UserDB userDB;
 
     private View headerView;
 
@@ -71,7 +87,8 @@ public class PoemListFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         setRetainInstance(false);
-        this.activity = (ActionBarActivity) activity;
+        this.activity = (AppCompatActivity) activity;
+        userDB = new UserDB(activity);
     }
 
     @Override
@@ -93,7 +110,7 @@ public class PoemListFragment extends Fragment {
     }
 
     private void initToolbar() {
-        toolbar.setNavigationIcon(R.drawable.icon_back_navigation);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,20 +118,31 @@ public class PoemListFragment extends Fragment {
                     callBaseActivityListener.switchFragment(ChapterListFragment.TAG,
                             ChapterListFragment.getInstance(callBaseActivityListener));
                 }
+                if (actionMode != null) {
+                    actionMode.finish();
+                    actionMode = null;
+                }
             }
         });
+        toolbar.inflateMenu(R.menu.menu_base);
+        toolbar.setOnMenuItemClickListener(((BaseActivity) activity).getOptionMenuItemListener());
     }
 
     private void initQRToolbar() {
         int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
-        int headerHeight2 = getActivity().getResources().getDimensionPixelSize(R.dimen.header_height2);
+        if (Build.VERSION.SDK_INT >= 16) {
+            headerHeight = toolbar.getMinimumHeight() + 14;
+        }
 
         toolbar.setTitleTextColor(Color.WHITE);
 
         headerView = new View(activity);
-        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight2);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
         headerView.setLayoutParams(headerParams);
         lvData.addHeaderView(headerView);
+        lvData.addFooterView(headerView);
+        lvData.setSmoothScrollbarEnabled(true);
+        lvData.setDivider(new ColorDrawable(Color.TRANSPARENT));
 
         lvData.setOnScrollListener(new QuickReturnListViewOnScrollListener
                 .Builder(QuickReturnViewType.HEADER)
@@ -134,7 +162,6 @@ public class PoemListFragment extends Fragment {
         super.onResume();
         initListData(getActivity());
         setTitleActionBar(chapter);
-        lvData.setSelection(GBApplication.poem - 1);
     }
 
     public void initListData(Activity activity) {
@@ -152,7 +179,42 @@ public class PoemListFragment extends Fragment {
 
     private void initListeners() {
         //lvData.setOnScrollListener(scrollDataListener);
+        lvData.setOnItemLongClickListener(itemPoemLongClickListener);
+        lvData.setOnItemClickListener(itemPoemClickListener);
     }
+
+    private AdapterView.OnItemLongClickListener itemPoemLongClickListener = new AdapterView.OnItemLongClickListener() {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            startMultiChoseAction(position);
+            return false;
+        }
+    };
+
+    private void startMultiChoseAction(int position) {
+        adapter.toggleSelection(position);
+        boolean hasCheckedItems = adapter.getSelectedCount() > 0;
+
+        if (hasCheckedItems && actionMode == null) {
+            actionMode = toolbar.startActionMode(new ActionModeSelectItemCallback());
+        } else if (!hasCheckedItems && actionMode != null) {
+            actionMode.finish();
+        }
+
+        if (actionMode != null) {
+            actionMode.setTitle(String.format(activity.getString(R.string.chosen_str),
+                    adapter.getSelectedCount()));
+        }
+    }
+
+    private AdapterView.OnItemClickListener itemPoemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (actionMode != null) {
+                startMultiChoseAction(position);
+            }
+        }
+    };
 
     private OnGetContentListener getContentChapterListener = new OnGetContentAdapter() {
         @Override
@@ -166,6 +228,11 @@ public class PoemListFragment extends Fragment {
             if (result != null) {
                 ArrayList<Poem> data = (ArrayList<Poem>) result;
                 adapter.addAll(data);
+
+                if ((GBApplication.chapterId + 1) == chapter) {
+                    int positionScroll = GBApplication.poem - 1;
+                    lvData.smoothScrollToPositionFromTop(positionScroll, 0);
+                }
             }
         }
     };
@@ -173,7 +240,8 @@ public class PoemListFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        GBApplication.setPoem(adapter.getItem(lvData.getFirstVisiblePosition()).poem);
+        if ((GBApplication.chapterId + 1) == chapter)
+            GBApplication.setPoem(adapter.getItem(lvData.getFirstVisiblePosition()).poem);
     }
 
     private AbsListView.OnScrollListener scrollDataListener = new AbsListView.OnScrollListener() {
@@ -196,9 +264,64 @@ public class PoemListFragment extends Fragment {
                     && firstVisibleItem > lastFirstVisibleItemPosition
                     && callBaseActivityListener != null) {
                 callBaseActivityListener.callShowHideBottomToolBar(false);
-            } else if(callBaseActivityListener == null) {
+            } else if (callBaseActivityListener == null) {
                 Log.e(TAG, "CALL BASE ACTIVITY LISTENER ## NULL");
             }
         }
     };
+
+    private class ActionModeSelectItemCallback implements ActionMode.Callback {
+
+        @Override
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            actionMode.getMenuInflater().inflate(R.menu.multi_poem_select, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+
+            ArrayList<Poem> selectedPoems = adapter.getSelectedItems();
+
+            switch (menuItem.getItemId()) {
+                case R.id.action_add_to_bookmarks:
+                    addToBookmarks(selectedPoems);
+                    break;
+                case R.id.action_add_to_plan:
+
+                    break;
+                case R.id.action_copy:
+
+                    break;
+                case R.id.action_share:
+
+                    break;
+                case R.id.action_compare:
+
+                    break;
+                case R.id.action_highlighter:
+
+                    break;
+            }
+
+            actionMode.finish();
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode actionMode) {
+            adapter.removeSelection();
+            PoemListFragment.this.actionMode = null;
+        }
+    }
+
+    private void addToBookmarks(final ArrayList<Poem> poems) {
+        //TODO: not work now | need open db in DROPBOX and sync db in AsyncTask
+        userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));
+    }
 }

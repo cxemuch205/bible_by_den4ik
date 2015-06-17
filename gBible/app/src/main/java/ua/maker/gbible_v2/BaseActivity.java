@@ -3,11 +3,15 @@ package ua.maker.gbible_v2;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -20,7 +24,7 @@ import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
 
 
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends AppCompatActivity {
 
     public static final String TAG = "BaseActivity";
 
@@ -157,4 +161,25 @@ public class BaseActivity extends ActionBarActivity {
             initFragments(fragment, tag);
         }
     };
+
+    public Toolbar.OnMenuItemClickListener getOptionMenuItemListener() {
+        return optionMenuItemListener;
+    }
+
+    private Toolbar.OnMenuItemClickListener optionMenuItemListener = new Toolbar.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_settings:
+                    openSettings();
+                    break;
+            }
+            return false;
+        }
+    };
+
+    private void openSettings() {
+        Intent openSettings = new Intent(this, SettingsActivity.class);
+        startActivity(openSettings);
+    }
 }

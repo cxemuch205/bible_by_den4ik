@@ -7,6 +7,7 @@ public class BookMark {
 	private String content = "";
 	private String comment = "";
 	private String linkNext = "";
+	private String dbxId = "";
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
@@ -52,8 +53,16 @@ public class BookMark {
 		this.comment = comment;
 		this.linkNext = linkNext;
 	}
-	
-	public void setBookId(int bookId) {
+
+    public String getDbxId() {
+        return dbxId;
+    }
+
+    public void setDbxId(String dbxId) {
+        this.dbxId = dbxId;
+    }
+
+    public void setBookId(int bookId) {
 		this.bookId = bookId;
 	}
 	

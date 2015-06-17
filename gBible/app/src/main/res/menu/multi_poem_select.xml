@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_add_to_bookmarks"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_add_to_bookmarks"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_add_to_plan"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_add_to_plan"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_copy"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_copy"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_share"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_compare"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_compare"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+    <item
+        android:id="@+id/action_highlighter"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/action_highlighter"
+        android:showAsAction="ifRoom|withText"
+        tools:ignore="AppCompatResource" />
+
+</menu>

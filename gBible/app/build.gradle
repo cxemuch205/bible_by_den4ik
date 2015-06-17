@@ -21,10 +21,23 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile fileTree(dir: "$buildDir/native-libs", include: 'native-libs.jar')
+    compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.code.gson:gson:2.3'
     compile project (":QRlibrary")
-    compile files('libs/dropbox-android-sdk-1.6.3.jar')
+    compile files('libs/dropbox-sync-sdk-android.jar')
     compile files('libs/multiwindow-v1.2.3.jar')
     compile files('libs/sdk-v1.0.0.jar')
+}
+
+task nativeLibsToJar(type: Zip) {
+    destinationDir file("$buildDir/native-libs")
+    baseName 'native-libs'
+    extension 'jar'
+    from fileTree(dir: 'libs', include: '**/*.so')
+    into 'lib/'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
 }

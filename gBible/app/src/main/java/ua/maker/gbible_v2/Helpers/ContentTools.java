@@ -10,6 +10,7 @@ import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.Models.Book;
+import ua.maker.gbible_v2.Models.BookMark;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 
@@ -203,5 +204,22 @@ public class ContentTools {
             }
 
         return result;
+    }
+
+    public static ArrayList<BookMark> convertPoemToBookmarkArray(Context context, ArrayList<Poem> poems) {
+        ArrayList<BookMark> bookMarks = new ArrayList<BookMark>();
+        for (Poem poem : poems) {
+            BookMark bookMark = new BookMark();
+
+            bookMark.setBookId(poem.bookId);
+            bookMark.setBookName(poem.bookName);
+            bookMark.setChapter(poem.chapter);
+            bookMark.setContent(poem.content);
+            bookMark.setPoem(poem.poem);
+            bookMark.setTableName(Tools.getTranslateWitchPreferences(context));
+
+            bookMarks.add(bookMark);
+        }
+        return bookMarks;
     }
 }

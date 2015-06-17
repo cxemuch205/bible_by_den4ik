@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Models.BooksId;
 import ua.maker.gbible_v2.R;
+import ua.maker.gbible_v2.SettingsActivity;
 
 /**
  * Created by daniil on 11/7/14.
@@ -453,5 +456,11 @@ public class Tools {
                 break;
         }
         return translateName;
+    }
+
+    public static void showToastCenter(Context context, String text) {
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

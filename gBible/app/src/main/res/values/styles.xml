@@ -1,22 +1,32 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/GBible.ActionBar</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
 
         <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/GBible.ActionBar</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="windowActionBar">false</item>
-        <item name="actionBarStyle">@style/GBible.ActionBar</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="GBible.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
         <item name="android:background">@color/action_bar</item>
         <item name="background">@color/action_bar</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="AppThemeWithActionBar" parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/GBible.ActionBar</item>
+
+        <item name="actionBarStyle">@style/GBible.ActionBar</item>
     </style>
 
 </resources>

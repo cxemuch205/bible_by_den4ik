@@ -1,5 +1,7 @@
 package ua.maker.gbible_v2.Models;
 
+import android.graphics.Color;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +14,8 @@ public class Poem implements Serializable {
     public int chapter;  //from 1
     public int poem;
     public int poemTo;
+    public int colorHighlight = Color.TRANSPARENT;
+    public boolean isBookmark = false;
     public String content;
     public String translateName;
     public String bookName;
