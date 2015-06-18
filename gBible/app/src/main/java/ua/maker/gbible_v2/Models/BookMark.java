@@ -11,9 +11,11 @@ public class BookMark {
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
-	private int id = 0;
-	
-	
+	private long id = 0;
+	private String createdMillisDbx;
+	private String updatedMillisDbx;
+
+
 	public BookMark(){}
 	
 	public BookMark(
@@ -40,7 +42,7 @@ public class BookMark {
             int bookId,
             int chapter,
             int poem,
-            int id,
+            long id,
             String comment,
             String linkNext){
 		this.tableName = tableName;
@@ -98,7 +100,7 @@ public class BookMark {
 		this.linkNext = linkNext;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
@@ -132,5 +134,21 @@ public class BookMark {
 	
 	public String getLinkNext() {
 		return linkNext;
+	}
+
+	public void setCreatedMillisDbx(String createdMillisDbx) {
+		this.createdMillisDbx = createdMillisDbx;
+	}
+
+	public void setUpdatedMillisDbx(String updatedMillisDbx) {
+		this.updatedMillisDbx = updatedMillisDbx;
+	}
+
+	public String getCreatedMillisDbx() {
+		return createdMillisDbx;
+	}
+
+	public String getUpdatedMillisDbx() {
+		return updatedMillisDbx;
 	}
 }

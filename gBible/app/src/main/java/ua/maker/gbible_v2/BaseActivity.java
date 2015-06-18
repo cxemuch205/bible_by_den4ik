@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.Fragments.BookmarksFragment;
 import ua.maker.gbible_v2.Fragments.BooksListFragment;
 import ua.maker.gbible_v2.Fragments.ChapterListFragment;
 import ua.maker.gbible_v2.Fragments.PagerPoemFragment;
@@ -33,7 +34,7 @@ public class BaseActivity extends AppCompatActivity {
     private Button btnOpenBottomMenu;
     private LinearLayout llBottomToolBar;
     private DisplayMetrics displayMetrics;
-    private LinearLayout llBibleHome;
+    private LinearLayout llBibleHome, llBookmarks;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -69,6 +70,7 @@ public class BaseActivity extends AppCompatActivity {
         btnOpenBottomMenu = (Button) findViewById(R.id.btn_show_menu_bottom);
         llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
         llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
+        llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
     }
 
     private void initTypefaces() {
@@ -78,6 +80,7 @@ public class BaseActivity extends AppCompatActivity {
     private void initListener() {
         btnOpenBottomMenu.setOnClickListener(clickOpenBottomToolBarListener);
         llBibleHome.setOnClickListener(clickBibleHomeListener);
+        llBookmarks.setOnClickListener(clickBookmarksListener);
     }
 
     private void initAnimations() {
@@ -131,6 +134,13 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             attachReadContent();
+        }
+    };
+
+    private View.OnClickListener clickBookmarksListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            initFragments(BookmarksFragment.getInstance(), BookmarksFragment.TAG);
         }
     };
 

@@ -2,6 +2,7 @@ package ua.maker.gbible_v2.Helpers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -221,5 +222,22 @@ public class ContentTools {
             bookMarks.add(bookMark);
         }
         return bookMarks;
+    }
+
+    public static void getBookmarks(final Activity activity, final String tag, final OnGetContentListener contentListener) {
+        contentListener.onStartGet();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //TODO: make request to db
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        contentListener.onEndGet(/*result*/null, tag);
+                    }
+                });
+            }
+        }).start();
     }
 }

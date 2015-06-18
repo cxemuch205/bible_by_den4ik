@@ -336,8 +336,51 @@ public class UserDB extends SQLiteOpenHelper {
 
     public ArrayList<BookMark> getBookMarks() {
         ArrayList<BookMark> result = new ArrayList<BookMark>();
+        ArrayList<BookMark> resultDbx = new ArrayList<BookMark>();
 
         //TODO: make get from dbx data
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
+            try {
+                DbxTable.QueryResult queryResult = dbxTable.query();
+                List<DbxRecord> queryList = queryResult.asList();
+                for (DbxRecord record : queryList) {
+
+                    String tableName = record.getString(FIELD_TABLE_NAME);
+                    int bookId = (int)record.getLong(FIELD_BOOK_ID);
+                    String bookName = record.getString(FIELD_BOOK_NAME);
+                    int chapter = (int)record.getLong(FIELD_CHAPTER);
+                    int poem = (int)record.getLong(FIELD_POEM);
+                    String content = record.getString(FIELD_CONTENT);
+                    long id = record.getLong(FIELD_LOCAL_DB_ID);
+                    String comment = record.getString(FIELD_COMMENT_BOOKMARK);
+                    String linkNext = record.getString(FIELD_NEXT_LINK);
+                    String dbxId = record.getId();
+                    String createdMillis = record.getString(FIELD_CREATED_MILLIS);
+                    String updateMillis = record.getString(FIELD_UPDATED_MILLIS);
+
+                    BookMark item = new BookMark(
+                            tableName,
+                            bookName,
+                            content,
+                            bookId,
+                            chapter,
+                            poem,
+                            id,
+                            comment,
+                            linkNext);
+                    item.setCreatedMillisDbx(createdMillis);
+                    item.setUpdatedMillisDbx(updateMillis);
+                    if (dbxId != null) {
+                        item.setDbxId(dbxId);
+                    }
+
+                    resultDbx.add(item);
+                }
+            } catch (DbxException e) {
+                e.printStackTrace();
+            }
+        }
 
         if (db.isOpen()) {
             Log.d(TAG, "start get BookMarks()");
@@ -382,6 +425,7 @@ public class UserDB extends SQLiteOpenHelper {
 
                     result.add(item);
                 } while (c.moveToNext());
+                c.close();
             }
         }
 
@@ -389,7 +433,7 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
     public void deleteBookmark(BookMark bookMark) {
-        Log.d(TAG, "DElete bookmark: id: " + bookMark.getId());
+        Log.d(TAG, "Delete bookmark: id: " + bookMark.getId());
         if (db.isOpen()) {
             if (dbxDatastore != null) {
                 DbxTable table = dbxDatastore.getTable(TABLE_BOOKMARKS);
@@ -457,7 +501,7 @@ public class UserDB extends SQLiteOpenHelper {
 
     public List<ItemPlan> getItemsPlanById(int idPlan_request) {
         List<ItemPlan> result = new ArrayList<ItemPlan>();
-        Log.d(TAG + " getItemsPlanById()", "Id plan: " + idPlan_request);
+        Log.d(TAG, "getItemsPlanById() Id plan: " + idPlan_request);
         if (db.isOpen()) {
             Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_PLAN_DATA + "'", null);
             if (c.moveToFirst()) {
