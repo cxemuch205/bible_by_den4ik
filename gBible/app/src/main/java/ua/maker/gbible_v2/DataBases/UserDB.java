@@ -102,6 +102,7 @@ public class UserDB extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_TABLE_BOOKMARKS_DATA = "CREATE TABLE " + TABLE_BOOKMARKS + " ("
             + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + FIELD_LOCAL_DB_ID + " INTEGER,"
             + FIELD_TABLE_NAME + " TEXT,"
             + FIELD_BOOK_ID + " INTEGER,"
             + FIELD_BOOK_NAME + " TEXT,"
@@ -142,6 +143,10 @@ public class UserDB extends SQLiteOpenHelper {
     private SQLiteDatabase db = null;
     private SharedPreferences pref;
     private static DbxDatastore dbxDatastore;
+
+    public static DbxDatastore getDbxDatastore() {
+        return dbxDatastore;
+    }
 
     public UserDB(Context context) {
         super(context, DB_NAME + ".db", null, DB_VERSION);
@@ -317,7 +322,10 @@ public class UserDB extends SQLiteOpenHelper {
             long localRawId = db.insert(TABLE_BOOKMARKS, null, values);
             if (dbxIdRecord != null) {
                 try {
+                    DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
                     record.set(FIELD_LOCAL_DB_ID, localRawId);
+                    dbxTable.insert(record);
+
                     dbxDatastore.sync();
                 } catch (DbxException e) {
                     e.printStackTrace();
@@ -352,12 +360,20 @@ public class UserDB extends SQLiteOpenHelper {
                     int chapter = (int)record.getLong(FIELD_CHAPTER);
                     int poem = (int)record.getLong(FIELD_POEM);
                     String content = record.getString(FIELD_CONTENT);
-                    long id = record.getLong(FIELD_LOCAL_DB_ID);
+                    long id = -1;
+                    if (record.hasField(FIELD_LOCAL_DB_ID)) {
+                        id = record.getLong(FIELD_LOCAL_DB_ID);
+                    }
                     String comment = record.getString(FIELD_COMMENT_BOOKMARK);
                     String linkNext = record.getString(FIELD_NEXT_LINK);
                     String dbxId = record.getId();
-                    String createdMillis = record.getString(FIELD_CREATED_MILLIS);
-                    String updateMillis = record.getString(FIELD_UPDATED_MILLIS);
+                    String createdMillis = "", updateMillis = "";
+                    if (record.hasField(FIELD_CREATED_MILLIS)) {
+                        createdMillis = record.getString(FIELD_CREATED_MILLIS);
+                    }
+                    if (record.hasField(FIELD_UPDATED_MILLIS)) {
+                        updateMillis = record.getString(FIELD_UPDATED_MILLIS);
+                    }
 
                     BookMark item = new BookMark(
                             tableName,
@@ -429,7 +445,7 @@ public class UserDB extends SQLiteOpenHelper {
             }
         }
 
-        return result;
+        return resultDbx;
     }
 
     public void deleteBookmark(BookMark bookMark) {

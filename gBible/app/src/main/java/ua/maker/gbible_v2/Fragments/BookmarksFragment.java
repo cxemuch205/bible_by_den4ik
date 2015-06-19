@@ -3,6 +3,7 @@ package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import ua.maker.gbible_v2.Adapters.BibleLinkAdapter;
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
 import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
@@ -48,6 +51,7 @@ public class BookmarksFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = (AppCompatActivity) activity;
+        DropBoxTools.getInstance().sync();
     }
 
     @Override
@@ -93,6 +97,13 @@ public class BookmarksFragment extends Fragment {
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
         }
+
+        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+
+        View headerView = new View(activity);
+        AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
+        headerView.setLayoutParams(headerParams);
+        lvData.addFooterView(headerView);
     }
 
 

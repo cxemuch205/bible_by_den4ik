@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.DataBases.BibleDB;
+import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BibleLink;
@@ -229,12 +230,13 @@ public class ContentTools {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //TODO: make request to db
+                UserDB userDB = new UserDB(activity);
+                final ArrayList<BookMark> bookMarks = userDB.getBookMarks();
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        contentListener.onEndGet(/*result*/null, tag);
+                        contentListener.onEndGet(bookMarks, tag);
                     }
                 });
             }

@@ -11,6 +11,7 @@ import com.dropbox.sync.android.DbxDatastoreManager;
 import com.dropbox.sync.android.DbxException;
 
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.SettingsActivity;
 
@@ -100,6 +101,14 @@ public class DropBoxTools {
             } catch (DbxException.Unauthorized unauthorized) {
                 unauthorized.printStackTrace();
             }
+        }
+    }
+
+    public void sync() {
+        try {
+            UserDB.getDbxDatastore().sync();
+        } catch (DbxException e) {
+            e.printStackTrace();
         }
     }
 }
