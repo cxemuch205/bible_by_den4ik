@@ -75,9 +75,10 @@ public class PagerPoemFragment extends Fragment {
         userDB.insertHistory(new History());
         viewPager.setCurrentItem(GBApplication.chapterId);
 
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -87,6 +88,7 @@ public class PagerPoemFragment extends Fragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
             }
         });
     }

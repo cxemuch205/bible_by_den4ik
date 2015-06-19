@@ -91,13 +91,13 @@ public class ContentTools {
         }).start();
     }
 
-    public static void getListPoemsFromChapter(final Activity activity, final String tag, final OnGetContentListener adapterProgress) {
+    public static void getListPoemsFromChapter(final int chapter, final Activity activity, final String tag, final OnGetContentListener adapterProgress) {
         adapterProgress.onStartGet();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 int bookId = GBApplication.bookId;
-                int chapterId = GBApplication.chapterId;
+                int chapterId = chapter - 1; //because i have to use chapterId
                 final ArrayList<Poem> result = new ArrayList<Poem>();
 
                 //######################## TESTS

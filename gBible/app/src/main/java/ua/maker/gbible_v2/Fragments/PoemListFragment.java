@@ -170,7 +170,7 @@ public class PoemListFragment extends Fragment {
         }
 
         adapter.clear();
-        ContentTools.getListPoemsFromChapter(activity, TAG, getContentChapterListener);
+        ContentTools.getListPoemsFromChapter(chapter, activity, TAG, getContentChapterListener);
 
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
