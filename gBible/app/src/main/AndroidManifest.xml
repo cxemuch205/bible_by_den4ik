@@ -63,6 +63,9 @@
             android:enabled="true"
             android:exported="false"
             android:label="Dropbox Sync"  />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="251d1d8b11ac1620c3f23a5b087cb9f33962e456" />
     </application>
 
 </manifest>

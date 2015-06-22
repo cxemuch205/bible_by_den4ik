@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.os.Handler;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 
@@ -22,12 +24,12 @@ public class GBApplication extends Application {
     }
 
     public static int bookId = 0,
-                      chapterId = 0,
-                      poem = 0,
-                      homeBibleLevel = App.BookHomeLevels.BOOK,
-                      deviceType,
-                      topBookId = 1,
-                      countChapters = 1;
+            chapterId = 0,
+            poem = 0,
+            homeBibleLevel = App.BookHomeLevels.BOOK,
+            deviceType,
+            topBookId = 1,
+            countChapters = 1;
 
     public static String bookName = "";
 
@@ -37,6 +39,7 @@ public class GBApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         instance = this;
         new DropBoxTools(instance);
         deviceType = getResources().getInteger(R.integer.device_type);

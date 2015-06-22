@@ -21,6 +21,7 @@ import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Fragments.BookmarksFragment;
 import ua.maker.gbible_v2.Fragments.BooksListFragment;
 import ua.maker.gbible_v2.Fragments.ChapterListFragment;
+import ua.maker.gbible_v2.Fragments.HistoryFragment;
 import ua.maker.gbible_v2.Fragments.PagerPoemFragment;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
@@ -35,7 +36,7 @@ public class BaseActivity extends AppCompatActivity {
     private Button btnOpenBottomMenu;
     private LinearLayout llBottomToolBar;
     private DisplayMetrics displayMetrics;
-    private LinearLayout llBibleHome, llBookmarks;
+    private LinearLayout llBibleHome, llBookmarks, llHistory;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -72,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
         llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
         llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
         llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
+        llHistory = (LinearLayout) findViewById(R.id.ll_history);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
@@ -86,6 +88,7 @@ public class BaseActivity extends AppCompatActivity {
         btnOpenBottomMenu.setOnClickListener(clickOpenBottomToolBarListener);
         llBibleHome.setOnClickListener(clickBibleHomeListener);
         llBookmarks.setOnClickListener(clickBookmarksListener);
+        llHistory.setOnClickListener(clickHistoryListener);
     }
 
     private void initAnimations() {
@@ -146,6 +149,13 @@ public class BaseActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             initFragments(BookmarksFragment.getInstance(), BookmarksFragment.TAG);
+        }
+    };
+
+    private View.OnClickListener clickHistoryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            initFragments(HistoryFragment.getInstance(), HistoryFragment.TAG);
         }
     };
 

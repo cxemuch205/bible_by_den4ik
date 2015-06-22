@@ -16,6 +16,7 @@ public class History {
 	private int bookId = 1;
 	private int chapter = 1;
 	private int poem = 1;
+	private String createdMillis;
 
     @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat
@@ -26,7 +27,7 @@ public class History {
         bookId = GBApplication.bookId;
         chapter = GBApplication.chapterId + 1;
         poem = GBApplication.poem;
-        translate = Tools.getTranslateWitchPreferences(GBApplication.getInstance());
+        translate = Tools.getTranslateIdWitchPreferences(GBApplication.getInstance());
         dateCreate = dateFormat.format(new Date());
     }
 
@@ -85,5 +86,14 @@ public class History {
 	
 	public String getDateCreated() {
 		return dateCreate;
+	}
+
+	public String getCreatedMillis() {
+		return createdMillis;
+	}
+
+	public History setCreatedMillis(String createdMillis) {
+		this.createdMillis = createdMillis;
+		return this;
 	}
 }

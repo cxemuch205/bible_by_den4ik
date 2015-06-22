@@ -8,10 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,54 +19,55 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
+import ua.maker.gbible_v2.Adapters.HistoryAdapter;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Helpers.ContentTools;
-import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BookMark;
+import ua.maker.gbible_v2.Models.History;
 import ua.maker.gbible_v2.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BookmarksFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-    public static final String TAG = "BookmarksFragment";
+    public static final String TAG = "HistoryFragment";
 
-    public BookmarksFragment() {}
+    private static HistoryFragment instance;
 
-    private static BookmarksFragment instance;
-    private AppCompatActivity activity;
-
-    public static BookmarksFragment getInstance() {
+    public static HistoryFragment getInstance() {
         if (instance == null) {
-            instance = new BookmarksFragment();
+            instance = new HistoryFragment();
         }
         return instance;
     }
+
+    public HistoryFragment() {}
+
+    private AppCompatActivity activity;
+    private UserDB userDB;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         this.activity = (AppCompatActivity) activity;
-        DropBoxTools.getInstance().sync();
         userDB = new UserDB(activity);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_bookmarks, container, false);
+        return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
     private Toolbar toolbar;
     private ListView lvData;
-    private BookmarksAdapter adapter;
     private ProgressBar pb;
+    private HistoryAdapter adapter;
     private TextView tvMessage;
-    private UserDB userDB;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -88,16 +89,30 @@ public class BookmarksFragment extends Fragment {
 
     private void initToolbar(Toolbar toolbar) {
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setTitle(R.string.title_bookmarks);
+        toolbar.setTitle(R.string.title_history);
+        toolbar.inflateMenu(R.menu.menu_history);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_clear:
+                        userDB.clearHistory();
+                        adapter.clear();
+                        toggleEmptyMessage(true);
+                        return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void initListData() {
         if (adapter == null) {
-            adapter = new BookmarksAdapter(getActivity(), new ArrayList<BookMark>(), userDB);
+            adapter = new HistoryAdapter(getActivity(), new ArrayList<History>());
         }
 
         adapter.clear();
-        ContentTools.getBookmarks(userDB, activity, TAG, getBookmarksAdapter);
+        ContentTools.getHistory(userDB, activity, TAG, getBookmarksAdapter);
 
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
@@ -117,8 +132,8 @@ public class BookmarksFragment extends Fragment {
         @Override
         public void onStartGet() {
             super.onStartGet();
-            toggleEmptyMessage(false);
             pb.setVisibility(ProgressBar.VISIBLE);
+            toggleEmptyMessage(false);
         }
 
         @Override
@@ -126,7 +141,7 @@ public class BookmarksFragment extends Fragment {
             super.onEndGet(result, tag);
             pb.setVisibility(ProgressBar.GONE);
             if (result != null) {
-                ArrayList<BookMark> data = (ArrayList<BookMark>) result;
+                ArrayList<History> data = (ArrayList<History>) result;
                 if (data.isEmpty()) {
                     toggleEmptyMessage(true);
                 } else {
@@ -144,7 +159,7 @@ public class BookmarksFragment extends Fragment {
             public void run() {
                 if (enable) {
                     tvMessage.setVisibility(TextView.VISIBLE);
-                    tvMessage.setText(R.string.empty_bookmark);
+                    tvMessage.setText(R.string.empty_history);
                 } else {
                     tvMessage.setVisibility(TextView.GONE);
                 }
@@ -153,28 +168,6 @@ public class BookmarksFragment extends Fragment {
     }
 
     private void initListeners() {
-        lvData.setOnItemClickListener(itemBookmarksClickListener);
-        lvData.setOnScrollListener(scrollBookmarksListener);
+        //lvData.setOnItemClickListener(itemBookmarksClickListener);
     }
-
-    private AdapterView.OnItemClickListener itemBookmarksClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            adapter.toggleMenuByItem(adapter.getItem(position));
-        }
-    };
-
-    private AbsListView.OnScrollListener scrollBookmarksListener = new AbsListView.OnScrollListener() {
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-            if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
-                adapter.setDefaultOtherItems(null);
-            }
-        }
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-        }
-    };
 }

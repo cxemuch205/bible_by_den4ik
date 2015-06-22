@@ -15,6 +15,7 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.Models.Book;
 import ua.maker.gbible_v2.Models.BookMark;
+import ua.maker.gbible_v2.Models.History;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 
@@ -228,6 +229,23 @@ public class ContentTools {
                     @Override
                     public void run() {
                         contentListener.onEndGet(bookMarks, tag);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public static void getHistory(final UserDB userDB, final Activity activity, final String tag, final OnGetContentListener getBookmarksAdapter) {
+        getBookmarksAdapter.onStartGet();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<History> histories = userDB.getHistory();
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getBookmarksAdapter.onEndGet(histories, tag);
                     }
                 });
             }

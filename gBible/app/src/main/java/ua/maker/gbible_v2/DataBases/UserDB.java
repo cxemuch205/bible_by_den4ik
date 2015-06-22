@@ -286,7 +286,7 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
     public void insertBookMark(BookMark bookmarks) {
-        if (dbxDatastore != null && dbxDatastore.isOpen() && isUniqueBookmark(bookmarks)) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
             DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
             if (dbxTable != null) {
                 DbxFields fields = new DbxFields();
@@ -298,14 +298,16 @@ public class UserDB extends SQLiteOpenHelper {
                 fields.set(FIELD_CONTENT, bookmarks.getContent());
                 fields.set(FIELD_COMMENT_BOOKMARK, "" + bookmarks.getComment());
                 fields.set(FIELD_NEXT_LINK, "" + bookmarks.getLinkNext());
-                fields.set(FIELD_CREATED_MILLIS, String.valueOf(System.currentTimeMillis()));
-                fields.set(FIELD_UPDATED_MILLIS, String.valueOf(System.currentTimeMillis()));
+                if (isUniqueBookmark(fields)) {
+                    fields.set(FIELD_CREATED_MILLIS, String.valueOf(System.currentTimeMillis()));
+                    fields.set(FIELD_UPDATED_MILLIS, String.valueOf(System.currentTimeMillis()));
 
-                dbxTable.insert(fields);
-                try {
-                    dbxDatastore.sync();
-                } catch (DbxException e) {
-                    e.printStackTrace();
+                    dbxTable.insert(fields);
+                    try {
+                        dbxDatastore.sync();
+                    } catch (DbxException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -341,18 +343,8 @@ public class UserDB extends SQLiteOpenHelper {
         }
     }
 
-    private boolean isUniqueBookmark(BookMark bookmarks) {
+    private boolean isUniqueBookmark(DbxFields fields) {
         DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
-        DbxFields fields = new DbxFields();
-        fields.set(FIELD_TABLE_NAME, bookmarks.getTableName());
-        fields.set(FIELD_BOOK_ID, bookmarks.getBookId());
-        fields.set(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookmarks.getBookId(), this.context));
-        fields.set(FIELD_CHAPTER, bookmarks.getChapter());
-        fields.set(FIELD_POEM, bookmarks.getPoem());
-        fields.set(FIELD_CONTENT, bookmarks.getContent());
-        fields.set(FIELD_COMMENT_BOOKMARK, "" + bookmarks.getComment());
-        fields.set(FIELD_NEXT_LINK, "" + bookmarks.getLinkNext());
-
         try {
             DbxTable.QueryResult queryResult = dbxTable.query(fields);
             if (queryResult != null && queryResult.count() > 0) {
@@ -436,7 +428,7 @@ public class UserDB extends SQLiteOpenHelper {
 
     public boolean deleteBookmark(BookMark bookMark, boolean withSync) {
         Log.d(TAG, "Delete bookmark: id: " + bookMark.getId());
-        if (dbxDatastore != null) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
             DbxTable table = dbxDatastore.getTable(TABLE_BOOKMARKS);
             try {
                 DbxRecord record = table.get(bookMark.getDbxId());
@@ -571,71 +563,105 @@ public class UserDB extends SQLiteOpenHelper {
                 + " chapter " + historyItem.getChapter()
                 + " poem " + historyItem.getPoem());
 
-        if (db.isOpen()) {
-            if (isNoLastHistory(historyItem)) {
-                ContentValues values = new ContentValues();
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_HISTORY);
+            if (table != null) {
+                DbxFields dbxFields = new DbxFields();
+                dbxFields.set(FIELD_BOOK_NAME, Tools.getBookNameByBookId(historyItem.getBookId(), context));
+                dbxFields.set(FIELD_BOOK_ID, historyItem.getBookId());
+                dbxFields.set(FIELD_CHAPTER, historyItem.getChapter());
+                dbxFields.set(FIELD_POEM, historyItem.getPoem());
+                dbxFields.set(FIELD_TRANSLATE, historyItem.getTranslate());
+                dbxFields.set(FIELD_DATE, historyItem.getDateCreated());
 
-                values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(historyItem.getBookId(), context));
-                values.put(FIELD_BOOK_ID, historyItem.getBookId());
-                values.put(FIELD_CHAPTER, historyItem.getChapter());
-                values.put(FIELD_POEM, historyItem.getPoem());
-                values.put(FIELD_TRANSLATE, historyItem.getTranslate());
-                values.put(FIELD_DATE, historyItem.getDateCreated());
+                if (isNoLastHistory(dbxFields)) {
+                    dbxFields.set(FIELD_CREATED_MILLIS, String.valueOf(System.currentTimeMillis()));
+                    table.insert(dbxFields);
 
-                db.insert(TABLE_HISTORY, null, values);
+                    try {
+                        dbxDatastore.sync();
+                    } catch (DbxException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }
 
-    private boolean isNoLastHistory(History historyItem) {
-        if (db.isOpen()) {
-            Cursor c = db.rawQuery("SELECT "
-                    + FIELD_BOOK_ID
-                    + " FROM '" + TABLE_HISTORY + "'"
-                    + " WHERE "
-                    + FIELD_BOOK_ID + " = '" + historyItem.getBookId() + "' AND "
-                    + FIELD_CHAPTER + " = '" + historyItem.getChapter() + "' AND "
-                    + FIELD_DATE + " = '" + historyItem.getDateCreated() + "'", null);
-            if (c != null) {
+    private boolean isNoLastHistory(DbxFields historyDbx) {
+        DbxTable table = dbxDatastore.getTable(TABLE_HISTORY);
+        try {
+            DbxTable.QueryResult queryResult = table.query(historyDbx);
+            if (queryResult.count() > 0) {
                 return false;
             }
+        } catch (DbxException e) {
+            e.printStackTrace();
         }
+
         return true;
     }
 
-    public List<History> getHistory() {
-        List<History> result = new ArrayList<History>();
+    public ArrayList<History> getHistory() {
+        ArrayList<History> result = new ArrayList<History>();
 
-        if (db.isOpen()) {
-            Log.d(TAG, "getHistory() - start");
-            Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_HISTORY + "'", null);
-            if (c.moveToFirst()) {
-                int idBookId = c.getColumnIndex(FIELD_BOOK_ID);
-                int idChapter = c.getColumnIndex(FIELD_CHAPTER);
-                int idPoem = c.getColumnIndex(FIELD_POEM);
-                int idBookName = c.getColumnIndex(FIELD_BOOK_NAME);
-                int idTranslate = c.getColumnIndex(FIELD_TRANSLATE);
-                int idDateCreate = c.getColumnIndex(FIELD_DATE);
-                do {
-                    int bookId = c.getInt(idBookId);
-                    int chapter = c.getInt(idChapter);
-                    int poem = c.getInt(idPoem);
-                    String bookName = c.getString(idBookName);
-                    String translate = c.getString(idTranslate);
-                    String dateCreate = c.getString(idDateCreate);
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_HISTORY);
+            if (table != null) {
+                try {
+                    DbxTable.QueryResult historyResults = table.query();
+                    if (historyResults != null) {
+                        List<DbxRecord> historyDbxRecords = historyResults.asList();
+                        for (DbxRecord record : historyDbxRecords) {
+                            int bookId = (int) record.getLong(FIELD_BOOK_ID);
+                            int chapter = (int) record.getLong(FIELD_CHAPTER);
+                            int poem = (int) record.getLong(FIELD_POEM);
+                            String bookName = record.getString(FIELD_BOOK_NAME);
+                            String translate = record.getString(FIELD_TRANSLATE);
+                            String dateCreate = record.getString(FIELD_DATE);
+                            String createdMillis = record.getString(FIELD_CREATED_MILLIS);
 
-                    result.add(0, new History(dateCreate, bookName, translate, bookId, chapter, poem));
-
-                } while (c.moveToNext());
+                            result.add(new History(dateCreate, bookName, translate, bookId, chapter, poem)
+                                    .setCreatedMillis(createdMillis));
+                        }
+                    }
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
+        Collections.sort(result, new Comparator<History>() {
+            @Override
+            public int compare(History lhs, History rhs) {
+                return (int)(Long.parseLong(rhs.getCreatedMillis()) - Long.parseLong(lhs.getCreatedMillis()));
+            }
+        });
 
         return result;
     }
 
     public void clearHistory() {
-        if (db.isOpen()) {
-            db.delete(TABLE_HISTORY, null, null);
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_HISTORY);
+            if (table != null) {
+                try {
+                    DbxTable.QueryResult historyResults = table.query();
+                    if (historyResults != null) {
+                        List<DbxRecord> historyDbxRecords = historyResults.asList();
+                        for (DbxRecord record : historyDbxRecords) {
+                            record.deleteRecord();
+                        }
+                    }
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                dbxDatastore.sync();
+            } catch (DbxException e) {
+                e.printStackTrace();
+            }
         }
     }
 

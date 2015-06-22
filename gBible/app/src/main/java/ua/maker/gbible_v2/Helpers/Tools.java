@@ -413,8 +413,6 @@ public class Tools {
         return 0;
     }
 
-
-
     public static String getTranslateWitchPreferences(Context ctx){
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         String translateName = BibleDB.TABLE_NAME_RST;
@@ -436,6 +434,14 @@ public class Tools {
             }
         }
         return translateName;
+    }
+
+    public static String getTranslateIdWitchPreferences(Context ctx){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        if(prefs.contains(ctx.getString(R.string.pref_default_translate))) {
+            return prefs.getString(ctx.getString(R.string.pref_default_translate), "0");
+        }
+        return "0";
     }
 
     public static String getTranslateWitchPreferences(String idTranslate, Context ctx){

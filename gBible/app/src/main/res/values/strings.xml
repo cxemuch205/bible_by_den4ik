@@ -354,5 +354,11 @@
     <string name="summary_sync_dbx">Установите флаг, для того, чтоб данные об заметках и истории, выделенных стихах сохранялись на ваш аккаунт на DropBox.</string>
 
     <string name="title_bookmarks">Закладки</string>
+    <string name="empty_bookmark">Нет закладок</string>
     <string name="title_comments">Комментарий:</string>
+
+    <string name="title_history">История</string>
+    <string name="empty_history">История пуста</string>
+    <string name="action_clear">Очистить историю</string>
+
 </resources>
