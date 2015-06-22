@@ -3,7 +3,6 @@ package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-import ua.maker.gbible_v2.Adapters.BibleLinkAdapter;
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
+import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
-import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.Models.BookMark;
 import ua.maker.gbible_v2.R;
 
@@ -52,6 +51,7 @@ public class BookmarksFragment extends Fragment {
         super.onAttach(activity);
         this.activity = (AppCompatActivity) activity;
         DropBoxTools.getInstance().sync();
+        userDB = new UserDB(activity);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class BookmarksFragment extends Fragment {
     private ListView lvData;
     private BookmarksAdapter adapter;
     private ProgressBar pb;
+    private UserDB userDB;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class BookmarksFragment extends Fragment {
         initToolbar(toolbar);
         Tools.initProgressBar(pb);
         initListData();
+        initListeners();
     }
 
     private void initToolbar(Toolbar toolbar) {
@@ -88,11 +90,11 @@ public class BookmarksFragment extends Fragment {
 
     private void initListData() {
         if (adapter == null) {
-            adapter = new BookmarksAdapter(getActivity(), new ArrayList<BookMark>());
+            adapter = new BookmarksAdapter(getActivity(), new ArrayList<BookMark>(), userDB);
         }
 
         adapter.clear();
-        ContentTools.getBookmarks(activity, TAG, getBookmarksAdapter);
+        ContentTools.getBookmarks(userDB, activity, TAG, getBookmarksAdapter);
 
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
@@ -123,6 +125,32 @@ public class BookmarksFragment extends Fragment {
                 ArrayList<BookMark> data = (ArrayList<BookMark>) result;
                 adapter.addAll(data);
             }
+        }
+    };
+
+    private void initListeners() {
+        lvData.setOnItemClickListener(itemBookmarksClickListener);
+        lvData.setOnScrollListener(scrollBookmarksListener);
+    }
+
+    private AdapterView.OnItemClickListener itemBookmarksClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            adapter.toggleMenuByItem(adapter.getItem(position));
+        }
+    };
+
+    private AbsListView.OnScrollListener scrollBookmarksListener = new AbsListView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            if (scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                adapter.setDefaultOtherItems(null);
+            }
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
         }
     };
 }

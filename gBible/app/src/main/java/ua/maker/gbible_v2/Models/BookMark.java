@@ -15,6 +15,8 @@ public class BookMark {
 	private String createdMillisDbx;
 	private String updatedMillisDbx;
 
+	public boolean isShowMenu = false;
+
 
 	public BookMark(){}
 	

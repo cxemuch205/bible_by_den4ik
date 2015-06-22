@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -71,6 +72,10 @@ public class BaseActivity extends AppCompatActivity {
         llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
         llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
         llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
+        }
     }
 
     private void initTypefaces() {

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.DataBases.UserDB;
@@ -67,12 +69,6 @@ public class ContentTools {
                 int bookId = GBApplication.bookId;
                 final ArrayList<BibleLink> result = new ArrayList<BibleLink>();
 
-                //######################## TESTS
-//                for (int i = 0; i < 20; i++) {
-//                    result.add(new BibleLink(String.valueOf(i + 1), i, bookId));
-//                }
-                //###############################
-
                 BibleDB bibleDB = new BibleDB(activity);
                 bibleDB.startupDB();
 
@@ -97,20 +93,10 @@ public class ContentTools {
             @Override
             public void run() {
                 int bookId = GBApplication.bookId;
-                int chapterId = chapter - 1; //because i have to use chapterId
                 final ArrayList<Poem> result = new ArrayList<Poem>();
-
-                //######################## TESTS
-//                Random random = new Random();
-//                for (int i = 0; i < 75; i++) {
-//                    result.add(new Poem((i + 1), chapterId, (i + 1), "Content " + random.nextInt()));
-//                }
-                //###############################
 
                 BibleDB bibleDB = new BibleDB(activity);
                 bibleDB.startupDB();
-
-                int chapter = chapterId + 1;
 
                 result.addAll(bibleDB.getPoemsInChapter(bookId, chapter, Tools.getTranslateWitchPreferences(activity)));
 
@@ -222,15 +208,20 @@ public class ContentTools {
 
             bookMarks.add(bookMark);
         }
+        Collections.sort(bookMarks, new Comparator<BookMark>() {
+            @Override
+            public int compare(BookMark lhs, BookMark rhs) {
+                return lhs.getPoem() - rhs.getPoem();
+            }
+        });
         return bookMarks;
     }
 
-    public static void getBookmarks(final Activity activity, final String tag, final OnGetContentListener contentListener) {
+    public static void getBookmarks(final UserDB userDB, final Activity activity, final String tag, final OnGetContentListener contentListener) {
         contentListener.onStartGet();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                UserDB userDB = new UserDB(activity);
                 final ArrayList<BookMark> bookMarks = userDB.getBookMarks();
 
                 activity.runOnUiThread(new Runnable() {

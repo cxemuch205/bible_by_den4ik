@@ -259,7 +259,8 @@ public class BibleDB extends SQLiteOpenHelper {
 
                     Poem item = new Poem();
                     item.bookId = bookId;
-                    item.chapterId = chapter;
+                    item.chapterId = chapter - 1;
+                    item.chapter = chapter;
                     item.content = content;
                     item.poem = poem;
 

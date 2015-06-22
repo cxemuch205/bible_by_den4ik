@@ -41,12 +41,15 @@ public class DropBoxTools {
     }
 
     public static DbxDatastoreManager getDbxDatastoreManager() {
-        if (dbxDatastoreManager == null) {
+        if (getDbxAccountManager().hasLinkedAccount()) {
             try {
                 dbxDatastoreManager = DbxDatastoreManager.forAccount(getDbxAccountManager().getLinkedAccount());
             } catch (DbxException.Unauthorized unauthorized) {
                 unauthorized.printStackTrace();
             }
+        }
+        if (dbxDatastoreManager == null) {
+            dbxDatastoreManager = DbxDatastoreManager.localManager(dbxAccountManager);
         }
         return dbxDatastoreManager;
     }
@@ -57,18 +60,16 @@ public class DropBoxTools {
 
     public static void toggleSyncWithDropBox(boolean enable) {
         if (enable) {
-            if (getDbxAccountManager().hasLinkedAccount()) {
-                try {
-                    dbxDatastoreManager = DbxDatastoreManager.forAccount(getDbxAccountManager().getLinkedAccount());
-                } catch (DbxException.Unauthorized unauthorized) {
-                    unauthorized.printStackTrace();
-                }
-            }
-            if (dbxDatastoreManager == null) {
-                dbxDatastoreManager = DbxDatastoreManager.localManager(dbxAccountManager);
-            }
+            getDbxDatastoreManager();
+            getInstance().sync();
         } else {
-            dbxAccountManager.unlink();
+            getDbxDatastoreManager().shutDown();
+            getDbxAccountManager().unlink();
+            UserDB.getDbxDatastore().close();
+            dbxDatastoreManager = null;
+            getDbxDatastoreManager();
+
+            UserDB.openDbxDatastore();
         }
     }
 
@@ -81,7 +82,10 @@ public class DropBoxTools {
             if (resultCode == Activity.RESULT_OK) {
                 DbxAccount account = getDbxAccountManager().getLinkedAccount();
                 try {
-                    getDbxDatastoreManager().migrateToAccount(account);
+                    if (UserDB.getDbxDatastore() != null && UserDB.getDbxDatastore().isOpen()) {
+                        UserDB.getDbxDatastore().close();
+                    }
+                    dbxDatastoreManager.migrateToAccount(account);
                     setupDbxDatastoreManager(account);
                     return true;
                 } catch (DbxException e) {
@@ -106,7 +110,14 @@ public class DropBoxTools {
 
     public void sync() {
         try {
-            UserDB.getDbxDatastore().sync();
+            if (UserDB.getDbxDatastore() != null) {
+                if (UserDB.getDbxDatastore().isOpen()) {
+                    UserDB.getDbxDatastore().sync();
+                } else {
+                    UserDB.openDbxDatastore();
+                    sync();
+                }
+            }
         } catch (DbxException e) {
             e.printStackTrace();
         }

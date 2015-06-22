@@ -1,6 +1,8 @@
 package ua.maker.gbible_v2.DataBases;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -100,7 +102,7 @@ public class UserDB extends SQLiteOpenHelper {
             + FIELD_POEM + " INTEGER NOT NULL,"
             + FIELD_TO_POEM + " INTEGER NOT NULL);";
 
-    private static final String SQL_CREATE_TABLE_BOOKMARKS_DATA = "CREATE TABLE " + TABLE_BOOKMARKS + " ("
+    /*private static final String SQL_CREATE_TABLE_BOOKMARKS_DATA = "CREATE TABLE " + TABLE_BOOKMARKS + " ("
             + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + FIELD_LOCAL_DB_ID + " INTEGER,"
             + FIELD_TABLE_NAME + " TEXT,"
@@ -111,7 +113,7 @@ public class UserDB extends SQLiteOpenHelper {
             + FIELD_DBX_ID + " TEXT,"
             + FIELD_CHAPTER + " INTEGER,"
             + FIELD_POEM + " INTEGER,"
-            + FIELD_CONTENT + " TEXT);";
+            + FIELD_CONTENT + " TEXT);";*/
 
     private static final String SQL_CREATE_TABLE_HISTORY = "CREATE TABLE " + TABLE_HISTORY + " ("
             + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -142,10 +144,18 @@ public class UserDB extends SQLiteOpenHelper {
     private Context context = null;
     private SQLiteDatabase db = null;
     private SharedPreferences pref;
-    private static DbxDatastore dbxDatastore;
+    private static DbxDatastore dbxDatastore = null;
 
     public static DbxDatastore getDbxDatastore() {
         return dbxDatastore;
+    }
+
+    public static void openDbxDatastore() {
+        try {
+            dbxDatastore = DropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
+        } catch (DbxException e) {
+            e.printStackTrace();
+        }
     }
 
     public UserDB(Context context) {
@@ -153,7 +163,7 @@ public class UserDB extends SQLiteOpenHelper {
         this.context = context;
         db = getWritableDatabase();
         pref = context.getSharedPreferences(App.Pref.NAME, 0);
-        if (pref.getBoolean(App.Pref.SYNC_WITH_DBX, false) && dbxDatastore == null) {
+        if (dbxDatastore == null) {
             try {
                 dbxDatastore = DropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
             } catch (DbxException e) {
@@ -166,7 +176,7 @@ public class UserDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.i(TAG, "onCreate()");
         db.execSQL(SQL_CREATE_TABLE_PLANS_LIST);
-        db.execSQL(SQL_CREATE_TABLE_BOOKMARKS_DATA);
+        //db.execSQL(SQL_CREATE_TABLE_BOOKMARKS_DATA);
         db.execSQL(SQL_CREATE_TABLE_PLAN_DATA);
         db.execSQL(SQL_CREATE_TABLE_HISTORY);
         db.execSQL(SQL_CREATE_TABLE_MARKER);
@@ -276,9 +286,7 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
     public void insertBookMark(BookMark bookmarks) {
-        String dbxIdRecord = null;
-        DbxRecord record = null;
-        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+        if (dbxDatastore != null && dbxDatastore.isOpen() && isUniqueBookmark(bookmarks)) {
             DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
             if (dbxTable != null) {
                 DbxFields fields = new DbxFields();
@@ -293,45 +301,67 @@ public class UserDB extends SQLiteOpenHelper {
                 fields.set(FIELD_CREATED_MILLIS, String.valueOf(System.currentTimeMillis()));
                 fields.set(FIELD_UPDATED_MILLIS, String.valueOf(System.currentTimeMillis()));
 
-                record = dbxTable.insert(fields);
-                dbxIdRecord = record.getId();
-                /*try {
-                    dbxDatastore.sync();
-                } catch (DbxException e) {
-                    e.printStackTrace();
-                }*/
-            }
-        }
-
-        if (db.isOpen()) {
-            Log.d(TAG, "WRITE - WORK");
-            ContentValues values = new ContentValues();
-
-            values.put(FIELD_TABLE_NAME, bookmarks.getTableName());
-            values.put(FIELD_BOOK_ID, bookmarks.getBookId());
-            values.put(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookmarks.getBookId(), this.context));
-            values.put(FIELD_CHAPTER, bookmarks.getChapter());
-            values.put(FIELD_POEM, bookmarks.getPoem());
-            values.put(FIELD_CONTENT, bookmarks.getContent());
-            values.put(FIELD_COMMENT_BOOKMARK, "" + bookmarks.getComment());
-            values.put(FIELD_NEXT_LINK, "" + bookmarks.getLinkNext());
-            if (dbxIdRecord != null) {
-                values.put(FIELD_DBX_ID, dbxIdRecord);
-            }
-
-            long localRawId = db.insert(TABLE_BOOKMARKS, null, values);
-            if (dbxIdRecord != null) {
+                dbxTable.insert(fields);
                 try {
-                    DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
-                    record.set(FIELD_LOCAL_DB_ID, localRawId);
-                    dbxTable.insert(record);
-
                     dbxDatastore.sync();
                 } catch (DbxException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public void updateBookmark(BookMark bookMark) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
+            if (dbxTable != null) {
+                DbxFields fields = new DbxFields();
+                fields.set(FIELD_TABLE_NAME, bookMark.getTableName());
+                fields.set(FIELD_BOOK_ID, bookMark.getBookId());
+                fields.set(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookMark.getBookId(), this.context));
+                fields.set(FIELD_CHAPTER, bookMark.getChapter());
+                fields.set(FIELD_POEM, bookMark.getPoem());
+                fields.set(FIELD_CONTENT, bookMark.getContent());
+                fields.set(FIELD_COMMENT_BOOKMARK, "" + bookMark.getComment());
+                fields.set(FIELD_NEXT_LINK, "" + bookMark.getLinkNext());
+                fields.set(FIELD_UPDATED_MILLIS, String.valueOf(System.currentTimeMillis()));
+
+                try {
+                    DbxRecord dbxRecord = dbxTable.get(bookMark.getDbxId());
+                    dbxRecord.setAll(fields);
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private boolean isUniqueBookmark(BookMark bookmarks) {
+        DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
+        DbxFields fields = new DbxFields();
+        fields.set(FIELD_TABLE_NAME, bookmarks.getTableName());
+        fields.set(FIELD_BOOK_ID, bookmarks.getBookId());
+        fields.set(FIELD_BOOK_NAME, Tools.getBookNameByBookId(bookmarks.getBookId(), this.context));
+        fields.set(FIELD_CHAPTER, bookmarks.getChapter());
+        fields.set(FIELD_POEM, bookmarks.getPoem());
+        fields.set(FIELD_CONTENT, bookmarks.getContent());
+        fields.set(FIELD_COMMENT_BOOKMARK, "" + bookmarks.getComment());
+        fields.set(FIELD_NEXT_LINK, "" + bookmarks.getLinkNext());
+
+        try {
+            DbxTable.QueryResult queryResult = dbxTable.query(fields);
+            if (queryResult != null && queryResult.count() > 0) {
+                return false;
+            }
+        } catch (DbxException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     public void insertBookMarks(ArrayList<BookMark> listBookMarks) {
@@ -343,10 +373,8 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
     public ArrayList<BookMark> getBookMarks() {
-        ArrayList<BookMark> result = new ArrayList<BookMark>();
         ArrayList<BookMark> resultDbx = new ArrayList<BookMark>();
 
-        //TODO: make get from dbx data
         if (dbxDatastore != null && dbxDatastore.isOpen()) {
             DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
             try {
@@ -387,9 +415,7 @@ public class UserDB extends SQLiteOpenHelper {
                             linkNext);
                     item.setCreatedMillisDbx(createdMillis);
                     item.setUpdatedMillisDbx(updateMillis);
-                    if (dbxId != null) {
-                        item.setDbxId(dbxId);
-                    }
+                    item.setDbxId(dbxId);
 
                     resultDbx.add(item);
                 }
@@ -398,74 +424,37 @@ public class UserDB extends SQLiteOpenHelper {
             }
         }
 
-        if (db.isOpen()) {
-            Log.d(TAG, "start get BookMarks()");
-            Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_BOOKMARKS + "'", null);
-            if (c.moveToFirst()) {
-                int idTableName = c.getColumnIndex(FIELD_TABLE_NAME);
-                int idBookName = c.getColumnIndex(FIELD_BOOK_NAME);
-                int idBookId = c.getColumnIndex(FIELD_BOOK_ID);
-                int idChapter = c.getColumnIndex(FIELD_CHAPTER);
-                int idPoem = c.getColumnIndex(FIELD_POEM);
-                int idContent = c.getColumnIndex(FIELD_CONTENT);
-                int idId = c.getColumnIndex(FIELD_ID);
-                int idComment = c.getColumnIndex(FIELD_COMMENT_BOOKMARK);
-                int idLinkNext = c.getColumnIndex(FIELD_NEXT_LINK);
-                int indexDbxId = c.getColumnIndex(FIELD_DBX_ID);
-
-                do {
-                    String tableName = c.getString(idTableName);
-                    String bookName = c.getString(idBookName);
-                    int bookId = c.getInt(idBookId);
-                    int chapter = c.getInt(idChapter);
-                    int poem = c.getInt(idPoem);
-                    String content = c.getString(idContent);
-                    int id = c.getInt(idId);
-                    String comment = c.getString(idComment);
-                    String linkNext = c.getString(idLinkNext);
-                    String dbxId = c.getString(indexDbxId);
-
-                    BookMark item = new BookMark(
-                            tableName,
-                            bookName,
-                            content,
-                            bookId,
-                            chapter,
-                            poem,
-                            id,
-                            comment,
-                            linkNext);
-                    if (dbxId != null) {
-                        item.setDbxId(dbxId);
-                    }
-
-                    result.add(item);
-                } while (c.moveToNext());
-                c.close();
+        Collections.sort(resultDbx, new Comparator<BookMark>() {
+            @Override
+            public int compare(BookMark lhs, BookMark rhs) {
+                return (int)(Long.parseLong(lhs.getCreatedMillisDbx()) - Long.parseLong(rhs.getCreatedMillisDbx()));
             }
-        }
+        });
 
         return resultDbx;
     }
 
-    public void deleteBookmark(BookMark bookMark) {
+    public boolean deleteBookmark(BookMark bookMark, boolean withSync) {
         Log.d(TAG, "Delete bookmark: id: " + bookMark.getId());
-        if (db.isOpen()) {
-            if (dbxDatastore != null) {
-                DbxTable table = dbxDatastore.getTable(TABLE_BOOKMARKS);
-                try {
-                    DbxRecord record = table.get(bookMark.getDbxId());
-                    if (record != null) {
-                        record.deleteRecord();
+        if (dbxDatastore != null) {
+            DbxTable table = dbxDatastore.getTable(TABLE_BOOKMARKS);
+            try {
+                DbxRecord record = table.get(bookMark.getDbxId());
+                if (record != null) {
+                    record.deleteRecord();
+                    if (withSync) {
                         dbxDatastore.sync();
                     }
-                } catch (DbxException e) {
-                    e.printStackTrace();
+                    return true;
                 }
+            } catch (DbxException e) {
+                e.printStackTrace();
             }
-            db.delete(TABLE_BOOKMARKS, FIELD_ID + " = " + bookMark.getId(), null);
         }
+        return false;
     }
+
+
 
     public void insertItemPlan(ItemPlan data) {
         if (db.isOpen()) {

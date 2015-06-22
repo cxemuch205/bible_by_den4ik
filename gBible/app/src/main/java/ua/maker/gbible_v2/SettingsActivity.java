@@ -3,6 +3,7 @@ package ua.maker.gbible_v2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +28,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar_header));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
+        }
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setBackgroundDrawable(
@@ -54,12 +60,11 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cbEnableSync.setChecked(!cbEnableSync.isChecked());
-                DropBoxTools.toggleSyncWithDropBox(cbEnableSync.isChecked());
-                if (DropBoxTools.getDbxAccountManager().hasLinkedAccount()) {
-                    executeLinkWithDropBox();
-                } else {
+                if (!DropBoxTools.getDbxAccountManager().hasLinkedAccount()) {
                     DropBoxTools.startLink(SettingsActivity.this);
                 }
+                DropBoxTools.toggleSyncWithDropBox(cbEnableSync.isChecked());
+                executeLinkWithDropBox();
             }
         });
     }
@@ -86,8 +91,10 @@ public class SettingsActivity extends AppCompatActivity {
         boolean isConnect = DropBoxTools.onActivityResult(requestCode, resultCode, data);
         if (isConnect) {
             executeLinkWithDropBox();
+            DropBoxTools.getInstance().sync();
         } else {
             cbEnableSync.setChecked(!cbEnableSync.isChecked());
+            executeLinkWithDropBox();
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

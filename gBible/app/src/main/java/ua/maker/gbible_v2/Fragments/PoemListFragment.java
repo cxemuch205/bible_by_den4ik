@@ -321,7 +321,6 @@ public class PoemListFragment extends Fragment {
     }
 
     private void addToBookmarks(final ArrayList<Poem> poems) {
-        //TODO: not work now | need open db in DROPBOX and sync db in AsyncTask
         userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));
     }
 }
