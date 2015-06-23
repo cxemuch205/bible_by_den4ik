@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
 import ua.maker.gbible_v2.Adapters.HistoryAdapter;
+import ua.maker.gbible_v2.BaseActivity;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.Tools;
@@ -168,6 +170,14 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initListeners() {
-        //lvData.setOnItemClickListener(itemBookmarksClickListener);
+        lvData.setOnItemClickListener(itemBookmarksClickListener);
     }
+
+    private AdapterView.OnItemClickListener itemBookmarksClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            History history = adapter.getItem(position);
+            ((BaseActivity) activity).openReadContent(history.getBookId(), history.getChapter() - 1, 1);
+        }
+    };
 }

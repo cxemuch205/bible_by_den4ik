@@ -361,4 +361,7 @@
     <string name="empty_history">История пуста</string>
     <string name="action_clear">Очистить историю</string>
 
+    <string name="title_search">Поиск</string>
+    <string name="empty_search">Ничего не найдено</string>
+    <string name="execute_search">Найти</string>
 </resources>

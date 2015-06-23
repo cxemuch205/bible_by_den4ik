@@ -111,6 +111,33 @@ public class ContentTools {
         }).start();
     }
 
+    public static void executeSearch(final Activity activity,
+                                     final String textQuery,
+                                     final String tag,
+                                     final int bookIdStart,
+                                     final int bookIdEnd,
+                                     final OnGetContentListener adapterProgress) {
+        adapterProgress.onStartGet();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<Poem> result = new ArrayList<Poem>();
+
+                BibleDB bibleDB = new BibleDB(activity);
+                bibleDB.startupDB();
+
+                result.addAll(bibleDB.searchInDataBase(textQuery, bookIdStart, bookIdEnd));
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapterProgress.onEndGet(result, tag);
+                    }
+                });
+            }
+        }).start();
+    }
+
     public static ArrayList<Poem> parseValueChapterBookIdString(Context context, String contentChapter, String bookName, String bookId) {
         ArrayList<Poem> result = new ArrayList<Poem>();
         int countBook = 0;

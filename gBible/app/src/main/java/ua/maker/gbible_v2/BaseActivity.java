@@ -23,6 +23,8 @@ import ua.maker.gbible_v2.Fragments.BooksListFragment;
 import ua.maker.gbible_v2.Fragments.ChapterListFragment;
 import ua.maker.gbible_v2.Fragments.HistoryFragment;
 import ua.maker.gbible_v2.Fragments.PagerPoemFragment;
+import ua.maker.gbible_v2.Fragments.SearchFragment;
+import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
 
@@ -36,7 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     private Button btnOpenBottomMenu;
     private LinearLayout llBottomToolBar;
     private DisplayMetrics displayMetrics;
-    private LinearLayout llBibleHome, llBookmarks, llHistory;
+    private LinearLayout llBibleHome, llBookmarks, llHistory, llSearch;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -74,6 +76,7 @@ public class BaseActivity extends AppCompatActivity {
         llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
         llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
         llHistory = (LinearLayout) findViewById(R.id.ll_history);
+        llSearch = (LinearLayout) findViewById(R.id.ll_search);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
@@ -89,6 +92,7 @@ public class BaseActivity extends AppCompatActivity {
         llBibleHome.setOnClickListener(clickBibleHomeListener);
         llBookmarks.setOnClickListener(clickBookmarksListener);
         llHistory.setOnClickListener(clickHistoryListener);
+        llSearch.setOnClickListener(clickSearchListener);
     }
 
     private void initAnimations() {
@@ -159,6 +163,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     };
 
+    private View.OnClickListener clickSearchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            initFragments(SearchFragment.getInstance(), SearchFragment.TAG);
+        }
+    };
+
     private void attachReadContent() {
         switch (GBApplication.homeBibleLevel) {
             case App.BookHomeLevels.BOOK:
@@ -171,6 +182,14 @@ public class BaseActivity extends AppCompatActivity {
                 initFragments(PagerPoemFragment.getInstance(bibleLinkListener), PagerPoemFragment.TAG);
                 break;
         }
+    }
+
+    public void openReadContent(int bookId, int chapter, int poem) {
+        GBApplication.setBookId(bookId);
+        GBApplication.setChapterId(chapter);
+        GBApplication.setPoem(poem);
+        GBApplication.setCurrentBookName(Tools.getBookNameByBookId(bookId, this));
+        attachReadContent();
     }
 
     private OnCallBaseActivityListener bibleLinkListener = new OnCallBaseActivityAdapter() {

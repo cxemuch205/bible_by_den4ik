@@ -1,10 +1,12 @@
 package ua.maker.gbible_v2.Helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -468,5 +470,22 @@ public class Tools {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        if (activity != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            if (activity.getCurrentFocus() != null) {
+                imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            }
+        }
+    }
+
+    public static void showKeyboard(Activity activity) {
+        if (activity != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
+        }
     }
 }

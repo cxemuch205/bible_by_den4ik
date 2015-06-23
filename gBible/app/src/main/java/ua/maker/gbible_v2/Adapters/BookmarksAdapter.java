@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ua.maker.gbible_v2.BaseActivity;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Models.BookMark;
 import ua.maker.gbible_v2.R;
@@ -55,6 +56,7 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
 
             holder.optionMenu = new ViewHolder.OptionMenu();
             holder.optionMenu.btnDel = (Button) holder.llMenuOptions.findViewById(R.id.btn_del);
+            holder.optionMenu.btnOpen = (Button) holder.llMenuOptions.findViewById(R.id.btn_open);
 
             view.setTag(holder);
         } else {
@@ -93,11 +95,18 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
                     }
                 }
             });
+            holder.optionMenu.btnOpen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((BaseActivity) context).openReadContent(bookMark.getBookId(), bookMark.getChapter() - 1, bookMark.getPoem() + 1);
+                }
+            });
         } else {
             if (holder.llMenuOptions.getVisibility() == LinearLayout.VISIBLE)
                 holder.llMenuOptions.startAnimation(animToDown);
             holder.llMenuOptions.setVisibility(LinearLayout.GONE);
             holder.optionMenu.btnDel.setOnClickListener(null);
+            holder.optionMenu.btnOpen.setOnClickListener(null);
         }
     }
 
@@ -136,6 +145,7 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
 
         static class OptionMenu{
             Button btnDel;
+            Button btnOpen;
         }
     }
 }
