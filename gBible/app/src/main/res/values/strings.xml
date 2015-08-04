@@ -361,6 +361,7 @@
     <string name="title_history">История</string>
     <string name="empty_history">История пуста</string>
     <string name="action_clear">Очистить историю</string>
+    <string name="action_clear_rfe">Обнулить</string>
 
     <string name="title_search">Поиск</string>
     <string name="empty_search">Ничего не найдено</string>

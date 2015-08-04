@@ -826,7 +826,7 @@ public class UserDB extends SQLiteOpenHelper {
         }
     }
 
-    public List<ItemReadDay> getStatusReaded(List<ItemReadDay> data) {
+    public ArrayList<ItemReadDay> getStatusReaded(ArrayList<ItemReadDay> data) {
         if (!pref.contains("inser_list_status")) {
             insertStatusesReaded(data);
             pref.edit().putBoolean("insert_list_status", true).apply();
@@ -868,12 +868,13 @@ public class UserDB extends SQLiteOpenHelper {
                 int indexData = c.getColumnIndex(FIELD_DATA);
                 do {
                     String data = c.getString(indexData);
-                    staticBookList = DataConverter.getGson().fromJson(data, Book.getTypeTokenForArray());
+                    staticBookList = DataConverter.getGson()
+                            .fromJson(data, Book.getTypeTokenForArray());
                     return staticBookList;
                 } while (c.moveToNext());
             }
         }
-        return null;
+        return staticBookList;
     }
 
     public void setBooksToJSON(ArrayList<Book> books) {

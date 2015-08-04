@@ -19,6 +19,7 @@ public class App {
         String POEM_TEXT_SIZE = "poem_text_size";
         String DATA_BASE_VER = "data_base_bible_ver";
         String SYNC_WITH_DBX = "sync_with_dbx";
+        String LAST_RED_POSITION = "LAST_RED_POSITION";
     }
 
     public interface BookHomeLevels {

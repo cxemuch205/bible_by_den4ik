@@ -478,8 +478,8 @@ public class BibleDB extends SQLiteOpenHelper {
         }
     }
 
-    public List<ItemReadDay> getListReadForEveryDay() {
-        List<ItemReadDay> result = new ArrayList<ItemReadDay>();
+    public ArrayList<ItemReadDay> getListReadForEveryDay() {
+        ArrayList<ItemReadDay> result = new ArrayList<ItemReadDay>();
 
         if (db.isOpen()) {
             Log.d(TAG, "START - getListReadForEveryDay()");
