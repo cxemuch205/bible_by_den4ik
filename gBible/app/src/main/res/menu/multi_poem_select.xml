@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/action_add_to_bookmarks"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_add_to_bookmarks"
+        android:icon="@drawable/ic_note_add_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_add_to_bookmarks"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/action_add_to_plan"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_add_to_plan"
+        android:icon="@drawable/ic_add_box_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_add_to_plan"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/action_copy"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_copy"
+        android:icon="@drawable/ic_content_copy_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_copy"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/action_share"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_share"
+        android:icon="@drawable/ic_share_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_share"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/action_compare"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_compare"
+        android:icon="@drawable/ic_compare_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_compare"
         tools:ignore="AppCompatResource" />
 
     <item
         android:id="@+id/action_highlighter"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_highlighter"
+        android:icon="@drawable/ic_dns_black_24dp"
         android:showAsAction="ifRoom|withText"
+        android:title="@string/action_highlighter"
         tools:ignore="AppCompatResource" />
 
 </menu>

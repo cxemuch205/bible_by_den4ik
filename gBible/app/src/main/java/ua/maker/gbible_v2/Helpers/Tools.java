@@ -1,15 +1,21 @@
 package ua.maker.gbible_v2.Helpers;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.nispok.snackbar.Snackbar;
+
+import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Models.BooksId;
@@ -466,6 +472,18 @@ public class Tools {
         return translateName;
     }
 
+    public static String getTranslateNameByTranslateDB(String nameInDB, Context context) {
+        String dbName = "";
+
+        if (nameInDB.equals(BibleDB.TABLE_NAME_RST)) {
+            dbName = context.getString(R.string.rus_translate_str);
+        } else if (nameInDB.equals(BibleDB.TABLE_NAME_MT)) {
+            dbName = context.getString(R.string.rus_modern_translate_str);
+        }
+
+        return dbName;
+    }
+
     public static void showToastCenter(Context context, String text) {
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -487,5 +505,30 @@ public class Tools {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 1);
         }
+    }
+
+    public static void copyToClipBoard(Context ctx, String textSetClip) {
+        if (ctx == null || textSetClip == null || textSetClip.isEmpty()) {
+            return;
+        }
+        int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentApiVersion >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText(ctx.getString(R.string.app_name), textSetClip);
+            clipboard.setPrimaryClip(clip);
+        } else {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(textSetClip);
+        }
+        Snackbar.with(ctx)
+                .text(R.string.copied)
+                .show((Activity) ctx);
+    }
+
+    public static void shareData(Context context, String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/*");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        context.startActivity(intent);
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import ua.maker.gbible_v2.ComparePoemActivity;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
@@ -277,5 +278,90 @@ public class ContentTools {
                 });
             }
         }).start();
+    }
+
+    public static String convertForClipboard(Context context, ArrayList<Poem> poems) {
+        StringBuilder result = new StringBuilder();
+        if (poems != null && poems.size() > 0) {
+            for (int i = 0; i < poems.size(); i++) {
+                Poem poem = poems.get(i);
+                if (poems.size() == 1) {
+                    result.append(poem.bookName)
+                            .append(" ")
+                            .append(poem.chapter)
+                            .append(":")
+                            .append(poem.poem)
+                            .append("\n");
+                } else if (i == 0) {
+                    int toPoem = 1;
+                    for (int j = 0; j < poems.size(); j++) {
+                        Poem tP = poems.get(j);
+                        if (toPoem < tP.poem) {
+                            toPoem = tP.poem;
+                        }
+                    }
+                    result.append(Tools.getBookNameByBookId(poem.bookId, context))
+                            .append(" ")
+                            .append(poem.chapter)
+                            .append(":")
+                            .append(poem.poem)
+                            .append("-")
+                            .append(toPoem);
+                }
+                if (poems.size() == 1) {
+                    result.append(poem.content);
+                } else {
+                    result.append("\n")
+                            .append(poem.poem)
+                            .append(" ")
+                            .append(poem.content);
+                }
+            }
+        }
+        return result.toString();
+    }
+
+    public static String parseListPoems(Context context, ArrayList<Poem> poems) {
+        StringBuilder title = new StringBuilder();
+
+        int minPoem = 200, maxPoem = 0;
+        for (int i = 0; i < poems.size(); i++) {
+            Poem poem = poems.get(i);
+            if (i == 0) {
+                title.append(Tools.getBookNameByBookId(
+                        poem.bookId, context))
+                        .append(" ")
+                        .append(poem.chapter)
+                        .append(":");
+            }
+            if (minPoem > poem.poem) {
+                minPoem = poem.poem;
+            }
+            if (maxPoem < poem.poem) {
+                maxPoem = poem.poem;
+            }
+        }
+
+        if (minPoem != 200 && maxPoem != 0 && minPoem != maxPoem) {
+            title.append(minPoem)
+                    .append("-")
+                    .append(maxPoem);
+        } else {
+            title.append(minPoem);
+        }
+
+
+        return title.toString();
+    }
+
+    public static ArrayList<Poem> sortByTranslate(ArrayList<Poem> poems) {
+        ArrayList<Poem> result = new ArrayList<Poem>();
+
+        for (int j = 0; j < BibleDB.TABLE_NAMES.length; j++) {
+            for (int i = j; i < poems.size(); i+= BibleDB.TABLE_NAMES.length) {
+                result.add(poems.get(i));
+            }
+        }
+        return result;
     }
 }

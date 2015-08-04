@@ -18,6 +18,7 @@
     <color name="text_color_item_bible_link">#3E2723</color>
     <color name="progress_load_color">#5D4037</color>
     <color name="text_color_poem">#000000</color>
+    <color name="back_title_compare">#d1aa99</color>
 
     <!-- INTEGERS -->
     <integer name="device_type">0</integer>
@@ -364,4 +365,11 @@
     <string name="title_search">Поиск</string>
     <string name="empty_search">Ничего не найдено</string>
     <string name="execute_search">Найти</string>
+
+    <string name="copied">Скопировано..</string>
+    <string name="title_activity_read_on_every_day">Чтение на каждый день</string>
+
+    <string name="hello_world">Hello world!</string>
+
+
 </resources>

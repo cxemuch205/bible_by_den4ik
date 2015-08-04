@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.PoemAdapter;
 import ua.maker.gbible_v2.BaseActivity;
+import ua.maker.gbible_v2.ComparePoemActivity;
+import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Helpers.ContentTools;
@@ -296,13 +298,13 @@ public class PoemListFragment extends Fragment {
 
                     break;
                 case R.id.action_copy:
-
+                    addToClipboard(selectedPoems);
                     break;
                 case R.id.action_share:
-
+                    shareSelectionPoem(selectedPoems);
                     break;
                 case R.id.action_compare:
-
+                    comparePoem(selectedPoems);
                     break;
                 case R.id.action_highlighter:
 
@@ -320,7 +322,21 @@ public class PoemListFragment extends Fragment {
         }
     }
 
-    private void addToBookmarks(final ArrayList<Poem> poems) {
+    private void addToBookmarks(ArrayList<Poem> poems) {
         userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));
+    }
+
+    private void addToClipboard(ArrayList<Poem> poems) {
+        Tools.copyToClipBoard(activity, ContentTools.convertForClipboard(activity, poems));
+    }
+
+    private void shareSelectionPoem(ArrayList<Poem> poems) {
+        Tools.shareData(activity, ContentTools.convertForClipboard(activity, poems));
+    }
+
+    private void comparePoem(ArrayList<Poem> poems) {
+        Intent compare = new Intent(activity, ComparePoemActivity.class);
+        compare.putExtra(App.Extras.DATA, poems);
+        activity.startActivity(compare);
     }
 }

@@ -50,4 +50,8 @@ public class App {
     public interface KeysConfig{
         String BOOKS = "books_list";
     }
+
+    public interface Extras{
+        String DATA = "data_object";
+    }
 }

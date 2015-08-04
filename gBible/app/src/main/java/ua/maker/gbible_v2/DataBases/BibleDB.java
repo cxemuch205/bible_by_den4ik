@@ -291,6 +291,9 @@ public class BibleDB extends SQLiteOpenHelper {
                         String content = c.getString(contentIndex);
 
                         Poem pm = new Poem();
+                        pm.poem = poem;
+                        pm.chapter = chapter;
+                        pm.bookId = bookId;
                         pm.content = content;
                         pm.translateName = TABLE_NAMES[i];
 

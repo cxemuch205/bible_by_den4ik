@@ -217,6 +217,9 @@ public class BaseActivity extends AppCompatActivity {
                 case R.id.action_settings:
                     openSettings();
                     break;
+                case R.id.action_rfe:
+                    openRfED();
+                    break;
             }
             return false;
         }
@@ -225,5 +228,10 @@ public class BaseActivity extends AppCompatActivity {
     private void openSettings() {
         Intent openSettings = new Intent(this, SettingsActivity.class);
         startActivity(openSettings);
+    }
+
+    private void openRfED() {
+        Intent openRfED = new Intent(this, ReadOnEveryDayActivity.class);
+        startActivity(openRfED);
     }
 }
