@@ -154,8 +154,8 @@ public class PoemListFragment extends Fragment {
     }
 
     private void setTitleActionBar(int chapter) {
-        toolbar.setTitle(GBApplication.bookName + " | "
-                + activity.getString(R.string.chapter) + " "
+        toolbar.setTitle(GBApplication.bookName);
+        toolbar.setSubtitle(activity.getString(R.string.chapter) + " "
                 + chapter);
     }
 

@@ -48,6 +48,7 @@ dependencies {
     }
     compile 'com.nispok:snackbar:2.10.+'
     compile 'se.emilsjolander:stickylistheaders:2.+'
+    compile 'me.grantland:autofittextview:0.2.+'
 }
 
 task nativeLibsToJar(type: Zip) {

@@ -14,7 +14,8 @@ public class ItemReadDay {
 	private int section = 0;
 	private String contentChapterOldTFull = "";
 	private String contentChapterNewTFull = "";
-	
+	private String dbxId;
+
 	public ItemReadDay(){};
 	
 	public ItemReadDay(int day, String month, int year, ArrayList<Poem> dataOld, ArrayList<Poem> dataNew){
@@ -105,4 +106,11 @@ public class ItemReadDay {
 		this.year = year;
 	}
 
+	public void setDbxId(String dbxId) {
+		this.dbxId = dbxId;
+	}
+
+	public String getDbxId() {
+		return dbxId;
+	}
 }

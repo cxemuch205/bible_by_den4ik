@@ -6,16 +6,29 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Day"
+            android:id="@+id/tv_day"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="16dp" />
 
         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New ToggleButton"
             android:id="@+id/tb_status"
-            android:checked="false" />
+            android:textOn="@string/text_on_read"
+            android:textOff="@string/text_off_read"
+            android:checked="false"
+            android:focusable="false" />
     </LinearLayout>
 
     <LinearLayout

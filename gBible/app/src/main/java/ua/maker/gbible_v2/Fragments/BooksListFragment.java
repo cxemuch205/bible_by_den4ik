@@ -109,6 +109,7 @@ public class BooksListFragment extends Fragment {
         AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
         headerView.setLayoutParams(headerParams);
         lvData.addHeaderView(headerView);
+        lvData.addFooterView(headerView);
 
         lvData.setOnScrollListener(new QuickReturnListViewOnScrollListener
                 .Builder(QuickReturnViewType.HEADER)

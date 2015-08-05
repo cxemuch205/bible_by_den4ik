@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center|left" >
+        android:gravity="center|left">
 
         <TextView
             android:id="@+id/tv_translate"
@@ -20,14 +20,21 @@
             android:text="Translate"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/tv_link_h"
+        <me.grantland.widget.AutofitLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:text="Link"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_link_h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:text="Link"
+                android:singleLine="true"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </me.grantland.widget.AutofitLayout>
 
         <TextView
             android:id="@+id/tv_date_created"

@@ -20,6 +20,7 @@ public class App {
         String DATA_BASE_VER = "data_base_bible_ver";
         String SYNC_WITH_DBX = "sync_with_dbx";
         String LAST_RED_POSITION = "LAST_RED_POSITION";
+        String INSERT_LIST_STATUS = "insert_list_status";
     }
 
     public interface BookHomeLevels {

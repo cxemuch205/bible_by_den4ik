@@ -466,16 +466,12 @@ public class BibleDB extends SQLiteOpenHelper {
         return result;
     }
 
-    public int setStatusItemReadForEveryDay(int index, boolean status) {
-        return dbUser.setStatusReadedByPosition(index, status);
+    public void setStatusItemReadForEveryDay(String dbxId, boolean status) {
+        dbUser.setStatusReadedByPosition(dbxId, status);
     }
 
-    public void setDefaultStatusItemRead(int countItems) {
-        if (db.isOpen()) {
-            for (int i = 0; i < countItems; i++) {
-                dbUser.setStatusReadedByPosition(i, false);
-            }
-        }
+    public void setDefaultStatusItemRead() {
+        dbUser.setStatusReadedDefault();
     }
 
     public ArrayList<ItemReadDay> getListReadForEveryDay() {

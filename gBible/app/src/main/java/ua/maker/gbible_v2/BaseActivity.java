@@ -27,6 +27,7 @@ import ua.maker.gbible_v2.Fragments.SearchFragment;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
+import ua.maker.gbible_v2.Models.Poem;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     public static final String TAG = "BaseActivity";
 
     private static final int DURATION_ANIM = 500;
+    private static final int REQUEST_RED_LINK = 88;
 
     private Button btnOpenBottomMenu;
     private LinearLayout llBottomToolBar;
@@ -232,6 +234,22 @@ public class BaseActivity extends AppCompatActivity {
 
     private void openRfED() {
         Intent openRfED = new Intent(this, ReadOnEveryDayActivity.class);
-        startActivity(openRfED);
+        startActivityForResult(openRfED, REQUEST_RED_LINK);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_RED_LINK:
+                if (resultCode == RESULT_OK) {
+                    Bundle info = data.getExtras();
+                    Poem poem = (Poem) info.getSerializable(App.Extras.DATA);
+                    if (poem != null) {
+                        openReadContent(poem.bookId, poem.chapter - 1, poem.poem + 1);
+                    }
+                }
+                break;
+        }
     }
 }

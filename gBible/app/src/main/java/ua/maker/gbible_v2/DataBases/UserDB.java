@@ -814,49 +814,113 @@ public class UserDB extends SQLiteOpenHelper {
         return result;
     }
 
-    public void insertStatusesReaded(List<ItemReadDay> data) {
-        if (db.isOpen()) {
-            for (int i = 0; i < data.size(); i++) {
-                ContentValues cv = new ContentValues();
-
-                cv.put(BibleDB.FIELD_STATUS_READED, data.get(i).isStatusReaded());
-
-                db.insert(BibleDB.TABLE_READ_FOR_EVERY_DAY, null, cv);
+    private void insertStatusesReaded(List<ItemReadDay> data) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
+            if (table != null) {
+                for (int i = 0; i < data.size(); i++) {
+                    DbxFields fields = new DbxFields();
+                    fields.set(BibleDB.FIELD_STATUS_READED, data.get(i).isStatusReaded());
+                    fields.set(BibleDB.KEY_ROWID, i);
+                    table.insert(fields);
+                }
+                try {
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     public ArrayList<ItemReadDay> getStatusReaded(ArrayList<ItemReadDay> data) {
-        if (!pref.contains("inser_list_status")) {
+        if (!pref.contains(App.Pref.INSERT_LIST_STATUS)) {
             insertStatusesReaded(data);
-            pref.edit().putBoolean("insert_list_status", true).apply();
+            pref.edit().putBoolean(App.Pref.INSERT_LIST_STATUS, true).apply();
         }
-        if (db.isOpen()) {
-            Cursor c = db.rawQuery("SELECT * FROM '" + BibleDB.TABLE_READ_FOR_EVERY_DAY + "'", null);
-            if (c.moveToFirst()) {
-                int indexStatus = c.getColumnIndex(BibleDB.FIELD_STATUS_READED);
-                int i = 0;
-                do {
-                    boolean status = Boolean.parseBoolean(c.getString(indexStatus));
-                    data.get(i).setStatus(status);
-                    i++;
-                } while (c.moveToNext());
+
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
+            if (table != null) {
+                try {
+                    DbxTable.QueryResult statusQuery = table.query();
+                    if (statusQuery != null) {
+                        List<DbxRecord> statuses = statusQuery.asList();
+                        int i = 0;
+                        for (DbxRecord record : statuses) {
+                            boolean status = record.getBoolean(BibleDB.FIELD_STATUS_READED);
+                            data.get(i).setStatus(status);
+                            data.get(i).setDbxId(record.getId());
+                            i++;
+                        }
+                        dbxDatastore.sync();
+                    }
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         return data;
     }
 
-    public int setStatusReadedByPosition(int index, boolean status) {
-        if (db.isOpen()) {
-            ContentValues values = new ContentValues();
+    public void deleteTableReadForEveryDay() {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
+            if (table != null) {
+                try {
+                    DbxTable.QueryResult statusQuery = table.query();
+                    if (statusQuery != null) {
+                        List<DbxRecord> statuses = statusQuery.asList();
+                        for (DbxRecord record : statuses) {
+                            record.deleteRecord();
+                        }
+                        dbxDatastore.sync();
+                    }
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-            values.put(BibleDB.FIELD_STATUS_READED, String.valueOf(status));
-            int idUpdateRow = db.update(BibleDB.TABLE_READ_FOR_EVERY_DAY, values, FIELD_ID + " = " + (index + 1), null);
-            Log.d(TAG, "ROW Update: " + idUpdateRow);
-            return idUpdateRow;
-        } else
-            return -1;
+    public void setStatusReadedByPosition(String dbxId, boolean status) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
+            if (table != null) {
+                try {
+                    DbxRecord record = table.get(dbxId);
+                    record.set(BibleDB.FIELD_STATUS_READED, status);
+
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void setStatusReadedDefault() {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
+            if (table != null) {
+                try {
+                    DbxTable.QueryResult qr = table.query();
+                    if (qr != null) {
+                        List<DbxRecord> list = qr.asList();
+                        if (list != null) {
+                            for (DbxRecord record : list) {
+                                record.set(BibleDB.FIELD_STATUS_READED, false);
+                            }
+                        }
+                    }
+
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public ArrayList<Book> getBooksFromJSON(ArrayList<Book> staticBookList) {

@@ -370,7 +370,13 @@
     <string name="copied">Скопировано..</string>
     <string name="title_activity_read_on_every_day">Чтение на каждый день</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="text_on_read">Прочтено</string>
+    <string name="text_off_read">Не проч-то</string>
 
+    <string name="msg_accept_drop">Вы уверены, что хотите начать сначала?</string>
+    <string name="title_ok">ОК</string>
+    <string name="title_cancel">Отмена</string>
+
+    <string name="title_chose_link">Выбирите место:</string>
 
 </resources>
