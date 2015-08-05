@@ -2,9 +2,14 @@ package ua.maker.gbible_v2.Fragments;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
+import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
@@ -39,6 +45,7 @@ public class BookmarksFragment extends Fragment {
 
     private static BookmarksFragment instance;
     private AppCompatActivity activity;
+    private LocalBroadcastManager broadcastManager;
 
     public static BookmarksFragment getInstance() {
         if (instance == null) {
@@ -53,7 +60,24 @@ public class BookmarksFragment extends Fragment {
         this.activity = (AppCompatActivity) activity;
         DropBoxTools.getInstance().sync();
         userDB = new UserDB(activity);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerUpdateBroadcast();
     }
+
+    private void registerUpdateBroadcast() {
+        IntentFilter filer = new IntentFilter();
+        filer.addAction(App.Actions.UPDATE_BOOKMARKS);
+        broadcastManager.registerReceiver(receiverUpdate, filer);
+    }
+
+    private BroadcastReceiver receiverUpdate = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (adapter != null) {
+                toggleEmptyMessage(adapter.isEmpty());
+            }
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -177,4 +201,10 @@ public class BookmarksFragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        broadcastManager.unregisterReceiver(receiverUpdate);
+    }
 }

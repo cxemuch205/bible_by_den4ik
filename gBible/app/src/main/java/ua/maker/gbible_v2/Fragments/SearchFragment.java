@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import ua.maker.gbible_v2.Adapters.PoemAdapter;
 import ua.maker.gbible_v2.Adapters.SearchAdapter;
 import ua.maker.gbible_v2.BaseActivity;
+import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
@@ -135,14 +136,19 @@ public class SearchFragment extends Fragment {
     private AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Poem poem = adapter.getItem(position-1);
-            ((BaseActivity) activity).openReadContent(poem.bookId, poem.chapter - 1, poem.poem+1);
+            Poem poem = adapter.getItem(position - 1);
+            GBApplication.chapterId = poem.chapter;
+            ((BaseActivity) activity).openReadContent(poem.bookId, poem.chapter - 1, poem.poem + 1);
         }
     };
 
     private View.OnKeyListener keyEtDataListener = new View.OnKeyListener() {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_ENTER
+                    && event.getAction() == KeyEvent.ACTION_UP) {
+                btnSearch.performClick();
+            }
             return false;
         }
     };

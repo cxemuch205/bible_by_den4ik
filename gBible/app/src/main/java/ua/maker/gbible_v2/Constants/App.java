@@ -56,4 +56,8 @@ public class App {
     public interface Extras{
         String DATA = "data_object";
     }
+
+    public interface Actions{
+        String UPDATE_BOOKMARKS = "ua.maker.gbible_v2.UPDATE_BOOKMARKS";
+    }
 }

@@ -233,7 +233,8 @@ public class PoemListFragment extends Fragment {
 
                 if ((GBApplication.chapterId + 1) == chapter) {
                     int positionScroll = GBApplication.poem - 1;
-                    lvData.smoothScrollToPositionFromTop(positionScroll, 0);
+                    lvData.setSelection(positionScroll);
+                    lvData.smoothScrollToPosition(positionScroll);
                 }
             }
         }

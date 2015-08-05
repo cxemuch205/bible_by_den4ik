@@ -2,6 +2,8 @@ package ua.maker.gbible_v2.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.BaseActivity;
+import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Models.BookMark;
 import ua.maker.gbible_v2.R;
@@ -28,11 +31,13 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
     private ArrayList<BookMark> data;
     private Animation animToUp, animToDown;
     private UserDB userDB;
+    private LocalBroadcastManager broadcastManager;
 
     public BookmarksAdapter(Context context, ArrayList<BookMark> data, UserDB userDB) {
         super(context, R.layout.item_bookmark, data);
         this.context = context;
         this.data = data;
+        broadcastManager = LocalBroadcastManager.getInstance(context);
         animToUp = AnimationUtils.loadAnimation(context, R.anim.translate_to_up);
         animToDown = AnimationUtils.loadAnimation(context, R.anim.translate_to_down);
         this.userDB = userDB;
@@ -92,6 +97,7 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
                     if (userDB.deleteBookmark(bookMark, true)) {
                         remove(bookMark);
                         notifyDataSetChanged();
+                        sendUpdateStatusEmpty();
                     }
                 }
             });
@@ -108,6 +114,11 @@ public class BookmarksAdapter extends ArrayAdapter<BookMark> {
             holder.optionMenu.btnDel.setOnClickListener(null);
             holder.optionMenu.btnOpen.setOnClickListener(null);
         }
+    }
+
+    private void sendUpdateStatusEmpty() {
+        Intent data = new Intent(App.Actions.UPDATE_BOOKMARKS);
+        broadcastManager.sendBroadcast(data);
     }
 
     private String getLinkPoem(BookMark item) {

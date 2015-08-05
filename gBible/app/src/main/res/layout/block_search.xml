@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:layout_height="wrap_content">
+    android:paddingRight="8dp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/et_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_data"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:singleLine="true" />
 
         <Button
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/execute_search"
-            android:id="@+id/btn_search" />
+            android:text="@string/execute_search" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:paddingBottom="8dp">
 
         <Spinner
+            android:id="@+id/s_start_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/s_start_book"
             android:layout_weight="1" />
 
         <Spinner
+            android:id="@+id/s_end_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/s_end_book"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
