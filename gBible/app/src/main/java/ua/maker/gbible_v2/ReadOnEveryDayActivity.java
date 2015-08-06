@@ -1,6 +1,7 @@
 package ua.maker.gbible_v2;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,7 @@ import ua.maker.gbible_v2.Adapters.ReadEveryDayAdapter;
 import ua.maker.gbible_v2.Adapters.SimpleDialogReadAdapter;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
+import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.Models.ItemReadDay;
 import ua.maker.gbible_v2.Models.Poem;
 
@@ -124,8 +126,20 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
         bibleDB = new BibleDB(this);
         bibleDB.startupDB();
 
-        adapter = new ReadEveryDayAdapter(this, bibleDB.getListReadForEveryDay(), bibleDB);
-        lvData.setAdapter(adapter);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final ArrayList<ItemReadDay> data = bibleDB.getListReadForEveryDay();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new ReadEveryDayAdapter(ReadOnEveryDayActivity.this, data, bibleDB);
+                        lvData.setAdapter(adapter);
+                        onResume();
+                    }
+                });
+            }
+        }).start();
     }
 
     private void initToolbar() {
@@ -148,10 +162,36 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
         }
     };
 
+    MenuItem actionItemSeReaded;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_read_on_every_day, menu);
+        actionItemSeReaded = menu.getItem(1);
+        if (pref.contains(App.Pref.FIRST_OPEN_READED)) {
+            actionItemSeReaded.setVisible(false);
+        }
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isReadedToToday()) {
+                    actionItemSeReaded.setVisible(false);
+                    pref.edit().putBoolean(App.Pref.FIRST_OPEN_READED, true).apply();
+                }
+            }
+        }, 400);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private boolean isReadedToToday() {
+        if (adapter != null)
+            for (int i = 0; i < day; i++) {
+                ItemReadDay item = adapter.getItem(i);
+                if (!item.isStatusReaded()) {
+                    return false;
+                }
+            }
+        return true;
     }
 
     @Override
@@ -165,9 +205,39 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
             case R.id.action_clear_rfe:
                 dialogAcceptDrop();
                 break;
+            case R.id.action_set_readed_to_today:
+                setReadedStatusToToday();
+                pref.edit().putBoolean(App.Pref.FIRST_OPEN_READED, true).apply();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setReadedStatusToToday() {
+        final ProgressDialog pd = ProgressDialog.show(this, null, getString(R.string.set_status_readed));
+
+        pd.show();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < day; i++) {
+                    ItemReadDay itemm = adapter.getItem(i);
+                    itemm.setStatus(true);
+                    bibleDB.setStatusItemReadForEveryDay(i, itemm.getDbxId(), true);
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                        pd.cancel();
+                        if (actionItemSeReaded != null && actionItemSeReaded.isVisible()) {
+                            actionItemSeReaded.setVisible(false);
+                        }
+                    }
+                });
+            }
+        }).start();
     }
 
     private void dialogAcceptDrop() {
@@ -177,6 +247,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dropList();
+                pref.edit().remove(App.Pref.FIRST_OPEN_READED).apply();
                 toPosition(0);
                 dialog.cancel();
             }
@@ -199,7 +270,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
             }
         });
         thread.start();
-        for(int i = 0; i < adapter.getCount(); i++){
+        for (int i = 0; i < adapter.getCount(); i++) {
             adapter.getItem(i).setStatus(false);
         }
         adapter.notifyDataSetChanged();

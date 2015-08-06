@@ -466,8 +466,8 @@ public class BibleDB extends SQLiteOpenHelper {
         return result;
     }
 
-    public void setStatusItemReadForEveryDay(String dbxId, boolean status) {
-        dbUser.setStatusReadedByPosition(dbxId, status);
+    public void setStatusItemReadForEveryDay(int position, String dbxId, boolean status) {
+        dbUser.setStatusReadedByPosition(position, dbxId, status);
     }
 
     public void setDefaultStatusItemRead() {

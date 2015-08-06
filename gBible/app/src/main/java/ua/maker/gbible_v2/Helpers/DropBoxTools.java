@@ -9,10 +9,12 @@ import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
 import com.dropbox.sync.android.DbxDatastoreManager;
 import com.dropbox.sync.android.DbxException;
+import com.nispok.snackbar.Snackbar;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
+import ua.maker.gbible_v2.R;
 import ua.maker.gbible_v2.SettingsActivity;
 
 /**
@@ -63,9 +65,7 @@ public class DropBoxTools {
             getDbxDatastoreManager();
             getInstance().sync();
         } else {
-            getDbxDatastoreManager().shutDown();
             getDbxAccountManager().unlink();
-            UserDB.getDbxDatastore().close();
             dbxDatastoreManager = null;
             getDbxDatastoreManager();
 
@@ -77,7 +77,7 @@ public class DropBoxTools {
         getDbxAccountManager().startLink(activity, REQUEST_LINK_DBX);
     }
 
-    public static boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+    public static boolean onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LINK_DBX) {
             if (resultCode == Activity.RESULT_OK) {
                 DbxAccount account = getDbxAccountManager().getLinkedAccount();
@@ -92,7 +92,9 @@ public class DropBoxTools {
                     e.printStackTrace();
                 }
             } else {
-                Tools.showToastCenter(getInstance().context, "CAN`T CONNECT TO YOUR DROPBOX");
+                Snackbar.with(activity)
+                        .text(R.string.error_connect_dropbox)
+                        .show(activity);
             }
         }
         return false;

@@ -6,6 +6,7 @@ package ua.maker.gbible_v2.Constants;
 public class App {
 
     public static final int COLOR_SELECT = 0x998D6E63;
+    public static final int DAY_IN_YEAR = 365;
 
     public interface Pref {
         String NAME = "gbible_preference";
@@ -20,7 +21,7 @@ public class App {
         String DATA_BASE_VER = "data_base_bible_ver";
         String SYNC_WITH_DBX = "sync_with_dbx";
         String LAST_RED_POSITION = "LAST_RED_POSITION";
-        String INSERT_LIST_STATUS = "insert_list_status";
+        String FIRST_OPEN_READED = "FIRST_OPEN_READED";
     }
 
     public interface BookHomeLevels {

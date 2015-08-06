@@ -634,7 +634,7 @@ public class UserDB extends SQLiteOpenHelper {
         Collections.sort(result, new Comparator<History>() {
             @Override
             public int compare(History lhs, History rhs) {
-                return (int)(Long.parseLong(rhs.getCreatedMillis()) - Long.parseLong(lhs.getCreatedMillis()));
+                return (int) (Long.parseLong(rhs.getCreatedMillis()) - Long.parseLong(lhs.getCreatedMillis()));
             }
         });
 
@@ -814,46 +814,15 @@ public class UserDB extends SQLiteOpenHelper {
         return result;
     }
 
-    private void insertStatusesReaded(List<ItemReadDay> data) {
-        if (dbxDatastore != null && dbxDatastore.isOpen()) {
-            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
-            if (table != null) {
-                for (int i = 0; i < data.size(); i++) {
-                    DbxFields fields = new DbxFields();
-                    fields.set(BibleDB.FIELD_STATUS_READED, data.get(i).isStatusReaded());
-                    fields.set(BibleDB.KEY_ROWID, i);
-                    table.insert(fields);
-                }
-                try {
-                    dbxDatastore.sync();
-                } catch (DbxException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     public ArrayList<ItemReadDay> getStatusReaded(ArrayList<ItemReadDay> data) {
-        if (!pref.contains(App.Pref.INSERT_LIST_STATUS)) {
-            insertStatusesReaded(data);
-            pref.edit().putBoolean(App.Pref.INSERT_LIST_STATUS, true).apply();
-        }
-
         if (dbxDatastore != null && dbxDatastore.isOpen()) {
             DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
             if (table != null) {
                 try {
                     DbxTable.QueryResult statusQuery = table.query();
-                    if (statusQuery != null) {
+                    if (statusQuery != null && statusQuery.count() > 0) {
                         List<DbxRecord> statuses = statusQuery.asList();
-                        int i = 0;
-                        for (DbxRecord record : statuses) {
-                            boolean status = record.getBoolean(BibleDB.FIELD_STATUS_READED);
-                            data.get(i).setStatus(status);
-                            data.get(i).setDbxId(record.getId());
-                            i++;
-                        }
-                        dbxDatastore.sync();
+                        getItemStatusRead(statuses, data);
                     }
                 } catch (DbxException e) {
                     e.printStackTrace();
@@ -862,6 +831,15 @@ public class UserDB extends SQLiteOpenHelper {
         }
 
         return data;
+    }
+
+    private static void getItemStatusRead(final List<DbxRecord> statuses, final ArrayList<ItemReadDay> data) {
+        for (DbxRecord record : statuses) {
+            boolean status = record.getBoolean(BibleDB.FIELD_STATUS_READED);
+            int index = (int) record.getLong(BibleDB.KEY_ROWID);
+            data.get(index).setStatus(status);
+            data.get(index).setDbxId(record.getId());
+        }
     }
 
     public void deleteTableReadForEveryDay() {
@@ -884,34 +862,26 @@ public class UserDB extends SQLiteOpenHelper {
         }
     }
 
-    public void setStatusReadedByPosition(String dbxId, boolean status) {
+    public void setStatusReadedByPosition(int position, String dbxId, boolean status) {
         if (dbxDatastore != null && dbxDatastore.isOpen()) {
             DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
             if (table != null) {
                 try {
-                    DbxRecord record = table.get(dbxId);
-                    record.set(BibleDB.FIELD_STATUS_READED, status);
+                    if (dbxId != null) {
+                        DbxRecord record = table.get(dbxId);
+                        if (record != null) {
+                            record.set(BibleDB.FIELD_STATUS_READED, status);
+                        }
+                    } else {
+                        DbxFields fields = new DbxFields();
+                        fields.set(BibleDB.KEY_ROWID, position);
+                        List<DbxRecord> r = table.query(fields).asList();
 
-                    dbxDatastore.sync();
-                } catch (DbxException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void setStatusReadedDefault() {
-        if (dbxDatastore != null && dbxDatastore.isOpen()) {
-            DbxTable table = dbxDatastore.getTable(BibleDB.TABLE_READ_FOR_EVERY_DAY);
-            if (table != null) {
-                try {
-                    DbxTable.QueryResult qr = table.query();
-                    if (qr != null) {
-                        List<DbxRecord> list = qr.asList();
-                        if (list != null) {
-                            for (DbxRecord record : list) {
-                                record.set(BibleDB.FIELD_STATUS_READED, false);
-                            }
+                        if (r.size() == 0) {
+                            fields.set(BibleDB.FIELD_STATUS_READED, status);
+                            table.insert(fields);
+                        } else {
+                            r.get(0).set(BibleDB.FIELD_STATUS_READED, status);
                         }
                     }
 
@@ -921,6 +891,9 @@ public class UserDB extends SQLiteOpenHelper {
                 }
             }
         }
+    }
+    public void setStatusReadedDefault() {
+        deleteTableReadForEveryDay();
     }
 
     public ArrayList<Book> getBooksFromJSON(ArrayList<Book> staticBookList) {

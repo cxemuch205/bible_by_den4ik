@@ -353,6 +353,7 @@
     <string name="title_sync">Синхронизация</string>
     <string name="title_sync_dbx">Синхронизация с DropBox</string>
     <string name="summary_sync_dbx">Установите флаг, для того, чтоб данные об заметках и истории, выделенных стихах сохранялись на ваш аккаунт на DropBox.</string>
+    <string name="error_connect_dropbox">Не удалось подключиться.</string>
 
     <string name="title_bookmarks">Закладки</string>
     <string name="empty_bookmark">Нет закладок</string>
@@ -378,5 +379,6 @@
     <string name="title_cancel">Отмена</string>
 
     <string name="title_chose_link">Выбирите место:</string>
+    <string name="set_status_readed">Устоновка статуса "Прочтено"&#8230;</string>
 
 </resources>

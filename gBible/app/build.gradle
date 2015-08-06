@@ -23,7 +23,7 @@ android {
         applicationId "ua.maker.gbible_v2"
         minSdkVersion 11
         targetSdkVersion 21
-        versionCode 3
+        versionCode 5
         versionName "1.0"
     }
     buildTypes {

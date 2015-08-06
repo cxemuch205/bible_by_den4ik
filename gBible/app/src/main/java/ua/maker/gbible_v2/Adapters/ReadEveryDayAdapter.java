@@ -75,7 +75,7 @@ public class ReadEveryDayAdapter extends ArrayAdapter<ItemReadDay> implements St
             @Override
             public void onClick(View v) {
                 item.setStatus(!item.isStatusReaded());
-                bibleDB.setStatusItemReadForEveryDay(
+                bibleDB.setStatusItemReadForEveryDay(position,
                         item.getDbxId(), item.isStatusReaded());
                 if (item.isStatusReaded()) {
                     prefs.edit().putInt(App.Pref.LAST_RED_POSITION, position).apply();
@@ -163,7 +163,9 @@ public class ReadEveryDayAdapter extends ArrayAdapter<ItemReadDay> implements St
 
     @Override
     public long getHeaderId(int position) {
-        return data.get(position).getMonth().charAt(0);
+        return data.get(position).getMonth().contains("Ию") ?
+                data.get(position).getMonth().charAt(2) :
+                data.get(position).getMonth().charAt(1);
     }
 
     private static class ViewHolder{
