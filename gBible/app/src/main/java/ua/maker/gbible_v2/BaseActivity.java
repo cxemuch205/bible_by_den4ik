@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.Fragments.BookmarksFragment;
 import ua.maker.gbible_v2.Fragments.BooksListFragment;
 import ua.maker.gbible_v2.Fragments.ChapterListFragment;
@@ -41,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
     private LinearLayout llBottomToolBar;
     private DisplayMetrics displayMetrics;
     private LinearLayout llBibleHome, llBookmarks, llHistory, llSearch;
+    private BibleDB bibleDB;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -70,6 +72,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initDataActivity() {
         displayMetrics = getResources().getDisplayMetrics();
+        bibleDB = GBApplication.getBibleDB();
     }
 
     private void initUI() {
@@ -189,6 +192,7 @@ public class BaseActivity extends AppCompatActivity {
     public void openReadContent(int bookId, int chapter, int poem) {
         GBApplication.setBookId(bookId);
         GBApplication.setChapterId(chapter);
+        GBApplication.setCountChapters(bibleDB.getNumberOfChapterInBook(bookId, Tools.getTranslateWitchPreferences(this)));
         GBApplication.setPoem(poem);
         GBApplication.setCurrentBookName(Tools.getBookNameByBookId(bookId, this));
         attachReadContent();

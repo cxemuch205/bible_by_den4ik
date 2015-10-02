@@ -317,12 +317,8 @@ public class BibleDB extends SQLiteOpenHelper {
                     + " WHERE "
                     + FIELD_BOOK_ID + " = '" + bookId +"' AND "
                     + FIELD_CHAPTER + " = '" + chapter +"'", null);
-            if (c.moveToFirst()) {
-                int indexResult = c.getColumnIndex(FIELD_RESULT);
-                do {
-                    count = c.getInt(indexResult);
-                } while (c.moveToNext());
-            }
+            c.moveToLast();
+            count = c.getInt(c.getColumnIndex(FIELD_RESULT));
             c.close();
         }
 
@@ -338,12 +334,8 @@ public class BibleDB extends SQLiteOpenHelper {
                     + " WHERE "
                     + FIELD_BOOK_ID + " = '" + bookId +"' AND "
                     + FIELD_POEM + " = '1'", null);
-            if (c.moveToFirst()) {
-                int indexResult = c.getColumnIndex(FIELD_RESULT);
-                do {
-                    count = c.getInt(indexResult);
-                } while (c.moveToNext());
-            }
+            c.moveToLast();
+            count = c.getInt(c.getColumnIndex(FIELD_RESULT));
             c.close();
         }
 

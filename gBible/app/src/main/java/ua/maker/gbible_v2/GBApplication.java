@@ -7,6 +7,7 @@ import android.os.Handler;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 
 /**
@@ -15,12 +16,21 @@ import ua.maker.gbible_v2.Helpers.DropBoxTools;
 public class GBApplication extends Application {
 
     public static GBApplication instance = null;
+    public static BibleDB bibleDB;
 
     public static GBApplication getInstance() {
         if(instance == null){
             instance = new GBApplication();
         }
         return instance;
+    }
+
+    public static BibleDB getBibleDB() {
+        if (bibleDB == null) {
+            bibleDB = new BibleDB(getInstance());
+            bibleDB.startupDB();
+        }
+        return bibleDB;
     }
 
     public static int bookId = 0,

@@ -123,8 +123,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        bibleDB = new BibleDB(this);
-        bibleDB.startupDB();
+        bibleDB = GBApplication.getBibleDB();
 
         new Thread(new Runnable() {
             @Override
@@ -169,7 +168,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_read_on_every_day, menu);
         actionItemSeReaded = menu.getItem(1);
         if (pref.contains(App.Pref.FIRST_OPEN_READED)) {
-            actionItemSeReaded.setVisible(false);
+            actionItemSeReaded.setVisible(!pref.getBoolean(App.Pref.FIRST_OPEN_READED, false));
         }
         new android.os.Handler().postDelayed(new Runnable() {
             @Override

@@ -62,8 +62,25 @@ public class PagerPoemFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+    }
 
-        initViewPager();
+    @Override
+    public void onStart() {
+        super.onStart();
+        initPagerAdapter();
+    }
+
+    private void initPagerAdapter() {
+        if (pagerAdapter == null) {
+            pagerAdapter = new PoemSlidePagerAdapter(getChildFragmentManager(),
+                    callBaseActivityListener);
+        } else {
+            pagerAdapter = null;
+            viewPager.setAdapter(null);
+            initPagerAdapter();
+        }
+
+        viewPager.setAdapter(pagerAdapter);
     }
 
     @Override
@@ -91,13 +108,5 @@ public class PagerPoemFragment extends Fragment {
 
             }
         });
-    }
-
-    private void initViewPager() {
-        Log.d(TAG, "initViewPager()");
-        pagerAdapter = new PoemSlidePagerAdapter(activity,
-                getChildFragmentManager(),
-                callBaseActivityListener);
-        viewPager.setAdapter(pagerAdapter);
     }
 }
