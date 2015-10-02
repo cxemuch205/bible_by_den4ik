@@ -15,11 +15,12 @@ import android.widget.LinearLayout;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
+import ua.maker.gbible_v2.Helpers.PreferenceManager;
 
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private SharedPreferences prefs;
+    private PreferenceManager preferenceManager;
 
     private CheckBox cbEnableSync;
 
@@ -39,7 +40,7 @@ public class SettingsActivity extends AppCompatActivity {
                     new ColorDrawable(getResources().getColor(R.color.action_bar)));
             initToolbar();
         }
-        prefs = getSharedPreferences(App.Pref.NAME, 0);
+        preferenceManager = new PreferenceManager(this);
 
         initSyncWithDropBox();
     }
@@ -54,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
         LinearLayout llBlockSync = (LinearLayout) findViewById(R.id.ll_enable_sync);
         cbEnableSync = (CheckBox) llBlockSync.findViewById(R.id.cb_enable_sync);
 
-        cbEnableSync.setChecked(prefs.getBoolean(App.Pref.SYNC_WITH_DBX, false));
+        cbEnableSync.setChecked(preferenceManager.isEnableSyncDbx());
 
         llBlockSync.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void executeLinkWithDropBox() {
-        prefs.edit().putBoolean(App.Pref.SYNC_WITH_DBX, cbEnableSync.isChecked()).apply();
+        preferenceManager.setEnableSyncDbx(cbEnableSync.isChecked());
     }
 
     @Override

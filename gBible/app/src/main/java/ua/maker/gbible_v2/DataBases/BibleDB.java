@@ -187,10 +187,14 @@ public class BibleDB extends SQLiteOpenHelper {
     }
 
     public Cursor getBooksCursor() {
-        return db.rawQuery("SELECT " + FIELD_BOOK_ID + " FROM '" + Tools.getTranslateWitchPreferences(mContext) + "'", null);
+        return db.rawQuery("SELECT "
+                + FIELD_BOOK_ID + " FROM '" + Tools.getTranslateWitchPreferences(mContext) + "'"
+                + " WHERE "
+                + FIELD_CHAPTER + " = '1' AND "
+                + FIELD_POEM + " = '1'", null);
     }
 
-    public Cursor getChapterCursors(String bookId) {
+    public Cursor getChaptersCursors(String bookId) {
         return db.query(Tools.getTranslateWitchPreferences(mContext),
                 new String[]{FIELD_BOOK_ID, FIELD_POEM}, BibleDB.FIELD_BOOK_ID + " = " + bookId, null, null, null, null);
     }
@@ -215,8 +219,8 @@ public class BibleDB extends SQLiteOpenHelper {
                 Cursor c = db.rawQuery("SELECT " + FIELD_BOOK_ID
                         + " FROM '" + TABLE_NAME_RST + "'"
                         + " WHERE "
-                        + FIELD_CHAPTER + " = '" + 1 + "' AND "
-                        + FIELD_POEM + " = '" + 1 + "'", null);
+                        + FIELD_CHAPTER + " = '1' AND "
+                        + FIELD_POEM + " = '1'", null);
                 if (c.moveToFirst()) {
                     int indexBookId = c.getColumnIndex(FIELD_BOOK_ID);
                     do {

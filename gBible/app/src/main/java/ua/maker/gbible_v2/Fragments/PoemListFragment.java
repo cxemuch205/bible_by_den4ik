@@ -8,14 +8,12 @@ import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +40,6 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.SettingsActivity;
 
 /**
  * Created by daniil on 11/7/14.
@@ -166,7 +163,7 @@ public class PoemListFragment extends Fragment {
         setTitleActionBar(chapter);
     }
 
-    public void initListData(Activity activity) {
+    public void initListData(final Activity activity) {
         if (adapter == null) {
             adapter = new PoemAdapter(activity, new ArrayList<Poem>());
         }

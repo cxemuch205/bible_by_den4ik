@@ -3,12 +3,13 @@ package ua.maker.gbible_v2.Constants;
 /**
  * Created by daniil on 11/6/14.
  */
-public class App {
+public interface App {
 
-    public static final int COLOR_SELECT = 0x998D6E63;
-    public static final int DAY_IN_YEAR = 365;
+    int COLOR_SELECT = 0x998D6E63;
+    int DAY_IN_YEAR = 365;
+    float DEFAULT_TEXT_SIZE = 16f;
 
-    public interface Pref {
+    interface Pref {
         String NAME = "gbible_preference";
         String BOOK_ID = "book_id";
         String BOOK_NAME = "book_name";
@@ -24,24 +25,24 @@ public class App {
         String FIRST_OPEN_READED = "FIRST_OPEN_READED";
     }
 
-    public interface BookHomeLevels {
+    interface BookHomeLevels {
         int BOOK = 0;
         int CHAPTER = 1;
         int POEM = 2;
     }
 
-    public interface DeviceType{
+    interface DeviceType{
         int PHONE = 0;
         int TABLET_7 = 1;
         int TABLET_10 = 2;
     }
 
-    public interface DropBox {
+    interface DropBox {
         String API_KEY = "zjzwnaytw9d55tc";//"f45xeahjql4ntdk";
         String API_SECRET = "yde5d3o2aosg8ul";//"1lsj4rpcz26kebr";
     }
 
-    public interface PlanDataType{
+    interface PlanDataType{
         int TEXT = 0;
         int TEXT_BOLD = 1;
         int LINK = 2;
@@ -50,15 +51,15 @@ public class App {
         int TEXT_WITH_IMG = 5;
     }
 
-    public interface KeysConfig{
+    interface KeysConfig{
         String BOOKS = "books_list";
     }
 
-    public interface Extras{
+    interface Extras{
         String DATA = "data_object";
     }
 
-    public interface Actions{
+    interface Actions{
         String UPDATE_BOOKMARKS = "ua.maker.gbible_v2.UPDATE_BOOKMARKS";
     }
 }
