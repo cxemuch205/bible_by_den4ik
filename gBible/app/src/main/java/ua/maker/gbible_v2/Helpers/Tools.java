@@ -5,22 +5,27 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.CoordinatorLayout;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.nispok.snackbar.Snackbar;
+import android.support.design.widget.Snackbar;
 
-import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Models.BooksId;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.SettingsActivity;
+import ua.maker.gbible_v2.Views.ColorPickerLine;
 
 /**
  * Created by daniil on 11/7/14.
@@ -507,7 +512,7 @@ public class Tools {
         }
     }
 
-    public static void copyToClipBoard(Context ctx, String textSetClip) {
+    public static void copyToClipBoard(Context ctx, String textSetClip, View view) {
         if (ctx == null || textSetClip == null || textSetClip.isEmpty()) {
             return;
         }
@@ -520,9 +525,7 @@ public class Tools {
             android.text.ClipboardManager clipboard = (android.text.ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboard.setText(textSetClip);
         }
-        Snackbar.with(ctx)
-                .text(R.string.copied)
-                .show((Activity) ctx);
+        Snackbar.make(view, R.string.copied, Snackbar.LENGTH_SHORT).show();
     }
 
     public static void shareData(Context context, String text) {
@@ -530,5 +533,39 @@ public class Tools {
         intent.setType("text/*");
         intent.putExtra(Intent.EXTRA_TEXT, text);
         context.startActivity(intent);
+    }
+
+    public static void showColorSelector(
+            View view,
+            Activity activity,
+            ColorPickerLine.OnColorChangedListener colorListener,
+            int color) {
+        /*Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+
+        ColorPickerLine colorPickerLine = new ColorPickerLine(activity);
+        colorPickerLine.setColor(color);
+        colorPickerLine.setOnColorChangedListener(colorListener);
+
+        ((LinearLayout)((CoordinatorLayout) snackbar.getView())
+                .findViewById(android.R.id.content)).addView(colorPickerLine);
+
+        snackbar.show();*/
+    }
+
+    public static int dpToPx(Context c, float dipValue) {
+        DisplayMetrics metrics = c.getResources().getDisplayMetrics();
+
+        float val = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
+
+        // Round
+        int res = (int)(val + 0.5);
+
+        // Ensure at least 1 pixel if val was > 0
+        if(res == 0 && val > 0) {
+            res = 1;
+        }
+
+        return res;
     }
 }

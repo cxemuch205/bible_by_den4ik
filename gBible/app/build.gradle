@@ -39,6 +39,7 @@ dependencies {
     compile fileTree(dir: "$buildDir/native-libs", include: 'native-libs.jar')
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.google.code.gson:gson:2.3"
+    compile "com.android.support:design:23.0.1"
     compile project (":QRlibrary")
     compile files('libs/dropbox-sync-sdk-android.jar')
     compile files('libs/multiwindow-v1.2.3.jar')
@@ -46,7 +47,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.0@aar') {
         transitive = true;
     }
-    compile 'com.nispok:snackbar:2.10.+'
     compile 'se.emilsjolander:stickylistheaders:2.+'
     compile 'me.grantland:autofittextview:0.2.+'
 }

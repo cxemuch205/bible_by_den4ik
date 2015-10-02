@@ -89,7 +89,11 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        boolean isConnect = DropBoxTools.onActivityResult(this, requestCode, resultCode, data);
+        boolean isConnect = DropBoxTools.onActivityResult(
+                this.findViewById(android.R.id.content),
+                requestCode,
+                resultCode,
+                data);
         if (isConnect) {
             executeLinkWithDropBox();
             DropBoxTools.getInstance().sync();

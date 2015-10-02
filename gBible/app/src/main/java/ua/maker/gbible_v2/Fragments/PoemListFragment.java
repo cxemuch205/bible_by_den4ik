@@ -40,6 +40,7 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
+import ua.maker.gbible_v2.Views.ColorPickerLine;
 
 /**
  * Created by daniil on 11/7/14.
@@ -305,7 +306,7 @@ public class PoemListFragment extends Fragment {
                     comparePoem(selectedPoems);
                     break;
                 case R.id.action_highlighter:
-
+                    highlighterPoem(selectedPoems);
                     break;
             }
 
@@ -320,12 +321,26 @@ public class PoemListFragment extends Fragment {
         }
     }
 
+    private void highlighterPoem(final ArrayList<Poem> selectedPoems) {
+        if (selectedPoems != null && !selectedPoems.isEmpty()) {
+            Tools.showColorSelector(getView(), activity, new ColorPickerLine.OnColorChangedListener() {
+                @Override
+                public void onColorChanged(int newColor) {
+                    for (Poem poem : selectedPoems) {
+                        poem.colorHighlight = newColor;
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }, selectedPoems.get(0).colorHighlight);
+        }
+    }
+
     private void addToBookmarks(ArrayList<Poem> poems) {
         userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));
     }
 
     private void addToClipboard(ArrayList<Poem> poems) {
-        Tools.copyToClipBoard(activity, ContentTools.convertForClipboard(activity, poems));
+        Tools.copyToClipBoard(activity, ContentTools.convertForClipboard(activity, poems), getView());
     }
 
     private void shareSelectionPoem(ArrayList<Poem> poems) {

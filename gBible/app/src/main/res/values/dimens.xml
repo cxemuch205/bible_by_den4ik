@@ -4,4 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="header_height">62dp</dimen>
     <dimen name="header_height2">58dp</dimen>
+    <dimen name="colorpickerview__required_padding">6dp</dimen>
+
+    <dimen name="colorpickerview__dialog_preview_width">65dp</dimen>
+    <dimen name="colorpickerview__dialog_preview_height">32dp</dimen>
+
 </resources>

@@ -3,19 +3,18 @@ package ua.maker.gbible_v2.Helpers;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
 import com.dropbox.sync.android.DbxDatastoreManager;
 import com.dropbox.sync.android.DbxException;
-import com.nispok.snackbar.Snackbar;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.SettingsActivity;
 
 /**
  * Created by Daniil on 14-Mar-15.
@@ -77,7 +76,7 @@ public class DropBoxTools {
         getDbxAccountManager().startLink(activity, REQUEST_LINK_DBX);
     }
 
-    public static boolean onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    public static boolean onActivityResult(View view, int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LINK_DBX) {
             if (resultCode == Activity.RESULT_OK) {
                 DbxAccount account = getDbxAccountManager().getLinkedAccount();
@@ -92,9 +91,10 @@ public class DropBoxTools {
                     e.printStackTrace();
                 }
             } else {
-                Snackbar.with(activity)
-                        .text(R.string.error_connect_dropbox)
-                        .show(activity);
+                Snackbar.make(
+                        view,
+                        R.string.error_connect_dropbox,
+                        Snackbar.LENGTH_SHORT).show();
             }
         }
         return false;
