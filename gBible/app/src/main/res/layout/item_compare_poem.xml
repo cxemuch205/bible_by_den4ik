@@ -2,37 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_name_translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="32dp"
+        android:background="@color/back_title_compare"
         android:gravity="center"
-        android:textColor="#FFF"
-        android:background="@color/back_title_compare"/>
+        android:minHeight="32dp"
+        android:textColor="#FFF" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tv_poem_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:id="@+id/tv_poem_id"
             android:layout_weight="7"
             android:gravity="center_horizontal"
+            android:text="1"
             android:textColor="@color/text_color_poem" />
 
         <TextView
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Content"
-            android:id="@+id/tv_content"
             android:layout_weight="1"
+            android:text="Content"
             android:textColor="@color/text_color_poem" />
     </LinearLayout>
 </LinearLayout>

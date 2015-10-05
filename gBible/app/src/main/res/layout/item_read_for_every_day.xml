@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:orientation="horizontal">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:gravity="center">
+        android:background="@null"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Day"
-            android:id="@+id/tv_day"
-            android:layout_marginTop="4dp"
             android:layout_gravity="left"
-            android:layout_marginLeft="16dp" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Day"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ToggleButton
+            android:id="@+id/tb_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New ToggleButton"
-            android:id="@+id/tb_status"
-            android:textOn="@string/text_on_read"
-            android:textOff="@string/text_off_read"
             android:checked="false"
-            android:focusable="false" />
+            android:focusable="false"
+            android:text="New ToggleButton"
+            android:textOff="@string/text_off_read"
+            android:textOn="@string/text_on_read" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_vertical">
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Old"
             android:id="@+id/tv_old_testament"
-            android:layout_weight="1" />
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="New"
+            android:layout_weight="1"
+            android:text="Old"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/tv_new_testament"
-            android:layout_weight="1" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="New"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 </LinearLayout>

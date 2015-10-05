@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     tools:context=".BaseActivity"
     tools:ignore="MergeRootFrame">
 
@@ -9,10 +10,10 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@null"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:background="@null" />
 
     <RelativeLayout
         android:id="@+id/rl_bottom_container"
@@ -20,8 +21,8 @@
         android:layout_height="52dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@null"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@null">
 
         <LinearLayout
             android:id="@+id/ll_bottom_toolbar"

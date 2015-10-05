@@ -1,6 +1,7 @@
 package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -43,7 +44,6 @@ import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 import ua.maker.gbible_v2.Views.ColorChoicerContainer;
-import ua.maker.gbible_v2.Views.ColorFullPickerView;
 
 /**
  * Created by daniil on 11/7/14.
@@ -87,10 +87,10 @@ public class PoemListFragment extends Fragment {
     private View headerView;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity = (AppCompatActivity) context;
         setRetainInstance(false);
-        this.activity = (AppCompatActivity) activity;
         userDB = new UserDB(activity);
     }
 
@@ -352,14 +352,14 @@ public class PoemListFragment extends Fragment {
             for (int i = 0; i < selectedPoems.size(); i++) {
                 Poem poem = adapter.getItem(selectedPoems.keyAt(i));
                 poem.colorHighlight = newColor;
-                if (poem.colorHighlinghtId != null
-                        && !poem.colorHighlinghtId.isEmpty()) {
+                if (poem.colorHighlightId != null
+                        && !poem.colorHighlightId.isEmpty()) {
                     userDB.updateMarker(
-                            poem.colorHighlinghtId,
+                            poem.colorHighlightId,
                             String.valueOf(newColor)
                     );
                 } else {
-                    poem.colorHighlinghtId = userDB.insertMarker(
+                    poem.colorHighlightId = userDB.insertMarker(
                             poem.bookId,
                             poem.chapter,
                             poem.poem,
@@ -373,12 +373,12 @@ public class PoemListFragment extends Fragment {
         public void deleteColor(SparseBooleanArray selectedPoems) {
             for (int i = 0; i < selectedPoems.size(); i++) {
                 Poem poem = adapter.getItem(selectedPoems.keyAt(i));
-                if (poem.colorHighlinghtId != null
-                        && !poem.colorHighlinghtId.isEmpty()) {
+                if (poem.colorHighlightId != null
+                        && !poem.colorHighlightId.isEmpty()) {
                     userDB.deleteMarker(
-                            poem.colorHighlinghtId
+                            poem.colorHighlightId
                     );
-                    poem.colorHighlinghtId = null;
+                    poem.colorHighlightId = null;
                     poem.colorHighlight = 0;
                 }
             }

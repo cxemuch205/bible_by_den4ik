@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:gravity="center|left">
 
         <TextView
@@ -31,8 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                android:text="Link"
                 android:singleLine="true"
+                android:text="Link"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </me.grantland.widget.AutofitLayout>
 

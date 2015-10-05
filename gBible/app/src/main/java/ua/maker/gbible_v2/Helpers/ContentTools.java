@@ -2,13 +2,11 @@ package ua.maker.gbible_v2.Helpers;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import ua.maker.gbible_v2.ComparePoemActivity;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
@@ -32,13 +30,6 @@ public class ContentTools {
             @Override
             public void run() {
                 final ArrayList<BibleLink> result = new ArrayList<BibleLink>();
-
-                //######################## TESTS
-//                for (int i = 0; i < 20; i++) {
-//                    result.add(new BibleLink("Bitie " + (i+1), i+1));
-//                }
-                //###############################
-
                 BibleDB bibleDB = new BibleDB(activity);
                 bibleDB.startupDB();
 
@@ -54,6 +45,7 @@ public class ContentTools {
                     result.add(link);
                 }
 
+                bibleDB.close();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -80,6 +72,7 @@ public class ContentTools {
                     result.add(new BibleLink(String.valueOf(i + 1), i, bookId));
                 }
 
+                bibleDB.close();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -109,11 +102,12 @@ public class ContentTools {
                         ItemColor itemColor = userDB.getPoemMarkerColor(poem.bookId, poem.chapter, poem.poem);
                         if (itemColor != null) {
                             poem.colorHighlight = Integer.parseInt(itemColor.getHex());
-                            poem.colorHighlinghtId = itemColor.getId();
+                            poem.colorHighlightId = itemColor.getId();
                         }
                     }
                 }
 
+                bibleDB.close();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -141,6 +135,7 @@ public class ContentTools {
 
                 result.addAll(bibleDB.searchInDataBase(textQuery, bookIdStart, bookIdEnd));
 
+                bibleDB.close();
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

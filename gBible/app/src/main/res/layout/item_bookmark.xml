@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@null">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout"
         android:layout_alignParentTop="true"
-        android:minHeight="58dp">
+        android:background="@null"
+        android:minHeight="58dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:orientation="horizontal">
 
             <TextView
@@ -59,47 +62,47 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/ll_menu_options"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ll_menu_options"
-        android:visibility="visible"
-        android:layout_centerHorizontal="true"
         android:layout_alignBottom="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@color/select_item">
+        android:background="@color/select_item"
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DEL"
             android:id="@+id/btn_del"
-            android:focusable="false" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EDIT"
+            android:focusable="false"
+            android:text="DEL" />
+
+        <Button
             android:id="@+id/btn_edit"
-            android:focusable="false" />
-
-        <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD"
+            android:focusable="false"
+            android:text="EDIT" />
+
+        <Button
             android:id="@+id/btn_add_to_plan"
-            android:focusable="false" />
-
-        <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OPEN"
+            android:focusable="false"
+            android:text="ADD" />
+
+        <Button
             android:id="@+id/btn_open"
-            android:focusable="false" />
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="OPEN" />
     </LinearLayout>
 
 </RelativeLayout>
