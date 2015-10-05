@@ -67,11 +67,15 @@ public class PoemAdapter extends ArrayAdapter<Poem> {
         holder.tvId.setTextSize(textSize);
 
         if (selectedItemIds.get(position)) {
-            view.setBackgroundDrawable(new SeveralColorsDrawable(
-                    App.COLOR_SELECT,
-                    item.colorHighlight,
-                    view.getWidth(),
-                    view.getHeight()));
+            if (item.colorHighlight != 0) {
+                view.setBackgroundDrawable(new SeveralColorsDrawable(
+                        App.COLOR_SELECT,
+                        item.colorHighlight,
+                        view.getWidth(),
+                        view.getHeight()));
+            } else {
+                view.setBackgroundColor(App.COLOR_SELECT);
+            }
         } else {
             view.setBackgroundColor(item.colorHighlight);
         }

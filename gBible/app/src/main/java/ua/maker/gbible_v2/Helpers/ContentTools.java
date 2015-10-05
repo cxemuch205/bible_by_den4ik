@@ -99,6 +99,8 @@ public class ContentTools {
                 UserDB userDB = bibleDB.getUserDB();
                 if (userDB != null) {
                     for (Poem poem : result) {
+                        poem.isBookmark = userDB.isBookMark(poem);
+
                         ItemColor itemColor = userDB.getPoemMarkerColor(poem.bookId, poem.chapter, poem.poem);
                         if (itemColor != null) {
                             poem.colorHighlight = Integer.parseInt(itemColor.getHex());

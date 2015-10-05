@@ -30,6 +30,7 @@ import ua.maker.gbible_v2.Models.ItemColor;
 import ua.maker.gbible_v2.Models.ItemPlan;
 import ua.maker.gbible_v2.Models.ItemReadDay;
 import ua.maker.gbible_v2.Models.Plan;
+import ua.maker.gbible_v2.Models.Poem;
 
 public class UserDB extends SQLiteOpenHelper {
 
@@ -883,5 +884,22 @@ public class UserDB extends SQLiteOpenHelper {
 
             db.insert(TABLE_CONFIGS, null, cv);
         }
+    }
+
+    public boolean isBookMark(Poem poem) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable dbxTable = dbxDatastore.getTable(TABLE_BOOKMARKS);
+            if (dbxTable != null) {
+                DbxFields fields = new DbxFields();
+                if(poem.translateName != null)
+                    fields.set(FIELD_TABLE_NAME, poem.translateName);
+                fields.set(FIELD_BOOK_ID, poem.bookId);
+                fields.set(FIELD_BOOK_NAME, Tools.getBookNameByBookId(poem.bookId, this.context));
+                fields.set(FIELD_CHAPTER, poem.chapter);
+                fields.set(FIELD_POEM, poem.poem);
+                return !isUniqueBookmark(fields);
+            }
+        }
+        return false;
     }
 }
