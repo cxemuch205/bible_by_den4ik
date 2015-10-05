@@ -193,6 +193,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void openReadContent(int bookId, int chapter, int poem) {
+        GBApplication.homeBibleLevel = App.BookHomeLevels.POEM;
         GBApplication.setBookId(bookId);
         GBApplication.setChapterId(chapter);
         GBApplication.setCountChapters(bibleDB.getNumberOfChapterInBook(bookId, Tools.getTranslateWitchPreferences(this)));
