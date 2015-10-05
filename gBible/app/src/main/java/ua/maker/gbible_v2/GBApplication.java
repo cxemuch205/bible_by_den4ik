@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 import io.fabric.sdk.android.Fabric;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
@@ -58,7 +59,7 @@ public class GBApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         instance = this;
         new DropBoxTools(instance);
         deviceType = getResources().getInteger(R.integer.device_type);
