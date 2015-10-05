@@ -17,6 +17,7 @@ import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.Models.Book;
 import ua.maker.gbible_v2.Models.BookMark;
 import ua.maker.gbible_v2.Models.History;
+import ua.maker.gbible_v2.Models.ItemColor;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 
@@ -101,6 +102,17 @@ public class ContentTools {
                 bibleDB.startupDB();
 
                 result.addAll(bibleDB.getPoemsInChapter(bookId, chapter, Tools.getTranslateWitchPreferences(activity)));
+
+                UserDB userDB = bibleDB.getUserDB();
+                if (userDB != null) {
+                    for (Poem poem : result) {
+                        ItemColor itemColor = userDB.getPoemMarkerColor(poem.bookId, poem.chapter, poem.poem);
+                        if (itemColor != null) {
+                            poem.colorHighlight = Integer.parseInt(itemColor.getHex());
+                            poem.colorHighlinghtId = itemColor.getId();
+                        }
+                    }
+                }
 
                 activity.runOnUiThread(new Runnable() {
                     @Override

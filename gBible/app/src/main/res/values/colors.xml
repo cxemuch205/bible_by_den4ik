@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="action_bar">#795548</color>
+    <color name="status_bar">#ff54392f</color>
+    <color name="bottom_bar">#6D4C41</color>
+    <color name="btn_open_bottom">#A1887F</color>
+    <color name="select_item">#ffc29c8b</color>
+    <color name="text_color_item_bible_link">#3E2723</color>
+    <color name="progress_load_color">#5D4037</color>
+    <color name="text_color_poem">#000000</color>
+    <color name="back_title_compare">#d1aa99</color>
+
+</resources>

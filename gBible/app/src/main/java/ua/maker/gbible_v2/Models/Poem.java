@@ -19,6 +19,7 @@ public class Poem implements Serializable {
     public String content;
     public String translateName;
     public String bookName;
+    public String colorHighlinghtId;
 
     public Poem() {
     }

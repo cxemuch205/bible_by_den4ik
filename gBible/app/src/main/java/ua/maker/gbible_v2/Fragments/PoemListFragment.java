@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,11 +37,13 @@ import ua.maker.gbible_v2.GBApplication;
 import ua.maker.gbible_v2.Helpers.ContentTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
+import ua.maker.gbible_v2.Interfaces.OnColorChangedListener;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.Views.ColorPickerLine;
+import ua.maker.gbible_v2.Views.ColorChoicerContainer;
+import ua.maker.gbible_v2.Views.ColorFullPickerView;
 
 /**
  * Created by daniil on 11/7/14.
@@ -306,8 +309,8 @@ public class PoemListFragment extends Fragment {
                     comparePoem(selectedPoems);
                     break;
                 case R.id.action_highlighter:
-                    highlighterPoem(selectedPoems);
-                    break;
+                    highlighterPoem(adapter.getSelectedItemIds());
+                    return true;
             }
 
             actionMode.finish();
@@ -318,22 +321,73 @@ public class PoemListFragment extends Fragment {
         public void onDestroyActionMode(ActionMode actionMode) {
             adapter.removeSelection();
             PoemListFragment.this.actionMode = null;
+            if (colorPickerLine != null) {
+                ((BaseActivity) activity)
+                        .getRlBottomContainer()
+                        .removeView(colorPickerLine);
+                colorPickerLine = null;
+            }
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 
-    private void highlighterPoem(final ArrayList<Poem> selectedPoems) {
-        if (selectedPoems != null && !selectedPoems.isEmpty()) {
-            Tools.showColorSelector(getView(), activity, new ColorPickerLine.OnColorChangedListener() {
-                @Override
-                public void onColorChanged(int newColor) {
-                    for (Poem poem : selectedPoems) {
-                        poem.colorHighlight = newColor;
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            }, selectedPoems.get(0).colorHighlight);
+    private ColorChoicerContainer colorPickerLine = null;
+
+    private void highlighterPoem(final SparseBooleanArray selectedPoems) {
+        if (selectedPoems != null && selectedPoems.size() > 0) {
+            colorPickerLine = Tools.showColorSelector(
+                    ((BaseActivity) activity)
+                            .getRlBottomContainer(),
+                    activity,
+                    colorMarkChangeListener,
+                    selectedPoems);
         }
     }
+
+    private OnColorChangedListener colorMarkChangeListener = new OnColorChangedListener() {
+        @Override
+        public void onColorChanged(int newColor, SparseBooleanArray selectedPoems) {
+            for (int i = 0; i < selectedPoems.size(); i++) {
+                Poem poem = adapter.getItem(selectedPoems.keyAt(i));
+                poem.colorHighlight = newColor;
+                if (poem.colorHighlinghtId != null
+                        && !poem.colorHighlinghtId.isEmpty()) {
+                    userDB.updateMarker(
+                            poem.colorHighlinghtId,
+                            String.valueOf(newColor)
+                    );
+                } else {
+                    poem.colorHighlinghtId = userDB.insertMarker(
+                            poem.bookId,
+                            poem.chapter,
+                            poem.poem,
+                            String.valueOf(newColor));
+                }
+            }
+            adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void deleteColor(SparseBooleanArray selectedPoems) {
+            for (int i = 0; i < selectedPoems.size(); i++) {
+                Poem poem = adapter.getItem(selectedPoems.keyAt(i));
+                if (poem.colorHighlinghtId != null
+                        && !poem.colorHighlinghtId.isEmpty()) {
+                    userDB.deleteMarker(
+                            poem.colorHighlinghtId
+                    );
+                    poem.colorHighlinghtId = null;
+                    poem.colorHighlight = 0;
+                }
+            }
+            adapter.notifyDataSetChanged();
+            if (actionMode != null) {
+                actionMode.finish();
+            }
+        }
+    };
 
     private void addToBookmarks(ArrayList<Poem> poems) {
         userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));

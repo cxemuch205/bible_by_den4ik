@@ -410,6 +410,7 @@ public class BibleDB extends SQLiteOpenHelper {
 
                 } while (c.moveToNext());
             }
+            c.close();
         }
 
         return result;
@@ -516,5 +517,9 @@ public class BibleDB extends SQLiteOpenHelper {
         }
 
         return result;
+    }
+
+    public UserDB getUserDB() {
+        return dbUser;
     }
 }

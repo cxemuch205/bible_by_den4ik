@@ -5,17 +5,15 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.preference.PreferenceManager;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.DisplayMetrics;
+import android.util.SparseBooleanArray;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,9 +21,11 @@ import android.support.design.widget.Snackbar;
 
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.GBApplication;
+import ua.maker.gbible_v2.Interfaces.OnColorChangedListener;
 import ua.maker.gbible_v2.Models.BooksId;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.Views.ColorPickerLine;
+import ua.maker.gbible_v2.Views.ColorChoicerContainer;
+import ua.maker.gbible_v2.Views.ColorFullPickerView;
 
 /**
  * Created by daniil on 11/7/14.
@@ -535,21 +535,16 @@ public class Tools {
         context.startActivity(intent);
     }
 
-    public static void showColorSelector(
-            View view,
+    public static ColorChoicerContainer showColorSelector(
+            ViewGroup viewGroup,
             Activity activity,
-            ColorPickerLine.OnColorChangedListener colorListener,
-            int color) {
-        /*Snackbar snackbar = Snackbar.make(view, "", Snackbar.LENGTH_LONG);
+            OnColorChangedListener colorListener,
+            SparseBooleanArray array) {
 
-        ColorPickerLine colorPickerLine = new ColorPickerLine(activity);
-        colorPickerLine.setColor(color);
-        colorPickerLine.setOnColorChangedListener(colorListener);
+        ColorChoicerContainer colorChoicerContainer = new ColorChoicerContainer(activity, colorListener, array);
 
-        ((LinearLayout)((CoordinatorLayout) snackbar.getView())
-                .findViewById(android.R.id.content)).addView(colorPickerLine);
-
-        snackbar.show();*/
+        viewGroup.addView(colorChoicerContainer);
+        return colorChoicerContainer;
     }
 
     public static int dpToPx(Context c, float dipValue) {

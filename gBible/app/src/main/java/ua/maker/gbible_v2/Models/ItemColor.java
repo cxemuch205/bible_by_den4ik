@@ -5,9 +5,18 @@ public class ItemColor {
 	private String hex = "";
 	private int position = 1;
 	private int idDB = 0;
+	private String id;
 	
 	public ItemColor(){};
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public ItemColor(String color){
 		this.hex = color;
 	};

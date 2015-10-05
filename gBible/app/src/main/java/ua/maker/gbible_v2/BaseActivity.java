@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
@@ -43,6 +44,7 @@ public class BaseActivity extends AppCompatActivity {
     private DisplayMetrics displayMetrics;
     private LinearLayout llBibleHome, llBookmarks, llHistory, llSearch;
     private BibleDB bibleDB;
+    private RelativeLayout rlBottomContainer;
 
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
@@ -78,6 +80,7 @@ public class BaseActivity extends AppCompatActivity {
     private void initUI() {
         btnOpenBottomMenu = (Button) findViewById(R.id.btn_show_menu_bottom);
         llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
+        rlBottomContainer = (RelativeLayout) findViewById(R.id.rl_bottom_container);
         llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
         llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
         llHistory = (LinearLayout) findViewById(R.id.ll_history);
@@ -255,5 +258,9 @@ public class BaseActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public RelativeLayout getRlBottomContainer() {
+        return rlBottomContainer;
     }
 }

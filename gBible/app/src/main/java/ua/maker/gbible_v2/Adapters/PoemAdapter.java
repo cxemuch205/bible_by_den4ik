@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
+import ua.maker.gbible_v2.Views.SeveralColorsDrawable;
 
 /**
  * Created by daniil on 11/7/14.
@@ -65,7 +66,16 @@ public class PoemAdapter extends ArrayAdapter<Poem> {
         holder.tvContent.setTextSize(textSize);
         holder.tvId.setTextSize(textSize);
 
-        view.setBackgroundColor(selectedItemIds.get(position) ? App.COLOR_SELECT : item.colorHighlight);
+        if (selectedItemIds.get(position)) {
+            view.setBackgroundDrawable(new SeveralColorsDrawable(
+                    App.COLOR_SELECT,
+                    item.colorHighlight,
+                    view.getWidth(),
+                    view.getHeight()));
+        } else {
+            view.setBackgroundColor(item.colorHighlight);
+        }
+
         if (item.isBookmark) {
             holder.vIsBookmark.setVisibility(View.VISIBLE);
         } else {

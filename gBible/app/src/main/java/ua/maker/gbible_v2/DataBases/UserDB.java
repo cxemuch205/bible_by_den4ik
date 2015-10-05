@@ -375,10 +375,10 @@ public class UserDB extends SQLiteOpenHelper {
                 for (DbxRecord record : queryList) {
 
                     String tableName = record.getString(FIELD_TABLE_NAME);
-                    int bookId = (int)record.getLong(FIELD_BOOK_ID);
+                    int bookId = (int) record.getLong(FIELD_BOOK_ID);
                     String bookName = record.getString(FIELD_BOOK_NAME);
-                    int chapter = (int)record.getLong(FIELD_CHAPTER);
-                    int poem = (int)record.getLong(FIELD_POEM);
+                    int chapter = (int) record.getLong(FIELD_CHAPTER);
+                    int poem = (int) record.getLong(FIELD_POEM);
                     String content = record.getString(FIELD_CONTENT);
                     long id = -1;
                     if (record.hasField(FIELD_LOCAL_DB_ID)) {
@@ -419,7 +419,7 @@ public class UserDB extends SQLiteOpenHelper {
         Collections.sort(resultDbx, new Comparator<BookMark>() {
             @Override
             public int compare(BookMark lhs, BookMark rhs) {
-                return (int)(Long.parseLong(lhs.getCreatedMillisDbx()) - Long.parseLong(rhs.getCreatedMillisDbx()));
+                return (int) (Long.parseLong(lhs.getCreatedMillisDbx()) - Long.parseLong(rhs.getCreatedMillisDbx()));
             }
         });
 
@@ -445,7 +445,6 @@ public class UserDB extends SQLiteOpenHelper {
         }
         return false;
     }
-
 
 
     public void insertItemPlan(ItemPlan data) {
@@ -665,133 +664,93 @@ public class UserDB extends SQLiteOpenHelper {
         }
     }
 
-    public int insertMarker(int bookId, int chapter, int poem, String colorHEX) {
-        int row = 0;
-        if (db.isOpen()) {
-            boolean first = true;
-            Cursor c;
-            try {
-                c = db.rawQuery("SELECT * FROM '" + TABLE_MARKER + "'", null);
-                if (c.moveToFirst()) {
-                    int bookIndex = c.getColumnIndex(FIELD_BOOK_ID);
-                    int chapterIndex = c.getColumnIndex(FIELD_CHAPTER);
-                    int poemIndex = c.getColumnIndex(FIELD_POEM);
-                    int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
-                    do {
-                        int book = c.getInt(bookIndex);
-                        int cha = c.getInt(chapterIndex);
-                        int pm = c.getInt(poemIndex);
-                        String color = c.getString(colorIndex);
-                        if (book == bookId & cha == chapter & pm == poem & color.equals(colorHEX)) {
-                            first = false;
-                            break;
-                        }
-                    } while (c.moveToNext());
-                }
-                if (first) {
-                    ContentValues cv = new ContentValues();
+    public String insertMarker(int bookId, int chapter, int poem, String colorHEX) {
+        String id = null;
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_MARKER);
+            if (table != null) {
+                DbxFields fields = new DbxFields();
+                fields.set(FIELD_BOOK_ID, bookId);
+                fields.set(FIELD_CHAPTER, chapter);
+                fields.set(FIELD_POEM, poem);
+                fields.set(FIELD_COLOR_HEX, colorHEX);
 
-                    cv.put(FIELD_BOOK_ID, bookId);
-                    cv.put(FIELD_CHAPTER, chapter);
-                    cv.put(FIELD_POEM, poem);
-                    cv.put(FIELD_COLOR_HEX, colorHEX);
+                id = table.insert(fields).getId();
 
-                    row = (int) db.insert(TABLE_MARKER, null, cv);
-                    Log.i(TAG, " INSERT - Color row: " + row);
+                try {
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
             }
         }
-        return row;
+        return id;
     }
 
-    public UserDB updateMarker(int bookId, int chapter, int poem, String colorHEX, int pos) {
-        if (db.isOpen()) {
-            ContentValues cv = new ContentValues();
+    public void updateMarker(String id, String colorHEX) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_MARKER);
+            if (table != null) {
+                try {
+                    DbxRecord record = table.get(id);
 
-            cv.put(FIELD_BOOK_ID, bookId);
-            cv.put(FIELD_CHAPTER, chapter);
-            cv.put(FIELD_POEM, poem);
-            cv.put(FIELD_COLOR_HEX, colorHEX);
+                    record.set(FIELD_COLOR_HEX, colorHEX);
 
-            long posColor = db.update(TABLE_MARKER, cv, FIELD_ID + "=" + String.valueOf(pos), null);
-            Log.i(TAG, "UPDATE Color pos: " + posColor);
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return this;
     }
 
     public ItemColor getPoemMarkerColor(int bookId, int chapter, int poem) {
         ItemColor result = new ItemColor();
-        try {
-            if (db.isOpen()) {
-                Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_MARKER + "'", null);
-                if (c.moveToFirst()) {
-                    int bookIndex = c.getColumnIndex(FIELD_BOOK_ID);
-                    int chapterIndex = c.getColumnIndex(FIELD_CHAPTER);
-                    int poemIndex = c.getColumnIndex(FIELD_POEM);
-                    int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
-                    int positionIndex = c.getColumnIndex(FIELD_ID);
-                    do {
-                        int book = c.getInt(bookIndex);
-                        int cha = c.getInt(chapterIndex);
-                        int pm = c.getInt(poemIndex);
-                        int position = c.getInt(positionIndex);
-                        if (book == bookId & cha == chapter & pm == poem) {
-                            result.setHex(c.getString(colorIndex));
-                            result.setPosition(position);
-                            break;
-                        }
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_MARKER);
+            if (table != null) {
+                DbxFields fields = new DbxFields();
+                fields.set(FIELD_BOOK_ID, bookId);
+                fields.set(FIELD_CHAPTER, chapter);
+                fields.set(FIELD_POEM, poem);
+                try {
+                    DbxTable.QueryResult queryResult = table.query(fields);
 
-                    } while (c.moveToNext());
+                    if (queryResult.count() > 0) {
+                        DbxRecord record = queryResult.asList().get(0);
+                        result.setId(record.getId());
+                        result.setHex(record.getString(FIELD_COLOR_HEX));
+                    } else {
+                        return null;
+                    }
+
+                } catch (DbxException e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
         }
         return result;
     }
 
-    public void insertColorStruct(ItemColor data) {
-        if (db.isOpen()) {
-            if (isUniqColorHEX(data)) {
-                insertCS(data);
-            } else {
-                if (data.getIdDB() != 0) {
-                    deleteColorItemHistory(data);
-                    insertCS(data);
+    public void deleteMarker(String id) {
+        if (dbxDatastore != null && dbxDatastore.isOpen()) {
+            DbxTable table = dbxDatastore.getTable(TABLE_MARKER);
+            if (table != null) {
+                try {
+                    DbxRecord record = table.get(id);
+
+                    if (record != null) {
+                        record.deleteRecord();
+                    } else {
+                        return;
+                    }
+
+                    dbxDatastore.sync();
+                } catch (DbxException e) {
+                    e.printStackTrace();
                 }
             }
         }
-    }
-
-    private void insertCS(ItemColor data) {
-        ContentValues cv = new ContentValues();
-        cv.put(FIELD_COLOR_HEX, data.getHex());
-        db.insert(TABLE_COLOR_SELECT_HITORY, null, cv);
-    }
-
-    private void deleteColorItemHistory(ItemColor data) {
-        if (db.isOpen()) {
-            db.delete(TABLE_COLOR_SELECT_HITORY, FIELD_ID + "=" + data.getIdDB(), null);
-        }
-    }
-
-    private boolean isUniqColorHEX(ItemColor data) {
-        if (db.isOpen()) {
-            Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_COLOR_SELECT_HITORY + "'", null);
-            if (c.moveToFirst()) {
-                int idIndex = c.getColumnIndex(FIELD_ID);
-                int colorIndex = c.getColumnIndex(FIELD_COLOR_HEX);
-                do {
-                    int id = c.getInt(idIndex);
-                    String color = c.getString(colorIndex);
-                    if (color.equals(data.getHex())) {
-                        data.setIdDB(id);
-                        return false;
-                    }
-                } while (c.moveToNext());
-            }
-        }
-        return true;
     }
 
     public List<ItemColor> getListHistoryColorsSelect() {
@@ -892,6 +851,7 @@ public class UserDB extends SQLiteOpenHelper {
             }
         }
     }
+
     public void setStatusReadedDefault() {
         deleteTableReadForEveryDay();
     }
