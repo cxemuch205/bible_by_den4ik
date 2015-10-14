@@ -513,6 +513,8 @@ public class BibleDB extends SQLiteOpenHelper {
                 } while (c.moveToNext());
             }
 
+            c.close();
+
             result = dbUser.getStatusReaded(result);
         }
 
