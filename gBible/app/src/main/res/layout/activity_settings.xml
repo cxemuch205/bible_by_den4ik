@@ -30,6 +30,8 @@
 
             <include layout="@layout/settings_sync_block" />
 
+            <include layout="@layout/setting_block_formatted" />
+
         </LinearLayout>
 
     </ScrollView>

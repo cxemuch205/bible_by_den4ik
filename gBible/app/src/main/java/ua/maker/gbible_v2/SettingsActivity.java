@@ -1,7 +1,6 @@
 package ua.maker.gbible_v2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,9 +12,8 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 
-import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
-import ua.maker.gbible_v2.Helpers.PreferenceManager;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 
 
 public class SettingsActivity extends AppCompatActivity {

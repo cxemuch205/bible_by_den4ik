@@ -1,7 +1,9 @@
-package ua.maker.gbible_v2.Helpers;
+package ua.maker.gbible_v2.Managers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.google.inject.Inject;
 
 import ua.maker.gbible_v2.Constants.App;
 
@@ -12,6 +14,7 @@ public class PreferenceManager {
 
     private SharedPreferences prefs;
 
+    @Inject
     public PreferenceManager(Context context) {
         prefs = context.getSharedPreferences(App.Pref.NAME, 0);
     }

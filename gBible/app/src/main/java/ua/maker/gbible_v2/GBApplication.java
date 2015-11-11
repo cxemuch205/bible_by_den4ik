@@ -10,7 +10,7 @@ import io.fabric.sdk.android.Fabric;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
-import ua.maker.gbible_v2.Helpers.PreferenceManager;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 
 /**
  * Created by daniil on 11/7/14.

@@ -7,6 +7,7 @@ public interface App {
 
     int COLOR_SELECT = 0x998D6E63;
     int DAY_IN_YEAR = 365;
+    int MAX_TEXT_SIZE = 40;
     float DEFAULT_TEXT_SIZE = 16f;
 
     interface Pref {

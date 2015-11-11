@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 import ua.maker.gbible_v2.Views.SeveralColorsDrawable;
@@ -24,15 +25,15 @@ public class PoemAdapter extends ArrayAdapter<Poem> {
 
     private Context context;
     private ArrayList<Poem> data;
-    private SharedPreferences pref;
+    private PreferenceManager prefs;
     private SparseBooleanArray selectedItemIds;
-    private float textSize = 16;
+    private float textSize = App.DEFAULT_TEXT_SIZE;
 
     public PoemAdapter(Context context, ArrayList<Poem> data) {
         super(context, R.layout.item_poem, data);
         this.context = context;
         this.data = data;
-        pref = context.getSharedPreferences(App.Pref.NAME, 0);
+        prefs = new PreferenceManager(context);
         selectedItemIds = new SparseBooleanArray();
     }
 
@@ -61,7 +62,7 @@ public class PoemAdapter extends ArrayAdapter<Poem> {
         holder.tvId.setText(String.valueOf(item.poem));
         holder.tvContent.setText(item.content);
 
-        textSize = pref.getInt(App.Pref.POEM_TEXT_SIZE, 16);
+        textSize = prefs.getTextPoemSize();
 
         holder.tvContent.setTextSize(textSize);
         holder.tvId.setTextSize(textSize);

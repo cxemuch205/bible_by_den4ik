@@ -11,4 +11,6 @@
     <color name="text_color_poem">#000000</color>
     <color name="back_title_compare">#d1aa99</color>
 
+    <color name="textColor">#000000</color>
+
 </resources>

@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Helpers.Tools;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 
@@ -21,11 +23,14 @@ public class ComparePoemAdapter extends ArrayAdapter<Poem> {
 
     private Context context;
     private ArrayList<Poem> data;
+    private float textSize = App.DEFAULT_TEXT_SIZE;
+    private PreferenceManager prefs;
 
     public ComparePoemAdapter(Context context, ArrayList<Poem> data) {
         super(context, R.layout.item_compare_poem, data);
         this.context = context;
         this.data = data;
+        prefs = new PreferenceManager(context);
     }
 
     @Override
@@ -47,6 +52,11 @@ public class ComparePoemAdapter extends ArrayAdapter<Poem> {
 
         Poem poem = data.get(position);
 
+        textSize = prefs.getTextPoemSize();
+
+        holder.tvContent.setTextSize(textSize);
+        holder.tvPoem.setTextSize(textSize);
+
         if (position == 0
                 || !data.get(position - 1).translateName.equals(poem.translateName)) {
             holder.tvNameTranslate.setVisibility(TextView.VISIBLE);
@@ -62,7 +72,7 @@ public class ComparePoemAdapter extends ArrayAdapter<Poem> {
         return view;
     }
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         TextView tvNameTranslate;
         TextView tvPoem;
         TextView tvContent;
