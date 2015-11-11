@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -233,9 +234,14 @@ public class PoemListFragment extends Fragment {
                 adapter.addAll(data);
 
                 if ((GBApplication.chapterId + 1) == chapter) {
-                    int positionScroll = GBApplication.poem - 1;
-                    lvData.setSelection(positionScroll);
-                    lvData.smoothScrollToPosition(positionScroll);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            int positionScroll = GBApplication.poem - 1;
+                            lvData.setSelected(true);
+                            lvData.setSelection(positionScroll);
+                        }
+                    }, 200);
                 }
             }
         }
