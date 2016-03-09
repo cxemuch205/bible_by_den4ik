@@ -55,6 +55,7 @@ public class BookmarksFragment extends RoboFragment {
     }
 
     private void registerUpdateBroadcast() {
+        broadcastManager = LocalBroadcastManager.getInstance(getContext());
         IntentFilter filer = new IntentFilter();
         filer.addAction(App.Actions.UPDATE_BOOKMARKS);
         broadcastManager.registerReceiver(receiverUpdate, filer);
@@ -83,9 +84,10 @@ public class BookmarksFragment extends RoboFragment {
     private BookmarksAdapter adapter;
 
     @Inject UserDB userDB;
-    @Inject LocalBroadcastManager broadcastManager;
     @Inject ContentManager contentManager;
     @Inject DropBoxTools dropBoxTools;
+
+    LocalBroadcastManager broadcastManager;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
