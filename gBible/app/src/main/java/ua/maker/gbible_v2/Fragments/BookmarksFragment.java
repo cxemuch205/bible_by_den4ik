@@ -54,13 +54,6 @@ public class BookmarksFragment extends RoboFragment {
         return instance;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dropBoxTools.sync();
-        registerUpdateBroadcast();
-    }
-
     private void registerUpdateBroadcast() {
         IntentFilter filer = new IntentFilter();
         filer.addAction(App.Actions.UPDATE_BOOKMARKS);
@@ -194,6 +187,13 @@ public class BookmarksFragment extends RoboFragment {
 
         }
     };
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        dropBoxTools.sync();
+        registerUpdateBroadcast();
+    }
 
     @Override
     public void onDestroy() {

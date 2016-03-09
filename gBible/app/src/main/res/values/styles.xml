@@ -17,7 +17,7 @@
 
     </style>
 
-    <style name="GBible.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
+    <style name="GBible.ActionBar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@color/action_bar</item>
         <item name="background">@color/action_bar</item>
         <item name="android:textColor">@android:color/white</item>

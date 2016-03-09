@@ -12,5 +12,6 @@
     <color name="back_title_compare">#d1aa99</color>
 
     <color name="textColor">#000000</color>
+    <color name="textColorWhite">#FFF</color>
 
 </resources>
