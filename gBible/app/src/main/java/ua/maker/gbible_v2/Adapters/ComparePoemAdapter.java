@@ -26,11 +26,11 @@ public class ComparePoemAdapter extends ArrayAdapter<Poem> {
     private float textSize = App.DEFAULT_TEXT_SIZE;
     private PreferenceManager prefs;
 
-    public ComparePoemAdapter(Context context, ArrayList<Poem> data) {
+    public ComparePoemAdapter(Context context, ArrayList<Poem> data, PreferenceManager preferenceManager) {
         super(context, R.layout.item_compare_poem, data);
         this.context = context;
         this.data = data;
-        prefs = new PreferenceManager(context);
+        this.prefs = preferenceManager;
     }
 
     @Override

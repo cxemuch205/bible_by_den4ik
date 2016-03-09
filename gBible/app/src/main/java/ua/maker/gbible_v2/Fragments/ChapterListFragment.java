@@ -1,18 +1,12 @@
 package ua.maker.gbible_v2.Fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
-import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -21,27 +15,29 @@ import android.widget.ProgressBar;
 
 import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
 import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Adapters.BibleLinkAdapter;
 import ua.maker.gbible_v2.BaseActivity;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.GBApplication;
-import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Managers.ContentManager;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
 import ua.maker.gbible_v2.Models.BibleLink;
 import ua.maker.gbible_v2.R;
-import ua.maker.gbible_v2.SettingsActivity;
 import ua.maker.gbible_v2.Views.HeaderGridView;
 
 /**
  * Created by daniil on 11/6/14.
  */
-public class ChapterListFragment extends Fragment {
+public class ChapterListFragment extends RoboFragment {
 
     public static String TAG = ChapterListFragment.class.getSimpleName();
     private static final int NUMB_OF_COLUMNS = 6;
@@ -60,18 +56,13 @@ public class ChapterListFragment extends Fragment {
         this.callBaseActivityListener = listener;
     }
 
-    private HeaderGridView gvData;
-    private BibleLinkAdapter adapter;
-    private ProgressBar pb;
-    private Toolbar toolbar;
-    private AppCompatActivity activity;
+    @InjectView(R.id.gv_data) HeaderGridView gvData;
+    @InjectView(R.id.pb_load) ProgressBar pb;
+    @InjectView(R.id.toolbar_header) Toolbar toolbar;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        setRetainInstance(true);
-        this.activity = (AppCompatActivity) activity;
-    }
+    @Inject ContentManager contentManager;
+
+    private BibleLinkAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -103,9 +94,6 @@ public class ChapterListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        gvData = (HeaderGridView) view.findViewById(R.id.gv_data);
-        pb = (ProgressBar) view.findViewById(R.id.pb_load);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
         Tools.initProgressBar(pb);
         initQRToolbar();
         initToolbar();
@@ -124,11 +112,12 @@ public class ChapterListFragment extends Fragment {
             }
         });
         toolbar.inflateMenu(R.menu.menu_base);
-        toolbar.setOnMenuItemClickListener(((BaseActivity) activity).getOptionMenuItemListener());
+        toolbar.setOnMenuItemClickListener(((BaseActivity) getActivity())
+                .getOptionMenuItemListener());
     }
 
     private void initQRToolbar() {
-        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+        int headerHeight = getResources().getDimensionPixelSize(R.dimen.header_height);
         if (Build.VERSION.SDK_INT >= 16) {
             headerHeight = toolbar.getMinimumHeight();
         }
@@ -136,7 +125,7 @@ public class ChapterListFragment extends Fragment {
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setTitle(R.string.chose_chapter);
 
-        View headerView = new View(activity);
+        View headerView = new View(getContext());
         AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
         headerView.setLayoutParams(headerParams);
         gvData.addHeaderView(headerView);
@@ -161,7 +150,7 @@ public class ChapterListFragment extends Fragment {
         }
 
         adapter.clear();
-        ContentTools.getListChapters(getActivity(), TAG, getListBooksAdapter);
+        contentManager.getListChapters(TAG, getListBooksAdapter);
 
         if (gvData != null && gvData.getAdapter() == null) {
             gvData.setAdapter(adapter);

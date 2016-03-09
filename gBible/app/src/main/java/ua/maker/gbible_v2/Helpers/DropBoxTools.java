@@ -1,6 +1,7 @@
 package ua.maker.gbible_v2.Helpers;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,9 @@ import com.dropbox.sync.android.DbxAccount;
 import com.dropbox.sync.android.DbxAccountManager;
 import com.dropbox.sync.android.DbxDatastoreManager;
 import com.dropbox.sync.android.DbxException;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
@@ -19,29 +23,28 @@ import ua.maker.gbible_v2.R;
 /**
  * Created by Daniil on 14-Mar-15.
  */
+@Singleton
 public class DropBoxTools {
 
-    private static DropBoxTools instance;
     public static final int REQUEST_LINK_DBX = 121;
-    private Context context;
 
-    public static DropBoxTools getInstance() {
-        if (instance == null) {
-            instance = new DropBoxTools(GBApplication.getInstance());
-        }
-        return instance;
-    }
+    private Context context;
+    private Provider<UserDB> userDB;
 
     private static DbxAccountManager dbxAccountManager = null;
-    private static DbxDatastoreManager dbxDatastoreManager = null;
+    private DbxDatastoreManager dbxDatastoreManager = null;
 
-    public DropBoxTools(Context context) {
-        instance = this;
+    @Inject
+    public DropBoxTools(Context context, Provider<UserDB> userDB) {
         this.context = context;
-        dbxAccountManager = DbxAccountManager.getInstance(context, App.DropBox.API_KEY, App.DropBox.API_SECRET);
+        this.userDB = userDB;
     }
 
-    public static DbxDatastoreManager getDbxDatastoreManager() {
+    public static void initDbxAccountManager(Application application) {
+        DropBoxTools.dbxAccountManager = DbxAccountManager.getInstance(application, App.DropBox.API_KEY, App.DropBox.API_SECRET);
+    }
+
+    public DbxDatastoreManager getDbxDatastoreManager() {
         if (getDbxAccountManager().hasLinkedAccount()) {
             try {
                 dbxDatastoreManager = DbxDatastoreManager.forAccount(getDbxAccountManager().getLinkedAccount());
@@ -55,34 +58,34 @@ public class DropBoxTools {
         return dbxDatastoreManager;
     }
 
-    public static DbxAccountManager getDbxAccountManager() {
+    public DbxAccountManager getDbxAccountManager() {
         return dbxAccountManager;
     }
 
-    public static void toggleSyncWithDropBox(boolean enable) {
+    public void toggleSyncWithDropBox(boolean enable) {
         if (enable) {
             getDbxDatastoreManager();
-            getInstance().sync();
+            sync();
         } else {
             getDbxAccountManager().unlink();
             dbxDatastoreManager = null;
             getDbxDatastoreManager();
 
-            UserDB.openDbxDatastore();
+            userDB.get().openDbxDatastore();
         }
     }
 
-    public static void startLink(Activity activity) {
+    public void startLink(Activity activity) {
         getDbxAccountManager().startLink(activity, REQUEST_LINK_DBX);
     }
 
-    public static boolean onActivityResult(View view, int requestCode, int resultCode, Intent data) {
+    public boolean onActivityResult(View view, int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_LINK_DBX) {
             if (resultCode == Activity.RESULT_OK) {
                 DbxAccount account = getDbxAccountManager().getLinkedAccount();
                 try {
-                    if (UserDB.getDbxDatastore() != null && UserDB.getDbxDatastore().isOpen()) {
-                        UserDB.getDbxDatastore().close();
+                    if (userDB.get().getDbxDatastore() != null && userDB.get().getDbxDatastore().isOpen()) {
+                        userDB.get().getDbxDatastore().close();
                     }
                     dbxDatastoreManager.migrateToAccount(account);
                     setupDbxDatastoreManager(account);
@@ -100,7 +103,7 @@ public class DropBoxTools {
         return false;
     }
 
-    private static void setupDbxDatastoreManager(DbxAccount account) {
+    private void setupDbxDatastoreManager(DbxAccount account) {
         if (account != null) {
             try {
                 dbxDatastoreManager = DbxDatastoreManager.forAccount(account);
@@ -112,11 +115,11 @@ public class DropBoxTools {
 
     public void sync() {
         try {
-            if (UserDB.getDbxDatastore() != null) {
-                if (UserDB.getDbxDatastore().isOpen()) {
-                    UserDB.getDbxDatastore().sync();
+            if (userDB.get().getDbxDatastore() != null) {
+                if (userDB.get().getDbxDatastore().isOpen()) {
+                    userDB.get().getDbxDatastore().sync();
                 } else {
-                    UserDB.openDbxDatastore();
+                    userDB.get().openDbxDatastore();
                     sync();
                 }
             }

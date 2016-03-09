@@ -2,11 +2,9 @@ package ua.maker.gbible_v2.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,21 +25,24 @@ import android.widget.ProgressBar;
 
 import com.etiennelawlor.quickreturn.library.enums.QuickReturnViewType;
 import com.etiennelawlor.quickreturn.library.listeners.QuickReturnListViewOnScrollListener;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Adapters.PoemAdapter;
 import ua.maker.gbible_v2.BaseActivity;
-import ua.maker.gbible_v2.ComparePoemActivity;
-import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
 import ua.maker.gbible_v2.GBApplication;
-import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Managers.ContentManager;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
 import ua.maker.gbible_v2.Interfaces.OnColorChangedListener;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
 import ua.maker.gbible_v2.Interfaces.OnGetContentListener;
+import ua.maker.gbible_v2.Managers.IntentManager;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 import ua.maker.gbible_v2.Models.Poem;
 import ua.maker.gbible_v2.R;
 import ua.maker.gbible_v2.Views.ColorChoicerContainer;
@@ -49,7 +50,7 @@ import ua.maker.gbible_v2.Views.ColorChoicerContainer;
 /**
  * Created by daniil on 11/7/14.
  */
-public class PoemListFragment extends Fragment {
+public class PoemListFragment extends RoboFragment {
 
     public static final String TAG = "PoemListFragment";
     private static PoemListFragment instance;
@@ -74,16 +75,20 @@ public class PoemListFragment extends Fragment {
         this.callBaseActivityListener = listener;
     }
 
-    private ListView lvData;
-    private PoemAdapter adapter;
-    private ProgressBar pb;
+    @InjectView(R.id.lv_data) ListView lvData;
+    @InjectView(R.id.pb_load) ProgressBar pb;
+    @InjectView(R.id.toolbar_header) Toolbar toolbar;
 
-    private Toolbar toolbar;
+    private PoemAdapter adapter;
     boolean mScrolling = false;
     private int lastFirstVisibleItemPosition = 0, chapter = 1;
     private AppCompatActivity activity;
     private ActionMode actionMode;
-    private UserDB userDB;
+
+    @Inject UserDB userDB;
+    @Inject PreferenceManager preferenceManager;
+    @Inject IntentManager intentManager;
+    @Inject ContentManager contentManager;
 
     private View headerView;
 
@@ -92,7 +97,6 @@ public class PoemListFragment extends Fragment {
         super.onAttach(context);
         activity = (AppCompatActivity) context;
         setRetainInstance(false);
-        userDB = new UserDB(activity);
     }
 
     @Override
@@ -103,9 +107,6 @@ public class PoemListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        lvData = (ListView) view.findViewById(R.id.lv_data);
-        pb = (ProgressBar) view.findViewById(R.id.pb_load);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
         initQRToolbar();
         initToolbar();
         Tools.initProgressBar(pb);
@@ -170,11 +171,11 @@ public class PoemListFragment extends Fragment {
 
     public void initListData(final Activity activity) {
         if (adapter == null) {
-            adapter = new PoemAdapter(activity, new ArrayList<Poem>());
+            adapter = new PoemAdapter(activity, new ArrayList<Poem>(), preferenceManager);
         }
 
         adapter.clear();
-        ContentTools.getListPoemsFromChapter(chapter, activity, TAG, getContentChapterListener);
+        contentManager.getListPoemsFromChapter(chapter, TAG, getContentChapterListener);
 
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
@@ -312,7 +313,7 @@ public class PoemListFragment extends Fragment {
                     shareSelectionPoem(selectedPoems);
                     break;
                 case R.id.action_compare:
-                    comparePoem(selectedPoems);
+                    intentManager.startComparePoemActivity(selectedPoems);
                     break;
                 case R.id.action_highlighter:
                     highlighterPoem(adapter.getSelectedItemIds());
@@ -396,20 +397,14 @@ public class PoemListFragment extends Fragment {
     };
 
     private void addToBookmarks(ArrayList<Poem> poems) {
-        userDB.insertBookMarks(ContentTools.convertPoemToBookmarkArray(activity, poems));
+        userDB.insertBookMarks(contentManager.convertPoemToBookmarkArray(poems));
     }
 
     private void addToClipboard(ArrayList<Poem> poems) {
-        Tools.copyToClipBoard(activity, ContentTools.convertForClipboard(activity, poems), getView());
+        Tools.copyToClipBoard(activity, contentManager.convertForClipboard(poems), getView());
     }
 
     private void shareSelectionPoem(ArrayList<Poem> poems) {
-        Tools.shareData(activity, ContentTools.convertForClipboard(activity, poems));
-    }
-
-    private void comparePoem(ArrayList<Poem> poems) {
-        Intent compare = new Intent(activity, ComparePoemActivity.class);
-        compare.putExtra(App.Extras.DATA, poems);
-        activity.startActivity(compare);
+        Tools.shareData(activity, contentManager.convertForClipboard(poems));
     }
 }

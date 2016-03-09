@@ -6,9 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,7 +16,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.inject.Inject;
+
+import roboguice.activity.RoboActionBarActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Constants.App;
+import ua.maker.gbible_v2.Constants.IntentData;
 import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.Fragments.BookmarksFragment;
 import ua.maker.gbible_v2.Fragments.BooksListFragment;
@@ -29,31 +33,37 @@ import ua.maker.gbible_v2.Fragments.SearchFragment;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityAdapter;
 import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
+import ua.maker.gbible_v2.Managers.IntentManager;
 import ua.maker.gbible_v2.Models.Poem;
 
-
-public class BaseActivity extends AppCompatActivity {
+@ContentView(R.layout.activity_base)
+public class BaseActivity extends RoboActionBarActivity {
 
     public static final String TAG = "BaseActivity";
 
     private static final int DURATION_ANIM = 500;
-    private static final int REQUEST_RED_LINK = 88;
 
-    private Button btnOpenBottomMenu;
-    private LinearLayout llBottomToolBar;
+    @InjectView(R.id.ll_home_bible) LinearLayout llBibleHome;
+    @InjectView(R.id.ll_bookmarks) LinearLayout llBookmarks;
+    @InjectView(R.id.ll_history) LinearLayout llHistory;
+    @InjectView(R.id.ll_search) LinearLayout llSearch;
+    @InjectView(R.id.btn_show_menu_bottom) Button btnOpenBottomMenu;
+    @InjectView(R.id.ll_bottom_toolbar) LinearLayout llBottomToolBar;
+    @InjectView(R.id.rl_bottom_container) RelativeLayout rlBottomContainer;
+
+    @Inject BibleDB bibleDB;
+    @Inject IntentManager intentManager;
+
     private DisplayMetrics displayMetrics;
-    private LinearLayout llBibleHome, llBookmarks, llHistory, llSearch;
-    private BibleDB bibleDB;
-    private RelativeLayout rlBottomContainer;
-
     private ObjectAnimator oaBottomToolbarOut, oaBottomToolbarIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
+        }
         initDataActivity();
-        initUI();
         initTypefaces();
         initAnimations();
         initListener();
@@ -74,21 +84,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initDataActivity() {
         displayMetrics = getResources().getDisplayMetrics();
-        bibleDB = GBApplication.getBibleDB();
-    }
-
-    private void initUI() {
-        btnOpenBottomMenu = (Button) findViewById(R.id.btn_show_menu_bottom);
-        llBottomToolBar = (LinearLayout) findViewById(R.id.ll_bottom_toolbar);
-        rlBottomContainer = (RelativeLayout) findViewById(R.id.rl_bottom_container);
-        llBibleHome = (LinearLayout) findViewById(R.id.ll_home_bible);
-        llBookmarks = (LinearLayout) findViewById(R.id.ll_bookmarks);
-        llHistory = (LinearLayout) findViewById(R.id.ll_history);
-        llSearch = (LinearLayout) findViewById(R.id.ll_search);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
-        }
+        bibleDB.startupDB();
     }
 
     private void initTypefaces() {
@@ -225,31 +221,21 @@ public class BaseActivity extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_settings:
-                    openSettings();
+                    intentManager.startSettingsActivity();
                     break;
                 case R.id.action_rfe:
-                    openRfED();
+                    intentManager.startReadForEveryDayActivity();
                     break;
             }
             return false;
         }
     };
 
-    private void openSettings() {
-        Intent openSettings = new Intent(this, SettingsActivity.class);
-        startActivity(openSettings);
-    }
-
-    private void openRfED() {
-        Intent openRfED = new Intent(this, ReadOnEveryDayActivity.class);
-        startActivityForResult(openRfED, REQUEST_RED_LINK);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case REQUEST_RED_LINK:
+            case IntentData.REQUEST_RED_LINK:
                 if (resultCode == RESULT_OK) {
                     Bundle info = data.getExtras();
                     Poem poem = (Poem) info.getSerializable(App.Extras.DATA);

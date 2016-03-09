@@ -1,14 +1,15 @@
 package ua.maker.gbible_v2;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.os.Handler;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.google.inject.Inject;
+
 import io.fabric.sdk.android.Fabric;
+import roboguice.RoboGuice;
 import ua.maker.gbible_v2.Constants.App;
-import ua.maker.gbible_v2.DataBases.BibleDB;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Managers.PreferenceManager;
 
@@ -18,29 +19,14 @@ import ua.maker.gbible_v2.Managers.PreferenceManager;
 public class GBApplication extends Application {
 
     public static GBApplication instance = null;
-    public static BibleDB bibleDB;
-    public static PreferenceManager preferenceManager;
 
-    public static PreferenceManager getPreferenceManager() {
-        if (preferenceManager == null) {
-            preferenceManager = new PreferenceManager(getInstance());
-        }
-        return preferenceManager;
-    }
+    @Inject PreferenceManager preferenceManager;
 
     public static GBApplication getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new GBApplication();
         }
         return instance;
-    }
-
-    public static BibleDB getBibleDB() {
-        if (bibleDB == null) {
-            bibleDB = new BibleDB(getInstance());
-            bibleDB.startupDB();
-        }
-        return bibleDB;
     }
 
     public static int bookId = 0,
@@ -53,25 +39,21 @@ public class GBApplication extends Application {
 
     public static String bookName = "";
 
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editorPref;
-
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         instance = this;
-        new DropBoxTools(instance);
+        DropBoxTools.initDbxAccountManager(instance);
+        RoboGuice.injectMembers(this, this);
         deviceType = getResources().getInteger(R.integer.device_type);
-        pref = getSharedPreferences(App.Pref.NAME, 0);
-        editorPref = pref.edit();
-        homeBibleLevel = pref.getInt(App.Pref.HOME_BIBLE_LEVEL, 0);
-        bookId = pref.getInt(App.Pref.BOOK_ID, 0);
-        chapterId = pref.getInt(App.Pref.CHAPTER_ID, 0);
-        poem = pref.getInt(App.Pref.POEM, 0);
-        topBookId = pref.getInt(App.Pref.TOP_BOOK_ID, 1);
-        countChapters = pref.getInt(App.Pref.COUNT_CHAPTERS, 1);
-        bookName = pref.getString(App.Pref.BOOK_NAME, "");
+        homeBibleLevel = preferenceManager.getBibleLevel();
+        bookId = preferenceManager.getLastBookId();
+        chapterId = preferenceManager.getLastChapterId();
+        poem = preferenceManager.getLastPoem();
+        topBookId = preferenceManager.getLastTopBookId();
+        countChapters = preferenceManager.getLastCountChapters();
+        bookName = preferenceManager.getLastBookName();
     }
 
     public void setHomeBibleLevel(final int level) {
@@ -79,7 +61,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                editorPref.putInt(App.Pref.HOME_BIBLE_LEVEL, level).apply();
+                preferenceManager.setBibleLevel(level);
             }
         });
     }
@@ -89,7 +71,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                editorPref.putInt(App.Pref.TOP_BOOK_ID, topBookId).apply();
+                preferenceManager.setTopBookId(topBookId);
             }
         });
     }
@@ -99,7 +81,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                instance.editorPref.putInt(App.Pref.BOOK_ID, bookIdd).apply();
+                getInstance().preferenceManager.setLastBookId(bookIdd);
             }
         });
     }
@@ -109,7 +91,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                instance.editorPref.putInt(App.Pref.CHAPTER_ID, chapterIdd).apply();
+                getInstance().preferenceManager.setLastChapterId(chapterIdd);
             }
         });
     }
@@ -119,7 +101,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                instance.editorPref.putInt(App.Pref.COUNT_CHAPTERS, countT).apply();
+                getInstance().preferenceManager.setLastCountChapters(countT);
             }
         });
     }
@@ -129,7 +111,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                instance.editorPref.putString(App.Pref.BOOK_NAME, bookNameT).apply();
+                getInstance().preferenceManager.setLastBookName(bookNameT);
             }
         });
     }
@@ -139,7 +121,7 @@ public class GBApplication extends Application {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                instance.editorPref.putInt(App.Pref.POEM, poemT).apply();
+                getInstance().preferenceManager.setLastPoem(poemT);
             }
         });
     }

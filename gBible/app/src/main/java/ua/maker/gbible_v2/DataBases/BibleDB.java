@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.gbible_v2.Constants.App;
-import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Managers.ContentManager;
 import ua.maker.gbible_v2.Helpers.Tools;
+import ua.maker.gbible_v2.Managers.FileManager;
 import ua.maker.gbible_v2.Models.Book;
 import ua.maker.gbible_v2.Models.ItemReadDay;
 import ua.maker.gbible_v2.Models.Poem;
@@ -27,6 +28,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
+@Singleton
 public class BibleDB extends SQLiteOpenHelper {
 
     private static final String TAG = "DataBase";
@@ -73,16 +78,19 @@ public class BibleDB extends SQLiteOpenHelper {
 												  *"en_t"*/};
 
     private SQLiteDatabase db = null;
-    private UserDB dbUser;
+    private final UserDB dbUser;
     private final Context mContext;
+    private final FileManager fileManager;
 
     private SharedPreferences pref = null;
 
-    public BibleDB(Context context) {
+    @Inject
+    public BibleDB(Context context, UserDB userDB, FileManager fileManager) {
         super(context, DB_NAME, null, DB_VERSION);
         mContext = context;
         pref = context.getSharedPreferences(App.Pref.NAME, 0);
-        dbUser = new UserDB(context);
+        this.dbUser = userDB;
+        this.fileManager = fileManager;
     }
 
     private void createDataBase() throws IOException {
@@ -120,7 +128,8 @@ public class BibleDB extends SQLiteOpenHelper {
 
         try {
             String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(myPath,
+                    null, SQLiteDatabase.OPEN_READONLY);
         } catch (SQLiteException e) {
         }
         if (checkDB != null) {
@@ -160,13 +169,6 @@ public class BibleDB extends SQLiteOpenHelper {
             createDataBase();
         } catch (IOException e) {}
         openDataBase();
-    }
-
-    @Override
-    public synchronized void close() {
-        if (db != null)
-            db.close();
-        super.close();
     }
 
     public SQLiteDatabase getDb() {
@@ -502,8 +504,8 @@ public class BibleDB extends SQLiteOpenHelper {
                     ItemReadDay item = new ItemReadDay();
                     item.setDay(day);
                     item.setMonth(month);
-                    item.setListPoemOld(ContentTools.parseValueChapterBookIdString(mContext, chaptersOldTestament, bookNameOldTestament, bookIdOldTestament));
-                    item.setListPoemNew(ContentTools.parseValueChapterBookIdString(mContext, chaptersNewTestament, bookNameNewTestament, bookIdNewTestament));
+                    item.setListPoemOld(ContentManager.parseValueChapterBookIdString(mContext, chaptersOldTestament, bookNameOldTestament, bookIdOldTestament));
+                    item.setListPoemNew(ContentManager.parseValueChapterBookIdString(mContext, chaptersNewTestament, bookNameNewTestament, bookIdNewTestament));
                     item.setContentChapterOldTFull(chaptersOldTestament);
                     item.setContentChapterNewTFull(chaptersNewTestament);
                     item.setStatus(status);
@@ -519,9 +521,5 @@ public class BibleDB extends SQLiteOpenHelper {
         }
 
         return result;
-    }
-
-    public UserDB getUserDB() {
-        return dbUser;
     }
 }

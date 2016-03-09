@@ -1,18 +1,18 @@
 package ua.maker.gbible_v2.Fragments;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.inject.Inject;
+
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Adapters.PoemSlidePagerAdapter;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
@@ -21,8 +21,7 @@ import ua.maker.gbible_v2.Interfaces.OnCallBaseActivityListener;
 import ua.maker.gbible_v2.Models.History;
 import ua.maker.gbible_v2.R;
 
-
-public class PagerPoemFragment extends Fragment {
+public class PagerPoemFragment extends RoboFragment {
 
     public static final String TAG = "ListPoemFragment";
     private static PagerPoemFragment instance;
@@ -41,17 +40,11 @@ public class PagerPoemFragment extends Fragment {
         this.callBaseActivityListener = listener;
     }
 
-    private ViewPager viewPager;
-    private PagerAdapter pagerAdapter;
-    private AppCompatActivity activity;
-    private UserDB userDB;
+    @InjectView(R.id.view_pager) ViewPager viewPager;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = (AppCompatActivity) activity;
-        userDB = new UserDB(activity);
-    }
+    @Inject UserDB userDB;
+
+    private PagerAdapter pagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +54,6 @@ public class PagerPoemFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewPager = (ViewPager) view.findViewById(R.id.view_pager);
     }
 
     @Override

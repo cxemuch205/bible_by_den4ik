@@ -4,12 +4,13 @@
     package="ua.maker.gbible_v2"
     android:installLocation="auto">
 
+    <uses-sdk tools:overrideLibrary="me.grantland.widget" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
-
-    <uses-sdk tools:overrideLibrary="me.grantland.widget" />
 
     <application
         android:name=".GBApplication"
@@ -20,7 +21,10 @@
         <activity
             android:name=".BaseActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name">
+            android:label="@string/app_name" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,19 +34,37 @@
         <activity
             android:name="com.dropbox.client2.android.AuthActivity"
             android:configChanges="orientation|keyboard"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
-
-                <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-zjzwnaytw9d55tc" />
-
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
+        <activity android:name=".ComparePoemActivity" />
+        <activity
+            android:name=".ReadOnEveryDayActivity"
+            android:label="@string/title_activity_read_on_every_day" />
 
+        <service
+            android:name="com.dropbox.sync.android.DbxSyncService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="Dropbox Sync" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="251d1d8b11ac1620c3f23a5b087cb9f33962e456" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="251d1d8b11ac1620c3f23a5b087cb9f33962e456" />
         <meta-data
             android:name="com.samsung.android.sdk.multiwindow.enable"
             android:value="true" />
@@ -55,26 +77,6 @@
         <meta-data
             android:name="com.sec.android.support.multiwindow"
             android:value="true" />
-
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
-
-        <service
-            android:name="com.dropbox.sync.android.DbxSyncService"
-            android:enabled="true"
-            android:exported="false"
-            android:label="Dropbox Sync" />
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="251d1d8b11ac1620c3f23a5b087cb9f33962e456" />
-
-        <activity android:name=".ComparePoemActivity"></activity>
-        <activity
-            android:name=".ReadOnEveryDayActivity"
-            android:label="@string/title_activity_read_on_every_day"></activity>
     </application>
 
 </manifest>

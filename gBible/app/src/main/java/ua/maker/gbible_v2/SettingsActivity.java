@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,20 +11,24 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 
+import com.google.inject.Inject;
+
+import roboguice.activity.RoboActionBarActivity;
+import roboguice.inject.ContentView;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Managers.PreferenceManager;
 
+@ContentView(R.layout.activity_settings)
+public class SettingsActivity extends RoboActionBarActivity {
 
-public class SettingsActivity extends AppCompatActivity {
-
-    private PreferenceManager preferenceManager;
+    @Inject PreferenceManager preferenceManager;
+    @Inject DropBoxTools dropBoxTools;
 
     private CheckBox cbEnableSync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar_header));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -38,7 +41,6 @@ public class SettingsActivity extends AppCompatActivity {
                     new ColorDrawable(getResources().getColor(R.color.action_bar)));
             initToolbar();
         }
-        preferenceManager = new PreferenceManager(this);
 
         initSyncWithDropBox();
     }
@@ -59,10 +61,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cbEnableSync.setChecked(!cbEnableSync.isChecked());
-                if (!DropBoxTools.getDbxAccountManager().hasLinkedAccount()) {
-                    DropBoxTools.startLink(SettingsActivity.this);
+                if (!dropBoxTools.getDbxAccountManager().hasLinkedAccount()) {
+                    dropBoxTools.startLink(SettingsActivity.this);
                 }
-                DropBoxTools.toggleSyncWithDropBox(cbEnableSync.isChecked());
+                dropBoxTools.toggleSyncWithDropBox(cbEnableSync.isChecked());
                 executeLinkWithDropBox();
             }
         });
@@ -87,14 +89,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        boolean isConnect = DropBoxTools.onActivityResult(
+        boolean isConnect = dropBoxTools.onActivityResult(
                 this.findViewById(android.R.id.content),
                 requestCode,
                 resultCode,
                 data);
         if (isConnect) {
             executeLinkWithDropBox();
-            DropBoxTools.getInstance().sync();
+            dropBoxTools.sync();
         } else {
             cbEnableSync.setChecked(!cbEnableSync.isChecked());
             executeLinkWithDropBox();

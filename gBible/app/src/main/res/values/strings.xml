@@ -374,5 +374,6 @@
     <string name="select_text_size">Размер текста стихов:</string>
     <string name="sample_text">Пример текста</string>
     <string name="title_formatted">Внешний вид</string>
+    <string name="you_need_acces_permissions_granted">Вам необходимо предоставить доступ для работы приложения. Перезапустите и подтвердите.</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package ua.maker.gbible_v2.Fragments;
 
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +19,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.inject.Inject;
+
 import java.util.ArrayList;
 
+import roboguice.fragment.RoboFragment;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Adapters.BookmarksAdapter;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.UserDB;
-import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Managers.ContentManager;
 import ua.maker.gbible_v2.Helpers.DropBoxTools;
 import ua.maker.gbible_v2.Helpers.Tools;
 import ua.maker.gbible_v2.Interfaces.OnGetContentAdapter;
@@ -37,15 +39,13 @@ import ua.maker.gbible_v2.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BookmarksFragment extends Fragment {
+public class BookmarksFragment extends RoboFragment {
 
     public static final String TAG = "BookmarksFragment";
 
     public BookmarksFragment() {}
 
     private static BookmarksFragment instance;
-    private AppCompatActivity activity;
-    private LocalBroadcastManager broadcastManager;
 
     public static BookmarksFragment getInstance() {
         if (instance == null) {
@@ -55,12 +55,9 @@ public class BookmarksFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = (AppCompatActivity) activity;
-        DropBoxTools.getInstance().sync();
-        userDB = new UserDB(activity);
-        broadcastManager = LocalBroadcastManager.getInstance(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dropBoxTools.sync();
         registerUpdateBroadcast();
     }
 
@@ -85,25 +82,21 @@ public class BookmarksFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_bookmarks, container, false);
     }
 
-    private Toolbar toolbar;
-    private ListView lvData;
+    @InjectView(R.id.lv_data) ListView lvData;
+    @InjectView(R.id.pb_load) ProgressBar pb;
+    @InjectView(R.id.toolbar_header) Toolbar toolbar;
+    @InjectView(R.id.tv_message) TextView tvMessage;
+
     private BookmarksAdapter adapter;
-    private ProgressBar pb;
-    private TextView tvMessage;
-    private UserDB userDB;
+
+    @Inject UserDB userDB;
+    @Inject LocalBroadcastManager broadcastManager;
+    @Inject ContentManager contentManager;
+    @Inject DropBoxTools dropBoxTools;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar_header);
-        lvData = (ListView) view.findViewById(R.id.lv_data);
-        pb = (ProgressBar) view.findViewById(R.id.pb_load);
-        tvMessage = (TextView) view.findViewById(R.id.tv_message);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         initToolbar(toolbar);
         Tools.initProgressBar(pb);
         initListData();
@@ -121,15 +114,15 @@ public class BookmarksFragment extends Fragment {
         }
 
         adapter.clear();
-        ContentTools.getBookmarks(userDB, activity, TAG, getBookmarksAdapter);
+        contentManager.getBookmarks(TAG, getBookmarksAdapter);
 
         if (lvData != null && lvData.getAdapter() == null) {
             lvData.setAdapter(adapter);
         }
 
-        int headerHeight = activity.getResources().getDimensionPixelSize(R.dimen.header_height);
+        int headerHeight = getResources().getDimensionPixelSize(R.dimen.header_height);
 
-        View headerView = new View(activity);
+        View headerView = new View(getContext());
         AbsListView.LayoutParams headerParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, headerHeight);
         headerView.setLayoutParams(headerParams);
         lvData.addFooterView(headerView);
@@ -163,7 +156,7 @@ public class BookmarksFragment extends Fragment {
     };
 
     private void toggleEmptyMessage(final boolean enable) {
-        activity.runOnUiThread(new Runnable() {
+        getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (enable) {

@@ -29,11 +29,11 @@ public class PoemAdapter extends ArrayAdapter<Poem> {
     private SparseBooleanArray selectedItemIds;
     private float textSize = App.DEFAULT_TEXT_SIZE;
 
-    public PoemAdapter(Context context, ArrayList<Poem> data) {
+    public PoemAdapter(Context context, ArrayList<Poem> data, PreferenceManager preferenceManager) {
         super(context, R.layout.item_poem, data);
         this.context = context;
         this.data = data;
-        prefs = new PreferenceManager(context);
+        this.prefs = preferenceManager;
         selectedItemIds = new SparseBooleanArray();
     }
 

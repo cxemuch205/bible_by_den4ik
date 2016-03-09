@@ -7,7 +7,6 @@ import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -18,6 +17,8 @@ import com.dropbox.sync.android.DbxException;
 import com.dropbox.sync.android.DbxFields;
 import com.dropbox.sync.android.DbxRecord;
 import com.dropbox.sync.android.DbxTable;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.Helpers.DataConverter;
@@ -32,12 +33,30 @@ import ua.maker.gbible_v2.Models.ItemReadDay;
 import ua.maker.gbible_v2.Models.Plan;
 import ua.maker.gbible_v2.Models.Poem;
 
+@Singleton
 public class UserDB extends SQLiteOpenHelper {
 
     private static final String TAG = "UserDB";
 
     private static final String DB_NAME = "user_data";
     private static final int DB_VERSION = 1;
+
+    @Inject private DropBoxTools dropBoxTools;
+
+    @Inject
+    public UserDB(Context context, DropBoxTools dropBoxTools) {
+        super(context, DB_NAME + ".db", null, DB_VERSION);
+        this.context = context;
+        this.dropBoxTools = dropBoxTools;
+        db = getWritableDatabase();
+        if (dbxDatastore == null) {
+            try {
+                dbxDatastore = dropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
+            } catch (DbxException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     private static final String TABLE_PLAN_LIST = "user_plan_list";
     private static final String TABLE_PLAN_DATA = "item_plan_data";
@@ -144,32 +163,17 @@ public class UserDB extends SQLiteOpenHelper {
 
     private Context context = null;
     private SQLiteDatabase db = null;
-    private SharedPreferences pref;
-    private static DbxDatastore dbxDatastore = null;
+    private DbxDatastore dbxDatastore = null;
 
-    public static DbxDatastore getDbxDatastore() {
+    public DbxDatastore getDbxDatastore() {
         return dbxDatastore;
     }
 
-    public static void openDbxDatastore() {
+    public void openDbxDatastore() {
         try {
-            dbxDatastore = DropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
+            dbxDatastore = dropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
         } catch (DbxException e) {
             e.printStackTrace();
-        }
-    }
-
-    public UserDB(Context context) {
-        super(context, DB_NAME + ".db", null, DB_VERSION);
-        this.context = context;
-        db = getWritableDatabase();
-        pref = context.getSharedPreferences(App.Pref.NAME, 0);
-        if (dbxDatastore == null) {
-            try {
-                dbxDatastore = DropBoxTools.getDbxDatastoreManager().openOrCreateDatastore(DB_NAME);
-            } catch (DbxException e) {
-                e.printStackTrace();
-            }
         }
     }
 

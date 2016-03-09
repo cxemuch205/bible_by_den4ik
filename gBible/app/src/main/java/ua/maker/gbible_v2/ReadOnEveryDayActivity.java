@@ -1,68 +1,68 @@
 package ua.maker.gbible_v2;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
+
+import com.google.inject.Inject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
+import roboguice.activity.RoboActionBarActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import ua.maker.gbible_v2.Adapters.ReadEveryDayAdapter;
 import ua.maker.gbible_v2.Adapters.SimpleDialogReadAdapter;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
-import ua.maker.gbible_v2.DataBases.UserDB;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 import ua.maker.gbible_v2.Models.ItemReadDay;
 import ua.maker.gbible_v2.Models.Poem;
 
-public class ReadOnEveryDayActivity extends AppCompatActivity {
+@ContentView(R.layout.activity_read_on_every_day)
+public class ReadOnEveryDayActivity extends RoboActionBarActivity {
 
     public static final String TAG = "ReadOnEveryDayActivity";
 
-    private StickyListHeadersListView lvData;
+    @InjectView(R.id.lv_data) StickyListHeadersListView lvData;
+
     private ReadEveryDayAdapter adapter;
-    private BibleDB bibleDB;
-    private SharedPreferences pref;
     private AlertDialog dialogChosen;
     private SimpleDialogReadAdapter dialogReadAdapter;
 
-    @SuppressLint("SimpleDateFormat")
+    @Inject BibleDB bibleDB;
+    @Inject PreferenceManager preferenceManager;
+
     private SimpleDateFormat simpleDateFormat
-            = new SimpleDateFormat("D");
+            = new SimpleDateFormat("D", Locale.US);
+
     private int day = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_on_every_day);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar_header));
-        pref = getSharedPreferences(App.Pref.NAME, Context.MODE_PRIVATE);
-        setResult(RESULT_CANCELED);
-
-        day = Integer.parseInt(simpleDateFormat.format(new Date())) - 1;
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
         }
+        setResult(RESULT_CANCELED);
 
-        lvData = (StickyListHeadersListView) this.findViewById(R.id.lv_data);
+        bibleDB.startupDB();
+
+        day = Integer.parseInt(simpleDateFormat.format(new Date())) - 1;
 
         initData();
         initListeners();
@@ -109,7 +109,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        int lastPosition = pref.getInt(App.Pref.LAST_RED_POSITION, 0);
+        int lastPosition = preferenceManager.getLastReadPosition();
         if (lastPosition == 0) {
             toPosition(day);
         } else {
@@ -123,8 +123,6 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        bibleDB = GBApplication.getBibleDB();
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -157,32 +155,32 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             showDialogChosen(position);
-            pref.edit().putInt(App.Pref.LAST_RED_POSITION, position).apply();
+            preferenceManager.setLastReadPosition(position);
         }
     };
 
-    MenuItem actionItemSeReaded;
+    MenuItem actionItemSeRead;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_read_on_every_day, menu);
-        actionItemSeReaded = menu.getItem(1);
-        if (pref.contains(App.Pref.FIRST_OPEN_READED)) {
-            actionItemSeReaded.setVisible(!pref.getBoolean(App.Pref.FIRST_OPEN_READED, false));
+        actionItemSeRead = menu.getItem(1);
+        if (preferenceManager.isFirstOpenReadD()) {
+            actionItemSeRead.setVisible(!preferenceManager.isFirstOpenReadD());
         }
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (isReadedToToday()) {
-                    actionItemSeReaded.setVisible(false);
-                    pref.edit().putBoolean(App.Pref.FIRST_OPEN_READED, true).apply();
+                if (isReadToToday()) {
+                    actionItemSeRead.setVisible(false);
+                    preferenceManager.setIsFirstOpenReadD(true);
                 }
             }
         }, 400);
         return super.onCreateOptionsMenu(menu);
     }
 
-    private boolean isReadedToToday() {
+    private boolean isReadToToday() {
         if (adapter != null)
             for (int i = 0; i < day; i++) {
                 ItemReadDay item = adapter.getItem(i);
@@ -206,7 +204,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
                 break;
             case R.id.action_set_readed_to_today:
                 setReadedStatusToToday();
-                pref.edit().putBoolean(App.Pref.FIRST_OPEN_READED, true).apply();
+                preferenceManager.setIsFirstOpenReadD(true);
                 break;
         }
 
@@ -230,8 +228,8 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
                     public void run() {
                         adapter.notifyDataSetChanged();
                         pd.cancel();
-                        if (actionItemSeReaded != null && actionItemSeReaded.isVisible()) {
-                            actionItemSeReaded.setVisible(false);
+                        if (actionItemSeRead != null && actionItemSeRead.isVisible()) {
+                            actionItemSeRead.setVisible(false);
                         }
                     }
                 });
@@ -246,7 +244,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dropList();
-                pref.edit().remove(App.Pref.FIRST_OPEN_READED).apply();
+                preferenceManager.setIsFirstOpenReadD(false);
                 toPosition(0);
                 dialog.cancel();
             }
@@ -273,7 +271,7 @@ public class ReadOnEveryDayActivity extends AppCompatActivity {
             adapter.getItem(i).setStatus(false);
         }
         adapter.notifyDataSetChanged();
-        pref.edit().remove(App.Pref.LAST_RED_POSITION).apply();
+        preferenceManager.removeLastReadPosition();
     }
 
     private void showDialogChosen(int position) {

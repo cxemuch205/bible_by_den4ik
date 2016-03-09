@@ -3,40 +3,47 @@ package ua.maker.gbible_v2;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.google.inject.Inject;
+
 import java.util.ArrayList;
 
+import roboguice.activity.RoboActionBarActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
 import ua.maker.gbible_v2.Adapters.ComparePoemAdapter;
 import ua.maker.gbible_v2.Constants.App;
 import ua.maker.gbible_v2.DataBases.BibleDB;
-import ua.maker.gbible_v2.Helpers.ContentTools;
+import ua.maker.gbible_v2.Managers.ContentManager;
+import ua.maker.gbible_v2.Managers.PreferenceManager;
 import ua.maker.gbible_v2.Models.Poem;
 
-public class ComparePoemActivity extends AppCompatActivity {
+@ContentView(R.layout.activity_compare_poem)
+public class ComparePoemActivity extends RoboActionBarActivity {
 
     public static final String TAG = "ComparePoemActivity";
 
-    private ListView lvData;
+    @InjectView(R.id.lv_data) ListView lvData;
+
+    @Inject PreferenceManager preferenceManager;
+    @Inject BibleDB bibleDB;
+    @Inject ContentManager contentManager;
+
     private ComparePoemAdapter adapter;
-    private BibleDB bibleDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compare_poem);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar_header));
+
+        bibleDB.startupDB();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar));
         }
-        initUI();
-
-        bibleDB = new BibleDB(this);
-        bibleDB.startupDB();
 
         ArrayList<Poem> poemsCompare = (ArrayList<Poem>)getIntent().getExtras().getSerializable(App.Extras.DATA);
         if (poemsCompare != null) {
@@ -60,13 +67,9 @@ public class ComparePoemActivity extends AppCompatActivity {
         }
     }
 
-    private void initUI() {
-        lvData = (ListView) this.findViewById(R.id.lv_data);
-    }
-
     private void initData(final ArrayList<Poem> poems) {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle(ContentTools.parseListPoems(this, poems));
+            getSupportActionBar().setTitle(contentManager.parseListPoems(poems));
         }
         if (adapter == null || adapter.getCount() == 0) {
             new Thread(new Runnable() {
@@ -83,7 +86,8 @@ public class ComparePoemActivity extends AppCompatActivity {
                         public void run() {
                             adapter = new ComparePoemAdapter(
                                     ComparePoemActivity.this,
-                                    ContentTools.sortByTranslate(list));
+                                    contentManager.sortByTranslate(list),
+                                    preferenceManager);
                             lvData.setAdapter(adapter);
                         }
                     });
